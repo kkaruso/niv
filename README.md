@@ -32,53 +32,53 @@ The documentation is split between the [Wiki](https://gitlab.rlp.net/top/21s/niv
 
 | Monday | Tuesday | Wednesday | Thursday                            | Friday                              |
 |--------|---------|-----------|-------------------------------------|-------------------------------------|
-|        |         |           | [protocol](protocols/02-04-2021.md) | [protocol]() |
+|        |         |           | [Protocol](protocols/02-04-2021.md) | [Protocol]() |
 
 ## Week 2: 08.-12.02.2021
 [↑ back to overview ↑](#overview)
 
 | Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
 |--------------|--------------|--------------|--------------|--------------|
-| [protocol]() | [protocol]() | [protocol]() | [protocol]() | [protocol]() |
+| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
 
 ## Week 3: 15.-19.02.2021
 [↑ back to overview ↑](#overview)
 
 | Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
 |--------------|--------------|--------------|--------------|--------------|
-| [protocol]() | [protocol]() | [protocol]() | [protocol]() | [protocol]() |
+| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
 
 ## Week 4: 22.-26.02.2021
 [↑ back to overview ↑](#overview)
 
 | Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
 |--------------|--------------|--------------|--------------|--------------|
-| [protocol]() | [protocol]() | [protocol]() | [protocol]() | [protocol]() |
+| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
 
 ## Week 5: 01.-05.03.2021
 [↑ back to overview ↑](#overview)
 
 | Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
 |--------------|--------------|--------------|--------------|--------------|
-| [protocol]() | [protocol]() | [protocol]() | [protocol]() | [protocol]() |
+| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
 
 ## Week 6: 08.-12.03.2021
 [↑ back to overview ↑](#overview)
 
 | Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
 |--------------|--------------|--------------|--------------|--------------|
-| [protocol]() | [protocol]() | [protocol]() | [protocol]() | [protocol]() |
+| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
 
 ## Week 7: 15.-19.03.2021
 [↑ back to overview ↑](#overview)
 
 | Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
 |--------------|--------------|--------------|--------------|--------------|
-| [protocol]() | [protocol]() | [protocol]() | [protocol]() | [protocol]() |
+| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
 
 ## Week 8: 22.-26.03.2021
 [↑ back to overview ↑](#overview)
 
 | Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
 |--------------|--------------|--------------|--------------|--------------|
-| [protocol]() | [protocol]() | [protocol]() | [protocol]() | [protocol]() |
+| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
