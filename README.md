@@ -2,6 +2,11 @@
 
 Welcome to the repository for the "Network Infrastructure Visualization" project
 
+The documentation is split between the [Wiki](https://gitlab.rlp.net/top/21s/niv/niv/-/wikis/home) and [this repository](https://gitlab.rlp.net/top/21s/niv/niv):
+
+* Rather stable documentation parts tend to be saved in the [Wiki](https://gitlab.rlp.net/top/21s/niv/niv/-/wikis/home), which is also a git repository.
+* Rather short time documentation parts tend to be saved [here in this repository](https://gitlab.rlp.net/top/21s/niv/niv) in a semester oriented branch.
+
 
 ## Table of Contents
 
