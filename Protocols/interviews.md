@@ -1,0 +1,29 @@
+# 04.02.2021
+
+Antworten von Bozakov:
+Konfiguration der Netzwerke wäre ein größeres Projekt - Mehr Nachforschungen werden benötigt, eher nicht in diese Richtung gehen
+Darstellung ist wichtig
+
+Nur im Browser oder auch auf Mobilgeräten verfügbar? - Nicht speziell anpassen auf Mobilgeräten
+Muss nicht so wild mit anklicken der Objekte sein. 
+
+Zielgruppe: Eher für erfahrene Administratoren, jedoch mehrere Ebenen einbauen (Detailsstufe I, II usw.)
+
+Fehlende Funktionen der anderen Beispielen: 
+                -Man konnte viel Eintragen, konnte jedoch nicht auf dem Rechner installiert werden
+                -Keine Vektorgrafiken (Kein Ranzoomen)
+                 -Keine Portbeschreibungen
+
+     Grafis/Plantuml:
+               -"Ganz Nett" ist aber nicht schön
+               -Oft in einem Blocksystem wo keine Details angezeigt werden
+Reines Konsolenprogramm? : Konsolenanwendung wichtig und danach weiter aufsetzen (durch Microservice, in einem größeren Programm aufrufbar)
+                   -(muss) keine direkte Gui haben, außer wir haben sehr viel Enthusiasmus
+
+Betriebssystem: Linux
+
+Layout generieren lassen
+
+Sprachen: "Wo man das Rad nicht neuerfinden muss"
+
+Lizenz: Keine Wünsche, OpenSource (z.B. GPL, MIT)
