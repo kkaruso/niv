@@ -1,4 +1,4 @@
-# NIV
+# Welcome to NIV (NW Infrastructure Visualization)
 
 Welcome to the repository for the "Network Infrastructure Visualization" project
 
