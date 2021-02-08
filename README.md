@@ -32,7 +32,7 @@ The documentation is split between the [Wiki](https://gitlab.rlp.net/top/21s/niv
 
 | Monday | Tuesday | Wednesday | Thursday                            | Friday                              |
 |--------|---------|-----------|-------------------------------------|-------------------------------------|
-|        |         |           | [Protocol](protocols/02-04-2021.md) | [Protocol]() |
+|        |         |           | [Protocol](protocols/02-04-2021.md) | [Protocol](protocols/02-05-2021.md) |
 
 ## Week 2: 08.-12.02.2021
 [↑ back to overview ↑](#overview)
