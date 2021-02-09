@@ -20,12 +20,6 @@ The documentation is split between the [Wiki](https://gitlab.rlp.net/top/21s/niv
 
 [[_TOC_]]
 
-## Wiki Structure
-- [Branches](branches): Project branch structure
-- [Issues Board](issues_board): Definitions and rules for the Issues Board
-- [Team](team): Team structure and roles
-- [References](references): Interesting links or related projects
-
 ## License MIT
 For details see [LICENSE.md](https://gitlab.rlp.net/top/21s/niv/niv/-/blob/main/LICENSE) in the repository.
 
