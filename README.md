@@ -1,84 +1,35 @@
-# Welcome to NIV (NW Infrastructure Visualization)
+# Welcome to Network Infrastructure Visualization (NIV)
 
-Welcome to the repository for the "Network Infrastructure Visualization" project
+NIV is a console application to visualize network infrastructure using YAML files.
+
+Network diagrams are commonly drawn manually, using tools like Visio or Draw.io. This makes maintaining an up-to-date representation of dynamic network environments challenging.
+Currently, no modern tools appear to exist which can generate network drawings from code such as YAML. Such a machine readable format would allow administrators to  automate the visualization of a topology and to track document changes using version control.
+
+**Key goals**
+- High quality visualization wanted (for dashboards, presentations, scientific papers)
+- Use YAML for infrastructure description
+- Offline generation of SVG diagrams
+- Hyperlink to detailed view (e.g. zoom into port utilization)
 
 The documentation is split between the [Wiki](https://gitlab.rlp.net/top/21s/niv/niv/-/wikis/home) and [this repository](https://gitlab.rlp.net/top/21s/niv/niv):
 
 * Rather stable documentation parts tend to be saved in the [Wiki](https://gitlab.rlp.net/top/21s/niv/niv/-/wikis/home), which is also a git repository.
 * Rather short time documentation parts tend to be saved [here in this repository](https://gitlab.rlp.net/top/21s/niv/niv) in a semester oriented branch.
 
-
-## Table of Contents
+## Contents of this page
 
 [[_TOC_]]
 
-## Overview
-[↑ back to Table of Contents ↑](#table-of-contents)
+## Wiki Structure
+- [Branches](branches): Project branch structure
+- [Issues Board](issues_board): Definitions and rules for the Issues Board
+- [Team](team): Team structure and roles
+- [References](references): Interesting links or related projects
 
-| Week | Date                                           | Content      |
-|------|------------------------------------------------|--------------|
-| 1    | [01.02.2021 - 05.02.2021](#week-1-01-05022021) | Introduction |
-| 2    | [08.02.2021 - 12.02.2021](#week-2-08-12022021) | Sprint 0     |
-| 3    | [15.02.2021 - 19.02.2021](#week-3-15-19022021) | Sprint 1     |
-| 4    | [22.02.2021 - 26.02.2021](#week-4-22-26022021) | Sprint 2     |
-| 5    | [01.03.2021 - 05.03.2021](#week-5-01-05032021) | Sprint 3     |
-| 6    | [08.03.2021 - 12.03.2021](#week-6-08-12032021) | Sprint 4     |
-| 7    | [15.03.2021 - 19.03.2021](#week-7-15-19032021) | Sprint 5     |
-| 8    | [22.03.2021 - 26.03.2021](#week-8-22-26032021) | Sprint 6     |
+## License MIT
+For details see [LICENSE.md](https://gitlab.rlp.net/top/21s/niv/niv/-/blob/main/LICENSE) in the repository.
+
+## Legal
+You can find the legal notes in German language at [Impressum und Datenschutzerklärung](https://gitlab.rlp.net/top/impressum-und-datenschutzerklaerung).
 
 
-## Week 1: 01.-05.02.2021
-[↑ back to overview ↑](#overview)
-
-| Monday | Tuesday | Wednesday | Thursday                            | Friday                              |
-|--------|---------|-----------|-------------------------------------|-------------------------------------|
-|        |         |           | [Protocol](protocols/02-04-2021.md) | [Protocol](protocols/02-05-2021.md) |
-
-## Week 2: 08.-12.02.2021
-[↑ back to overview ↑](#overview)
-
-| Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
-|--------------|--------------|--------------|--------------|--------------|
-| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
-
-## Week 3: 15.-19.02.2021
-[↑ back to overview ↑](#overview)
-
-| Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
-|--------------|--------------|--------------|--------------|--------------|
-| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
-
-## Week 4: 22.-26.02.2021
-[↑ back to overview ↑](#overview)
-
-| Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
-|--------------|--------------|--------------|--------------|--------------|
-| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
-
-## Week 5: 01.-05.03.2021
-[↑ back to overview ↑](#overview)
-
-| Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
-|--------------|--------------|--------------|--------------|--------------|
-| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
-
-## Week 6: 08.-12.03.2021
-[↑ back to overview ↑](#overview)
-
-| Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
-|--------------|--------------|--------------|--------------|--------------|
-| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
-
-## Week 7: 15.-19.03.2021
-[↑ back to overview ↑](#overview)
-
-| Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
-|--------------|--------------|--------------|--------------|--------------|
-| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
-
-## Week 8: 22.-26.03.2021
-[↑ back to overview ↑](#overview)
-
-| Monday       | Tuesday      | Wednesday    | Thursday     | Friday       |
-|--------------|--------------|--------------|--------------|--------------|
-| [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() | [Protocol]() |
