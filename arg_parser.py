@@ -1,8 +1,22 @@
 import argparse
 import os
-import pathlib
-import sys
-from pathlib import Path
+
+
+def is_path_to_yaml_file(file_path):
+    """
+    Checks if file path is valid and file is a .yaml file
+    :param file_path: path to file
+    :return: path of file or raise error
+    """
+    if os.path.isfile(file_path):
+        file_name = file_path.split('\\')[-1]
+        file_type = file_name.split('.')[-1]
+        if file_type == "yaml":
+            return file_path
+        else:
+            raise argparse.ArgumentTypeError(f'\n"{file_name}" is not a .yaml')
+    else:
+        raise argparse.ArgumentTypeError(f'\n"{file_path}" is not a valid file path')
 
 
 class ArgParser:
@@ -33,27 +47,16 @@ class ArgParser:
                                                                                      "number and exit")
         parser.add_argument('-r', '--run', action='store_true',
                             help='Create visualization without exporting any files')
-        parser.add_argument('-s', '--save', type=Path, nargs='?', metavar='',
+        parser.add_argument('-s', '--save', type=is_path_to_yaml_file, nargs='?', metavar='',
                             help='Save .yaml and .svg file to given path or to current directory if no path given')
-        parser.add_argument('-l', '--load', type=check_file(), nargs='?', metavar='',
+        parser.add_argument('-l', '--load', type=is_path_to_yaml_file, nargs='?', metavar='',
                             help='Create visualization with a given .yaml file')
         parser.add_argument('-g', '--gui', action='store_true', help='Start niv gui')
 
         # parser.print_help()
-        print(parser.parse_args('-r -s this/is/a/path'.split()))
+        # print(parser.parse_args('-r -s this/is/a/path'.split()))
 
         args = parser.parse_args()
 
         return args
 
-    def check_file(self, string):
-        """
-        Check if file exists in path
-
-        :param string: path to the file as a string
-        :return: path, if it exists
-        """
-        if os.path.isfile(string):
-            return string
-        else:
-            print("No such file '{}'".format(string), file=sys.stderr)
