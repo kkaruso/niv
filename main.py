@@ -6,7 +6,7 @@ from arg_parser import ArgParser
 # Create an instance of the ArgParser class
 arg_parser = ArgParser()
 # Call the function "set_args"
-args = ArgParser.set_args()
+args = arg_parser.set_args()
 
 # if __name__ == '__main__':
 #     if args.convert is not None:
