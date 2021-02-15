@@ -33,9 +33,25 @@ class TestArgParser(TestCase):
 
         self.assertEqual(argparse.Namespace(run=False, save="test.yaml", load=None, gui=False),
                          parser.set_args(["-s test.yaml"]))
+        # TODO: FIX --save and --load
         # self.assertEqual(argparse.Namespace(run=False, save="test.yaml", load=None, gui=False),
         #                 parser.set_args(["--save test.yaml"]))
 
         self.assertEqual(argparse.Namespace(run=False, save=None, load="test.yaml", gui=False),
                          parser.set_args(["-l test.yaml"]))
-    # TODO: add test for is_path_to_yaml_file()
+        # self.assertEqual(argparse.Namespace(run=False, save=None, load="test.yaml", gui=False),
+        #                 parser.set_args(["--load test.yaml"]))
+
+    def test_is_path_to_yaml_file(self):
+        """
+        is_path_to_yaml_file function test
+        """
+        parser = ArgParser()
+        with self.assertRaises(argparse.ArgumentTypeError):
+            parser.is_path_to_yaml_file("this/is/a/path")
+
+        with self.assertRaises(argparse.ArgumentTypeError):
+            parser.is_path_to_yaml_file("this/is/a/path/test.yaml")
+
+        self.assertEqual("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
+        self.assertIsNotNone("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
