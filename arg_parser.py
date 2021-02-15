@@ -13,6 +13,10 @@ class ArgParser:
         Adds the needed arguments to the ArgumentParser class
     """
 
+    # Dictionary for argument choices
+    ICONS = [1, 2, 3]
+    DETAIL = [1, 2, 3]
+
     def __init__(self):
         return
 
@@ -25,15 +29,30 @@ class ArgParser:
         parser = argparse.ArgumentParser(prog="niv",
                                          description="Creates a visualization of your network infrastructure",
                                          add_help=False)
+
         parser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
+
         parser.add_argument('-v', '--version', action='version', version='1.0', help="Show program's version "
                                                                                      "number and exit")
+
         parser.add_argument('-r', '--run', action='store_true',
                             help='Create visualization without exporting any files')
-        parser.add_argument('-s', '--save', type=self.is_path_to_yaml_file, nargs='?', metavar='',
+
+        parser.add_argument('-s', '--save', type=self.is_path_to_yaml_file, nargs='?', metavar='OUTPUT_PATH',
                             help='Save .yaml and .svg file to given path or to current directory if no path given')
-        parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file, nargs='?', metavar='',
+
+        parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file, nargs='?', metavar='INPUT_PATH',
                             help='Create visualization with a given .yaml file')
+
+        # TODO: Add name of icons to help message
+        parser.add_argument('-i', '--icons', type=int, nargs='?', metavar='INT', default=1, choices=self.ICONS,
+                            help='Choose the icons you want to use for the visualization; 1: cisco, 2: ..., 3: ..., '
+                                 '(DEFAULT: 1)')
+
+        parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT', default=1, choices=self.DETAIL,
+                            help='The level of detail you want to use for the visualization; 1: least detail, '
+                                 '2: medium detail, 3: most detail (DEFAULT: 1)')
+
         parser.add_argument('-g', '--gui', action='store_true', help='Start niv gui')
 
         # parser.print_help()
