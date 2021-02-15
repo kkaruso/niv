@@ -1,5 +1,6 @@
 import argparse
 import os
+import sys
 
 
 class ArgParser:
@@ -15,7 +16,7 @@ class ArgParser:
     def __init__(self):
         return
 
-    def set_args(self):
+    def set_args(self, args):
         """
         Adds the needed arguments to the ArgumentParser class
 
@@ -36,12 +37,12 @@ class ArgParser:
         parser.add_argument('-g', '--gui', action='store_true', help='Start niv gui')
 
         # parser.print_help()
+        # print(parser.parse_args('-r'.split()))
+        if len(sys.argv) == 1:
+            print('You didnt specify any arguments, here is some help:\n')
+            parser.print_help()
 
-        print(parser.parse_args('-r -s this/is/a/path'.split()))
-
-        args = parser.parse_args()
-
-        return args
+        return parser.parse_args(args)
 
     @staticmethod
     def is_path_to_yaml_file(file_path):
@@ -50,6 +51,8 @@ class ArgParser:
         :param file_path: path to file
         :return: path of file or raise error
         """
+        # call .strip to remove all whitespaces in the path
+        file_path = file_path.lstrip()
         if os.path.isfile(file_path):
             file_name = file_path.split('\\')[-1]
             file_type = file_name.split('.')[-1]
