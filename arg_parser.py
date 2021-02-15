@@ -38,7 +38,7 @@ class ArgParser:
 
         # parser.print_help()
         # print(parser.parse_args('-r'.split()))
-        if len(sys.argv) == 1:
+        if len(args) == 0:
             print('You didnt specify any arguments, here is some help:\n')
             parser.print_help()
 
