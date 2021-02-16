@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+from datetime import date
 
 
 class ArgParser:
@@ -41,10 +42,8 @@ class ArgParser:
         parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file, nargs='?', metavar='INPUT_PATH',
                             help='Create visualization with a given .yaml file')
 
-        # TODO: Add name of icons to help message
         parser.add_argument('-i', '--icons', type=int, nargs='?', metavar='INT', default=1, choices=self.ICONS,
-                            help='Choose the icons you want to use for the visualization; 1: cisco, 2: ..., 3: ..., '
-                                 '(DEFAULT: 1)')
+                            help='Choose the icons you want to use for the visualization; 1: cisco, 2: osa (DEFAULT: 1)')
 
         parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT', default=1, choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
@@ -55,6 +54,7 @@ class ArgParser:
 
         parser.add_argument('-g', '--gui', action='store_true', help='Start niv gui')
 
+        # print(parser.parse_args("-s .".split()))
         # If no argument given, print help
         if len(args) == 0:
             print('You didnt specify any arguments, here is some help:\n')
@@ -99,8 +99,21 @@ class ArgParser:
 
         # If the path is just a '.' create a file in the current directory
         if file_path == '.':
-            print("i want to create a file in your current directory")
-            # TODO: create file in current directory
+            # generate file name with today's date, because no name was given
+            date_today = "{:%Y%m%d}".format(date.today())
+            file_name = f"{date_today}_NIV_Diagram.svg"
+
+            i = 1
+            # Add an incrementing number to end of file if file name already exists
+            while os.path.isfile(file_name):
+                file_name = file_name.split('.')[0].split('-')[0]
+                file_name = f"{file_name}-{i}"
+                file_name = f"{file_name}.svg"
+                i = i + 1
+
+            # create the file in the current directory
+            open(f"{file_name}", "a")
+            return file_name
 
         # If there is a '.' in the name of the last element of the path, it is a file, else it is a directory
         elif '.' in last_element:
