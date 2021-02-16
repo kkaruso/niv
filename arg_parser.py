@@ -35,8 +35,8 @@ class ArgParser:
         parser.add_argument('-v', '--version', action='version', version='1.0', help="Show program's version "
                                                                                      "number and exit")
 
-        parser.add_argument('-s', '--save', type=self.is_path_to_yaml_file, nargs='?', metavar='OUTPUT_PATH',
-                            help='Save .yaml and .svg file to given path or to current directory if no path given')
+        parser.add_argument('-s', '--save', type=self.save_to_path, nargs='?', metavar='OUTPUT_PATH',
+                            help='Save .svg, .png or .jpeg file to a given path (DEFAULT: .svg)')
 
         parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file, nargs='?', metavar='INPUT_PATH',
                             help='Create visualization with a given .yaml file')
@@ -51,12 +51,11 @@ class ArgParser:
                                  '2: medium detail, 3: most detail (DEFAULT: 1)')
 
         parser.add_argument('-r', '--run', action='store_true',
-                            help='Create visualization without exporting any files')
+                            help='Create visualization without saving any files')
 
         parser.add_argument('-g', '--gui', action='store_true', help='Start niv gui')
 
-        # parser.print_help()
-        # print(parser.parse_args('-r'.split()))
+        # If no argument given, print help
         if len(args) == 0:
             print('You didnt specify any arguments, here is some help:\n')
             parser.print_help()
@@ -67,17 +66,57 @@ class ArgParser:
     def is_path_to_yaml_file(file_path):
         """
         Checks if file path is valid and file is a .yaml file
+
         :param file_path: path to file
         :return: path of file or raise error
         """
-        # call .strip to remove all whitespaces in the path
+        # call lstrip() to remove all whitespaces in front of the path
         file_path = file_path.lstrip()
         if os.path.isfile(file_path):
-            file_name = file_path.split('\\')[-1]
+            file_name = file_path.split('/')[-1]
             file_type = file_name.split('.')[-1]
             if file_type == "yaml":
                 return file_path
             else:
                 raise argparse.ArgumentTypeError(f'\n"{file_name}" is not a .yaml')
         else:
-            raise argparse.ArgumentTypeError(f'\n"{file_path}" is not a valid file path')
+            raise Exception(f'\n"{file_path}" is not a valid file path')
+
+    @staticmethod
+    def save_to_path(file_path):
+        """
+        Checks if the path is a file path or a directory path and creates the output file in the corresponding
+        directory with a suitable name, if no name is given
+
+        :param file_path: path to where the file should be saved
+        :return: path to file or raise error
+        """
+        print(f"Filepath: {file_path}")
+        # Call lstrip() to remove all whitespaces in front of the path
+        file_path = file_path.lstrip()
+        last_element = file_path.split('/')[-1]
+        print(f"Last element: {last_element}")
+
+        # If the path is just a '.' create a file in the current directory
+        if file_path == '.':
+            print("i want to create a file in your current directory")
+            # TODO: create file in current directory
+
+        # If there is a '.' in the name of the last element of the path, it is a file, else it is a directory
+        elif '.' in last_element:
+            print("im a file")
+            # Check if file already exists. If it doesn't create file, else raise exception
+            if not os.path.isfile(file_path):
+                # TODO: create file and check if file format is correct (.svg, .png, .jpeg)
+                return file_path
+            else:
+                raise FileExistsError(f"{last_element} already exists")
+
+        else:
+            print("im a directory")
+            # Check if directory exists. If it does return the file_path, else raise exception
+            if os.path.isdir(file_path):
+                # TODO: create .svg file with generated name in given directory
+                return file_path
+            else:
+                raise Exception(f'\n"{file_path}": directory doesn\'t exist')

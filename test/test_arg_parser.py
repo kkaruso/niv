@@ -72,11 +72,15 @@ class TestArgParser(TestCase):
         is_path_to_yaml_file function test
         """
         parser = ArgParser()
-        with self.assertRaises(argparse.ArgumentTypeError):
+        with self.assertRaises(Exception):
             parser.is_path_to_yaml_file("this/is/a/path")
 
-        with self.assertRaises(argparse.ArgumentTypeError):
+        with self.assertRaises(Exception):
             parser.is_path_to_yaml_file("this/is/a/path/test.yaml")
 
+        with self.assertRaises(argparse.ArgumentTypeError):
+            parser.is_path_to_yaml_file("test.txt")
+
         self.assertEqual("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
+
         self.assertIsNotNone("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
