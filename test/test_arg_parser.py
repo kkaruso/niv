@@ -40,14 +40,14 @@ class TestArgParser(TestCase):
         self.assertEqual(argparse.Namespace(save=None, load=None, icons=1, detail=1, run=True, gui=True),
                          parser.set_args(["-g", "-r"]))
 
-        self.assertEqual(argparse.Namespace(save="test.yaml", load=None, icons=1, detail=1, run=True, gui=False),
-                         parser.set_args(["-s", "test.yaml", "-r"]))
+        self.assertEqual(argparse.Namespace(save="test2.yaml", load=None, icons=1, detail=1, run=True, gui=False),
+                         parser.set_args(["-s", "test2.yaml", "-r"]))
 
-        self.assertEqual(argparse.Namespace(save="test.yaml", load=None, icons=1, detail=1, run=False, gui=False),
-                         parser.set_args(["-s", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save="test2.yaml", load=None, icons=1, detail=1, run=False, gui=False),
+                         parser.set_args(["-s", "test2.yaml"]))
 
-        self.assertEqual(argparse.Namespace(save="test.yaml", load=None, icons=1, detail=1, run=False, gui=False),
-                         parser.set_args(["--save", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save="test2.yaml", load=None, icons=1, detail=1, run=False, gui=False),
+                         parser.set_args(["--save", "test2.yaml"]))
 
         self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=False),
                          parser.set_args(["-l", "test.yaml"]))
@@ -58,8 +58,8 @@ class TestArgParser(TestCase):
         self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=True),
                          parser.set_args(["-g", "-l", "test.yaml"]))
 
-        self.assertEqual(argparse.Namespace(save="test.yaml", load="test.yaml", icons=1, detail=1, run=True, gui=True),
-                         parser.set_args(["-r", "-s", "test.yaml", "-g", "-l", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save="test2.yaml", load="test.yaml", icons=1, detail=1, run=True, gui=True),
+                         parser.set_args(["-r", "-s", "test2.yaml", "-g", "-l", "test.yaml"]))
 
         self.assertEqual(argparse.Namespace(save=None, load=None, icons=2, detail=2, run=False, gui=False),
                          parser.set_args(["-i", "2", "-d", "2"]))
@@ -84,3 +84,18 @@ class TestArgParser(TestCase):
         self.assertEqual("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
 
         self.assertIsNotNone("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
+
+    def test_save_to_path(self):
+        """
+        save_to_path function test
+        """
+        parser = ArgParser()
+        with self.assertRaises(Exception):
+            parser.save_to_path("test_directory/")
+
+        with self.assertRaises(FileExistsError):
+            parser.save_to_path("test.yaml")
+
+        self.assertEqual("test2.yaml", parser.save_to_path("test2.yaml"))
+
+        self.assertEqual("testdirectory", parser.save_to_path("testdirectory"))
