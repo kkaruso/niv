@@ -98,4 +98,20 @@ class TestArgParser(TestCase):
 
         self.assertEqual("test2.yaml", parser.save_to_path("test2.yaml"))
 
-        self.assertEqual("testdirectory", parser.save_to_path("testdirectory"))
+        self.assertEqual("testdirectory/", parser.save_to_path("testdirectory"))
+
+        import os
+        #self.assertEqual(os.path.isfile(f"{parser.create_filename('.')}"), parser.save_to_path("."))
+
+    def test_create_filename(self):
+        """
+        create_filename function test
+        """
+        from datetime import date
+        parser = ArgParser()
+        date_today = "{:%Y%m%d}".format(date.today())
+        file_name = f"{date_today}_NIV_Diagram.svg"
+
+        self.assertEqual(file_name, parser.create_filename("."))
+
+
