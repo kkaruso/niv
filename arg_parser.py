@@ -85,10 +85,10 @@ class ArgParser:
     @staticmethod
     def create_filename(file_path):
         """
-        generate file name with today's date, because no name was give
+        Generate a file name with today's date
 
         :param file_path: path to where the file should be saved
-        :return filename
+        :return generated filename
         """
         i = 1
         date_today = "{:%Y%m%d}".format(date.today())
@@ -111,22 +111,22 @@ class ArgParser:
         :param file_path: path to where the file should be saved
         :return: path to file or raise error
         """
-        print(f"Filepath: {file_path}")
+        # print(f"Filepath: {file_path}")
         # Call lstrip() to remove all whitespaces in front of the path
         file_path = file_path.lstrip()
         last_element = file_path.split('/')[-1]
-        print(f"Last element: {last_element}")
+        # print(f"Last element: {last_element}")
 
         # If the path is just a '.' create a file in the current directory
         if file_path == '.':
             file_name = ArgParser.create_filename(f"{file_path}/")
             # create the file in the current directory
-            open(f"{file_name}", "a")
+            f = open(f"{file_name}", "a")
+            f.close()
             return file_name
 
         # If there is a '.' in the name of the last element of the path, it is a file, else it is a directory
         elif '.' in last_element:
-            print("im a file")
             # Check if file already exists. If it doesn't create file, else raise exception
             if not os.path.isfile(file_path):
                 # TODO: create file and check if file format is correct (.svg, .png, .jpeg)
@@ -135,7 +135,6 @@ class ArgParser:
                 raise FileExistsError(f"{last_element} already exists")
 
         else:
-            print("im a directory")
             # Check if directory exists. If it does return the file_path, else raise exception
             if os.path.isdir(file_path):
                 # Check if last symbol is a "/" otherwise add a "/"
@@ -143,7 +142,8 @@ class ArgParser:
                     file_path += "/"
                 file_name = ArgParser.create_filename(file_path)
                 # Create file in the given directory
-                open(f"{file_path}{file_name}", "a")
+                f = open(f"{file_path}{file_name}", "a")
+                f.close()
                 return file_path
             else:
                 raise Exception(f'\n"{file_path}": directory doesn\'t exist')

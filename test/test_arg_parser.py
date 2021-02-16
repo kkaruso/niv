@@ -1,12 +1,26 @@
 from unittest import TestCase
 from arg_parser import ArgParser
 import argparse
+import os
+import shutil
 
 
 class TestArgParser(TestCase):
     """
     A class for testing functions of ArgParser class
     """
+    testdirectory_path = "testdirectory/"
+
+    def setUp(self) -> None:
+        """
+        Setup test directories and files for testing
+        """
+        try:
+            os.mkdir(self.testdirectory_path)
+        except OSError:
+            print(f"Creation of the directory {self.testdirectory_path} failed")
+        else:
+            print(f"Successfully created the directory {self.testdirectory_path}")
 
     def test_set_args(self):
         """
@@ -100,8 +114,7 @@ class TestArgParser(TestCase):
 
         self.assertEqual("testdirectory/", parser.save_to_path("testdirectory"))
 
-        import os
-        #self.assertEqual(os.path.isfile(f"{parser.create_filename('.')}"), parser.save_to_path("."))
+        # self.assertEqual(parser.create_filename("."), parser.save_to_path("."))
 
     def test_create_filename(self):
         """
@@ -114,4 +127,13 @@ class TestArgParser(TestCase):
 
         self.assertEqual(file_name, parser.create_filename("."))
 
-
+    def tearDown(self) -> None:
+        """
+        Removes files and directory created by testing
+        """
+        try:
+            shutil.rmtree(f'{self.testdirectory_path}', ignore_errors=True)
+        except OSError:
+            print(f"Deletion of the directory {self.testdirectory_path} failed")
+        else:
+            print(f"Successfully deleted the directory {self.testdirectory_path}")
