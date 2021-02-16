@@ -83,6 +83,26 @@ class ArgParser:
             raise Exception(f'\n"{file_path}" is not a valid file path')
 
     @staticmethod
+    def create_filename(file_path):
+        """
+        generate file name with today's date, because no name was give
+
+        :param file_path: path to where the file should be saved
+        :return filename
+        """
+        i = 1
+        date_today = "{:%Y%m%d}".format(date.today())
+        file_name = f"{date_today}_NIV_Diagram.svg"
+        # Add an incrementing number to end of file if file name already exists
+        while os.path.isfile(f"{file_path}{file_name}"):
+            file_name = file_name.split('.')[0].split('-')[0]
+            file_name = f"{file_name}-{i}"
+            file_name = f"{file_name}.svg"
+            i += 1
+
+        return file_name
+
+    @staticmethod
     def save_to_path(file_path):
         """
         Checks if the path is a file path or a directory path and creates the output file in the corresponding
@@ -99,18 +119,7 @@ class ArgParser:
 
         # If the path is just a '.' create a file in the current directory
         if file_path == '.':
-            # generate file name with today's date, because no name was given
-            date_today = "{:%Y%m%d}".format(date.today())
-            file_name = f"{date_today}_NIV_Diagram.svg"
-
-            i = 1
-            # Add an incrementing number to end of file if file name already exists
-            while os.path.isfile(file_name):
-                file_name = file_name.split('.')[0].split('-')[0]
-                file_name = f"{file_name}-{i}"
-                file_name = f"{file_name}.svg"
-                i = i + 1
-
+            file_name = ArgParser.create_filename(f"{file_path}/")
             # create the file in the current directory
             open(f"{file_name}", "a")
             return file_name
@@ -129,7 +138,12 @@ class ArgParser:
             print("im a directory")
             # Check if directory exists. If it does return the file_path, else raise exception
             if os.path.isdir(file_path):
-                # TODO: create .svg file with generated name in given directory
+                # Check if last symbol is a "/" otherwise add a "/"
+                if file_path[-1] != "/":
+                    file_path += "/"
+                file_name = ArgParser.create_filename(file_path)
+                # Create file in the given directory
+                open(f"{file_path}{file_name}", "a")
                 return file_path
             else:
                 raise Exception(f'\n"{file_path}": directory doesn\'t exist')
