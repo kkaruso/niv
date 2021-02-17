@@ -118,12 +118,7 @@ class ArgParser:
         # Workaround that adds a "./" at the start of the path if no "./" is entered
         if file_path[0:2] != "./":
             file_path = "./" + file_path
-
-        print(f"Filepath: {file_path}")
-        print(f"Last element: {last_element}")
-        if not last_element == file_path:
-            path = file_path.removesuffix(f'{last_element}')
-            print(f"Path without last element: {path}")
+        path = file_path.removesuffix(f'{last_element}')
 
         # If the path is just a '.' create a file in the current directory
         if file_path == '.':
@@ -150,7 +145,7 @@ class ArgParser:
                 else:
                     raise Exception(f'\n"{path}": directory doesn\'t exist')
             else:
-                raise Exception(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
+                raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
 
         else:
             # Check if directory exists. If it does return the file_path, else raise exception

@@ -63,17 +63,17 @@ class TestArgParser(TestCase):
         self.assertEqual(argparse.Namespace(save="test2.yaml", load=None, icons=1, detail=1, run=False, gui=False),
                          parser.set_args(["--save", "test2.yaml"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=False),
-                         parser.set_args(["-l", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="test.svg", icons=1, detail=1, run=False, gui=False),
+                         parser.set_args(["-l", "test.svg"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=False),
-                         parser.set_args(["--load", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="test.svg", icons=1, detail=1, run=False, gui=False),
+                         parser.set_args(["--load", "test.svg"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=True),
-                         parser.set_args(["-g", "-l", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="test.svg", icons=1, detail=1, run=False, gui=True),
+                         parser.set_args(["-g", "-l", "test.svg"]))
 
-        self.assertEqual(argparse.Namespace(save="test2.yaml", load="test.yaml", icons=1, detail=1, run=True, gui=True),
-                         parser.set_args(["-r", "-s", "test2.yaml", "-g", "-l", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save="test2.yaml", load="test.svg", icons=1, detail=1, run=True, gui=True),
+                         parser.set_args(["-r", "-s", "test2.yaml", "-g", "-l", "test.svg"]))
 
         self.assertEqual(argparse.Namespace(save=None, load=None, icons=2, detail=2, run=False, gui=False),
                          parser.set_args(["-i", "2", "-d", "2"]))
@@ -90,14 +90,14 @@ class TestArgParser(TestCase):
             parser.is_path_to_yaml_file("this/is/a/path")
 
         with self.assertRaises(Exception):
-            parser.is_path_to_yaml_file("this/is/a/path/test.yaml")
+            parser.is_path_to_yaml_file("this/is/a/path/test.svg")
 
         with self.assertRaises(argparse.ArgumentTypeError):
             parser.is_path_to_yaml_file("test.txt")
 
-        self.assertEqual("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
+        self.assertEqual("test.svg", parser.is_path_to_yaml_file("test.svg"))
 
-        self.assertIsNotNone("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
+        self.assertIsNotNone("test.svg", parser.is_path_to_yaml_file("test.svg"))
 
     def test_save_to_path(self):
         """
@@ -108,13 +108,31 @@ class TestArgParser(TestCase):
             parser.save_to_path("test_directory/")
 
         with self.assertRaises(FileExistsError):
+            parser.save_to_path("test.svg")
+
+        with self.assertRaises(TypeError):
             parser.save_to_path("test.yaml")
 
-        self.assertEqual("test2.yaml", parser.save_to_path("test2.yaml"))
+        self.assertEqual(f"./{self.testdirectory_path}test2.svg",
+                         parser.save_to_path(f"{self.testdirectory_path}test2.svg"))
 
-        self.assertEqual("testdirectory/", parser.save_to_path("testdirectory"))
+        # first file in testdirectory
+        self.assertEqual(f"./{self.testdirectory_path}", parser.save_to_path(f"{self.testdirectory_path}"))
 
-        # self.assertEqual(parser.create_filename("."), parser.save_to_path("."))
+        from datetime import date
+        date_today = "{:%Y%m%d}".format(date.today())
+        file_name = f"{date_today}_NIV_Diagram"
+
+        # second file -> -1
+        self.assertEqual("./testdirectory/",
+                         parser.save_to_path(f"./{self.testdirectory_path}"))
+        # third file -> -2
+        # create file and give directory_list the array of created files
+        # the new file should be on the second position
+
+        parser.save_to_path(f"{self.testdirectory_path}")
+        directory_list = os.listdir(f"{self.testdirectory_path}")
+        self.assertEqual(f"{file_name}-2.svg", f"{directory_list[1]}")
 
     def test_create_filename(self):
         """
