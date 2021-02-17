@@ -51,23 +51,20 @@ class TestArgParser(TestCase):
         self.assertEqual(argparse.Namespace(save=None, load=None, icons=1, detail=1, run=False, gui=True),
                          parser.set_args(["-g"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load=None, icons=1, detail=1, run=True, gui=True),
-                         parser.set_args(["-g", "-r"]))
-
         self.assertEqual(
             argparse.Namespace(save=f"./{self.testdirectory_path}test2.svg", load=None, icons=1, detail=1, run=True,
                                gui=False),
             parser.set_args(["-s", f"{self.testdirectory_path}test2.svg", "-r"]))
 
         self.assertEqual(
-            argparse.Namespace(save=f"./{self.testdirectory_path}test3.svg", load=None, icons=1, detail=1, run=False,
+            argparse.Namespace(save=f"./{self.testdirectory_path}test3.svg", load=None, icons=1, detail=1, run=True,
                                gui=False),
-            parser.set_args(["-s", f"{self.testdirectory_path}test3.svg"]))
+            parser.set_args(["-s", f"{self.testdirectory_path}test3.svg", "-r"]))
 
         self.assertEqual(
-            argparse.Namespace(save=f"./{self.testdirectory_path}test4.svg", load=None, icons=1, detail=1, run=False,
+            argparse.Namespace(save=f"./{self.testdirectory_path}test4.svg", load=None, icons=1, detail=1, run=True,
                                gui=False),
-            parser.set_args(["--save", f"{self.testdirectory_path}test4.svg"]))
+            parser.set_args(["--save", f"{self.testdirectory_path}test4.svg", "-r"]))
 
         self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=False),
                          parser.set_args(["-l", "test.yaml"]))
@@ -75,16 +72,11 @@ class TestArgParser(TestCase):
         self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=False),
                          parser.set_args(["--load", "test.yaml"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=True),
-                         parser.set_args(["-g", "-l", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=2, run=False, gui=False),
+                         parser.set_args(["-d", "2", "-l", "test.yaml"]))
 
-        self.assertEqual(
-            argparse.Namespace(save=f"./{self.testdirectory_path}test5.svg", load="test.yaml", icons=1, detail=1,
-                               run=True, gui=True),
-            parser.set_args(["-r", "-s", f"{self.testdirectory_path}test5.svg", "-g", "-l", "test.yaml"]))
-
-        self.assertEqual(argparse.Namespace(save=None, load=None, icons=2, detail=2, run=False, gui=False),
-                         parser.set_args(["-i", "2", "-d", "2"]))
+        self.assertEqual(argparse.Namespace(save=None, load=None, icons=2, detail=2, run=True, gui=False),
+                         parser.set_args(["-i", "2", "-d", "2", "-r"]))
 
         self.assertEqual(argparse.Namespace(save=None, load=None, icons=2, detail=1, run=True, gui=False),
                          parser.set_args(["-r", "-i", "2"]))
@@ -152,6 +144,64 @@ class TestArgParser(TestCase):
         file_name = f"{date_today}_NIV_Diagram.svg"
 
         self.assertEqual(file_name, parser.create_filename("."))
+
+    def test_check_args_compatibility(self):
+        """
+        check_args_compatibility function test
+        """
+        parser = ArgParser()
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-g", "-i"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-r", "-l"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-g", "-s", "-l"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-r", "-s", "-l"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-d"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-i"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-s"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-d", "-i", "-s"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-d", "-i"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-d", "-s"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["-i", "-s"])
+
+        self.assertTrue(["-r"])
+
+        self.assertTrue(["-l"])
+
+        self.assertTrue(["-s"])
+
+        self.assertTrue(["-g"])
+
+        self.assertTrue(["-i"])
+
+        self.assertTrue(["-d"])
+
+        self.assertTrue(["-d", "-r", "-i"])
+
+        self.assertTrue(["-d", "-i", "-l"])
+
+        self.assertTrue(["-s", "-l"])
+
+        self.assertTrue(["-r", "-s"])
 
     def tearDown(self) -> None:
         """

@@ -59,8 +59,6 @@ class ArgParser:
             print('You didnt specify any arguments, here is some help:\n')
             parser.print_help()
 
-        # return parser.parse_args(args)
-
         # Checks if the arguments are compatible with each other, else raise Exception
         if self.check_args_compatibility(args):
             return parser.parse_args(args)
@@ -182,10 +180,16 @@ class ArgParser:
         run = "--run" in args or "-r" in args
         gui = "--gui" in args or "-g" in args
 
+        # If no arguments are given
+        if len(args) == 0:
+            return True
         # If -g/--gui is used with any other argument, raise ArgumentError
-        if (icons or detail or load or save or run) and gui:
-            raise argparse.ArgumentError("Can\'t use -g/--gui with other arguments :)")
+        elif (icons or detail or load or save or run) and gui:
+            raise Exception("Can\'t use -g/--gui with other arguments :)")
         # If -r/--run is used with -l/--load, raise ArgumentError
         elif run and load:
-            raise argparse.ArgumentError("Can\'t use -r/--run with -l/--load :)")
+            raise Exception("Can\'t use -r/--run with -l/--load :)")
+        # If neither load, run or gui are as arguments -> the program would do nothing
+        elif not (load or run or gui):
+            raise Exception("To use NIV you need either load, run or gui as an argument :)")
         return True
