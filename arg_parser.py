@@ -115,10 +115,15 @@ class ArgParser:
         # Call lstrip() to remove all whitespaces in front of the path
         file_path = file_path.lstrip()
         last_element = file_path.split('/')[-1]
-        path = file_path.removesuffix(f'{last_element}')
+        # Workaround that adds a "./" at the start of the path if no "./" is entered
+        if file_path[0:2] != "./":
+            file_path = "./" + file_path
+
         print(f"Filepath: {file_path}")
-        print(f"Path without last element {path}")
         print(f"Last element: {last_element}")
+        if not last_element == file_path:
+            path = file_path.removesuffix(f'{last_element}')
+            print(f"Path without last element: {path}")
 
         # If the path is just a '.' create a file in the current directory
         if file_path == '.':
