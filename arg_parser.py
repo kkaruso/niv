@@ -85,10 +85,11 @@ class ArgParser:
     @staticmethod
     def create_filename(file_path):
         """
-        Generate a file name with today's date
+        Generate a file name with today's date and check if file with the same name already exists. If it does add a
+        number at the end of the name
 
         :param file_path: path to where the file should be saved
-        :return generated filename
+        :return: generated filename
         """
         i = 1
         date_today = "{:%Y%m%d}".format(date.today())
@@ -111,26 +112,38 @@ class ArgParser:
         :param file_path: path to where the file should be saved
         :return: path to file or raise error
         """
-        # print(f"Filepath: {file_path}")
         # Call lstrip() to remove all whitespaces in front of the path
         file_path = file_path.lstrip()
         last_element = file_path.split('/')[-1]
-        # print(f"Last element: {last_element}")
+        path = file_path.removesuffix(f'{last_element}')
+        print(f"Filepath: {file_path}")
+        print(f"Path without last element {path}")
+        print(f"Last element: {last_element}")
 
         # If the path is just a '.' create a file in the current directory
         if file_path == '.':
             file_name = ArgParser.create_filename(f"{file_path}/")
-            # create the file in the current directory
+            # Create the file in the current directory
             f = open(f"{file_name}", "a")
             f.close()
             return file_name
 
         # If there is a '.' in the name of the last element of the path, it is a file, else it is a directory
         elif '.' in last_element:
-            # Check if file already exists. If it doesn't create file, else raise exception
+            # Check if file already exists. If it doesn't create file, else raise FileExistsError
             if not os.path.isfile(file_path):
-                # TODO: create file and check if file format is correct (.svg, .png, .jpeg)
-                return file_path
+                # Check if the directory above the file exists, else raise Exception
+                if os.path.isdir(path):
+                    # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
+                    if last_element.lower().endswith(('.svg', '.png', '.jpeg')):
+                        # Create the given file in the given directory
+                        f = open(f"{file_path}", "a")
+                        f.close()
+                    else:
+                        raise Exception(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
+                    return file_path
+                else:
+                    raise Exception(f'\n"{path}": directory doesn\'t exist')
             else:
                 raise FileExistsError(f"{last_element} already exists")
 
@@ -141,7 +154,7 @@ class ArgParser:
                 if file_path[-1] != "/":
                     file_path += "/"
                 file_name = ArgParser.create_filename(file_path)
-                # Create file in the given directory
+                # Create the file in the given directory
                 f = open(f"{file_path}{file_name}", "a")
                 f.close()
                 return file_path
