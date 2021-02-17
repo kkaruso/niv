@@ -18,6 +18,7 @@ cache:
     - venv/
 
 before_script:
+  - pip install --upgrade setuptools
   - python -V  # Print out python version for debugging
   - pip install virtualenv
   - virtualenv venv
