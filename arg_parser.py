@@ -1,6 +1,5 @@
 import argparse
 import os
-import sys
 from datetime import date
 
 
@@ -54,13 +53,19 @@ class ArgParser:
 
         parser.add_argument('-g', '--gui', action='store_true', help='Start niv gui')
 
-        # print(parser.parse_args("-s .".split()))
+        # print(parser.parse_args("-g".split()))
         # If no argument given, print help
         if len(args) == 0:
             print('You didnt specify any arguments, here is some help:\n')
             parser.print_help()
 
-        return parser.parse_args(args)
+        # return parser.parse_args(args)
+
+        # Checks if the arguments are compatible with each other, else raise Exception
+        if self.check_args_compatibility(args):
+            return parser.parse_args(args)
+        else:
+            Exception("Arguments are not compatible")
 
     @staticmethod
     def is_path_to_yaml_file(file_path):
@@ -148,7 +153,7 @@ class ArgParser:
                 raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
 
         else:
-            # Check if directory exists. If it does return the file_path, else raise exception
+            # Check if directory exists. If it does return the file_path, else raise Exception
             if os.path.isdir(file_path):
                 # Check if last symbol is a "/" otherwise add a "/"
                 if file_path[-1] != "/":
@@ -160,3 +165,27 @@ class ArgParser:
                 return file_path
             else:
                 raise Exception(f'\n"{file_path}": directory doesn\'t exist')
+
+    @staticmethod
+    def check_args_compatibility(args):
+        """
+        Checks if the given arguments are compatible with each other (e.g: --gui can't be used with any other argument)
+
+        :param args: parsed arguments as a namespace
+        :return: true, if arguments are compatible. false, if not
+        """
+        # Set variable to True if argument is given
+        icons = "--icons" in args or "-i" in args
+        detail = "--detail" in args or "-d" in args
+        load = "--load" in args or "-l" in args
+        save = "--save" in args or "-s" in args
+        run = "--run" in args or "-r" in args
+        gui = "--gui" in args or "-g" in args
+
+        # If -g/--gui is used with any other argument, raise ArgumentError
+        if (icons or detail or load or save or run) and gui:
+            raise argparse.ArgumentError("Can\'t use -g/--gui with other arguments :)")
+        # If -r/--run is used with -l/--load, raise ArgumentError
+        elif run and load:
+            raise argparse.ArgumentError("Can\'t use -r/--run with -l/--load :)")
+        return True
