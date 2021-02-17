@@ -130,22 +130,22 @@ class ArgParser:
 
         # If there is a '.' in the name of the last element of the path, it is a file, else it is a directory
         elif '.' in last_element:
-            # Check if file already exists. If it doesn't create file, else raise FileExistsError
-            if not os.path.isfile(file_path):
+            # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
+            if last_element.lower().endswith(('.svg', '.png', '.jpeg')):
                 # Check if the directory above the file exists, else raise Exception
                 if os.path.isdir(path):
-                    # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
-                    if last_element.lower().endswith(('.svg', '.png', '.jpeg')):
+                    # Check if file already exists. If it doesn't create file, else raise FileExistsError
+                    if not os.path.isfile(file_path):
                         # Create the given file in the given directory
                         f = open(f"{file_path}", "a")
                         f.close()
+                        return file_path
                     else:
-                        raise Exception(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
-                    return file_path
+                        raise FileExistsError(f"{last_element} already exists")
                 else:
                     raise Exception(f'\n"{path}": directory doesn\'t exist')
             else:
-                raise FileExistsError(f"{last_element} already exists")
+                raise Exception(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
 
         else:
             # Check if directory exists. If it does return the file_path, else raise exception
