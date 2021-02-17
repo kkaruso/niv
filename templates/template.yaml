@@ -1,0 +1,96 @@
+diagram: #Use current values as defaults
+  backgroundColor: "white"  # Change the color of the diagram's background
+  columns: 10  # Number of columns
+  rows: 10  # Number of rows
+  gridLines: false  # Show grid lines after exporting: true/false
+  gridPaddingInner: .25  # Not sure yet
+  groupPadding: .75 # Padding between each group frame I think
+
+title: # Area underneath the diagram. Use current values as defaults
+  showTitle: true  # Show title area: true/false
+  color: black  # Font color
+  heightPercentage: 8  # Height of title in perecentage e.g. title 8% -> diagram will be 92%
+  logoFill: none # Logo background color:
+  logoUrl: https://sites.google.com/site/dekchysite95/_/rsrc/1480944463347/extra-credit/google.png  # Logo Url
+  text: "NIV"  # Header text: enter string
+  subText: "Network Infrastructure Visualization."
+  author: "Tom Themas"  # Author's name: enter string
+  company: Empty  # Enter company name or leave empty
+  date: "01.01.2021"  # Default date is current date or enter specific date as string
+  version: "1.0"  # Version of the diagram as string
+  type: "bar"  # Box around title or just a bar between title and diagram: box/bar
+  stroke: black  # Color of bar/box-frame
+
+  iconDefaults: &iconDefaults #Use current values as defaults 
+    color: black  # Text color underneath icon
+    fill: none # Color of icons bounding box
+    stroke: none # Color of border around icon
+    icon: none # Name of icon in icon family
+    iconFamily: cisco # Choose between "cisco", "aws", "opensecurityarchitecture"
+    iconStroke: # Color of lines within icon.svg. Use color of svg-file as default
+    iconStrokeWidth: # Size of lines within icon.svg. Use size of svg-file as default
+    text: none  # Instead of icon's key use this text for icon label
+    x: 1  # x-coordinate on grid
+    y: 1  # y-coordinate on grid
+    h: 1  # Height of icon
+    w: 1  # Width of icon
+    ip:  # Enter ip or leave blank
+    port:  # Enter ports or leave blank
+
+  # Maybe do it like this in the future. More user friendly
+  # x: (default: none) The x-coordinate location of the icon.
+  #  n: An absolute position.
+  #  "+n": A value added from the previous icon's x value.
+  #  "-n": A value subtracted from the previous icon's x value.
+  #  Example: `{x: "+5", y: 0}`
+  #y: (default: none) The y-coordinate location of the icon.
+  #  n: An absolute position.
+  #  "+n": A value added from the previous icon's x value.
+  #  "-n": A value subtracted from the previous icon's x value.
+  #  Example: `{x: 0, y: "+5"}`
+    
+
+
+  groupDefaults: &groupDefaults #Use current values as defaults
+    fill: "none"  # Fill the background of the group box
+    color: black  # Color of the text
+    stroke: black  # Color of the group box
+    members: none  # Array of members for group. e.g. [dns,lb,server1,server2,server3]
+    name: none  # Name of group
+
+  connectionDefaults: &connectionDefaults #Use current values as defaults
+    color: "green"  # Text color of the connection
+    stroke: "red"  # Color of the connected line
+    strokewidth: 1  # Width of the connection line
+    endpoint:  # Array of 2 icons. e.g. [dns, lb]
+    
+
+  noteDefaults: &noteDefaults
+    color: black  # Text color of the note
+    fill: white  # Background color of the note
+    stroke: black  # Group box color of the note
+    xAlign: center  # X-alignment of the text 
+    yAlign: center  # Y-alignment of the text
+
+  icons: #enter devices here. Maybe change "icons" to "devices" later.
+    dns: {<<: *iconDefaults, icon: dns, x: 2, y: 3 }
+    lb: {<<: *iconDefaults, icon: lb, y: "-1" }
+    server1: {<<: *iconDefaults, icon: server, x: "-1", y: "-1" }
+    server2: {<<: *iconDefaults, icon: server, x: "+1" }
+    server3: {<<: *iconDefaults, icon: server, x: "+1" }
+
+  groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
+    pcs: { <<: *groupDefaults, name: My Servers, members: [pc1, pc2, pc3] }
+    
+  connections: #enter your connections here
+  - { <<: *connectionDefaults, endpoints: [server1, router] }
+  - { <<: *connectionDefaults, endpoints: [router, pcs] }
+  
+  # Probably won't use notes like the one on GitHub
+  # Notes that he uses are html flexboxes. Need to find some kind of python equivalent  
+  notes: #only if you need a note
+    note1:
+    <<: *noteDefaults
+    x: 0
+    y: 3
+    text: "##Note\n\nThis is the text for the note."
