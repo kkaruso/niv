@@ -66,14 +66,14 @@ class TestArgParser(TestCase):
                                gui=False),
             parser.set_args(["--save", f"{self.testdirectory_path}test4.svg", "-r"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=False),
-                         parser.set_args(["-l", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="./test.yaml", icons=1, detail=1, run=False, gui=False),
+                         parser.set_args(["-l", "./test.yaml"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=1, run=False, gui=False),
-                         parser.set_args(["--load", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="./test.yaml", icons=1, detail=1, run=False, gui=False),
+                         parser.set_args(["--load", "./test.yaml"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="test.yaml", icons=1, detail=2, run=False, gui=False),
-                         parser.set_args(["-d", "2", "-l", "test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="./test.yaml", icons=1, detail=2, run=False, gui=False),
+                         parser.set_args(["-d", "2", "-l", "./test.yaml"]))
 
         self.assertEqual(argparse.Namespace(save=None, load=None, icons=2, detail=2, run=True, gui=False),
                          parser.set_args(["-i", "2", "-d", "2", "-r"]))
@@ -87,17 +87,15 @@ class TestArgParser(TestCase):
         """
         parser = ArgParser()
         with self.assertRaises(Exception):
-            parser.is_path_to_yaml_file("this/is/a/path")
+            parser.is_path_to_yaml_file("./this/is/a/path")
 
         with self.assertRaises(Exception):
-            parser.is_path_to_yaml_file("this/is/a/path/test.svg")
+            parser.is_path_to_yaml_file("./this/is/a/path/test.svg")
 
         with self.assertRaises(Exception):
-            parser.is_path_to_yaml_file("test.txt")
+            parser.is_path_to_yaml_file("./test.txt")
 
-        self.assertEqual("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
-
-        self.assertIsNotNone("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
+        self.assertEqual("./test.yaml", parser.is_path_to_yaml_file("./test.yaml"))
 
     def test_save_to_path(self):
         """
@@ -105,13 +103,13 @@ class TestArgParser(TestCase):
         """
         parser = ArgParser()
         with self.assertRaises(Exception):
-            parser.save_to_path("test_directory/")
+            parser.save_to_path("./test_directory/")
 
-        with self.assertRaises(Exception):
-            parser.save_to_path("test.svg")
+        with self.assertRaises(FileExistsError):
+            parser.save_to_path("./test.svg")
 
         with self.assertRaises(TypeError):
-            parser.save_to_path("test.yaml")
+            parser.save_to_path("./test.yaml")
 
         self.assertEqual(f"./{self.testdirectory_path}test2.svg",
                          parser.save_to_path(f"{self.testdirectory_path}test2.svg"))
