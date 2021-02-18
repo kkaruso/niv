@@ -1,15 +1,20 @@
+image: "python:3.7"
+
+before_script:
+  - python --version
+
 stages:
   - Static Analysis
   - Test
+
 pylint:
-    stage: Static analysis
-    image: python:3.6
-    script:
-        - pip install pylint --quiet
-        - pylint --ignored-classes=_socketobject *.py
-pytest:
-  stage: unittest
-  image: python:3.6
+  stage: Static Analysis
   script:
-    - pip install pytest --quiet
-    - python -m pytest
+  - pip install pylint --quiet
+  - pylint -d C0301 src/*.py
+
+pytest:
+  stage: Test
+  script:
+  - pip install pytest --quiet 
+  - cd test/;pytest -v
