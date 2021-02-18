@@ -1,3 +1,6 @@
+"""
+Parses given .yaml file
+"""
 import yaml
 
 
@@ -14,5 +17,4 @@ def get_yaml(path):
             print(yaml_parsed)
             return yaml_parsed
         except yaml.YAMLError as exc:
-            print(exc)
             raise Exception(f"{exc}")
