@@ -4,7 +4,7 @@ test:pylint:
       - python -V # Print out python version for debugging
     script:
         - pip install pylint --quiet
-        - pylint --ignored-classes=_socketobject *.py --output-format=<colorized>
+        - pylint --ignored-classes=_socketobject *.py
 test:pytest:
   image: python:3.9
   before_script:
