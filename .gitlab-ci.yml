@@ -7,34 +7,41 @@ test:pylint:
         - pylint --ignored-classes=_socketobject --max-line-length=150 *.py
 
 
-test:pytest:
-  image: python:3.9
-  variables:
+image: "python:3.9"
+
+# Change pip's cache directory to be inside the project directory since we can
+# only cache local items.
+variables:
     PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
 
-  cache:
+# Pip's cache doesn't store the python packages
+# https://pip.pypa.io/en/stable/reference/pip_install/#caching
+#
+# If you want to also cache the installed packages, you have to install
+# them in a virtualenv and cache it as well.
+cache:
+  paths:
+    - .cache/pip
+    - venv/
+
+before_script:
+  - python -V               # Print out python version for debugging
+  - python -m venv venv
+  - source venv/bin/activate
+  - pip install requests
+  - pip install pdoc3 pytest pytest-cov pytest-html
+
+tests:
+  script:
+    - python -m pytest --cov=niv --cov-report html --html=report.html --self-contained-html tests
+  artifacts:
     paths:
-      - .cache/pip
-      - venv/
+      - htmlcov
+      - report.html
 
-  before_script:
-    - python -V               # Print out python version for debugging
-    - python -m venv venv
-    - source venv/bin/activate
-    - pip install requests
-    - pip install pdoc3 pytest pytest-cov pytest-html
-
-  tests:
-    script:
-      - python -m pytest --cov=netzwerkprogrammierung --cov-report html --html=report.html --self-contained-html tests
-    artifacts:
-      paths:
-        - htmlcov
-        - report.html
-
-  pages:
-    script:
-      - pdoc3 --html --output-dir public netzwerkprogrammierung
-    artifacts:
-      paths:
-        - public
+pages:
+  script:
+    - pdoc3 --html --output-dir public netzwerkprogrammierung
+  artifacts:
+    paths:
+      - public
