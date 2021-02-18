@@ -1,12 +1,12 @@
 test:pylint:
-    image: python:3.6
+    image: python:3.9
     before_script:
       - python -V # Print out python version for debugging
     script:
         - pip install pylint --quiet
         - pylint --ignored-classes=_socketobject *.py
 test:pytest:
-  image: python:3.6
+  image: python:3.9
   before_script:
     - python -V # Print out python version for debugging
   script:
