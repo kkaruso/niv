@@ -85,6 +85,7 @@ class TestArgParser(TestCase):
         """
         is_path_to_yaml_file function test
         """
+        print(os.getcwd())
         parser = ArgParser()
         with self.assertRaises(Exception):
             parser.is_path_to_yaml_file("./this/is/a/path")
