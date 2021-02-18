@@ -22,7 +22,7 @@ class ArgParser:
     DETAIL = [1, 2, 3]
 
     def __init__(self):
-        return
+        pass
 
     def set_args(self, args):
         """
@@ -39,16 +39,20 @@ class ArgParser:
         parser.add_argument('-v', '--version', action='version', version='1.0',
                             help="Show program's version number and exit")
 
-        parser.add_argument('-s', '--save', type=self.save_to_path, nargs='?', metavar='OUTPUT_PATH',
+        parser.add_argument('-s', '--save', type=self.save_to_path,
+                            nargs='?', metavar='OUTPUT_PATH',
                             help='Save .svg, .png or .jpeg file to a given path (DEFAULT: .svg)')
 
-        parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file, nargs='?', metavar='INPUT_PATH',
+        parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file,
+                            nargs='?', metavar='INPUT_PATH',
                             help='Create visualization with a given .yaml file')
 
-        parser.add_argument('-i', '--icons', type=int, nargs='?', metavar='INT', default=1, choices=self.ICONS,
+        parser.add_argument('-i', '--icons', type=int, nargs='?', metavar='INT',
+                            default=1, choices=self.ICONS,
                             help='Choose the icons you want to use for the visualization; 1: cisco, 2: osa (DEFAULT: 1)')
 
-        parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT', default=1, choices=self.DETAIL,
+        parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
+                            default=1, choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
                                  '2: medium detail, 3: most detail (DEFAULT: 1)')
 
@@ -161,8 +165,7 @@ class ArgParser:
             file = open(f"{file_path}{file_name}", "a")
             file.close()
             return file_path
-        else:
-            raise Exception(f'\n"{file_path}": directory doesn\'t exist')
+        raise Exception(f'\n"{file_path}": directory doesn\'t exist')
 
     @staticmethod
     def check_args_compatibility(args):
@@ -181,16 +184,19 @@ class ArgParser:
         run = "--run" in args or "-r" in args
         gui = "--gui" in args or "-g" in args
 
+        # variable for or operation on all arguments except gui
+        eegui = icons or detail or load or save or run
+
         # If no arguments are given
         if len(args) == 0:
             return True
         # If -g/--gui is used with any other argument, raise ArgumentError
-        elif (icons or detail or load or save or run) and gui:
+        if eegui and gui:
             raise Exception("Can\'t use -g/--gui with other arguments :)")
         # If -r/--run is used with -l/--load, raise ArgumentError
-        elif run and load:
+        if run and load:
             raise Exception("Can\'t use -r/--run with -l/--load :)")
         # If neither load, run or gui are as arguments -> the program would do nothing
-        elif not (load or run or gui):
+        if not (load or run or gui):
             raise Exception("To use NIV you need either load, run or gui as an argument :)")
         return True
