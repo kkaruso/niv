@@ -17,10 +17,18 @@ class TestArgParser(TestCase):
         """
         try:
             os.mkdir(self.testdirectory_path)
+            with open("test.txt", "w"):
+                pass
+            with open("test.yaml", "w"):
+                pass
+            with open("test.svg", "w"):
+                pass
+
         except OSError:
             print(f"Creation of the directory {self.testdirectory_path} failed")
         else:
             print(f"Successfully created the directory {self.testdirectory_path}")
+            print("Successfully created test files")
 
     def test_set_args(self):
         """
@@ -85,7 +93,6 @@ class TestArgParser(TestCase):
         """
         is_path_to_yaml_file function test
         """
-        print(os.getcwd())
         parser = ArgParser()
         with self.assertRaises(Exception):
             parser.is_path_to_yaml_file("./this/is/a/path")
@@ -214,7 +221,11 @@ class TestArgParser(TestCase):
         """
         try:
             shutil.rmtree(f'{self.testdirectory_path}', ignore_errors=True)
+            os.remove("test.svg")
+            os.remove("test.txt")
+            os.remove("test.yaml")
         except OSError:
             print(f"Deletion of the directory {self.testdirectory_path} failed")
         else:
             print(f"Successfully deleted the directory {self.testdirectory_path}")
+            print("Successfully deleted Test files")
