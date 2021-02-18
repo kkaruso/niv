@@ -38,10 +38,3 @@ tests:
     paths:
       - htmlcov
       - report.html
-
-pages:
-  script:
-    - pdoc3 --html --output-dir public netzwerkprogrammierung
-  artifacts:
-    paths:
-      - public
