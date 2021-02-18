@@ -70,7 +70,7 @@ class ArgParser:
         # Checks if the arguments are compatible with each other, else raise Exception
         if self.check_args_compatibility(args):
             return parser.parse_args(args)
-        Exception("Arguments are not compatible")
+        raise Exception("Arguments are not compatible")
 
     @staticmethod
     def is_path_to_yaml_file(file_path):
@@ -140,7 +140,7 @@ class ArgParser:
 
         # If there is a '.' in the name of the last element of the
         # path, it is a file, else it is a directory
-        elif '.' in last_element:
+        if '.' in last_element:
             # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
             if last_element.lower().endswith(('.svg', '.png', '.jpeg')):
                 # Check if the directory above the file exists, else raise Exception

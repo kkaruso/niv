@@ -183,6 +183,12 @@ class TestArgParser(TestCase):
         with self.assertRaises(Exception):
             parser.check_args_compatibility(["-i", "-s"])
 
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["Test"])
+
+        with self.assertRaises(Exception):
+            parser.check_args_compatibility(["123"])
+
         self.assertTrue(["-r"])
 
         self.assertTrue(["-l"])
