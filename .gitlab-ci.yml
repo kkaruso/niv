@@ -12,4 +12,6 @@ test:pytest:
   script:
     - pip install pytest --quiet
     - ls -l
+    - cd test/
+    - ls -l
     - python -m pytest
