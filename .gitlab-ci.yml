@@ -2,12 +2,14 @@ stages:
   -PEP8
   -unittest
 
-test:PEP8:
+test1:
+    stage: PEP8
     image: python:3.6
     script:
         - pip install pylint --quiet
         - pylint --ignored-classes=_socketobject *.py
-test:unittest:
+test2:
+  stage: unittest
   image: python:3.6
   script:
     - pip install pytest --quiet
