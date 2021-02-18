@@ -2,8 +2,7 @@
 Main
 """
 import sys
-
-#import yaml
+# import yaml
 from arg_parser import ArgParser
 
 # Create an instance of the ArgParser class

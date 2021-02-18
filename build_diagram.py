@@ -10,8 +10,23 @@ import yaml_parser
 # Get the parsed yaml in form of a dictionary
 yaml = yaml_parser.get_yaml("templates/template.yaml")
 
-print(yaml.get("title").get("text"))
+print(yaml.get("groups"))
+
+# Create variables for dynamically getting the values from the .yaml file for creating the graph
 title = yaml.get("title").get("text")
+group_count = len(yaml.get("groups"))
+groups = list(yaml.get("groups").keys())
+group_members = yaml.get("groups").get("pcs").get("members")
+node_count = len(yaml.get("icons"))
+nodes = list(yaml.get("icons").keys())
+connections = []
+for i in range(0, len(yaml.get("connections"))):
+    connections.append(yaml.get("connections")[i].get("endpoints"))
+
+print(f"groups: {groups}")
+print(f"group_members: {group_members}")
+print(f"nodes: {nodes}")
+print(f"connections: {connections}")
 
 output_format = "svg"
 
@@ -19,15 +34,11 @@ filename = "Test_Diagram"
 
 full_filename = f"{filename}.{output_format}"
 
-graph_attr = {
-    "layout": "dot",
-}
-
 # IP Example
 ip = "192.168.x.x"
 
 # Create a instance of the Diagram class to create a diagram context
-with Diagram(f"{title}", filename=filename, outformat=output_format, show=True, graph_attr=graph_attr):
+with Diagram(f"{title}", filename=filename, outformat=output_format, show=False):
     # Group 1
     with Cluster("Gruppe 1"):
         # The Mater Device in the Group
@@ -55,3 +66,5 @@ with open(full_filename, "r") as f:
 
 with open(full_filename, "w") as f:
     f.write(out_string)
+
+# def set_variables():
