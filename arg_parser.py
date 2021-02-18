@@ -35,6 +35,7 @@ class ArgParser:
         parser.add_argument('-v', '--version', action='version', version='1.0', help="Show program's version "
                                                                                      "number and exit")
 
+        # TODO: Add .pdf and change .jpeg to .jpg
         parser.add_argument('-s', '--save', type=self.save_to_path, nargs='?', metavar='OUTPUT_PATH',
                             help='Save .svg, .png or .jpeg file to a given path (DEFAULT: .svg)')
 
