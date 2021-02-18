@@ -1,3 +1,6 @@
+"""
+Yaml Parser
+"""
 import yaml
 
 with open("templates/template.yaml", "r") as stream:
@@ -5,4 +8,3 @@ with open("templates/template.yaml", "r") as stream:
         print(yaml.safe_load(stream))
     except yaml.YAMLError as exc:
         print(exc)
-
