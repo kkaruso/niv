@@ -1,3 +1,7 @@
+"""
+Parser class for Arguments when you start NIV
+"""
+
 import argparse
 import os
 from datetime import date
@@ -62,8 +66,7 @@ class ArgParser:
         # Checks if the arguments are compatible with each other, else raise Exception
         if self.check_args_compatibility(args):
             return parser.parse_args(args)
-        else:
-            Exception("Arguments are not compatible")
+        Exception("Arguments are not compatible")
 
     @staticmethod
     def is_path_to_yaml_file(file_path):
@@ -80,10 +83,8 @@ class ArgParser:
             file_type = file_name.split('.')[-1]
             if file_type == "yaml":
                 return file_path
-            else:
-                raise argparse.ArgumentTypeError(f'\n"{file_name}" is not a .yaml')
-        else:
-            raise Exception(f'\n"{file_path}" is not a valid file path')
+            raise argparse.ArgumentTypeError(f'\n"{file_name}" is not a .yaml')
+        raise Exception(f'\n"{file_path}" is not a valid file path')
 
     @staticmethod
     def create_filename(file_path):
@@ -129,8 +130,8 @@ class ArgParser:
         if file_path == '.':
             file_name = ArgParser.create_filename(f"{file_path}/")
             # Create the file in the current directory
-            f = open(f"{file_name}", "a")
-            f.close()
+            file = open(f"{file_name}", "a")
+            file.close()
             return file_name
 
         # If there is a '.' in the name of the last element of the
@@ -143,29 +144,25 @@ class ArgParser:
                     # Check if file already exists. If it doesn't create file, else raise FileExistsError
                     if not os.path.isfile(file_path):
                         # Create the given file in the given directory
-                        f = open(f"{file_path}", "a")
-                        f.close()
+                        file = open(f"{file_path}", "a")
+                        file.close()
                         return file_path
-                    else:
-                        raise FileExistsError(f"{last_element} already exists")
-                else:
-                    raise Exception(f'\n"{path}": directory doesn\'t exist')
-            else:
-                raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
+                    raise FileExistsError(f"{last_element} already exists")
+                raise Exception(f'\n"{path}": directory doesn\'t exist')
+            raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
 
+        # Check if directory exists. If it does return the file_path, else raise Exception
+        if os.path.isdir(file_path):
+            # Check if last symbol is a "/" otherwise add a "/"
+            if file_path[-1] != "/":
+                file_path += "/"
+            file_name = ArgParser.create_filename(file_path)
+            # Create the file in the given directory
+            file = open(f"{file_path}{file_name}", "a")
+            file.close()
+            return file_path
         else:
-            # Check if directory exists. If it does return the file_path, else raise Exception
-            if os.path.isdir(file_path):
-                # Check if last symbol is a "/" otherwise add a "/"
-                if file_path[-1] != "/":
-                    file_path += "/"
-                file_name = ArgParser.create_filename(file_path)
-                # Create the file in the given directory
-                f = open(f"{file_path}{file_name}", "a")
-                f.close()
-                return file_path
-            else:
-                raise Exception(f'\n"{file_path}": directory doesn\'t exist')
+            raise Exception(f'\n"{file_path}": directory doesn\'t exist')
 
     @staticmethod
     def check_args_compatibility(args):
