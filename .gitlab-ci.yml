@@ -11,4 +11,5 @@ test:pytest:
     - python -V # Print out python version for debugging
   script:
     - pip install pytest --quiet
+    - cd test/
     - python -m pytest
