@@ -1,14 +1,14 @@
 stages:
-  -PEP8
+  -Static analysis
   -unittest
 
-test1:
-    stage: PEP8
+pylint:
+    stage: Static analysis
     image: python:3.6
     script:
         - pip install pylint --quiet
         - pylint --ignored-classes=_socketobject *.py
-test2:
+pytest:
   stage: unittest
   image: python:3.6
   script:
