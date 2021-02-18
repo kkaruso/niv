@@ -33,6 +33,7 @@ before_script:
 
 tests:
   script:
+    - cd /Test
     - python -m pytest --cov=niv --cov-report html --html=report.html --self-contained-html tests
   artifacts:
     paths:
