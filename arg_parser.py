@@ -87,7 +87,7 @@ class ArgParser:
             file_type = file_name.split('.')[-1]
             if file_type == "yaml":
                 return file_path
-            raise argparse.ArgumentTypeError(f'\n"{file_name}" is not a .yaml')
+            raise Exception(f'\n"{file_name}" is not a .yaml')
         raise Exception(f'\n"{file_path}" is not a valid file path')
 
     @staticmethod

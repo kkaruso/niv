@@ -92,7 +92,7 @@ class TestArgParser(TestCase):
         with self.assertRaises(Exception):
             parser.is_path_to_yaml_file("this/is/a/path/test.svg")
 
-        with self.assertRaises(argparse.ArgumentTypeError):
+        with self.assertRaises(Exception):
             parser.is_path_to_yaml_file("test.txt")
 
         self.assertEqual("test.yaml", parser.is_path_to_yaml_file("test.yaml"))
@@ -107,7 +107,7 @@ class TestArgParser(TestCase):
         with self.assertRaises(Exception):
             parser.save_to_path("test_directory/")
 
-        with self.assertRaises(FileExistsError):
+        with self.assertRaises(Exception):
             parser.save_to_path("test.svg")
 
         with self.assertRaises(TypeError):
