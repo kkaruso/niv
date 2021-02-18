@@ -1,7 +1,6 @@
 stages:
-  -Static analysis
-  -unittest
-
+  - Static Analysis
+  - Test
 pylint:
     stage: Static analysis
     image: python:3.6
