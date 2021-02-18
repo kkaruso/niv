@@ -32,8 +32,8 @@ class ArgParser:
 
         parser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
 
-        parser.add_argument('-v', '--version', action='version', version='1.0', help="Show program's version "
-                                                                                     "number and exit")
+        parser.add_argument('-v', '--version', action='version', version='1.0',
+                            help="Show program's version number and exit")
 
         parser.add_argument('-s', '--save', type=self.save_to_path, nargs='?', metavar='OUTPUT_PATH',
                             help='Save .svg, .png or .jpeg file to a given path (DEFAULT: .svg)')
@@ -88,7 +88,8 @@ class ArgParser:
     @staticmethod
     def create_filename(file_path):
         """
-        Generate a file name with today's date and check if file with the same name already exists. If it does add a
+        Generate a file name with today's date and check
+        if file with the same name already exists. If it does add a
         number at the end of the name
 
         :param file_path: path to where the file should be saved
@@ -109,7 +110,8 @@ class ArgParser:
     @staticmethod
     def save_to_path(file_path):
         """
-        Checks if the path is a file path or a directory path and creates the output file in the corresponding
+        Checks if the path is a file path or a directory path
+        and creates the output file in the corresponding
         directory with a suitable name, if no name is given
 
         :param file_path: path to where the file should be saved
@@ -131,7 +133,8 @@ class ArgParser:
             f.close()
             return file_name
 
-        # If there is a '.' in the name of the last element of the path, it is a file, else it is a directory
+        # If there is a '.' in the name of the last element of the
+        # path, it is a file, else it is a directory
         elif '.' in last_element:
             # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
             if last_element.lower().endswith(('.svg', '.png', '.jpeg')):
@@ -167,7 +170,8 @@ class ArgParser:
     @staticmethod
     def check_args_compatibility(args):
         """
-        Checks if the given arguments are compatible with each other (e.g: --gui can't be used with any other argument)
+        Checks if the given arguments are compatible with each other
+        (e.g: --gui can't be used with any other argument)
 
         :param args: parsed arguments as a namespace
         :return: true, if arguments are compatible. false, if not
