@@ -183,12 +183,16 @@ class ArgParser:
         save = "--save" in args or "-s" in args
         run = "--run" in args or "-r" in args
         gui = "--gui" in args or "-g" in args
+        version = "--version" in args or "-v" in args
+        help = "--help" in args or "-h" in args
 
         # variable for or operation on all arguments except gui
         eegui = icons or detail or load or save or run
-
         # If no arguments are given
         if len(args) == 0:
+            return True
+        # If only help or version are given
+        if len(args) == 1 and (version or help):
             return True
         # If -g/--gui is used with any other argument, raise ArgumentError
         if eegui and gui:
