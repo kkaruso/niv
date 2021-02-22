@@ -14,7 +14,7 @@ def get_yaml(path):
     with open(f"{path}", "r") as stream:
         try:
             yaml_parsed = yaml.safe_load(stream)
-            print(yaml_parsed)
+            print(f"parsed yaml as dict: {yaml_parsed}\n")
             return yaml_parsed
         except yaml.YAMLError as exc:
             raise Exception(f"{exc}")
