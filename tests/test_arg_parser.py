@@ -13,26 +13,26 @@ class TestArgParser(TestCase):
 
     def setUp(self) -> None:
         """
-        Setup test directories and files for testing
+        Setup tests directories and files for testing
         """
         try:
             os.mkdir(self.testdirectory_path)
-            with open("test.txt", "w"):
+            with open("tests.txt", "w"):
                 pass
-            with open("test.yaml", "w"):
+            with open("tests.yaml", "w"):
                 pass
-            with open("test.svg", "w"):
+            with open("tests.svg", "w"):
                 pass
 
         except OSError:
             print(f"Creation of the directory {self.testdirectory_path} failed")
         else:
             print(f"Successfully created the directory {self.testdirectory_path}")
-            print("Successfully created test files")
+            print("Successfully created tests files")
 
     def test_set_args(self):
         """
-        set_args function test
+        set_args function tests
         """
 
         parser = ArgParser()
@@ -74,14 +74,14 @@ class TestArgParser(TestCase):
                                gui=False),
             parser.set_args(["--save", f"{self.testdirectory_path}test4.svg", "-r"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="./test.yaml", icons=1, detail=1, run=False, gui=False),
-                         parser.set_args(["-l", "./test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", icons=1, detail=1, run=False, gui=False),
+                         parser.set_args(["-l", "./tests.yaml"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="./test.yaml", icons=1, detail=1, run=False, gui=False),
-                         parser.set_args(["--load", "./test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", icons=1, detail=1, run=False, gui=False),
+                         parser.set_args(["--load", "./tests.yaml"]))
 
-        self.assertEqual(argparse.Namespace(save=None, load="./test.yaml", icons=1, detail=2, run=False, gui=False),
-                         parser.set_args(["-d", "2", "-l", "./test.yaml"]))
+        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", icons=1, detail=2, run=False, gui=False),
+                         parser.set_args(["-d", "2", "-l", "./tests.yaml"]))
 
         self.assertEqual(argparse.Namespace(save=None, load=None, icons=2, detail=2, run=True, gui=False),
                          parser.set_args(["-i", "2", "-d", "2", "-r"]))
@@ -91,33 +91,33 @@ class TestArgParser(TestCase):
 
     def test_is_path_to_yaml_file(self):
         """
-        is_path_to_yaml_file function test
+        is_path_to_yaml_file function tests
         """
         parser = ArgParser()
         with self.assertRaises(Exception):
             parser.is_path_to_yaml_file("./this/is/a/path")
 
         with self.assertRaises(Exception):
-            parser.is_path_to_yaml_file("./this/is/a/path/test.svg")
+            parser.is_path_to_yaml_file("./this/is/a/path/tests.svg")
 
         with self.assertRaises(Exception):
-            parser.is_path_to_yaml_file("./test.txt")
+            parser.is_path_to_yaml_file("./tests.txt")
 
-        self.assertEqual("./test.yaml", parser.is_path_to_yaml_file("./test.yaml"))
+        self.assertEqual("./tests.yaml", parser.is_path_to_yaml_file("./tests.yaml"))
 
     def test_save_to_path(self):
         """
-        save_to_path function test
+        save_to_path function tests
         """
         parser = ArgParser()
         with self.assertRaises(Exception):
             parser.save_to_path("./test_directory/")
 
         with self.assertRaises(FileExistsError):
-            parser.save_to_path("./test.svg")
+            parser.save_to_path("./tests.svg")
 
         with self.assertRaises(TypeError):
-            parser.save_to_path("./test.yaml")
+            parser.save_to_path("./tests.yaml")
 
         self.assertEqual(f"./{self.testdirectory_path}test2.svg",
                          parser.save_to_path(f"{self.testdirectory_path}test2.svg"))
@@ -142,7 +142,7 @@ class TestArgParser(TestCase):
 
     def test_create_filename(self):
         """
-        create_filename function test
+        create_filename function tests
         """
         from datetime import date
         parser = ArgParser()
@@ -153,7 +153,7 @@ class TestArgParser(TestCase):
 
     def test_check_args_compatibility(self):
         """
-        check_args_compatibility function test
+        check_args_compatibility function tests
         """
         parser = ArgParser()
         with self.assertRaises(Exception):
@@ -221,9 +221,9 @@ class TestArgParser(TestCase):
         """
         try:
             shutil.rmtree(f'{self.testdirectory_path}', ignore_errors=True)
-            os.remove("test.svg")
-            os.remove("test.txt")
-            os.remove("test.yaml")
+            os.remove("tests.svg")
+            os.remove("tests.txt")
+            os.remove("tests.yaml")
         except OSError:
             print(f"Deletion of the directory {self.testdirectory_path} failed")
         else:

@@ -4,7 +4,15 @@ Parser class for Arguments when you start NIV
 
 import argparse
 import os
+import configparser
 from datetime import date
+
+
+def get_config_path():
+    # current_pwd = os.getcwd()
+    # for item in current_pwd.split("\\"):
+    #    print(item)
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '\\niv\\config.ini'
 
 
 class ArgParser:
@@ -16,6 +24,10 @@ class ArgParser:
     set_args():
         Adds the needed arguments to the ArgumentParser class
     """
+    # Creates an object from configparser and loads the config file "config.ini"
+    config = configparser.ConfigParser()
+    get_config_path()
+    config.read(get_config_path())
 
     # Dictionary for argument choices
     ICONS = [1, 2, 3]
@@ -48,11 +60,11 @@ class ArgParser:
                             help='Create visualization with a given .yaml file')
 
         parser.add_argument('-i', '--icons', type=int, nargs='?', metavar='INT',
-                            default=1, choices=self.ICONS,
+                            default=self.config["DEFAULT"]["std_icons"], choices=self.ICONS,
                             help='Choose the icons you want to use for the visualization; 1: cisco, 2: osa (DEFAULT: 1)')
 
         parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
-                            default=1, choices=self.DETAIL,
+                            default=self.config["DEFAULT"]["std_details"], choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
                                  '2: medium detail, 3: most detail (DEFAULT: 1)')
 
@@ -90,8 +102,7 @@ class ArgParser:
             raise Exception(f'\n"{file_name}" is not a .yaml')
         raise Exception(f'\n"{file_path}" is not a valid file path')
 
-    @staticmethod
-    def create_filename(file_path):
+    def create_filename(self, file_path):
         """
         Generate a file name with today's date and check
         if file with the same name already exists. If it does add a
@@ -103,17 +114,17 @@ class ArgParser:
         i = 1
         date_today = "{:%Y%m%d}".format(date.today())
         file_name = f"{date_today}_NIV_Diagram.svg"
+        file_format = self.config["DEFAULT"]["std_type"]
         # Add an incrementing number to end of file if file name already exists
         while os.path.isfile(f"{file_path}{file_name}"):
             file_name = file_name.split('.')[0].split('-')[0]
             file_name = f"{file_name}-{i}"
-            file_name = f"{file_name}.svg"
+            file_name = f"{file_name}{file_format}"
             i += 1
 
         return file_name
 
-    @staticmethod
-    def save_to_path(file_path):
+    def save_to_path(self, file_path):
         """
         Checks if the path is a file path or a directory path
         and creates the output file in the corresponding
@@ -160,7 +171,7 @@ class ArgParser:
             # Check if last symbol is a "/" otherwise add a "/"
             if file_path[-1] != "/":
                 file_path += "/"
-            file_name = ArgParser.create_filename(file_path)
+            file_name = ArgParser.create_filename(self, file_path)
             # Create the file in the given directory
             file = open(f"{file_path}{file_name}", "a")
             file.close()
