@@ -34,7 +34,7 @@ class TestArgParser(TestCase):
         """
         set_args function tests
         """
-
+        # TODO: Fix tests
         parser = ArgParser()
         self.assertEqual(argparse.Namespace(save=None, load=None, icons=1, detail=1, run=False, gui=False),
                          parser.set_args(""))
