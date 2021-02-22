@@ -2,6 +2,7 @@
 
 from diagrams.icons import _ICONS
 
+
 class _Cisco(_ICONS):
     _type = "cisco"
     _icon_dir = "resources/icons/cisco"
@@ -9,584 +10,1164 @@ class _Cisco(_ICONS):
 
 class BasetHub(_Cisco):
     _icon = "100baset-hub.png"
+
+
 class a10700(_Cisco):
     _icon = "10700.png"
+
+
 class GeFcoe(_Cisco):
     _icon = "10ge-fcoe.png"
+
+
 class a15200(_Cisco):
     _icon = "15200.png"
+
+
 class a174Desktop(_Cisco):
     _icon = "3174-(desktop).png"
+
+
 class MobileAccessRouter(_Cisco):
     _icon = "3200-mobile-access-router.png"
+
+
 class Series(_Cisco):
     _icon = "6700-series.png"
+
+
 class Ars7513(_Cisco):
     _icon = "7500ars-(7513).png"
+
+
 class AccessGateway(_Cisco):
     _icon = "access-gateway.png"
+
+
 class Accesspoint(_Cisco):
     _icon = "accesspoint.png"
+
+
 class Ace(_Cisco):
     _icon = "ace.png"
+
+
 class Acs(_Cisco):
     _icon = "acs.png"
+
+
 class Adm(_Cisco):
     _icon = "adm.png"
+
+
 class AndrogenousPerson(_Cisco):
     _icon = "androgenous-person.png"
+
+
 class Antenna(_Cisco):
     _icon = "antenna.png"
+
+
 class AsicProcessor(_Cisco):
     _icon = "asic-processor.png"
+
+
 class Asr1000Series(_Cisco):
     _icon = "asr-1000-series.png"
+
+
 class Ata(_Cisco):
     _icon = "ata.png"
+
+
 class Atm3800(_Cisco):
     _icon = "atm-3800.png"
+
+
 class AtmFastGigabitEtherswitch(_Cisco):
     _icon = "atm-fast-gigabit-etherswitch.png"
+
+
 class AtmRouter(_Cisco):
     _icon = "atm-router.png"
+
+
 class AtmSwitch(_Cisco):
     _icon = "atm-switch.png"
+
+
 class AtmTagSwitchRouter(_Cisco):
     _icon = "atm-tag-switch-router.png"
+
+
 class Avs(_Cisco):
     _icon = "avs.png"
+
+
 class Axp(_Cisco):
     _icon = "axp.png"
+
+
 class BbfwMedia(_Cisco):
     _icon = "bbfw-media.png"
+
+
 class Bbfw(_Cisco):
     _icon = "bbfw.png"
+
+
 class Bbsm(_Cisco):
     _icon = "bbsm.png"
+
+
 class BranchOffice(_Cisco):
     _icon = "branch-office.png"
+
+
 class Bridge(_Cisco):
     _icon = "bridge.png"
+
+
 class Bts10200(_Cisco):
     _icon = "bts-10200.png"
+
+
 class CableModem(_Cisco):
     _icon = "cable-modem.png"
+
+
 class Callmanager(_Cisco):
     _icon = "callmanager.png"
+
+
 class Car(_Cisco):
     _icon = "car.png"
+
+
 class CarrierRoutingSystem(_Cisco):
     _icon = "carrier-routing-system.png"
+
+
 class CddiFddi(_Cisco):
     _icon = "cddi-fddi.png"
+
+
 class Cdm(_Cisco):
     _icon = "cdm.png"
+
+
 class CellularPhone(_Cisco):
     _icon = "cellular-phone.png"
+
+
 class CentriFirewall(_Cisco):
     _icon = "centri-firewall.png"
+
+
 class Cisco1000(_Cisco):
     _icon = "cisco-1000.png"
+
+
 class CiscoAsa5500(_Cisco):
     _icon = "cisco-asa-5500.png"
+
+
 class CiscoCa(_Cisco):
     _icon = "cisco-ca.png"
+
+
 class CiscoFileEngine(_Cisco):
     _icon = "cisco-file-engine.png"
+
+
 class CiscoHub(_Cisco):
     _icon = "cisco-hub.png"
+
+
 class CiscoUnifiedPresenceServer(_Cisco):
     _icon = "cisco-unified-presence-server.png"
+
+
 class CiscoUnityexpress(_Cisco):
     _icon = "cisco-unityexpress.png"
+
+
 class Ciscosecurity(_Cisco):
     _icon = "ciscosecurity.png"
+
+
 class Ciscoworks(_Cisco):
     _icon = "ciscoworks.png"
+
+
 class Class45Switch(_Cisco):
     _icon = "class-4-5-switch.png"
+
+
 class Cloud(_Cisco):
     _icon = "cloud.png"
+
+
 class CommunicationsServer(_Cisco):
     _icon = "communications-server.png"
+
+
 class ContactCenter(_Cisco):
     _icon = "contact-center.png"
+
+
 class ContentEngineCacheDirector(_Cisco):
     _icon = "content-engine-(cache-director).png"
+
+
 class ContentServiceRouter(_Cisco):
     _icon = "content-service-router.png"
+
+
 class ContentServiceSwitch1100(_Cisco):
     _icon = "content-service-switch-1100.png"
+
+
 class ContentSwitchModule(_Cisco):
     _icon = "content-switch-module.png"
+
+
 class ContentSwitch(_Cisco):
     _icon = "content-switch.png"
+
+
 class ContentTransformationEngineCte(_Cisco):
     _icon = "content-transformation-engine-(cte).png"
+
+
 class CsMars(_Cisco):
     _icon = "cs-mars.png"
+
+
 class CsmS(_Cisco):
     _icon = "csm-s.png"
+
+
 class CsuDsu(_Cisco):
     _icon = "csu-dsu.png"
+
+
 class Cube(_Cisco):
     _icon = "cube.png"
+
+
 class Detector(_Cisco):
     _icon = "detector.png"
+
+
 class DirectorClassFibreChannelDirector(_Cisco):
     _icon = "director-class-fibre-channel-director.png"
+
+
 class DirectoryServer(_Cisco):
     _icon = "directory-server.png"
+
+
 class Diskette(_Cisco):
     _icon = "diskette.png"
+
+
 class DistributedDirector(_Cisco):
     _icon = "distributed-director.png"
+
+
 class DotDot(_Cisco):
     _icon = "dot-dot.png"
+
+
 class Dpt(_Cisco):
     _icon = "dpt.png"
+
+
 class Dslam(_Cisco):
     _icon = "dslam.png"
+
+
 class DualModeAp(_Cisco):
     _icon = "dual-mode-ap.png"
+
+
 class DwdmFilter(_Cisco):
     _icon = "dwdm-filter.png"
+
+
 class EndOffice(_Cisco):
     _icon = "end-office.png"
+
+
 class Fax(_Cisco):
     _icon = "fax.png"
+
+
 class FcStorage(_Cisco):
     _icon = "fc-storage.png"
+
+
 class FddiRing(_Cisco):
     _icon = "fddi-ring.png"
+
+
 class FibreChannelDiskSubsystem(_Cisco):
     _icon = "fibre-channel-disk-subsystem.png"
+
+
 class FibreChannelFabricSwitch(_Cisco):
     _icon = "fibre-channel-fabric-switch.png"
+
+
 class FileCabinet(_Cisco):
     _icon = "file-cabinet.png"
+
+
 class FileServer(_Cisco):
     _icon = "file-server.png"
+
+
 class Fileserver(_Cisco):
     _icon = "fileserver.png"
+
+
 class FirewallServiceModulFwsm(_Cisco):
     _icon = "firewall-service-module-(fwsm).png"
+
+
 class Firewall(_Cisco):
     _icon = "firewall.png"
+
+
 class FrontEndProcessor(_Cisco):
     _icon = "front-end-processor.png"
+
+
 class Gatekeeper(_Cisco):
     _icon = "gatekeeper.png"
+
+
 class GeneralApplicance(_Cisco):
     _icon = "general-applicance.png"
+
+
 class GenericBuilding(_Cisco):
     _icon = "generic-building.png"
+
+
 class GenericGateway(_Cisco):
     _icon = "generic-gateway.png"
+
+
 class GenericProcessor(_Cisco):
     _icon = "generic-processor.png"
+
+
 class GenericSoftswitch(_Cisco):
     _icon = "generic-softswitch.png"
+
+
 class GigabitSwitchAtmTagRouter(_Cisco):
     _icon = "gigabit-switch-atm-tag-router.png"
+
+
 class GovernmentBuilding(_Cisco):
     _icon = "government-building.png"
+
+
 class GroundTerminal(_Cisco):
     _icon = "ground-terminal.png"
+
+
 class Guard(_Cisco):
     _icon = "guard.png"
+
+
 class H323(_Cisco):
     _icon = "h.323.png"
+
+
 class Handheld(_Cisco):
     _icon = "handheld.png"
+
+
 class Hootphone(_Cisco):
     _icon = "hootphone.png"
+
+
 class Host(_Cisco):
     _icon = "host.png"
+
+
 class HpMini(_Cisco):
     _icon = "hp-mini.png"
+
+
 class Hub(_Cisco):
     _icon = "hub.png"
+
+
 class IadRouter(_Cisco):
     _icon = "iad-router.png"
+
+
 class IbmMainframe(_Cisco):
     _icon = "ibm-mainframe.png"
+
+
 class IbmMiniAs400(_Cisco):
     _icon = "ibm-mini-as400.png"
+
+
 class IbmTower(_Cisco):
     _icon = "ibm-tower.png"
+
+
 class Icm(_Cisco):
     _icon = "icm.png"
+
+
 class Ics(_Cisco):
     _icon = "ics.png"
+
+
 class IntelliswitchStack(_Cisco):
     _icon = "intelliswitch-stack.png"
+
+
 class InternetStreamer(_Cisco):
     _icon = "internet-streamer.png"
+
+
 class IosFirewall(_Cisco):
     _icon = "ios-firewall.png"
+
+
 class IosSlb(_Cisco):
     _icon = "ios-slb.png"
+
+
 class IpCommunicator(_Cisco):
     _icon = "ip-communicator.png"
+
+
 class IpDsl(_Cisco):
     _icon = "ip-dsl.png"
+
+
 class IpPhone(_Cisco):
     _icon = "ip-phone.png"
+
+
 class IpTelephonyRouter(_Cisco):
     _icon = "ip-telephony-router.png"
+
+
 class Ip(_Cisco):
     _icon = "ip.png"
+
+
 class Iptc(_Cisco):
     _icon = "iptc.png"
+
+
 class IptvContentManager(_Cisco):
     _icon = "iptv-content-manager.png"
+
+
 class IptvServer(_Cisco):
     _icon = "iptv-server.png"
+
+
 class IscsiRouter(_Cisco):
     _icon = "iscsi-router.png"
+
+
 class IsdnSwitch(_Cisco):
     _icon = "isdn-switch.png"
+
+
 class Itp(_Cisco):
     _icon = "itp.png"
+
+
 class Jbod(_Cisco):
     _icon = "jbod.png"
+
+
 class Key(_Cisco):
     _icon = "key.png"
+
+
 class Keys(_Cisco):
     _icon = "keys.png"
+
+
 class LanToLan(_Cisco):
     _icon = "lan-to-lan.png"
+
+
 class Laptop(_Cisco):
     _icon = "laptop.png"
+
+
 class Layer2RemoteSwitch(_Cisco):
     _icon = "layer-2-remote-switch.png"
+
+
 class Layer3Switch(_Cisco):
     _icon = "layer-3-switch.png"
+
+
 class LightweightAp(_Cisco):
     _icon = "lightweight-ap.png"
+
+
 class Localdirector(_Cisco):
     _icon = "localdirector.png"
+
+
 class Lock(_Cisco):
     _icon = "lock.png"
+
+
 class LongreachCpe(_Cisco):
     _icon = "longreach-cpe.png"
+
+
 class MacWoman(_Cisco):
     _icon = "mac-woman.png"
+
+
 class Macintosh(_Cisco):
     _icon = "macintosh.png"
+
+
 class ManWoman(_Cisco):
     _icon = "man-woman.png"
+
+
 class MasGateway(_Cisco):
     _icon = "mas-gateway.png"
+
+
 class Mau(_Cisco):
     _icon = "mau.png"
+
+
 class Mcu(_Cisco):
     _icon = "mcu.png"
+
+
 class Mdu(_Cisco):
     _icon = "mdu.png"
+
+
 class Me1100(_Cisco):
     _icon = "me-1100.png"
+
+
 class Mediator(_Cisco):
     _icon = "mediator.png"
+
+
 class Meetingplace(_Cisco):
     _icon = "meetingplace.png"
+
+
 class MeshAp(_Cisco):
     _icon = "mesh-ap.png"
+
+
 class Metro1500(_Cisco):
     _icon = "metro-1500.png"
+
+
 class Mgx8000MultiserviceSwitch(_Cisco):
     _icon = "mgx-8000-multiservice-switch.png"
+
+
 class Microphone(_Cisco):
     _icon = "microphone.png"
+
+
 class Microwebserver(_Cisco):
     _icon = "microwebserver.png"
+
+
 class MiniVax(_Cisco):
     _icon = "mini-vax.png"
+
+
 class MobileAccessIpPhone(_Cisco):
     _icon = "mobile-access-ip-phone.png"
+
+
 class MobileAccessRouter(_Cisco):
     _icon = "mobile-access-router.png"
+
+
 class MobileStreamer(_Cisco):
     _icon = "mobile-streamer.png"
+
+
 class Modem(_Cisco):
     _icon = "modem.png"
+
+
 class MohServer(_Cisco):
     _icon = "moh-server.png"
+
+
 class Mse(_Cisco):
     _icon = "mse.png"
+
+
 class MulitswitchDevice(_Cisco):
     _icon = "mulitswitch-device.png"
+
+
 class MultiFabricServerSwitch(_Cisco):
     _icon = "multi-fabric-server-switch.png"
+
+
 class MultilayerRemoteSwitch(_Cisco):
     _icon = "multilayer-remote-switch.png"
+
+
 class Mux(_Cisco):
     _icon = "mux.png"
+
+
 class Mxe(_Cisco):
     _icon = "mxe.png"
+
+
 class NacAppliance(_Cisco):
     _icon = "nac-appliance.png"
+
+
 class NceRouter(_Cisco):
     _icon = "nce-router.png"
+
+
 class Nce(_Cisco):
     _icon = "nce.png"
+
+
 class NetflowRouter(_Cisco):
     _icon = "netflow-router.png"
+
+
 class Netranger(_Cisco):
     _icon = "netranger.png"
+
+
 class Netsonar(_Cisco):
     _icon = "netsonar.png"
+
+
 class NetworkManagement(_Cisco):
     _icon = "network-management.png"
+
+
 class Nexus1000(_Cisco):
     _icon = "nexus-1000.png"
+
+
 class Nexus2000(_Cisco):
     _icon = "nexus-2000.png"
+
+
 class Nexus5000(_Cisco):
     _icon = "nexus-5000.png"
+
+
 class Nexus7000(_Cisco):
     _icon = "nexus-7000.png"
+
+
 class Octel(_Cisco):
     _icon = "octel.png"
+
+
 class Ons15500(_Cisco):
     _icon = "ons15500.png"
+
+
 class OpticalAmplifier(_Cisco):
     _icon = "optical-amplifier.png"
+
+
 class OpticalServicesRouter(_Cisco):
     _icon = "optical-services-router.png"
+
+
 class OpticalTransport(_Cisco):
     _icon = "optical-transport.png"
+
+
 class PadX28(_Cisco):
     _icon = "pad-x.28.png"
+
+
 class Pad(_Cisco):
     _icon = "pad.png"
+
+
 class PageIcon(_Cisco):
     _icon = "page-icon.png"
+
+
 class PbxSwitch(_Cisco):
     _icon = "pbx-switch.png"
+
+
 class Pbx(_Cisco):
     _icon = "pbx.png"
+
+
 class PcAdapterCard(_Cisco):
     _icon = "pc-adapter-card.png"
+
+
 class PcMan(_Cisco):
     _icon = "pc-man.png"
+
+
 class PcRoutercard(_Cisco):
     _icon = "pc-routercard.png"
+
+
 class PcSoftware(_Cisco):
     _icon = "pc-software.png"
+
+
 class PcVideo(_Cisco):
     _icon = "pc-video.png"
+
+
 class Pc(_Cisco):
     _icon = "pc.png"
+
+
 class Pda(_Cisco):
     _icon = "pda.png"
+
+
 class PhoneFax(_Cisco):
     _icon = "phone-fax.png"
+
+
 class Phone(_Cisco):
     _icon = "phone.png"
+
+
 class PixFirewall(_Cisco):
     _icon = "pix-firewall.png"
+
+
 class Pmc(_Cisco):
     _icon = "pmc.png"
+
+
 class Printer(_Cisco):
     _icon = "printer.png"
+
+
 class ProgrammableSwitch(_Cisco):
     _icon = "programmable-switch.png"
+
+
 class ProtocolTranslator(_Cisco):
     _icon = "protocol-translator.png"
+
+
 class Pxf(_Cisco):
     _icon = "pxf.png"
+
+
 class RadioTower(_Cisco):
     _icon = "radio-tower.png"
+
+
 class Ratemux(_Cisco):
     _icon = "ratemux.png"
+
+
 class RelationalDatabase(_Cisco):
     _icon = "relational-database.png"
+
+
 class Repeater(_Cisco):
     _icon = "repeater.png"
+
+
 class RfModem(_Cisco):
     _icon = "rf-modem.png"
+
+
 class RouteSwitchProcessor(_Cisco):
     _icon = "route-switch-processor.png"
+
+
 class RouterFirewall(_Cisco):
     _icon = "router-firewall.png"
+
+
 class RouterWithSiliconSwitch(_Cisco):
     _icon = "router-with-silicon-switch.png"
+
+
 class Router(_Cisco):
     _icon = "router.png"
+
+
 class RouterinBuilding(_Cisco):
     _icon = "routerin-building.png"
+
+
 class Rpsrps(_Cisco):
     _icon = "rpsrps.png"
+
+
 class RunningMan(_Cisco):
     _icon = "running-man.png"
+
+
 class SafeharborIcon(_Cisco):
     _icon = "safeharbor-icon.png"
+
+
 class SatteliteDish(_Cisco):
     _icon = "sattelite-dish.png"
+
+
 class Sattelite(_Cisco):
     _icon = "sattelite.png"
+
+
 class Scanner(_Cisco):
     _icon = "scanner.png"
+
+
 class ServerSwitch(_Cisco):
     _icon = "server-switch.png"
+
+
 class ServerWithRouter(_Cisco):
     _icon = "server-with-router.png"
+
+
 class ServiceControl(_Cisco):
     _icon = "service-control.png"
+
+
 class ServiceModule(_Cisco):
     _icon = "service-module.png"
+
+
 class ServiceRouter(_Cisco):
     _icon = "service-router.png"
+
+
 class Services(_Cisco):
     _icon = "services.png"
+
+
 class SetTopBox(_Cisco):
     _icon = "set-top-box.png"
+
+
 class SimulitlayerSwitch(_Cisco):
     _icon = "simulitlayer-switch.png"
+
+
 class SipProxyWerver(_Cisco):
     _icon = "sip-proxy-werver.png"
+
+
 class SittingWoman(_Cisco):
     _icon = "sitting-woman.png"
+
+
 class SmallBusiness(_Cisco):
     _icon = "small-business.png"
+
+
 class SmallHub(_Cisco):
     _icon = "small-hub.png"
+
+
 class Softphone(_Cisco):
     _icon = "softphone.png"
+
+
 class SoftswitchPgwMgc(_Cisco):
     _icon = "softswitch-pgw-mgc.png"
+
+
 class SoftwareBasedServer(_Cisco):
     _icon = "software-based-server.png"
+
+
 class SpaceRouter(_Cisco):
     _icon = "space-router.png"
+
+
 class Speaker(_Cisco):
     _icon = "speaker.png"
+
+
 class Ssc(_Cisco):
     _icon = "ssc.png"
+
+
 class SslTerminator(_Cisco):
     _icon = "ssl-terminator.png"
+
+
 class StandardHost(_Cisco):
     _icon = "standard-host.png"
+
+
 class StandingMan(_Cisco):
     _icon = "standing-man.png"
+
+
 class StandingWoman(_Cisco):
     _icon = "standing-woman.png"
+
+
 class Stb(_Cisco):
     _icon = "stb.png"
+
+
 class StorageRouter(_Cisco):
     _icon = "storage-router.png"
+
+
 class StorageServer(_Cisco):
     _icon = "storage-server.png"
+
+
 class Stp(_Cisco):
     _icon = "stp.png"
+
+
 class Streamer(_Cisco):
     _icon = "streamer.png"
+
+
 class SunWorkstation(_Cisco):
     _icon = "sun-workstation.png"
+
+
 class Supercomputer(_Cisco):
     _icon = "supercomputer.png"
+
+
 class Svx(_Cisco):
     _icon = "svx.png"
+
+
 class SystemController(_Cisco):
     _icon = "system-controller.png"
+
+
 class Tablet(_Cisco):
     _icon = "tablet.png"
+
+
 class TapeArray(_Cisco):
     _icon = "tape-array.png"
+
+
 class TdmRouter(_Cisco):
     _icon = "tdm-router.png"
+
+
 class TelecommuterHousePc(_Cisco):
     _icon = "telecommuter-house-pc.png"
+
+
 class TelecommuterHouse(_Cisco):
     _icon = "telecommuter-house.png"
+
+
 class TelecommuterIcon(_Cisco):
     _icon = "telecommuter-icon.png"
+
+
 class Terminal(_Cisco):
     _icon = "terminal.png"
+
+
 class Token(_Cisco):
     _icon = "token.png"
+
+
 class TpMcu(_Cisco):
     _icon = "tp-mcu.png"
+
+
 class Transpath(_Cisco):
     _icon = "transpath.png"
+
+
 class Truck(_Cisco):
     _icon = "truck.png"
+
+
 class Turret(_Cisco):
     _icon = "turret.png"
+
+
 class Tv(_Cisco):
     _icon = "tv.png"
+
+
 class Ubr910(_Cisco):
     _icon = "ubr910.png"
+
+
 class UmgSeries(_Cisco):
     _icon = "umg-series.png"
+
+
 class UnityServer(_Cisco):
     _icon = "unity-server.png"
+
+
 class UniversalGateway(_Cisco):
     _icon = "universal-gateway.png"
+
+
 class University(_Cisco):
     _icon = "university.png"
+
+
 class Upc(_Cisco):
     _icon = "upc.png"
+
+
 class Ups(_Cisco):
     _icon = "ups.png"
+
+
 class Vault(_Cisco):
     _icon = "vault.png"
+
+
 class VideoCamera(_Cisco):
     _icon = "video-camera.png"
+
+
 class Vip(_Cisco):
     _icon = "vip.png"
+
+
 class VirtualLayerSwitch(_Cisco):
     _icon = "virtual-layer-switch.png"
+
+
 class VirtualSwitchControllerVsc3000(_Cisco):
     _icon = "virtual-switch-controller-(vsc3000).png"
+
+
 class VoiceAtmSwitch(_Cisco):
     _icon = "voice-atm-switch.png"
+
+
 class VoiceCommserver(_Cisco):
     _icon = "voice-commserver.png"
+
+
 class VoiceRouter(_Cisco):
     _icon = "voice-router.png"
+
+
 class VoiceSwitch(_Cisco):
     _icon = "voice-switch.png"
+
+
 class VPNConcentrator(_Cisco):
     _icon = "vpn-concentrator.png"
+
+
 class VPNGateway(_Cisco):
     _icon = "vpn-gateway.png"
+
+
 class Vsd(_Cisco):
     _icon = "vsd.png"
+
+
 class Vss(_Cisco):
     _icon = "vss.png"
+
+
 class Wae(_Cisco):
     _icon = "wae.png"
+
+
 class WavelengthRouter(_Cisco):
     _icon = "wavelength-router.png"
+
+
 class WebBrowser(_Cisco):
     _icon = "web-browser.png"
+
+
 class WebCluster(_Cisco):
     _icon = "web-cluster.png"
+
+
 class WiFiTag(_Cisco):
     _icon = "wi-fi-tag.png"
+
+
 class WirelessBridge(_Cisco):
     _icon = "wireless-bridge.png"
+
+
 class WirelessLocationAppliance(_Cisco):
     _icon = "wireless-location-appliance.png"
+
+
 class WirelessRouter(_Cisco):
     _icon = "wireless-router.png"
+
+
 class WirelessTransport(_Cisco):
     _icon = "wireless-transport.png"
+
+
 class Wireless(_Cisco):
     _icon = "wireless.png"
+
+
 class Wism(_Cisco):
     _icon = "wism.png"
+
+
 class WlanController(_Cisco):
     _icon = "wlan-controller.png"
+
+
 class WorkgroupDirector(_Cisco):
     _icon = "workgroup-director.png"
+
+
 class WorkgroupSwitch(_Cisco):
     _icon = "workgroup-switch.png"
+
+
 class Workstation(_Cisco):
     _icon = "workstation.png"
+
+
 class WwwServer(_Cisco):
     _icon = "www-server.png"
 

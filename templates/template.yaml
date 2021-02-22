@@ -73,10 +73,8 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
   server2: {<<: *iconDefaults, icon: server, x: "+1" }
   server3: {<<: *iconDefaults, icon: server, x: "+1" }
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  pcs1: { <<: *groupDefaults, name: My Servers, members: [dns, lb, server1] }
-  pcs2: { <<: *groupDefaults, name: My Servers, members: [pc1, pc2, pc3] }
-  pcs3: { <<: *groupDefaults, name: My Servers, members: [pc1, pc2, pc3] }
-  pcs4: { <<: *groupDefaults, name: My Servers, members: [pc1, pc2, pc3] }
+  group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner] }
+  moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
 
 connections: #enter your connections here
 - { <<: *connectionDefaults, endpoints: [server1, lb] }

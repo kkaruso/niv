@@ -3,304 +3,304 @@
 from . import _ICONS
 
 
-class _Opensecur(_ICONS):
-    _type = "opensecur"
-    _icon_dir = "resources/icons/opensecur"
+class _OSA(_ICONS):
+    _type = "osa"
+    _icon_dir = "resources/icons/osa"
 
 
-class OsaArrowGreenLeft(_Opensecur):
+class OsaArrowGreenLeft(_OSA):
     _icon = "osa-arrow-green-left.png"
 
 
-class OsaArrowYellowRight(_Opensecur):
+class OsaArrowYellowRight(_OSA):
     _icon = "osa-arrow-yellow-right.png"
 
 
-class OsaAwareness(_Opensecur):
+class OsaAwareness(_OSA):
     _icon = "osa-awareness.png"
 
 
-class OsaCameraWeb(_Opensecur):
+class OsaCameraWeb(_OSA):
     _icon = "osa-camera-web.png"
 
 
-class OsaCloud(_Opensecur):
+class OsaCloud(_OSA):
     _icon = "osa-cloud.png"
 
 
-class OsaContract(_Opensecur):
+class OsaContract(_OSA):
     _icon = "osa-contract.png"
 
 
-class OsaDatabase(_Opensecur):
+class OsaDatabase(_OSA):
     _icon = "osa-database.png"
 
 
-class OsaDesktopImac(_Opensecur):
+class OsaDesktopImac(_OSA):
     _icon = "osa-desktop-imac.png"
 
 
-class OsaDesktop(_Opensecur):
+class OsaDesktop(_OSA):
     _icon = "osa-desktop.png"
 
 
-class OsaDeviceMusic(_Opensecur):
+class OsaDeviceMusic(_OSA):
     _icon = "osa-device-music.png"
 
 
-class OsaDeviceScanner(_Opensecur):
+class OsaDeviceScanner(_OSA):
     _icon = "osa-device-scanner.png"
 
 
-class OsaDeviceUsbWifi(_Opensecur):
+class OsaDeviceUsbWifi(_OSA):
     _icon = "osa-device-usb-wifi.png"
 
 
-class OsaDeviceUsb(_Opensecur):
+class OsaDeviceUsb(_OSA):
     _icon = "osa-device-usb.png"
 
 
-class OsaDeviceWirelessRouter(_Opensecur):
+class OsaDeviceWirelessRouter(_OSA):
     _icon = "osa-device-wireless-router.png"
 
 
-class OsaDisposal(_Opensecur):
+class OsaDisposal(_OSA):
     _icon = "osa-disposal.png"
 
 
-class OsaDriveHarddisk(_Opensecur):
+class OsaDriveHarddisk(_OSA):
     _icon = "osa-drive-harddisk.png"
 
 
-class OsaDriveOptical(_Opensecur):
+class OsaDriveOptical(_OSA):
     _icon = "osa-drive-optical.png"
 
 
-class OsaFirewall(_Opensecur):
+class OsaFirewall(_OSA):
     _icon = "osa-firewall.png"
 
 
-class OsaHome(_Opensecur):
+class OsaHome(_OSA):
     _icon = "osa-home.png"
 
 
-class OsaHub(_Opensecur):
+class OsaHub(_OSA):
     _icon = "osa-hub.png"
 
 
-class OsaIcsDrive(_Opensecur):
+class OsaIcsDrive(_OSA):
     _icon = "osa-ics-drive.png"
 
 
-class OsaIcsPlc(_Opensecur):
+class OsaIcsPlc(_OSA):
     _icon = "osa-ics-plc.png"
 
 
-class OsaIcsThermometer(_Opensecur):
+class OsaIcsThermometer(_OSA):
     _icon = "osa-ics-thermometer.png"
 
 
-class OsaIdCard(_Opensecur):
+class OsaIdCard(_OSA):
     _icon = "osa-id-card.png"
 
 
-class OsaImageGeneric(_Opensecur):
+class OsaImageGeneric(_OSA):
     _icon = "osa-image-generic.png"
 
 
-class OsaIphone(_Opensecur):
+class OsaIphone(_OSA):
     _icon = "osa-iphone.png"
 
 
-class OsaLaptop(_Opensecur):
+class OsaLaptop(_OSA):
     _icon = "osa-laptop.png"
 
 
-class OsaLifecycle(_Opensecur):
+class OsaLifecycle(_OSA):
     _icon = "osa-lifecycle.png"
 
 
-class OsaLightning(_Opensecur):
+class OsaLightning(_OSA):
     _icon = "osa-lightning.png"
 
 
-class OsaMediaFlash(_Opensecur):
+class OsaMediaFlash(_OSA):
     _icon = "osa-media-flash.png"
 
 
-class OsaMediaOptical(_Opensecur):
+class OsaMediaOptical(_OSA):
     _icon = "osa-media-optical.png"
 
 
-class OsaMediaTape(_Opensecur):
+class OsaMediaTape(_OSA):
     _icon = "osa-media-tape.png"
 
 
-class OsaMobilePda(_Opensecur):
+class OsaMobilePda(_OSA):
     _icon = "osa-mobile-pda.png"
 
 
-class OsaPadlock(_Opensecur):
+class OsaPadlock(_OSA):
     _icon = "osa-padlock.png"
 
 
-class OsaPrinter(_Opensecur):
+class OsaPrinter(_OSA):
     _icon = "osa-printer.png"
 
 
-class OsaServerApplication(_Opensecur):
+class OsaServerApplication(_OSA):
     _icon = "osa-server-application.png"
 
 
-class OsaServerDatabase(_Opensecur):
+class OsaServerDatabase(_OSA):
     _icon = "osa-server-database.png"
 
 
-class OsaServerDirectory(_Opensecur):
+class OsaServerDirectory(_OSA):
     _icon = "osa-server-directory.png"
 
 
-class OsaServerDistribution(_Opensecur):
+class OsaServerDistribution(_OSA):
     _icon = "osa-server-distribution.png"
 
 
-class OsaServerFile(_Opensecur):
+class OsaServerFile(_OSA):
     _icon = "osa-server-file.png"
 
 
-class OsaServerGateway(_Opensecur):
+class OsaServerGateway(_OSA):
     _icon = "osa-server-gateway.png"
 
 
-class OsaServerIdentity(_Opensecur):
+class OsaServerIdentity(_OSA):
     _icon = "osa-server-identity.png"
 
 
-class OsaServerMail(_Opensecur):
+class OsaServerMail(_OSA):
     _icon = "osa-server-mail.png"
 
 
-class OsaServerMedia(_Opensecur):
+class OsaServerMedia(_OSA):
     _icon = "osa-server-media.png"
 
 
-class OsaServerMonitor(_Opensecur):
+class OsaServerMonitor(_OSA):
     _icon = "osa-server-monitor.png"
 
 
-class OsaServerProxy(_Opensecur):
+class OsaServerProxy(_OSA):
     _icon = "osa-server-proxy.png"
 
 
-class OsaServerTerminal(_Opensecur):
+class OsaServerTerminal(_OSA):
     _icon = "osa-server-terminal.png"
 
 
-class OsaServerWeb(_Opensecur):
+class OsaServerWeb(_OSA):
     _icon = "osa-server-web.png"
 
 
-class OsaServer(_Opensecur):
+class OsaServer(_OSA):
     _icon = "osa-server.png"
 
 
-class OsaSiteBranch(_Opensecur):
+class OsaSiteBranch(_OSA):
     _icon = "osa-site-branch.png"
 
 
-class OsaSiteFactory(_Opensecur):
+class OsaSiteFactory(_OSA):
     _icon = "osa-site-factory.png"
 
 
-class OsaSiteHeadOffice(_Opensecur):
+class OsaSiteHeadOffice(_OSA):
     _icon = "osa-site-head-office.png"
 
 
-class OsaSiteNeighbourhood(_Opensecur):
+class OsaSiteNeighbourhood(_OSA):
     _icon = "osa-site-neighbourhood.png"
 
 
-class OsaUserAudit(_Opensecur):
+class OsaUserAudit(_OSA):
     _icon = "osa-user-audit.png"
 
 
-class OsaUserBlackHat(_Opensecur):
+class OsaUserBlackHat(_OSA):
     _icon = "osa-user-black-hat.png"
 
 
-class OsaUserBlueSecuritySpecialist(_Opensecur):
+class OsaUserBlueSecuritySpecialist(_OSA):
     _icon = "osa-user-blue-security-specialist.png"
 
 
-class OsaUserBlueSysadmin(_Opensecur):
+class OsaUserBlueSysadmin(_OSA):
     _icon = "osa-user-blue-sysadmin.png"
 
 
-class OsaUserBlueTester(_Opensecur):
+class OsaUserBlueTester(_OSA):
     _icon = "osa-user-blue-tester.png"
 
 
-class OsaUserBlueTie(_Opensecur):
+class OsaUserBlueTie(_OSA):
     _icon = "osa-user-blue-tie.png"
 
 
-class OsaUserBlue(_Opensecur):
+class OsaUserBlue(_OSA):
     _icon = "osa-user-blue.png"
 
 
-class OsaUserGreenArchitect(_Opensecur):
+class OsaUserGreenArchitect(_OSA):
     _icon = "osa-user-green-architect.png"
 
 
-class OsaUserGreenBusinessManager(_Opensecur):
+class OsaUserGreenBusinessManager(_OSA):
     _icon = "osa-user-green-business-manager.png"
 
 
-class OsaUserGreenDeveloper(_Opensecur):
+class OsaUserGreenDeveloper(_OSA):
     _icon = "osa-user-green-developer.png"
 
 
-class OsaUserGreenOperations(_Opensecur):
+class OsaUserGreenOperations(_OSA):
     _icon = "osa-user-green-operations.png"
 
 
-class OsaUserGreenProjectManager(_Opensecur):
+class OsaUserGreenProjectManager(_OSA):
     _icon = "osa-user-green-project-manager.png"
 
 
-class OsaUserGreenServiceManager(_Opensecur):
+class OsaUserGreenServiceManager(_OSA):
     _icon = "osa-user-green-service-manager.png"
 
 
-class OsaUserGreenWarning(_Opensecur):
+class OsaUserGreenWarning(_OSA):
     _icon = "osa-user-green-warning.png"
 
 
-class OsaUserGreen(_Opensecur):
+class OsaUserGreen(_OSA):
     _icon = "osa-user-green.png"
 
 
-class OsaUserLargeGroup(_Opensecur):
+class OsaUserLargeGroup(_OSA):
     _icon = "osa-user-large-group.png"
 
 
-class OsaUserWhiteHat(_Opensecur):
+class OsaUserWhiteHat(_OSA):
     _icon = "osa-user-white-hat.png"
 
 
-class OsaUsersBlueGreen(_Opensecur):
+class OsaUsersBlueGreen(_OSA):
     _icon = "osa-users-blue-green.png"
 
 
-class OsaVPN(_Opensecur):
+class OsaVPN(_OSA):
     _icon = "osa-vpn.png"
 
 
-class OsaWarning(_Opensecur):
+class OsaWarning(_OSA):
     _icon = "osa-warning.png"
 
 
-class OsaWirelessNetwork(_Opensecur):
+class OsaWirelessNetwork(_OSA):
     _icon = "osa-wireless-network.png"
 
 
