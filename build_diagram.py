@@ -1,11 +1,8 @@
-from diagrams.azure.mobile import MobileEngagement
-from diagrams.oci.connectivity import CDN
 from scour import scour
-from diagrams import Cluster
-from diagrams.aws.compute import Compute
-from diagrams import Diagram
-from diagrams.aws.database import RDS
 import yaml_parser
+from diagrams import *
+from diagrams.icons.opensecur import *
+
 
 # Get the parsed yaml in form of a dictionary
 yaml = yaml_parser.get_yaml("templates/template.yaml")
@@ -37,27 +34,48 @@ full_filename = f"{filename}.{output_format}"
 # IP Example
 ip = "192.168.x.x"
 
+graph_attr = {
+    "layout": "fdp",
+    "area": "1",
+    "center": "true",
+    "comment": "blabla",
+    "compound": "false",
+    "style": "invis"
+}
+
+clus_attr = {
+    "penwidth": "4.0"
+}
+
 # Create a instance of the Diagram class to create a diagram context
-with Diagram(f"{title}", filename=filename, outformat=output_format, show=False):
+with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=True, graph_attr=graph_attr):
     # Group 1
     with Cluster("Gruppe 1"):
         # The Mater Device in the Group
-        master1 = CDN("Switch")
+        master1 = OsaDeviceWirelessRouter("Router" + ip)
         # internal connections
-        master1 << [MobileEngagement("Device 1\n" + ip), Compute("Device 2\n" + ip)]
+        master1 - OsaHub("Switch") - [OsaDesktop("PC \n" + ip), OsaPrinter("Printer\n" + ip),
+                                      OsaIphone("Iphone\n" + ip), OsaDeviceScanner("Scanenr\n" + ip),
+                                      OsaServer("Server\n" + ip) - OsaServer("Server")]
 
     # Group 2
-    with Cluster("Gruppe 2"):
-        master2 = CDN("Switch")
-        master2 << [MobileEngagement("Device 1\n" + ip), Compute("Device 2\n" + ip)]
+    with Cluster("Gruppe 2", graph_attr=clus_attr):
+        master2 = OsaDeviceWirelessRouter("Router" + ip)
+        master2 - OsaHub("Switch") - [OsaDesktop("PC \n" + ip), OsaPrinter("Printer\n" + ip),
+                                      OsaIphone("Iphone\n" + ip), OsaDeviceScanner("Scanenr\n" + ip),
+                                      OsaServer("Server\n" + ip)]
 
     # Group 3
     with Cluster("Gruppe 3"):
-        master3 = CDN("Switch")
-        master3 << [MobileEngagement("Device 1\n" + ip), RDS("Device 2\n" + ip)]
+        hub1 = OsaHub("Switch", shape="plantext", pin="True")
+        hub2 = OsaHub("Switch", pin="True", pos="2")
+        master3 = OsaDeviceWirelessRouter("Router" + ip)
+        master3 - [hub1, hub2]
+        hub1 - [OsaPrinter("Printer" + ip), OsaDeviceScanner("Scanenr" + ip)]
+        hub2 - [OsaIphone("Iphone" + ip), OsaDesktop("Desktop" + ip)]
 
     # External Connections between the Groups can be: From >> To, To << From or Point - Point
-    master2 >> master1 << master3
+    master2 - master1 - master3
 
 # Fix SVG-Icons Bug (source: https://github.com/mingrammer/diagrams/issues/8)
 with open(full_filename, "r") as f:
