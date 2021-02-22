@@ -7,21 +7,35 @@ from diagrams.icons.opensecur import *
 # Get the parsed yaml in form of a dictionary
 yaml = yaml_parser.get_yaml("templates/template.yaml")
 
-print(yaml.get("groups"))
+# print(len(yaml.get("groups")))
+# print(yaml.get("groups"))
+# print(f"erstes Element: {list(yaml.get('groups'))}")
+# for key in yaml.get("groups").keys():
+#     print("hier die funktioniert es:", key, '->', yaml.get("groups")[key].get("members"))
+#     groups_members[f'{key}'] = f"{yaml.get('groups')[key].get('members')}"
+
 
 # Create variables for dynamically getting the values from the .yaml file for creating the graph
 title = yaml.get("title").get("text")
 group_count = len(yaml.get("groups"))
 groups = list(yaml.get("groups").keys())
-group_members = yaml.get("groups").get("pcs").get("members")
+group_members = {}
+for key in yaml.get("groups").keys():
+    # print("hier:", key, '->', yaml.get("groups")[key].get("members"))
+    # Creates new key value pairs in group_members dict for each group with its members
+    group_members[f'{key}'] = f"{yaml.get('groups')[key].get('members')}"
 node_count = len(yaml.get("icons"))
 nodes = list(yaml.get("icons").keys())
 connections = []
 for i in range(0, len(yaml.get("connections"))):
     connections.append(yaml.get("connections")[i].get("endpoints"))
 
+print("Created variables from .yaml:")
+print(f"title: {title}")
+print(f"group_count: {group_count}")
 print(f"groups: {groups}")
 print(f"group_members: {group_members}")
+print(f"node_count: {node_count}")
 print(f"nodes: {nodes}")
 print(f"connections: {connections}")
 
