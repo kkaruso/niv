@@ -52,6 +52,7 @@ graph_attr = {
 clus_attr = {
     "penwidth": "4.0"
 }
+link = f"\n<a xlink:href=\"Test_Diagram.svg\"> {ip} </a>"
 
 # Create an instance of the Diagram class to create a diagram context
 with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=False, graph_attr=graph_attr):
@@ -66,7 +67,7 @@ with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=Fals
                 print(f"member: {member}")
                 # Create an instance of the node class with the "member" name, if not valid print name of not valid icon
                 try:
-                    instance = globals()[member](f"{member}")
+                    instance = globals()[member](f"{member}" + link)
                 except KeyError:
                     print(f"KeyError: {member} is not a valid node name!")
             # clusters[f"master{i}"] = OsaDeviceWirelessRouter(f"Router {i} \n {ip}")
@@ -108,4 +109,10 @@ with open(full_filename, "r") as f:
 with open(full_filename, "w") as f:
     f.write(out_string)
 
-# def set_variables():
+fin = open(f"{filename}.{output_format}", "rt")
+data = fin.read()
+data = data.replace('&lt;', '<').replace('&gt;', '>')
+fin.close()
+fin = open(f"{filename}.{output_format}", "wt")
+fin.write(data)
+fin.close()
