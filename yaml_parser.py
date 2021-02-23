@@ -17,4 +17,4 @@ def get_yaml(path):
             print(f"parsed yaml as dict: {yaml_parsed}\n")
             return yaml_parsed
         except yaml.YAMLError as exc:
-            raise Exception(f"{exc}")
+            raise Exception from exc

@@ -10,5 +10,4 @@ arg_parser = ArgParser(sys.argv[1:])
 args = arg_parser.get_parser()
 
 print(args.load)
-print("Test: " + str(arg_parser.get_load()))
-
+print(f"Test: {str(arg_parser.get_load())}\n")
