@@ -9,299 +9,299 @@ class _OSA(_ICONS):
 
 
 class OsaArrowGreenLeft(_OSA):
-    _icon = "osa-arrow-green-left.png"
+    _icon = "osa-arrow-green-left.svg"
 
 
 class OsaArrowYellowRight(_OSA):
-    _icon = "osa-arrow-yellow-right.png"
+    _icon = "osa-arrow-yellow-right.svg"
 
 
 class OsaAwareness(_OSA):
-    _icon = "osa-awareness.png"
+    _icon = "osa-awareness.svg"
 
 
 class OsaCameraWeb(_OSA):
-    _icon = "osa-camera-web.png"
+    _icon = "osa-camera-web.svg"
 
 
 class OsaCloud(_OSA):
-    _icon = "osa-cloud.png"
+    _icon = "osa-cloud.svg"
 
 
 class OsaContract(_OSA):
-    _icon = "osa-contract.png"
+    _icon = "osa-contract.svg"
 
 
 class OsaDatabase(_OSA):
-    _icon = "osa-database.png"
+    _icon = "osa-database.svg"
 
 
 class OsaDesktopImac(_OSA):
-    _icon = "osa-desktop-imac.png"
+    _icon = "osa-desktop-imac.svg"
 
 
 class OsaDesktop(_OSA):
-    _icon = "osa-desktop.png"
+    _icon = "osa-desktop.svg"
 
 
 class OsaDeviceMusic(_OSA):
-    _icon = "osa-device-music.png"
+    _icon = "osa-device-music.svg"
 
 
 class OsaDeviceScanner(_OSA):
-    _icon = "osa-device-scanner.png"
+    _icon = "osa-device-scanner.svg"
 
 
 class OsaDeviceUsbWifi(_OSA):
-    _icon = "osa-device-usb-wifi.png"
+    _icon = "osa-device-usb-wifi.svg"
 
 
 class OsaDeviceUsb(_OSA):
-    _icon = "osa-device-usb.png"
+    _icon = "osa-device-usb.svg"
 
 
 class OsaDeviceWirelessRouter(_OSA):
-    _icon = "osa-device-wireless-router.png"
+    _icon = "osa-device-wireless-router.svg"
 
 
 class OsaDisposal(_OSA):
-    _icon = "osa-disposal.png"
+    _icon = "osa-disposal.svg"
 
 
 class OsaDriveHarddisk(_OSA):
-    _icon = "osa-drive-harddisk.png"
+    _icon = "osa-drive-harddisk.svg"
 
 
 class OsaDriveOptical(_OSA):
-    _icon = "osa-drive-optical.png"
+    _icon = "osa-drive-optical.svg"
 
 
 class OsaFirewall(_OSA):
-    _icon = "osa-firewall.png"
+    _icon = "osa-firewall.svg"
 
 
 class OsaHome(_OSA):
-    _icon = "osa-home.png"
+    _icon = "osa-home.svg"
 
 
 class OsaHub(_OSA):
-    _icon = "osa-hub.png"
+    _icon = "osa-hub.svg"
 
 
 class OsaIcsDrive(_OSA):
-    _icon = "osa-ics-drive.png"
+    _icon = "osa-ics-drive.svg"
 
 
 class OsaIcsPlc(_OSA):
-    _icon = "osa-ics-plc.png"
+    _icon = "osa-ics-plc.svg"
 
 
 class OsaIcsThermometer(_OSA):
-    _icon = "osa-ics-thermometer.png"
+    _icon = "osa-ics-thermometer.svg"
 
 
 class OsaIdCard(_OSA):
-    _icon = "osa-id-card.png"
+    _icon = "osa-id-card.svg"
 
 
 class OsaImageGeneric(_OSA):
-    _icon = "osa-image-generic.png"
+    _icon = "osa-image-generic.svg"
 
 
 class OsaIphone(_OSA):
-    _icon = "osa-iphone.png"
+    _icon = "osa-iphone.svg"
 
 
 class OsaLaptop(_OSA):
-    _icon = "osa-laptop.png"
+    _icon = "osa-laptop.svg"
 
 
 class OsaLifecycle(_OSA):
-    _icon = "osa-lifecycle.png"
+    _icon = "osa-lifecycle.svg"
 
 
 class OsaLightning(_OSA):
-    _icon = "osa-lightning.png"
+    _icon = "osa-lightning.svg"
 
 
 class OsaMediaFlash(_OSA):
-    _icon = "osa-media-flash.png"
+    _icon = "osa-media-flash.svg"
 
 
 class OsaMediaOptical(_OSA):
-    _icon = "osa-media-optical.png"
+    _icon = "osa-media-optical.svg"
 
 
 class OsaMediaTape(_OSA):
-    _icon = "osa-media-tape.png"
+    _icon = "osa-media-tape.svg"
 
 
 class OsaMobilePda(_OSA):
-    _icon = "osa-mobile-pda.png"
+    _icon = "osa-mobile-pda.svg"
 
 
 class OsaPadlock(_OSA):
-    _icon = "osa-padlock.png"
+    _icon = "osa-padlock.svg"
 
 
 class OsaPrinter(_OSA):
-    _icon = "osa-printer.png"
+    _icon = "osa-printer.svg"
 
 
 class OsaServerApplication(_OSA):
-    _icon = "osa-server-application.png"
+    _icon = "osa-server-application.svg"
 
 
 class OsaServerDatabase(_OSA):
-    _icon = "osa-server-database.png"
+    _icon = "osa-server-database.svg"
 
 
 class OsaServerDirectory(_OSA):
-    _icon = "osa-server-directory.png"
+    _icon = "osa-server-directory.svg"
 
 
 class OsaServerDistribution(_OSA):
-    _icon = "osa-server-distribution.png"
+    _icon = "osa-server-distribution.svg"
 
 
 class OsaServerFile(_OSA):
-    _icon = "osa-server-file.png"
+    _icon = "osa-server-file.svg"
 
 
 class OsaServerGateway(_OSA):
-    _icon = "osa-server-gateway.png"
+    _icon = "osa-server-gateway.svg"
 
 
 class OsaServerIdentity(_OSA):
-    _icon = "osa-server-identity.png"
+    _icon = "osa-server-identity.svg"
 
 
 class OsaServerMail(_OSA):
-    _icon = "osa-server-mail.png"
+    _icon = "osa-server-mail.svg"
 
 
 class OsaServerMedia(_OSA):
-    _icon = "osa-server-media.png"
+    _icon = "osa-server-media.svg"
 
 
 class OsaServerMonitor(_OSA):
-    _icon = "osa-server-monitor.png"
+    _icon = "osa-server-monitor.svg"
 
 
 class OsaServerProxy(_OSA):
-    _icon = "osa-server-proxy.png"
+    _icon = "osa-server-proxy.svg"
 
 
 class OsaServerTerminal(_OSA):
-    _icon = "osa-server-terminal.png"
+    _icon = "osa-server-terminal.svg"
 
 
 class OsaServerWeb(_OSA):
-    _icon = "osa-server-web.png"
+    _icon = "osa-server-web.svg"
 
 
 class OsaServer(_OSA):
-    _icon = "osa-server.png"
+    _icon = "osa-server.svg"
 
 
 class OsaSiteBranch(_OSA):
-    _icon = "osa-site-branch.png"
+    _icon = "osa-site-branch.svg"
 
 
 class OsaSiteFactory(_OSA):
-    _icon = "osa-site-factory.png"
+    _icon = "osa-site-factory.svg"
 
 
 class OsaSiteHeadOffice(_OSA):
-    _icon = "osa-site-head-office.png"
+    _icon = "osa-site-head-office.svg"
 
 
 class OsaSiteNeighbourhood(_OSA):
-    _icon = "osa-site-neighbourhood.png"
+    _icon = "osa-site-neighbourhood.svg"
 
 
 class OsaUserAudit(_OSA):
-    _icon = "osa-user-audit.png"
+    _icon = "osa-user-audit.svg"
 
 
 class OsaUserBlackHat(_OSA):
-    _icon = "osa-user-black-hat.png"
+    _icon = "osa-user-black-hat.svg"
 
 
 class OsaUserBlueSecuritySpecialist(_OSA):
-    _icon = "osa-user-blue-security-specialist.png"
+    _icon = "osa-user-blue-security-specialist.svg"
 
 
 class OsaUserBlueSysadmin(_OSA):
-    _icon = "osa-user-blue-sysadmin.png"
+    _icon = "osa-user-blue-sysadmin.svg"
 
 
 class OsaUserBlueTester(_OSA):
-    _icon = "osa-user-blue-tester.png"
+    _icon = "osa-user-blue-tester.svg"
 
 
 class OsaUserBlueTie(_OSA):
-    _icon = "osa-user-blue-tie.png"
+    _icon = "osa-user-blue-tie.svg"
 
 
 class OsaUserBlue(_OSA):
-    _icon = "osa-user-blue.png"
+    _icon = "osa-user-blue.svg"
 
 
 class OsaUserGreenArchitect(_OSA):
-    _icon = "osa-user-green-architect.png"
+    _icon = "osa-user-green-architect.svg"
 
 
 class OsaUserGreenBusinessManager(_OSA):
-    _icon = "osa-user-green-business-manager.png"
+    _icon = "osa-user-green-business-manager.svg"
 
 
 class OsaUserGreenDeveloper(_OSA):
-    _icon = "osa-user-green-developer.png"
+    _icon = "osa-user-green-developer.svg"
 
 
 class OsaUserGreenOperations(_OSA):
-    _icon = "osa-user-green-operations.png"
+    _icon = "osa-user-green-operations.svg"
 
 
 class OsaUserGreenProjectManager(_OSA):
-    _icon = "osa-user-green-project-manager.png"
+    _icon = "osa-user-green-project-manager.svg"
 
 
 class OsaUserGreenServiceManager(_OSA):
-    _icon = "osa-user-green-service-manager.png"
+    _icon = "osa-user-green-service-manager.svg"
 
 
 class OsaUserGreenWarning(_OSA):
-    _icon = "osa-user-green-warning.png"
+    _icon = "osa-user-green-warning.svg"
 
 
 class OsaUserGreen(_OSA):
-    _icon = "osa-user-green.png"
+    _icon = "osa-user-green.svg"
 
 
 class OsaUserLargeGroup(_OSA):
-    _icon = "osa-user-large-group.png"
+    _icon = "osa-user-large-group.svg"
 
 
 class OsaUserWhiteHat(_OSA):
-    _icon = "osa-user-white-hat.png"
+    _icon = "osa-user-white-hat.svg"
 
 
 class OsaUsersBlueGreen(_OSA):
-    _icon = "osa-users-blue-green.png"
+    _icon = "osa-users-blue-green.svg"
 
 
 class OsaVPN(_OSA):
-    _icon = "osa-vpn.png"
+    _icon = "osa-vpn.svg"
 
 
 class OsaWarning(_OSA):
-    _icon = "osa-warning.png"
+    _icon = "osa-warning.svg"
 
 
 class OsaWirelessNetwork(_OSA):
-    _icon = "osa-wireless-network.png"
+    _icon = "osa-wireless-network.svg"
 
 
 # Aliases

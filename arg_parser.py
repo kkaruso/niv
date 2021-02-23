@@ -33,6 +33,7 @@ class ArgParser:
     def __init__(self, args):
         self.args = args
         self.parser = argparse.ArgumentParser
+        self.set_args()
         pass
 
     def set_args(self):
@@ -81,11 +82,20 @@ class ArgParser:
         # Checks if the arguments are compatible with each other, else raise Exception
         if self.check_args_compatibility():
             self.parser = parser.parse_args(self.args)
-            return self.parser
+            return
         raise Exception("Arguments are not compatible")
 
     def get_load(self):
+        """
+        :return: returns data from argument load
+        """
         return self.parser.load
+
+    def get_parser(self):
+        """
+        :return: returns set parser from set_parser()
+        """
+        return self.parser
 
     @staticmethod
     def is_path_to_yaml_file(file_path):
