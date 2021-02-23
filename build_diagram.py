@@ -37,19 +37,19 @@ print(f"node_count: {node_count}")
 print(f"nodes: {nodes}")
 print(f"connections: {connections}\n")
 
-output_format = "svg"
+OUTPUT_FORMAT = "svg"
 
-filename = "Test_Diagram"
+FILENAME = "Test_Diagram"
 
-full_filename = f"{filename}.{output_format}"
+full_filename = f"{FILENAME}.{OUTPUT_FORMAT}"
 
 # IP Example
-ip = "192.168.x.x"
+IP = "192.168.x.x"
 
-link = f"\n<a xlink:href=\"Test_Diagram.svg\"> {ip} </a>"
+link = f"\n<a xlink:href=\"Test_Diagram.svg\"> {IP} </a>"
 
 # Create an instance of the Diagram class to create a diagram context
-with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=True):
+with Diagram(f"\n{title}", filename=FILENAME, outformat=OUTPUT_FORMAT, show=True):
     instances = []
     nodes_not_in_groups = []
     members = []
@@ -100,8 +100,7 @@ with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=True
             if instance_names[j] == connections[n][0]:
                 for k in range(len(instance_names)):
                     if connections[n][1] == instance_names[k]:
-                        instances[k] - instances[j]
-
+                        var = instances[k] - instances[j]
 
     # # Group 1
     # with Cluster("Gruppe 1"):
@@ -134,15 +133,15 @@ with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=True
 # Fix SVG-Icons Bug (source: https://github.com/mingrammer/diagrams/issues/8)
 with open(full_filename, "r") as f:
     in_string = f.read()
-    out_string = scour.scourString(in_string)
+    OUT_STRING = scour.scourString(in_string)
 
 with open(full_filename, "w") as f:
-    f.write(out_string)
+    f.write(OUT_STRING)
 
-fin = open(f"{filename}.{output_format}", "rt")
+fin = open(f"{FILENAME}.{OUTPUT_FORMAT}", "rt")
 data = fin.read()
 data = data.replace('&lt;', '<').replace('&gt;', '>')
 fin.close()
-fin = open(f"{filename}.{output_format}", "wt")
+fin = open(f"{FILENAME}.{OUTPUT_FORMAT}", "wt")
 fin.write(data)
 fin.close()
