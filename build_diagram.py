@@ -1,3 +1,10 @@
+# pylint: disable=unused-wildcard-import, method-hidden
+# pylint: disable=unused-import
+# pylint: disable=wildcard-import
+"""
+build_diagram.py
+Dynamically creates the diagram
+"""
 from scour import scour
 import yaml_parser
 from diagrams import *
@@ -39,6 +46,7 @@ full_filename = f"{filename}.{output_format}"
 # IP Example
 ip = "192.168.x.x"
 
+link = f"\n<a xlink:href=\"Test_Diagram.svg\"> {ip} </a>"
 
 # Create an instance of the Diagram class to create a diagram context
 with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=True):
@@ -60,7 +68,7 @@ with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=True
     for node in nodes:
         if node not in members:
             nodes_not_in_groups.append(node)
-            instances.append(globals()[node](f"{node}"))
+            instances.append(globals()[node](f"{node}" + link))
     # print(f"nodes_not_in_groups: {nodes_not_in_groups}\n")
 
     # Dynamically create the amount of groups given by "group_count" with the corresponding group name
@@ -72,7 +80,7 @@ with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=True
                 print(f"member: {member}")
                 # Create an instance of the node class with the "member" name, if not valid print name of not valid node
                 try:
-                    instances.append(globals()[member](f"{member}"))
+                    instances.append(globals()[member](f"{member}" + link))
                 except KeyError:
                     print(f"KeyError: {member} is not a valid node name!")
 
@@ -130,3 +138,11 @@ with open(full_filename, "r") as f:
 
 with open(full_filename, "w") as f:
     f.write(out_string)
+
+fin = open(f"{filename}.{output_format}", "rt")
+data = fin.read()
+data = data.replace('&lt;', '<').replace('&gt;', '>')
+fin.close()
+fin = open(f"{filename}.{output_format}", "wt")
+fin.write(data)
+fin.close()
