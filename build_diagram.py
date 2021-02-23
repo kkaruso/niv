@@ -95,10 +95,10 @@ with Diagram(f"\n{title}", filename=FILENAME, outformat=OUTPUT_FORMAT, show=True
     # print(f"instance_name: {instance_names}")
 
     # Create connections
-    for j in range(len(instance_names)):
-        for n in range(len(connections)):
+    for j, _ in enumerate(instance_names):
+        for n, _ in enumerate(connections):
             if instance_names[j] == connections[n][0]:
-                for k in range(len(instance_names)):
+                for k, _ in enumerate(instance_names):
                     if connections[n][1] == instance_names[k]:
                         var = instances[k] - instances[j]
 
