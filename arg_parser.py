@@ -105,7 +105,7 @@ class ArgParser:
             raise Exception(f'\n"{file_name}" is not a .yaml')
         raise Exception(f'\n"{file_path}" is not a valid file path')
 
-    def create_filename(self, file_path):
+    def create_filename(self):
         """
         Generate a file name with today's date and check
         if file with the same name already exists. If it does add a
@@ -116,15 +116,18 @@ class ArgParser:
         """
         i = 1
         date_today = "{:%Y%m%d}".format(date.today())
-        file_name = f"{date_today}_NIV_Diagram.svg"
+        file_name = self.get_load()
+        # file_name = f"{date_today}_NIV_Diagram.svg"
         file_format = self.config["DEFAULT"]["std_type"]
         # Add an incrementing number to end of file if file name already exists
-        while os.path.isfile(f"{file_path}{file_name}"):
-            file_name = file_name.split('.')[0].split('-')[0]
-            file_name = f"{file_name}-{i}"
-            file_name = f"{file_name}{file_format}"
-            i += 1
-
+        # while os.path.isfile(f"{file_path}{file_name}"):
+        #     # file_name = file_name.split('.')[0].split('-')[0]
+        #     file_name = file_name.split('/')[-1].split(".")[0]
+        #     file_name = f"{file_name}-{i}"
+        #     file_name = f"{file_name}{file_format}"
+        #     i += 1
+        file_name = file_name.split('/')[-1].split('.')[0]
+        file_name = f"{file_name}{file_format}"
         return file_name
 
     def save_to_path(self, file_path):
@@ -146,7 +149,8 @@ class ArgParser:
 
         # If the path is just a '.' create a file in the current directory
         if file_path == '.':
-            file_name = ArgParser.create_filename(f"{file_path}/")
+            # file_name = ArgParser.create_filename(f"{file_path}/")
+            file_name = self.create_filename()
             # Create the file in the current directory
             file = open(f"{file_name}", "a")
             file.close()
@@ -160,12 +164,12 @@ class ArgParser:
                 # Check if the directory above the file exists, else raise Exception
                 if os.path.isdir(path):
                     # Check if file already exists. If it doesn't create file, else raise FileExistsError
-                    if not os.path.isfile(file_path):
-                        # Create the given file in the given directory
-                        file = open(f"{file_path}", "a")
-                        file.close()
-                        return file_path
-                    raise FileExistsError(f"{last_element} already exists")
+                    # if not os.path.isfile(file_path):
+                    #     # Create the given file in the given directory
+                    #     file = open(f"{file_path}", "a")
+                    #     file.close()
+                    return file_path
+                    # raise FileExistsError(f"{last_element} already exists")
                 raise Exception(f'\n"{path}": directory doesn\'t exist')
             raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
 
@@ -174,7 +178,7 @@ class ArgParser:
             # Check if last symbol is a "/" otherwise add a "/"
             if file_path[-1] != "/":
                 file_path += "/"
-            file_name = ArgParser.create_filename(self, file_path)
+            file_name = self.create_filename()
             # Create the file in the given directory
             file = open(f"{file_path}{file_name}", "a")
             file.close()
