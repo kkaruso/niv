@@ -67,19 +67,21 @@ noteDefaults: &noteDefaults
   xAlign: center  # X-alignment of the text
   yAlign: center  # Y-alignment of the text
 icons: #enter devices here. Maybe change "icons" to "devices" later.
-  dns: {<<: *iconDefaults, icon: dns, x: 2, y: 3 }
-  lb: {<<: *iconDefaults, icon: lb, y: "-1" }
-  server1: {<<: *iconDefaults, icon: server, x: "-1", y: "-1" }
-  server2: {<<: *iconDefaults, icon: server, x: "+1" }
-  server3: {<<: *iconDefaults, icon: server, x: "+1" }
+  OsaCloud: {<<: *iconDefaults, icon: dns, x: 2, y: 3 }
+  OsaDatabase: {<<: *iconDefaults, icon: lb, y: "-1" }
+  OsaDeviceScanner: {<<: *iconDefaults, icon: server, x: "-1", y: "-1" }
+  OsaServerWeb: {<<: *iconDefaults, icon: server, x: "+1" }
+  OsaServerTerminal: {<<: *iconDefaults, icon: server, x: "+1" }
+  OsaDesktopImac: {<<: *iconDefaults, icon: server, x: "+1" }
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner] }
   moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
 
 connections: #enter your connections here
-- { <<: *connectionDefaults, endpoints: [server1, lb] }
-- { <<: *connectionDefaults, endpoints: [lb, pcs] }
-- { <<: *connectionDefaults, endpoints: [pcs1, pcs2] }
+- { <<: *connectionDefaults, endpoints: [OsaCloud, OsaDatabase] }
+- { <<: *connectionDefaults, endpoints: [OsaServer, OsaServerWeb] }
+- { <<: *connectionDefaults, endpoints: [OsaServer, OsaDeviceScanner] }
+- { <<: *connectionDefaults, endpoints: [OsaDesktopImac, OsaDatabase] }
 
 # Probably won't use notes like the one on GitHub
 # Notes that he uses are html flexboxes. Need to find some kind of python equivalent

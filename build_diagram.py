@@ -13,7 +13,6 @@ group_count = len(yaml.get("groups"))
 groups = list(yaml.get("groups").keys())
 group_members = {}
 for member in yaml.get("groups").keys():
-    # print("hier:", key, '->', yaml.get("groups")[key].get("members"))
     # Creates new key value pairs in group_members dict for each group with its members
     group_members[f'{member}'] = yaml.get('groups')[member].get('members')
 node_count = len(yaml.get("icons"))
@@ -29,7 +28,7 @@ print(f"groups: {groups}")
 print(f"group_members: {group_members}")
 print(f"node_count: {node_count}")
 print(f"nodes: {nodes}")
-print(f"connections: {connections}")
+print(f"connections: {connections}\n")
 
 output_format = "svg"
 
@@ -40,22 +39,29 @@ full_filename = f"{filename}.{output_format}"
 # IP Example
 ip = "192.168.x.x"
 
-graph_attr = {
-    "layout": "fdp",
-    "area": "1",
-    "center": "true",
-    "comment": "blabla",
-    "compound": "false",
-    "style": "invis"
-}
-
-clus_attr = {
-    "penwidth": "4.0"
-}
 
 # Create an instance of the Diagram class to create a diagram context
-with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=False, graph_attr=graph_attr):
-    clusters = {}
+with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=True):
+    instances = []
+    nodes_not_in_groups = []
+    members = []
+
+    # Dynamically create the amount of nodes that are not a member of a group
+    print(f"group_members: {group_members}")
+    print(f"nodes: {nodes}")
+
+    # Fill "members" list with all the group members"
+    for group_name in group_members:
+        for member in list(group_members.get(group_name)):
+            print(f"member: {member}")
+            members.append(member)
+
+    # If a node is not a member of a group, create it outside of a cluster
+    for node in nodes:
+        if node not in members:
+            nodes_not_in_groups.append(node)
+            instances.append(globals()[node](f"{node}"))
+    # print(f"nodes_not_in_groups: {nodes_not_in_groups}\n")
 
     # Dynamically create the amount of groups given by "group_count" with the corresponding group name
     for group_name in group_members:
@@ -64,13 +70,30 @@ with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=Fals
             # Create a node for each member in every group
             for member in list(group_members.get(group_name)):
                 print(f"member: {member}")
-                # Create an instance of the node class with the "member" name, if not valid print name of not valid icon
+                # Create an instance of the node class with the "member" name, if not valid print name of not valid node
                 try:
-                    instance = globals()[member](f"{member}")
+                    instances.append(globals()[member](f"{member}"))
                 except KeyError:
                     print(f"KeyError: {member} is not a valid node name!")
-            # clusters[f"master{i}"] = OsaDeviceWirelessRouter(f"Router {i} \n {ip}")
-    # print(clusters)
+
+    # Get the names of the instances as strings to create the connections
+    instance_names = []
+    for i, instance in enumerate(instances):
+        instance_name = str(instance).split('.')[-1].split('>')[0]
+        instance_names.append(instance_name)
+
+    # print(f"\ninstances: {instances}")
+    # print(f"connections: {connections}")
+    # print(f"instance_name: {instance_names}")
+
+    # Create connections
+    for j in range(len(instance_names)):
+        for n in range(len(connections)):
+            if instance_names[j] == connections[n][0]:
+                for k in range(len(instance_names)):
+                    if connections[n][1] == instance_names[k]:
+                        instances[k] - instances[j]
+
 
     # # Group 1
     # with Cluster("Gruppe 1"):
@@ -107,5 +130,3 @@ with open(full_filename, "r") as f:
 
 with open(full_filename, "w") as f:
     f.write(out_string)
-
-# def set_variables():
