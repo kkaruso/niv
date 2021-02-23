@@ -50,7 +50,7 @@ with Diagram(f"\n{title}", filename=filename, outformat=output_format, show=True
     print(f"group_members: {group_members}")
     print(f"nodes: {nodes}")
 
-    # Fill "members" list with all the group members"
+    # Fill "members" list with all the group members
     for group_name in group_members:
         for member in list(group_members.get(group_name)):
             print(f"member: {member}")
