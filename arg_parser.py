@@ -5,11 +5,13 @@ Parser class for Arguments when you start NIV
 import argparse
 import os
 import configparser
-from datetime import date
 
 
 def get_config_path():
-    return os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '\\niv\\config.ini'
+    """
+    :return: absolute path of config.ini
+    """
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.ini'
 
 
 class ArgParser:
@@ -34,7 +36,6 @@ class ArgParser:
         self.args = args
         self.parser = argparse.ArgumentParser
         self.set_args()
-        pass
 
     def set_args(self):
         """
@@ -181,7 +182,6 @@ class ArgParser:
         Checks if the given arguments are compatible with each other
         (e.g: --gui can't be used with any other argument)
 
-        :param args: parsed arguments as a namespace
         :return: true, if arguments are compatible. false, if not
         """
         # Set variable to True if argument is given
@@ -192,7 +192,7 @@ class ArgParser:
         run = "--run" in self.args or "-r" in self.args
         gui = "--gui" in self.args or "-g" in self.args
         version = "--version" in self.args or "-v" in self.args
-        help = "--help" in self.args or "-h" in self.args
+        hlp = "--help" in self.args or "-h" in self.args
 
         # variable for or operation on all arguments except gui
         eegui = icons or detail or load or save or run
@@ -200,7 +200,7 @@ class ArgParser:
         if len(self.args) == 0:
             return True
         # If only help or version are given
-        if len(self.args) == 1 and (version or help):
+        if len(self.args) == 1 and (version or hlp):
             return True
         # If -g/--gui is used with any other argument, raise ArgumentError
         if eegui and gui:

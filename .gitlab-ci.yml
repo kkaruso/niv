@@ -5,6 +5,7 @@ test:pylint:
   script:
     - pip install pylint --quiet
     - pip install pyyaml
+    - pip install scour
     - pylint --ignored-classes=_socketobject --max-line-length=150 *.py
 
 test:pytest:
