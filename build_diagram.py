@@ -1,5 +1,6 @@
 # pylint: disable=unused-wildcard-import, method-hidden
 # pylint: disable=unused-import
+# pylint: disable=wildcard-import
 from scour import scour
 import yaml_parser
 from diagrams import *
