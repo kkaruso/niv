@@ -117,25 +117,11 @@ class ArgParser:
 
     def create_filename(self):
         """
-        Generate a file name with today's date and check
-        if file with the same name already exists. If it does add a
-        number at the end of the name
-
-        :param file_path: path to where the file should be saved
+        generate name from input file and return it
         :return: generated filename
         """
-        i = 1
-        date_today = "{:%Y%m%d}".format(date.today())
         file_name = self.get_load()
-        # file_name = f"{date_today}_NIV_Diagram.svg"
         file_format = self.config["DEFAULT"]["std_type"]
-        # Add an incrementing number to end of file if file name already exists
-        # while os.path.isfile(f"{file_path}{file_name}"):
-        #     # file_name = file_name.split('.')[0].split('-')[0]
-        #     file_name = file_name.split('/')[-1].split(".")[0]
-        #     file_name = f"{file_name}-{i}"
-        #     file_name = f"{file_name}{file_format}"
-        #     i += 1
         file_name = file_name.split('/')[-1].split('.')[0]
         file_name = f"{file_name}{file_format}"
         return file_name
@@ -173,11 +159,6 @@ class ArgParser:
             if last_element.lower().endswith(('.svg', '.png', '.jpeg')):
                 # Check if the directory above the file exists, else raise Exception
                 if os.path.isdir(path):
-                    # Check if file already exists. If it doesn't create file, else raise FileExistsError
-                    # if not os.path.isfile(file_path):
-                    #     # Create the given file in the given directory
-                    #     file = open(f"{file_path}", "a")
-                    #     file.close()
                     return file_path
                     # raise FileExistsError(f"{last_element} already exists")
                 raise Exception(f'\n"{path}": directory doesn\'t exist')

@@ -134,32 +134,16 @@ class TestArgParser(TestCase):
         with self.assertRaises(Exception):
             parser.save_to_path("./test_directory/")
 
-        with self.assertRaises(FileExistsError):
-            parser.save_to_path("./tests.svg")
-
         with self.assertRaises(TypeError):
             parser.save_to_path("./tests.yaml")
 
         self.assertEqual(f"./{self.test_directory_path}test2.svg",
                          parser.save_to_path(f"{self.test_directory_path}test2.svg"))
 
-        # first file in testdirectory
         self.assertEqual(f"./{self.test_directory_path}", parser.save_to_path(f"{self.test_directory_path}"))
 
-        from datetime import date
-        date_today = "{:%Y%m%d}".format(date.today())
-        file_name = f"{date_today}_NIV_Diagram"
-
-        # second file -> -1
         self.assertEqual("./testdirectory/",
                          parser.save_to_path(f"./{self.test_directory_path}"))
-        # third file -> -2
-        # create file and give directory_list the array of created files
-        # the new file should be on the second position
-
-        parser.save_to_path(f"{self.test_directory_path}")
-        directory_list = os.listdir(f"{self.test_directory_path}")
-        self.assertEqual(f"{file_name}-2.svg", f"{directory_list[1]}")
 
     def test_create_filename(self):
         """
@@ -167,10 +151,9 @@ class TestArgParser(TestCase):
         """
         from datetime import date
         parser = ArgParser(["-l", "./tests.yaml"])
-        date_today = "{:%Y%m%d}".format(date.today())
-        file_name = f"{date_today}_NIV_Diagram.svg"
+        file_name = "tests.svg"
 
-        self.assertEqual(file_name, parser.create_filename("."))
+        self.assertEqual(file_name, parser.create_filename())
 
     def test_check_args_compatibility(self):
         """
