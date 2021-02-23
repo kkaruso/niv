@@ -11,7 +11,7 @@ def get_config_path():
     """
     :return: absolute path of config.ini
     """
-    return os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '\\niv\\config.ini'
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.ini'
 
 
 class ArgParser:
