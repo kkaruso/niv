@@ -1,8 +1,8 @@
 from scour import scour
 import yaml_parser
 from diagrams import *
-from diagrams.icons.osa import *
-from diagrams.icons.cisco import *
+from diagrams.icons.osa import * # pylint: disable=unused-import
+from diagrams.icons.cisco import * # pylint: disable=unused-import
 
 # Get the parsed yaml in form of a dictionary
 yaml = yaml_parser.get_yaml("templates/template.yaml")
