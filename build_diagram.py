@@ -17,16 +17,14 @@ class BuildDiagram:
     """
     Handles creation of diagram
     """
-    OUTPUT_FORMAT = "svg"
+    # OUTPUT_FORMAT = "svg"
 
-    FILENAME = "Test_Diagram"
+    # FILENAME = "Test_Diagram"
 
-    full_filename = f"{FILENAME}.{OUTPUT_FORMAT}"
+    # full_filename = f"{FILENAME}.{OUTPUT_FORMAT}"
 
     # IP Example
     IP = "192.168.x.x"
-
-    link = f"\n<a xlink:href=\"Test_Diagram.svg\"> {IP} </a>"
 
     config_parsers = ConfigParser()
     config = config_parsers.get_config()
@@ -34,6 +32,16 @@ class BuildDiagram:
     def __init__(self, load_path, save_path):
         self.yaml = yaml_parser.get_yaml(load_path)
         # TODO: Implement save_path somehow and cleanup
+        self.save_path = save_path
+        self.output_format = save_path.split('.')[-1]
+        self.filename = save_path.split('/')[-1].split('.')[0]
+        self.full_filename = f"{self.filename}.{self.output_format}"
+        self.save_path_without_file_format = save_path.split('.')[0]
+        print(f"output_format: {self.output_format}")
+        print(f"file_name: {self.filename}")
+        print(f"full_filename: {self.full_filename}")
+        print(f"save_path_without_file_format: {self.save_path_without_file_format}\n")
+        self.link = f"\n<a xlink:href=\"{self.save_path}\"> {self.IP} </a>"
 
         # Create variables for dynamically getting the values from the .yaml file for creating the graph
         self.title = self.yaml.get("title").get("text")
@@ -64,7 +72,8 @@ class BuildDiagram:
         """
 
         # Create an instance of the Diagram class to create a diagram context
-        with Diagram(f"\n{self.title}", filename=self.FILENAME, outformat=self.OUTPUT_FORMAT, show=True):
+        with Diagram(f"\n{self.title}", filename=self.save_path_without_file_format, outformat=self.output_format,
+                     show=True):
             instances = []
             nodes_not_in_groups = []
             members = []
@@ -147,24 +156,26 @@ class BuildDiagram:
             # master2 - master1 - master3
 
         # Fix SVG-Icons Bug (source: https://github.com/mingrammer/diagrams/issues/8)
-        with open(self.full_filename, "r") as file:
+        with open(self.save_path, "r") as file:
             in_string = file.read()
             out_string = scour.scourString(in_string)
 
-        with open(self.full_filename, "w") as file:
+        with open(self.save_path, "w") as file:
             file.write(out_string)
 
+        # Only add link to diagram if it's a .svg
+        # if self.output_format == "svg":
         self.html_to_ascii()
 
     def html_to_ascii(self):
         """
-        Replace html-entity with ascii-symbol
+        Replace html-entity with ascii-symbol for embedding hyperlinks in svg
         :return:
         """
-        fin = open(f"{self.FILENAME}.{self.OUTPUT_FORMAT}", "rt")
+        fin = open(f"{self.save_path}", "rt")
         data = fin.read()
         data = data.replace('&lt;', '<').replace('&gt;', '>')
         fin.close()
-        fin = open(f"{self.FILENAME}.{self.OUTPUT_FORMAT}", "wt")
+        fin = open(f"{self.save_path}", "wt")
         fin.write(data)
         fin.close()
