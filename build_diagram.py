@@ -45,22 +45,15 @@ class BuildDiagram:
 
         self.link = f"\n<a xlink:href=\"{self.save_path}\"> {self.IP} </a>"
 
-        # Get title of the diagram, the amount of groups and the groups itself
+        # Get title of the diagram
         self.title = self.yaml.get("title").get("text")
-        self.group_count = len(self.yaml.get("groups"))
-        self.groups = list(self.yaml.get("groups").keys())
 
-        # Go through each group and take the group name as the key and save the list of members as values in
-        # "group_members" dictionary
+        # Get name and members of groups and save as key value pairs in "group_members"
         self.group_members = {}
         for member in self.yaml.get("groups").keys():
             self.group_members[f'{member}'] = self.yaml.get('groups')[member].get('members')
 
-        # Get nodes and the amount of nodes
-        self.node_count = len(self.yaml.get("icons"))
-        self.nodes = list(self.yaml.get("icons").keys())
-
-        # Go through each node and save the text in "nodes_text" dictionary with the node name as the key
+        # Get name and text of nodes and save as key value pairs in "nodes_text"
         self.nodes_text = {}
         for node in self.yaml.get("icons"):
             self.nodes_text[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('text')
@@ -78,11 +71,7 @@ class BuildDiagram:
 
         print("Created variables from .yaml:")
         print(f"title: {self.title}")
-        print(f"group_count: {self.group_count}")
-        print(f"groups: {self.groups}")
         print(f"group_members: {self.group_members}")
-        print(f"node_count: {self.node_count}")
-        print(f"nodes: {self.nodes}")
         print(f"nodes_text: {self.nodes_text}")
         print(f"connections: {self.connections}\n")
 
@@ -95,47 +84,36 @@ class BuildDiagram:
         with Diagram(f"\n{self.title}", filename=self.filename, outformat=self.output_format,
                      show=self.config["DEFAULT"]["open_in_browser"] == "True"):
             instances = []
-            nodes_not_in_groups = []
             members = []
-
-            print(f"group_members: {self.group_members}")
-            print(f"nodes: {self.nodes}")
 
             # Fill "members" list with all the group members
             for group_name in self.group_members:
                 for member in list(self.group_members.get(group_name)):
-                    # print(f"member: {member}")
                     members.append(member)
 
             # If a node is not a member of a group, create it outside of a cluster
-            for node in self.nodes:
+            for node in self.nodes_text:
                 if node not in members:
-                    nodes_not_in_groups.append(node)
                     instances.append(globals()[node](f"{self.nodes_text[node]}" + self.link))
 
             # Dynamically create the amount of groups given by "group_count" with the corresponding group name
             for group_name in self.group_members:
-                # print(f"group_name: {group_name}")
                 with Cluster(f"{group_name}"):
                     # Create a node for each member in every group
                     for member in list(self.group_members.get(group_name)):
-                        # print(f"member: {member}")
                         # Create an instance of the node class with the "member" name, if not valid print name of not
                         # valid node
                         try:
                             instances.append(globals()[member](f"{self.nodes_text[member]}" + self.link))
                         except KeyError:
-                            print(f"KeyError: {member} is not a valid node name!")
+                            print(f"KeyError: {member} is not given within 'icons', that's why it does not show in "
+                                  f"the diagram")
 
             # Get the names of the instances as strings to create the connections
             instance_names = []
             for instance in instances:
                 instance_name = str(instance).split('.')[-1].split('>')[0]
                 instance_names.append(instance_name)
-
-            # print(f"\ninstances: {instances}")
-            # print(f"connections: {connections}")
-            # print(f"instance_name: {instance_names}")
 
             # Create connections
             for j, _ in enumerate(instance_names):
