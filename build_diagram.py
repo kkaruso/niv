@@ -1,6 +1,7 @@
 # pylint: disable=unused-wildcard-import, method-hidden
 # pylint: disable=unused-import
 # pylint: disable=wildcard-import
+# pylint: disable=fixme
 """
 build_diagram.py
 Dynamically creates the diagram
@@ -75,6 +76,30 @@ class BuildDiagram:
         print(f"nodes_text: {self.nodes_text}")
         print(f"connections: {self.connections}\n")
 
+    def set_instances(self, instances, members):
+        # If a node is not a member of a group, create it outside of a cluster
+        for node in self.nodes_text:
+            if node not in members:
+                instances.append(globals()[node](f"{self.nodes_text[node]}" + self.link))
+
+        # Dynamically create the amount of groups given by "group_count" with the corresponding group name
+        for group_name in self.group_members:
+            with Cluster(f"{group_name}"):
+                # Create a node for each member in every group
+                for member in list(self.group_members.get(group_name)):
+                    # Create an instance of the node class with the "member" name, if not valid print name of not
+                    # valid node
+                    try:
+                        instances.append(globals()[member](f"{self.nodes_text[member]}" + self.link))
+                    except KeyError:
+                        print(f"KeyError: {member} is not given within 'icons', that's why it does not show in "
+                              f"the diagram")
+
+    def set_members(self, members):
+        for group_name in self.group_members:
+            for member in list(self.group_members.get(group_name)):
+                members.append(member)
+
     def create_diagram(self):
         """
         Creates the diagram with the right amount of of nodes, clusters and connections
@@ -85,32 +110,12 @@ class BuildDiagram:
                      show=self.config["DEFAULT"]["open_in_browser"] == "True"):
             instances = []
             members = []
+            instance_names = []
 
-            # Fill "members" list with all the group members
-            for group_name in self.group_members:
-                for member in list(self.group_members.get(group_name)):
-                    members.append(member)
-
-            # If a node is not a member of a group, create it outside of a cluster
-            for node in self.nodes_text:
-                if node not in members:
-                    instances.append(globals()[node](f"{self.nodes_text[node]}" + self.link))
-
-            # Dynamically create the amount of groups given by "group_count" with the corresponding group name
-            for group_name in self.group_members:
-                with Cluster(f"{group_name}"):
-                    # Create a node for each member in every group
-                    for member in list(self.group_members.get(group_name)):
-                        # Create an instance of the node class with the "member" name, if not valid print name of not
-                        # valid node
-                        try:
-                            instances.append(globals()[member](f"{self.nodes_text[member]}" + self.link))
-                        except KeyError:
-                            print(f"KeyError: {member} is not given within 'icons', that's why it does not show in "
-                                  f"the diagram")
+            self.set_members(members)
+            self.set_instances(instances, members)
 
             # Get the names of the instances as strings to create the connections
-            instance_names = []
             for instance in instances:
                 instance_name = str(instance).split('.')[-1].split('>')[0]
                 instance_names.append(instance_name)
@@ -119,9 +124,9 @@ class BuildDiagram:
             for j, _ in enumerate(instance_names):
                 for k, _ in enumerate(self.connections):
                     if instance_names[j] == self.connections[k][0]:
-                        for l, _ in enumerate(instance_names):
-                            if self.connections[k][1] == instance_names[l]:
-                                _ = instances[l] - instances[j]
+                        for m, _ in enumerate(instance_names):
+                            if self.connections[k][1] == instance_names[m]:
+                                _ = instances[m] - instances[j]
 
             # # Group 1
             # with Cluster("Gruppe 1"):
