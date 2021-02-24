@@ -67,12 +67,12 @@ noteDefaults: &noteDefaults
   xAlign: center  # X-alignment of the text
   yAlign: center  # Y-alignment of the text
 icons: #enter devices here. Maybe change "icons" to "devices" later.
-  OsaCloud: {<<: *iconDefaults, icon: dns, x: 2, y: 3 }
-  OsaDatabase: {<<: *iconDefaults, icon: lb, y: "-1" }
-  OsaDeviceScanner: {<<: *iconDefaults, icon: server, x: "-1", y: "-1" }
-  OsaServerWeb: {<<: *iconDefaults, icon: server, x: "+1" }
-  OsaServerTerminal: {<<: *iconDefaults, icon: server, x: "+1" }
-  OsaDesktopImac: {<<: *iconDefaults, icon: server, x: "+1" }
+  OsaCloud: {<<: *iconDefaults, icon: dns, text: GoogleCloud, x: 2, y: 3 }
+  OsaDatabase: {<<: *iconDefaults, icon: lb, text: MySQL Database, y: "-1" }
+  OsaDeviceScanner: {<<: *iconDefaults, icon: server, text: Local Device Scanner, x: "-1", y: "-1" }
+  OsaServerWeb: {<<: *iconDefaults, icon: server, text: My WebServer, x: "+1" }
+  OsaServerTerminal: {<<: *iconDefaults, icon: server, text: Central Terminal, x: "+1" }
+  OsaDesktopImac: {<<: *iconDefaults, icon: server, text: My Desktop, x: "+1" }
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner] }
   moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
