@@ -45,7 +45,7 @@ class ArgParser:
 
         parser.add_argument('-s', '--save', type=self.save_to_path,
                             nargs='?', metavar='OUTPUT_PATH',
-                            help='Save .svg, .png or .jpeg file to a given path (DEFAULT: .svg)')
+                            help='Save .svg, .png, .jpg or .pdf file to a given path (DEFAULT: .svg)')
 
         parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file,
                             nargs='?', metavar='INPUT_PATH',
@@ -148,13 +148,13 @@ class ArgParser:
         # path, it is a file, else it is a directory
         if '.' in last_element:
             # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
-            if last_element.lower().endswith(('.svg', '.png', '.jpeg')):
+            if last_element.lower().endswith(('.svg', '.png', '.jpg', 'pdf')):
                 # Check if the directory above the file exists, else raise Exception
                 if os.path.isdir(path):
                     return file_path
                     # raise FileExistsError(f"{last_element} already exists")
                 raise Exception(f'\n"{path}": directory doesn\'t exist')
-            raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
+            raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpg, .pdf)")
 
         # Check if directory exists. If it does return the file_path, else raise Exception
         if os.path.isdir(file_path):
