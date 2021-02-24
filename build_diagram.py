@@ -10,6 +10,7 @@ import yaml_parser
 from diagrams import *
 from diagrams.icons.osa import *
 from diagrams.icons.cisco import *
+from config_parser import ConfigParser
 
 
 class BuildDiagram:
@@ -24,6 +25,9 @@ class BuildDiagram:
 
     # IP Example
     IP = "192.168.x.x"
+
+    config_parsers = ConfigParser()
+    config = config_parsers.get_config()
 
     # TODO: Check if icon names are valid by somehow comparing them to the classes in osa.py and cisco.py or to the
     #   icon catalog
@@ -89,7 +93,7 @@ class BuildDiagram:
 
         # Create an instance of the Diagram class to create a diagram context
         with Diagram(f"\n{self.title}", filename=self.filename, outformat=self.output_format,
-                     show=True):
+                     show=self.config["DEFAULT"]["open_in_browser"] == "True"):
             instances = []
             nodes_not_in_groups = []
             members = []
