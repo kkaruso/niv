@@ -2,6 +2,7 @@
 # pylint: disable=unused-import
 # pylint: disable=wildcard-import
 # pylint: disable=fixme
+# pylint: disable=too-many-instance-attributes
 """
 build_diagram.py
 Dynamically creates the diagram
@@ -77,6 +78,9 @@ class BuildDiagram:
         print(f"connections: {self.connections}\n")
 
     def set_instances(self, instances, members):
+        """
+        Function to set all instances
+        """
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_text:
             if node not in members:
@@ -96,6 +100,9 @@ class BuildDiagram:
                               f"the diagram")
 
     def set_members(self, members):
+        """
+        Function to set members
+        """
         for group_name in self.group_members:
             for member in list(self.group_members.get(group_name)):
                 members.append(member)
@@ -121,12 +128,12 @@ class BuildDiagram:
                 instance_names.append(instance_name)
 
             # Create connections
-            for j, _ in enumerate(instance_names):
-                for k, _ in enumerate(self.connections):
-                    if instance_names[j] == self.connections[k][0]:
-                        for m, _ in enumerate(instance_names):
-                            if self.connections[k][1] == instance_names[m]:
-                                _ = instances[m] - instances[j]
+            for i, _ in enumerate(instance_names):
+                for j, _ in enumerate(self.connections):
+                    if instance_names[i] == self.connections[j][0]:
+                        for k, _ in enumerate(instance_names):
+                            if self.connections[j][1] == instance_names[k]:
+                                _ = instances[k] - instances[i]
 
             # # Group 1
             # with Cluster("Gruppe 1"):
