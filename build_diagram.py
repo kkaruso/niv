@@ -10,6 +10,7 @@ import yaml_parser
 from diagrams import *
 from diagrams.icons.osa import *
 from diagrams.icons.cisco import *
+from config_parser import ConfigParser
 
 
 class BuildDiagram:
@@ -26,6 +27,9 @@ class BuildDiagram:
     IP = "192.168.x.x"
 
     link = f"\n<a xlink:href=\"Test_Diagram.svg\"> {IP} </a>"
+
+    config_parsers = ConfigParser()
+    config = config_parsers.get_config()
 
     def __init__(self, load_path, save_path):
         self.yaml = yaml_parser.get_yaml(load_path)
