@@ -86,7 +86,7 @@ class BuildDiagram:
                 try:
                     instances.append(globals()[node](f"{self.nodes_text[node]}" + self.link))
                 except KeyError:
-                    print("KeyError in {self.load_path}: '{node}' is not a valid icon, that's why it does not show "
+                    print(f"KeyError in {self.load_path}: '{node}' is not a valid icon, that's why it does not show "
                           f"in the diagram. Please refer to the icon catalog for more information about available "
                           f"icons.")
 
