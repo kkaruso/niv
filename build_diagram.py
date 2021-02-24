@@ -73,7 +73,7 @@ class BuildDiagram:
 
         # Create an instance of the Diagram class to create a diagram context
         with Diagram(f"\n{self.title}", filename=self.save_path_without_file_format, outformat=self.output_format,
-                     show=True):
+                     show=self.config["DEFAULT"]["open_in_browser"] == "True"):
             instances = []
             nodes_not_in_groups = []
             members = []
