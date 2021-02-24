@@ -4,14 +4,7 @@ Parser class for Arguments when you start NIV
 
 import argparse
 import os
-import configparser
-
-
-def get_config_path():
-    """
-    :return: absolute path of config.ini
-    """
-    return os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.ini'
+from config_parser import ConfigParser
 
 
 class ArgParser:
@@ -23,10 +16,8 @@ class ArgParser:
     set_args():
         Adds the needed arguments to the ArgumentParser class
     """
-    # Creates an object from configparser and loads the config file "config.ini"
-    config = configparser.ConfigParser()
-    get_config_path()
-    config.read(get_config_path())
+    config_parsers = ConfigParser()
+    config = config_parsers.get_config()
 
     # Dictionary for argument choices
     ICONS = [1, 2, 3]
