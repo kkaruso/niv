@@ -1,9 +1,9 @@
-# pylint: disable=import-error
 """
 Includes all tests for build_diagram
 """
 from unittest import TestCase
 import os
+
 from build_diagram import BuildDiagram
 from diagrams import Diagram
 
