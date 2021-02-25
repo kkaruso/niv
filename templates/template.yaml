@@ -73,6 +73,8 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
   OsaServerWeb: {<<: *iconDefaults, icon: server, text: My WebServer, x: "+1" }
   OsaServerTerminal: {<<: *iconDefaults, icon: server, text: Central Terminal, x: "+1" }
   OsaDesktopImac: {<<: *iconDefaults, icon: server, text: My Desktop, x: "+1" }
+  Osa: {<<: *iconDefaults, icon: server, text: Test, x: "+1" }
+
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner] }
   moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
