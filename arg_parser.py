@@ -89,6 +89,10 @@ class ArgParser:
         """
         return self.parser
 
+    def get_save_path(self):
+
+        return self.parser.save
+
     @staticmethod
     def is_path_to_yaml_file(file_path):
         """
