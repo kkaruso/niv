@@ -67,7 +67,7 @@ noteDefaults: &noteDefaults
   xAlign: center  # X-alignment of the text
   yAlign: center  # Y-alignment of the text
 icons: #enter devices here. Maybe change "icons" to "devices" later.
-  OsaCloud: {<<: *iconDefaults, icon: dns, text: GoogleCloud, x: 2, y: 3 }
+  Antenna: {<<: *iconDefaults, icon: dns, text: GoogleCloud, x: 2, y: 3 }
   OsaDatabase: {<<: *iconDefaults, icon: lb, text: MySQL Database, y: "-1" }
   OsaDeviceScanner: {<<: *iconDefaults, icon: server, text: Local Device Scanner, x: "-1", y: "-1" }
   OsaServerWeb: {<<: *iconDefaults, icon: server, text: My WebServer, x: "+1" }
@@ -78,7 +78,7 @@ groups: #add a group to target multiple objects at once, if you don't, delete th
   moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
 
 connections: #enter your connections here
-- { <<: *connectionDefaults, endpoints: [OsaCloud, OsaDatabase] }
+- { <<: *connectionDefaults, endpoints: [Antenna, OsaDatabase] }
 - { <<: *connectionDefaults, endpoints: [OsaServer, OsaServerWeb] }
 - { <<: *connectionDefaults, endpoints: [OsaServer, OsaDeviceScanner] }
 - { <<: *connectionDefaults, endpoints: [OsaDesktopImac, OsaDatabase] }
