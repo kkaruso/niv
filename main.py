@@ -12,8 +12,5 @@ if __name__ == '__main__':
     # Call the function "set_args"
     args = arg_parser.get_parser()
 
-    if args.command == 'load':
-        if arg_parser.get_save_path:
-            print(arg_parser.get_save_path())
-            print(arg_parser.get_load_path())
-          #  diagram_builder = BuildDiagram(arg_parser.get_load_path(), str(arg_parser.get_save_path))
+
+    diagram_builder = BuildDiagram(arg_parser.get_load(), str(arg_parser.get_save_path()))
