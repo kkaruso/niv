@@ -7,7 +7,6 @@
 build_diagram.py
 Dynamically creates the diagram
 """
-from scour import scour
 import yaml_parser
 from diagrams import *
 from diagrams.icons.osa import *
@@ -19,11 +18,6 @@ class BuildDiagram:
     """
     Handles creation of diagram
     """
-    # OUTPUT_FORMAT = "svg"
-
-    # FILENAME = "Test_Diagram"
-
-    # full_filename = f"{FILENAME}.{OUTPUT_FORMAT}"
 
     # IP Example
     IP = "192.168.x.x"
@@ -31,9 +25,8 @@ class BuildDiagram:
     config_parsers = ConfigParser()
     config = config_parsers.get_config()
 
-    # TODO: Check if icon names are valid by somehow comparing them to the classes in osa.py and cisco.py or to the
-    #   icon catalog
-
+    # TODO: Add coordinates in icons and groups and integrate into create_diagram function
+    # TODO: Add options for different layouts and to change graph_attr in .yaml
     def __init__(self, load_path, save_path):
         # Initialize variables for dynamically getting the values from the .yaml file
         # TODO: cleanup (delete not needed comments like old prints)
@@ -42,6 +35,7 @@ class BuildDiagram:
         self.yaml = yaml_parser.get_yaml(load_path)
 
         self.save_path = save_path
+        self.load_path = load_path
         self.output_format = save_path.split('.')[-1]
         self.filename = os.path.splitext(save_path)[0]
 
@@ -77,63 +71,76 @@ class BuildDiagram:
         print(f"nodes_text: {self.nodes_text}")
         print(f"connections: {self.connections}\n")
 
-    def set_instances(self, instances, members):
+    def create_nodes(self, instances, members):
         """
-        Function to set all instances
+        Create nodes outside and inside of clusters
         """
+        # Fill "members" list with all the group members
+        for group_name in self.group_members:
+            for member in list(self.group_members.get(group_name)):
+                members.append(member)
+
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_text:
             if node not in members:
-                instances.append(globals()[node](f"{self.nodes_text[node]}" + self.link))
+                try:
+                    instances.append(globals()[node](f"{self.nodes_text[node]}" + self.link))
+                except KeyError:
+                    print(f"KeyError in {self.load_path}: '{node}' is not a valid icon, that's why it does not show "
+                          f"in the diagram. Please refer to the icon catalog for more information about available "
+                          f"icons.")
 
         # Dynamically create the amount of groups given by "group_count" with the corresponding group name
         for group_name in self.group_members:
             with Cluster(f"{group_name}"):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(group_name)):
-                    # Create an instance of the node class with the "member" name, if not valid print name of not
-                    # valid node
+                    # Create an instance of the node class, if not valid print name of not valid node
                     try:
                         instances.append(globals()[member](f"{self.nodes_text[member]}" + self.link))
                     except KeyError:
-                        print(f"KeyError: {member} is not given within 'icons', that's why it does not show in "
-                              f"the diagram")
+                        print(
+                            f"KeyError in {self.load_path}: '{member}' is not given in 'icons', that's why it does "
+                            f"not show in the diagram. Add it to 'icons' or remove it as a member.")
 
-    def set_members(self, members):
+    def create_connections(self, instances, instance_names):
         """
-        Function to set members
+        Create connections between nodes
         """
-        for group_name in self.group_members:
-            for member in list(self.group_members.get(group_name)):
-                members.append(member)
+        # Get the names of the instances as strings to create the connections
+        for instance in instances:
+            instance_name = str(instance).split('.')[-1].split('>')[0]
+            instance_names.append(instance_name)
+
+        # Check if any endpoints are not given in 'icons', if not print an error
+        for connection in self.connections:
+            for endpoint in connection:
+                if endpoint not in self.nodes_text:
+                    print(f"KeyError in {self.load_path}: '{endpoint}' is not given in 'icons', that's why it "
+                          f"does not show in the diagram. Add it to 'icons' or remove it as an endpoint.")
+
+        # Create connections
+        for i, _ in enumerate(instance_names):
+            for j, _ in enumerate(self.connections):
+                if instance_names[i] == self.connections[j][0]:
+                    for k, _ in enumerate(instance_names):
+                        if self.connections[j][1] == instance_names[k]:
+                            _ = instances[k] - instances[i]
 
     def create_diagram(self):
         """
         Creates the diagram with the right amount of of nodes, clusters and connections
         """
-
-        # Create an instance of the Diagram class to create a diagram context
-        with Diagram(f"\n{self.title}", filename=self.filename, outformat=self.output_format,
+        with Diagram(f"{self.title}", filename=self.filename, outformat=self.output_format,
                      show=self.config["DEFAULT"]["open_in_browser"] == "True"):
             instances = []
             members = []
             instance_names = []
 
-            self.set_members(members)
-            self.set_instances(instances, members)
-
-            # Get the names of the instances as strings to create the connections
-            for instance in instances:
-                instance_name = str(instance).split('.')[-1].split('>')[0]
-                instance_names.append(instance_name)
-
+            # Create nodes and clusters
+            self.create_nodes(instances, members)
             # Create connections
-            for i, _ in enumerate(instance_names):
-                for j, _ in enumerate(self.connections):
-                    if instance_names[i] == self.connections[j][0]:
-                        for k, _ in enumerate(instance_names):
-                            if self.connections[j][1] == instance_names[k]:
-                                _ = instances[k] - instances[i]
+            self.create_connections(instances, instance_names)
 
             # # Group 1
             # with Cluster("Gruppe 1"):
@@ -163,14 +170,6 @@ class BuildDiagram:
             # # External Connections between the Groups can be: From >> To, To << From or Point - Point
             # master2 - master1 - master3
 
-        # Fix SVG-Icons Bug (source: https://github.com/mingrammer/diagrams/issues/8)
-        with open(self.save_path, "r") as file:
-            in_string = file.read()
-            out_string = scour.scourString(in_string)
-
-        with open(self.save_path, "w") as file:
-            file.write(out_string)
-
         # TODO: Add logic to only embed links in .svg (and maybe .pdf if it's possible)
         # Only add link to diagram if it's a .svg
         # if self.output_format == "svg":
@@ -182,7 +181,7 @@ class BuildDiagram:
         """
         fin = open(f"{self.save_path}", "rt")
         data = fin.read()
-        data = data.replace('&lt;', '<').replace('&gt;', '>')
+        data = data.replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"')
         fin.close()
         fin = open(f"{self.save_path}", "wt")
         fin.write(data)

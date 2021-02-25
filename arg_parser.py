@@ -38,56 +38,57 @@ class ArgParser:
                                          description="Creates a visualization of your network infrastructure",
                                          add_help=False)
 
-        parser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
+        optional = parser.add_argument_group('optional arguments')
 
-        parser.add_argument('-v', '--version', action='version', version='1.0',
-                            help="Show program's version number and exit")
+        optional.add_argument('-v', '--version', action='version', version='1.0',
+                              help="Show program's version number and exit")
 
-        parser.add_argument('-s', '--save', type=self.save_to_path,
-                            nargs='?', metavar='OUTPUT_PATH',
-                            help='Save .svg, .png or .jpeg file to a given path (DEFAULT: .svg)')
+        optional.add_argument('-h', '--help', action='help', help='Show this help message and exit')
 
-        parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file,
-                            nargs='?', metavar='INPUT_PATH',
-                            help='Create visualization with a given .yaml file')
+        subparsers = parser.add_subparsers(dest="command")
 
-        parser.add_argument('-i', '--icons', type=int, nargs='?', metavar='INT',
-                            default=self.config["DEFAULT"]["std_icons"], choices=self.ICONS,
-                            help='Choose the icons you want to use for the visualization; 1: cisco, 2: osa (DEFAULT: 1)')
+        optional.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
+                              default=self.config["DEFAULT"]["std_details"], choices=self.DETAIL,
+                              help='The level of detail you want to use for the visualization; 1: least detail, '
+                                   '2: medium detail, 3: most detail (DEFAULT: 1)')
 
-        parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
-                            default=self.config["DEFAULT"]["std_details"], choices=self.DETAIL,
-                            help='The level of detail you want to use for the visualization; 1: least detail, '
-                                 '2: medium detail, 3: most detail (DEFAULT: 1)')
+        load_parser = subparsers.add_parser('load', help='Create visualization with a given .yaml file')
 
-        parser.add_argument('-r', '--run', action='store_true',
-                            help='Create visualization without saving any files')
+        run_parser = subparsers.add_parser('run', help='Create visualization without saving any files')
 
-        parser.add_argument('-g', '--gui', action='store_true', help='Start niv gui')
+        gui_parser = subparsers.add_parser('gui', help='Start niv gui')
 
-        # print(parser.parse_args("-g".split()))
+        load_parser.add_argument('-s', '--save', type=self.save_to_path,
+                                 nargs='?', metavar='OUTPUT_PATH',
+                                 help='Save .svg, .png or .jpeg file to a given path (DEFAULT: .svg)')
+
+        load_parser.add_argument('-p', '--path', type=self.is_path_to_yaml_file,
+                                 required=True, help='Path to .yaml file')
+
+        run_parser.add_argument('-s', '--save', type=self.save_to_path,
+                                metavar='OUTPUT_PATH',
+                                help='Save .svg, .png or .jpeg file to a given path (DEFAULT: .svg)')
+
         # If no argument given, print help
         if len(self.args) == 0:
             print('You didnt specify any arguments, here is some help:\n')
             parser.print_help()
-
-        # Checks if the arguments are compatible with each other, else raise Exception
-        if self.check_args_compatibility():
-            self.parser = parser.parse_args(self.args)
-            return
-        raise Exception("Arguments are not compatible")
-
-    def get_load(self):
-        """
-        :return: returns data from argument load
-        """
-        return self.parser.load
+        self.parser = parser.parse_args(self.args)
+        print(self.args)
+        return self.parser
 
     def get_parser(self):
         """
         :return: returns set parser from set_parser()
         """
         return self.parser
+
+    def get_save_path(self):
+
+        return self.args[self.args.index('-s') + 1]
+
+    def get_load_path(self):
+        return self.args[self.args.index('-p') + 1]
 
     @staticmethod
     def is_path_to_yaml_file(file_path):
@@ -112,7 +113,7 @@ class ArgParser:
         generate name from input file and return it
         :return: generated filename
         """
-        file_name = self.get_load()
+        file_name = self.get_load_path()
         file_format = self.config["DEFAULT"]["std_type"]
         file_name = file_name.split('/')[-1].split('.')[0]
         file_name = f"{file_name}{file_format}"
@@ -148,13 +149,13 @@ class ArgParser:
         # path, it is a file, else it is a directory
         if '.' in last_element:
             # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
-            if last_element.lower().endswith(('.svg', '.png', '.jpeg')):
+            if last_element.lower().endswith(('.svg', '.png', '.jpg', 'pdf')):
                 # Check if the directory above the file exists, else raise Exception
                 if os.path.isdir(path):
                     return file_path
                     # raise FileExistsError(f"{last_element} already exists")
                 raise Exception(f'\n"{path}": directory doesn\'t exist')
-            raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
+            raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpg, .pdf)")
 
         # Check if directory exists. If it does return the file_path, else raise Exception
         if os.path.isdir(file_path):
@@ -167,39 +168,3 @@ class ArgParser:
             file.close()
             return file_path
         raise Exception(f'\n"{file_path}": directory doesn\'t exist')
-
-    def check_args_compatibility(self):
-        """
-        Checks if the given arguments are compatible with each other
-        (e.g: --gui can't be used with any other argument)
-
-        :return: true, if arguments are compatible. false, if not
-        """
-        # Set variable to True if argument is given
-        icons = "--icons" in self.args or "-i" in self.args
-        detail = "--detail" in self.args or "-d" in self.args
-        load = "--load" in self.args or "-l" in self.args
-        save = "--save" in self.args or "-s" in self.args
-        run = "--run" in self.args or "-r" in self.args
-        gui = "--gui" in self.args or "-g" in self.args
-        version = "--version" in self.args or "-v" in self.args
-        hlp = "--help" in self.args or "-h" in self.args
-
-        # variable for or operation on all arguments except gui
-        eegui = icons or detail or load or save or run
-        # If no arguments are given
-        if len(self.args) == 0:
-            return True
-        # If only help or version are given
-        if len(self.args) == 1 and (version or hlp):
-            return True
-        # If -g/--gui is used with any other argument, raise ArgumentError
-        if eegui and gui:
-            raise Exception("Can\'t use -g/--gui with other arguments :)")
-        # If -r/--run is used with -l/--load, raise ArgumentError
-        if run and load:
-            raise Exception("Can\'t use -r/--run with -l/--load :)")
-        # If neither load, run or gui are as arguments -> the program would do nothing
-        if not (load or run or gui):
-            raise Exception("To use NIV you need either load, run or gui as an argument :)")
-        return True
