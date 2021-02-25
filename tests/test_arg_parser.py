@@ -1,8 +1,11 @@
-from unittest import TestCase
-from arg_parser import ArgParser
+"""
+Includes all tests for arg_parser
+"""
 import argparse
 import os
 import shutil
+from unittest import TestCase
+from arg_parser import ArgParser
 
 
 class TestArgParser(TestCase):
@@ -34,7 +37,6 @@ class TestArgParser(TestCase):
         """
         set_args function tests
         """
-        # TODO: Fix tests
         parser = ArgParser("")
         self.assertEqual(argparse.Namespace(save=None, load=None, icons=1, detail=1, run=False, gui=False),
                          parser.get_parser())
@@ -122,8 +124,22 @@ class TestArgParser(TestCase):
         self.assertEqual("./tests.yaml", parser.is_path_to_yaml_file("./tests.yaml"))
 
     def test_get_load(self):
+        """
+        get_load function tests
+        """
         parser = ArgParser(["-l", "./tests.yaml"])
+        self.assertEqual("./tests.yaml", parser.get_load())
 
+        parser = ArgParser(["-l", "./tests.yaml", "-s", f"{self.test_directory_path}test.svg"])
+        self.assertEqual("./tests.yaml", parser.get_load())
+
+        parser = ArgParser(["-l", "./tests.yaml", "-s", "./"])
+        self.assertEqual("./tests.yaml", parser.get_load())
+
+        parser = ArgParser(["-l", "./tests.yaml", "-s", "."])
+        self.assertEqual("./tests.yaml", parser.get_load())
+
+        parser = ArgParser(["-s", ".", "-l", "./tests.yaml"])
         self.assertEqual("./tests.yaml", parser.get_load())
 
     def test_save_to_path(self):
@@ -149,7 +165,6 @@ class TestArgParser(TestCase):
         """
         create_filename function tests
         """
-        from datetime import date
         parser = ArgParser(["-l", "./tests.yaml"])
         file_name = "tests.svg"
 
