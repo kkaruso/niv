@@ -52,10 +52,6 @@ class ArgParser:
                             nargs='?', metavar='INPUT_PATH',
                             help='Create visualization with a given .yaml file')
 
-        parser.add_argument('-i', '--icons', type=int, nargs='?', metavar='INT',
-                            default=self.config["DEFAULT"]["std_icons"], choices=self.ICONS,
-                            help='Choose the icons you want to use for the visualization; 1: cisco, 2: osa (DEFAULT: 1)')
-
         parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
                             default=self.config["DEFAULT"]["std_details"], choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
@@ -130,7 +126,7 @@ class ArgParser:
                     file_name = self.args[i + 1]
                     break
             if file_name == "":
-                raise Exception("Can\'t access file_Name")
+                raise Exception("Can\'t access file_name")
             file_name = file_name.split('/')[-1].split('.')[0]
             file_name = f"{file_name}{file_format}"
             return file_name
@@ -196,7 +192,6 @@ class ArgParser:
         :return: true, if arguments are compatible. false, if not
         """
         # Set variable to True if argument is given
-        icons = "--icons" in self.args or "-i" in self.args
         detail = "--detail" in self.args or "-d" in self.args
         load = "--load" in self.args or "-l" in self.args
         save = "--save" in self.args or "-s" in self.args
@@ -206,7 +201,7 @@ class ArgParser:
         hlp = "--help" in self.args or "-h" in self.args
 
         # variable for or operation on all arguments except gui
-        eegui = icons or detail or load or save or run
+        eegui = detail or load or save or run
         # If no arguments are given
         if len(self.args) == 0:
             return True
