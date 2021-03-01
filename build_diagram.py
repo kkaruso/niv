@@ -12,8 +12,8 @@ from diagrams import *
 from diagrams.icons.ciscoPng import *
 from diagrams.icons.osa import *
 from diagrams.icons.cisco import *
-from config_parser import ConfigParser
 from diagrams.icons.osaPng import *
+from config_parser import ConfigParser
 
 
 class BuildDiagram:
@@ -23,6 +23,8 @@ class BuildDiagram:
 
     # IP Example
     IP = "192.168.x.x"
+    graph_attr = {
+    }
 
     config_parsers = ConfigParser()
     config = config_parsers.get_config()
@@ -32,10 +34,8 @@ class BuildDiagram:
     def __init__(self, load_path, save_path):
         # Initialize variables for dynamically getting the values from the .yaml file
         # TODO: cleanup (delete not needed comments like old prints)
-
         # Load the .yaml from the given path
         self.yaml = yaml_parser.get_yaml(load_path)
-
         self.save_path = save_path
         self.load_path = load_path
         self.output_format = save_path.split('.')[-1]
@@ -45,6 +45,16 @@ class BuildDiagram:
 
         # Get title of the diagram
         self.title = self.yaml.get("title").get("text")
+
+        # Get X coordinate of each node
+        self.nodes_x = {}
+        for node in self.yaml.get("icons"):
+            self.nodes_x[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('x')
+
+        # Get Y coordinate of each node
+        self.nodes_y = {}
+        for node in self.yaml.get("icons"):
+            self.nodes_y[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('y')
 
         # Get name and members of groups and save as key value pairs in "group_members"
         self.group_members = {}
@@ -72,6 +82,8 @@ class BuildDiagram:
         print(f"group_members: {self.group_members}")
         print(f"nodes_text: {self.nodes_text}")
         print(f"connections: {self.connections}\n")
+        print(f"Xs: {self.nodes_x}\n")
+        print(f"Ys: {self.nodes_y}\n")
 
     def create_nodes(self, instances, members):
         """
@@ -86,7 +98,9 @@ class BuildDiagram:
         for node in self.nodes_text:
             if node not in members:
                 try:
-                    instances.append(globals()[node](f"{self.nodes_text[node]}" + self.link))
+                    instances.append(
+                        globals()[node](f"{self.nodes_text[node]}" + self.link, pos=f"{self.nodes_x[node]},"
+                                                                                    f"{self.nodes_y[node]}!"))
                 except KeyError:
                     print(f"KeyError in {self.load_path}: '{node}' is not a valid icon, that's why it does not show "
                           f"in the diagram. Please refer to the icon catalog for more information about available "
@@ -99,7 +113,9 @@ class BuildDiagram:
                 for member in list(self.group_members.get(group_name)):
                     # Create an instance of the node class, if not valid print name of not valid node
                     try:
-                        instances.append(globals()[member](f"{self.nodes_text[member]}" + self.link))
+                        instances.append(
+                            globals()[member](f"{self.nodes_text[member]}" + self.link, pos=f"{self.nodes_x[member]},"
+                                                                                            f"{self.nodes_y[member]}!"))
                     except KeyError:
                         print(
                             f"KeyError in {self.load_path}: '{member}' is not given in 'icons', that's why it does "
@@ -134,7 +150,7 @@ class BuildDiagram:
         Creates the diagram with the right amount of of nodes, clusters and connections
         """
         with Diagram(f"{self.title}", filename=self.filename, outformat=self.output_format,
-                     show=self.config["DEFAULT"]["open_in_browser"] == "True"):
+                     show=self.config["DEFAULT"]["open_in_browser"] == "True", graph_attr=self.graph_attr):
             instances = []
             members = []
             instance_names = []
@@ -143,7 +159,6 @@ class BuildDiagram:
             self.create_nodes(instances, members)
             # Create connections
             self.create_connections(instances, instance_names)
-
             # # Group 1
             # with Cluster("Gruppe 1"):
             #     # The Mater Device in the Group
