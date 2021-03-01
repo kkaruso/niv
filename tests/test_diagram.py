@@ -49,7 +49,8 @@ class TestBuildDiagram(TestCase):
             diagram.create_nodes(instances, members)
             diagram.create_connections(instances, instance_names)
 
-            test_instance_names = ['OsaDesktopImac', 'OsaCloud', 'OsaDatabase', 'OsaDeviceScanner', 'OsaServerWeb',
+            test_instance_names = ['Antenna',
+                                   'OsaDesktopImac', 'OsaDatabase', 'OsaDeviceScanner', 'OsaServerWeb',
                                    'OsaServerTerminal']
 
             self.assertEqual(test_instance_names, instance_names)

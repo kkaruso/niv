@@ -67,21 +67,21 @@ noteDefaults: &noteDefaults
   xAlign: center  # X-alignment of the text
   yAlign: center  # Y-alignment of the text
 icons: #enter devices here. Maybe change "icons" to "devices" later.
-  Antenna: {<<: *iconDefaults, icon: dns, text: GoogleCloud, x: 2, y: 3 }
-  OsaDatabase: {<<: *iconDefaults, icon: lb, text: MySQL Database, y: "-1" }
-  OsaDeviceScanner: {<<: *iconDefaults, icon: server, text: Local Device Scanner, x: "-1", y: "-1" }
-  OsaServerWeb: {<<: *iconDefaults, icon: server, text: My WebServer, x: "+1" }
-  OsaServerTerminal: {<<: *iconDefaults, icon: server, text: Central Terminal, x: "+1" }
-  OsaDesktopImac: {<<: *iconDefaults, icon: server, text: My Desktop, x: "+1" }
+  Antenna: { <<: *iconDefaults, icon: dns, text: GoogleCloud, x: 2, y: 3 }
+  OsaDatabase: { <<: *iconDefaults, icon: lb, text: MySQL Database, y: "-1" }
+  OsaDeviceScanner: { <<: *iconDefaults, icon: server, text: Local Device Scanner, x: "-1", y: "-1" }
+  OsaServerWeb: { <<: *iconDefaults, icon: server, text: My WebServer, x: "+1" }
+  OsaServerTerminal: { <<: *iconDefaults, icon: server, text: Central Terminal, x: "+1" }
+  OsaDesktopImac: { <<: *iconDefaults, icon: server, text: My Desktop, x: "+1" }
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner] }
-  moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
+  test: { <<: *groupDefaults, name: My Servers, members: [ OsaCloud, OsaDatabase, OsaDeviceScanner ] }
+  test2: { <<: *groupDefaults, name: My Servers, members: [ OsaServer, OsaServerWeb, OsaServerTerminal ] }
 
 connections: #enter your connections here
-- { <<: *connectionDefaults, endpoints: [Antenna, OsaDatabase] }
-- { <<: *connectionDefaults, endpoints: [OsaServer, OsaServerWeb] }
-- { <<: *connectionDefaults, endpoints: [OsaServer, OsaDeviceScanner] }
-- { <<: *connectionDefaults, endpoints: [OsaDesktopImac, OsaDatabase] }
+  - { <<: *connectionDefaults, endpoints: [ Antenna, OsaDatabase ] }
+  - { <<: *connectionDefaults, endpoints: [ OsaServer, OsaServerWeb ] }
+  - { <<: *connectionDefaults, endpoints: [ OsaServer, OsaDeviceScanner ] }
+  - { <<: *connectionDefaults, endpoints: [ OsaDesktopImac, OsaDatabase ] }
 
 # Probably won't use notes like the one on GitHub
 # Notes that he uses are html flexboxes. Need to find some kind of python equivalent

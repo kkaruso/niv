@@ -12,8 +12,8 @@ from diagrams import *
 from diagrams.icons.ciscoPng import *
 from diagrams.icons.osa import *
 from diagrams.icons.cisco import *
-from config_parser import ConfigParser
 from diagrams.icons.osaPng import *
+from yaml_parser import get_yaml
 
 
 class BuildDiagram:
@@ -24,8 +24,7 @@ class BuildDiagram:
     # IP Example
     IP = "192.168.x.x"
 
-    config_parsers = ConfigParser()
-    config = config_parsers.get_config()
+    config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
 
     # TODO: Add coordinates in icons and groups and integrate into create_diagram function
     # TODO: Add options for different layouts and to change graph_attr in .yaml
@@ -134,7 +133,7 @@ class BuildDiagram:
         Creates the diagram with the right amount of of nodes, clusters and connections
         """
         with Diagram(f"{self.title}", filename=self.filename, outformat=self.output_format,
-                     show=self.config["DEFAULT"]["open_in_browser"] == "True"):
+                     show=self.config.get('default').get('open_in_browser')):
             instances = []
             members = []
             instance_names = []
