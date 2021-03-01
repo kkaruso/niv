@@ -1,7 +1,7 @@
 diagram: # Diagram properties
   backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding: 0.5  # Padding around the graph (default: 0.5; type: double)
-  layout: neato  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
+  layout: fdp  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
 
 title: # Text underneath the diagram.
   text: NIV  # Title under the Diagram (default: Diagram; type: string)
@@ -46,8 +46,10 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
   Osa: {<<: *iconDefaults, icon: server, text: Test, x: 1 }
 
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner] }
-  group2: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
+  group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner], url: https://hs-worms.de }
+  moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal], url: https://google.com }
+  moinmusa2: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
+
 
 connections: #enter your connections here
 - { <<: *connectionDefaults, endpoints: [OsaCloud, OsaDatabase] }
