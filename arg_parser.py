@@ -3,6 +3,7 @@ Parser class for Arguments when you start NIV
 """
 
 import argparse
+import logging
 import os
 
 from config_parser import ConfigParser
@@ -28,6 +29,9 @@ class ArgParser:
         self.args = args
         self.parser = argparse.ArgumentParser
         self.set_args()
+
+        self.logger = logging.getLogger("Logger1")
+        self.logger2 = logging.getLogger("Logger2")
 
     def set_args(self):
         """
@@ -56,11 +60,6 @@ class ArgParser:
                             default=self.config["DEFAULT"]["std_details"], choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
                                  '2: medium detail, 3: most detail (DEFAULT: 1)')
-
-        parser.add_argument('-r', '--run', action='store_true',
-                            help='Create visualization without saving any files')
-
-        parser.add_argument('-g', '--gui', action='store_true', help='Start niv gui')
 
         # print(parser.parse_args("-g".split()))
         # If no argument given, print help
@@ -195,26 +194,16 @@ class ArgParser:
         detail = "--detail" in self.args or "-d" in self.args
         load = "--load" in self.args or "-l" in self.args
         save = "--save" in self.args or "-s" in self.args
-        run = "--run" in self.args or "-r" in self.args
-        gui = "--gui" in self.args or "-g" in self.args
         version = "--version" in self.args or "-v" in self.args
         hlp = "--help" in self.args or "-h" in self.args
 
-        # variable for or operation on all arguments except gui
-        eegui = detail or load or save or run
         # If no arguments are given
         if len(self.args) == 0:
             return True
         # If only help or version are given
         if len(self.args) == 1 and (version or hlp):
             return True
-        # If -g/--gui is used with any other argument, raise ArgumentError
-        if eegui and gui:
-            raise Exception("Can\'t use -g/--gui with other arguments :)")
-        # If -r/--run is used with -l/--load, raise ArgumentError
-        if run and load:
-            raise Exception("Can\'t use -r/--run with -l/--load :)")
         # If neither load, run or gui are as arguments -> the program would do nothing
-        if not (load or run or gui):
+        if not load:
             raise Exception("To use NIV you need either load, run or gui as an argument :)")
         return True

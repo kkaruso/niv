@@ -38,73 +38,24 @@ class TestArgParser(TestCase):
         set_args function tests
         """
         parser = ArgParser("")
-        self.assertEqual(argparse.Namespace(save=None, load=None, detail=1, run=False, gui=False),
+        self.assertEqual(argparse.Namespace(save=None, load=None, detail=1),
                          parser.get_parser())
 
-        parser = ArgParser(["--run"])
-        self.assertTrue(parser.get_parser())
-
-        parser = ArgParser(["-r"])
-        self.assertTrue(parser.get_parser())
-
-        parser = ArgParser(["--gui"])
-        self.assertTrue(parser.get_parser())
-
-        parser = ArgParser(["-g"])
-        self.assertTrue(parser.get_parser())
-
-        parser = ArgParser(["--run"])
-        self.assertEqual(argparse.Namespace(save=None, load=None, detail=1, run=True, gui=False),
-                         parser.get_parser())
-
-        parser = ArgParser(["-r"])
-        self.assertEqual(argparse.Namespace(save=None, load=None, detail=1, run=True, gui=False),
-                         parser.get_parser())
-
-        parser = ArgParser(["--gui"])
-        self.assertEqual(argparse.Namespace(save=None, load=None, detail=1, run=False, gui=True),
-                         parser.get_parser())
-
-        parser = ArgParser(["-g"])
-        self.assertEqual(argparse.Namespace(save=None, load=None, detail=1, run=False, gui=True),
-                         parser.get_parser())
-
-        parser = ArgParser(["-s", f"{self.test_directory_path}test2.svg", "-r"])
+        parser = ArgParser(["-s", f"{self.test_directory_path}test2.svg", "-l", "./tests.yaml"])
         self.assertEqual(
-            argparse.Namespace(save=f"./{self.test_directory_path}test2.svg", load=None, detail=1, run=True,
-                               gui=False),
-            parser.get_parser())
-
-        parser = ArgParser(["-s", f"{self.test_directory_path}test3.svg", "-r"])
-        self.assertEqual(
-            argparse.Namespace(save=f"./{self.test_directory_path}test3.svg", load=None, detail=1, run=True,
-                               gui=False),
-            parser.get_parser())
-
-        parser = ArgParser(["--save", f"{self.test_directory_path}test4.svg", "-r"])
-        self.assertEqual(
-            argparse.Namespace(save=f"./{self.test_directory_path}test4.svg", load=None, detail=1, run=True,
-                               gui=False),
+            argparse.Namespace(save=f"./{self.test_directory_path}test2.svg", load="./tests.yaml", detail=1),
             parser.get_parser())
 
         parser = ArgParser(["-l", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", detail=1, run=False, gui=False),
+        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", detail=1),
                          parser.get_parser())
 
         parser = ArgParser(["--load", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", detail=1, run=False, gui=False),
+        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", detail=1),
                          parser.get_parser())
 
         parser = ArgParser(["-d", "2", "-l", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", detail=2, run=False, gui=False),
-                         parser.get_parser())
-
-        parser = ArgParser(["-d", "2", "-r"])
-        self.assertEqual(argparse.Namespace(save=None, load=None, detail=2, run=True, gui=False),
-                         parser.get_parser())
-
-        parser = ArgParser(["-r"])
-        self.assertEqual(argparse.Namespace(save=None, load=None, detail=1, run=True, gui=False),
+        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", detail=2),
                          parser.get_parser())
 
     def test_is_path_to_yaml_file(self):
@@ -176,15 +127,6 @@ class TestArgParser(TestCase):
         """
 
         with self.assertRaises(Exception):
-            ArgParser(["-r", "-l"])
-
-        with self.assertRaises(Exception):
-            ArgParser(["-g", "-s", "-l"])
-
-        with self.assertRaises(Exception):
-            ArgParser(["-r", "-s", "-l"])
-
-        with self.assertRaises(Exception):
             ArgParser(["-d"])
 
         with self.assertRaises(Exception):
@@ -208,17 +150,11 @@ class TestArgParser(TestCase):
         with self.assertRaises(Exception):
             ArgParser(["123"])
 
-        self.assertTrue(["-r"])
-
         self.assertTrue(["-l"])
 
         self.assertTrue(["-s"])
 
-        self.assertTrue(["-g"])
-
         self.assertTrue(["-d"])
-
-        self.assertTrue(["-d", "-r"])
 
         self.assertTrue(["-d", "-l"])
 
