@@ -23,6 +23,8 @@ class BuildDiagram:
 
     # IP Example
     IP = "192.168.x.x"
+    graph_attr = {
+    }
 
     config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
 
@@ -31,10 +33,8 @@ class BuildDiagram:
     def __init__(self, load_path, save_path):
         # Initialize variables for dynamically getting the values from the .yaml file
         # TODO: cleanup (delete not needed comments like old prints)
-
         # Load the .yaml from the given path
         self.yaml = yaml_parser.get_yaml(load_path)
-
         self.save_path = save_path
         self.load_path = load_path
         self.output_format = save_path.split('.')[-1]
@@ -44,6 +44,16 @@ class BuildDiagram:
 
         # Get title of the diagram
         self.title = self.yaml.get("title").get("text")
+
+        # Get X coordinate of each node
+        self.nodes_x = {}
+        for node in self.yaml.get("icons"):
+            self.nodes_x[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('x')
+
+        # Get Y coordinate of each node
+        self.nodes_y = {}
+        for node in self.yaml.get("icons"):
+            self.nodes_y[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('y')
 
         # Get name and members of groups and save as key value pairs in "group_members"
         self.group_members = {}
@@ -60,6 +70,13 @@ class BuildDiagram:
         for i in range(0, len(self.yaml.get("connections"))):
             self.connections.append(self.yaml.get("connections")[i].get("endpoints"))
 
+        # Get the URL of each group, clear empty URLs
+        self.group_url = {}
+        for url in self.yaml.get("groups").keys():
+            self.group_url[f'{url}'] = self.yaml.get('groups')[url].get('url')
+            if self.yaml.get('groups')[url].get('url') is None:
+                self.group_url[f'{url}'] = ""
+
         # Just for "debugging"
         # TODO: delete when finished with the file
         print(f"output_format: {self.output_format}")
@@ -71,6 +88,9 @@ class BuildDiagram:
         print(f"group_members: {self.group_members}")
         print(f"nodes_text: {self.nodes_text}")
         print(f"connections: {self.connections}\n")
+        print(f"group_url: {self.group_url}\n")
+        print(f"Xs: {self.nodes_x}\n")
+        print(f"Ys: {self.nodes_y}\n")
 
     def create_nodes(self, instances, members):
         """
@@ -78,6 +98,7 @@ class BuildDiagram:
         """
         # Fill "members" list with all the group members
         for group_name in self.group_members:
+
             for member in list(self.group_members.get(group_name)):
                 members.append(member)
 
@@ -85,7 +106,9 @@ class BuildDiagram:
         for node in self.nodes_text:
             if node not in members:
                 try:
-                    instances.append(globals()[node](f"{self.nodes_text[node]}" + self.link))
+                    instances.append(
+                        globals()[node](f"{self.nodes_text[node]}" + self.link, pos=f"{self.nodes_x[node]},"
+                                                                                    f"{self.nodes_y[node]}!"))
                 except KeyError:
                     print(f"KeyError in {self.load_path}: '{node}' is not a valid icon, that's why it does not show "
                           f"in the diagram. Please refer to the icon catalog for more information about available "
@@ -93,12 +116,17 @@ class BuildDiagram:
 
         # Dynamically create the amount of groups given by "group_count" with the corresponding group name
         for group_name in self.group_members:
-            with Cluster(f"{group_name}"):
+            graph_attr = {
+                "URL": f"{self.group_url[group_name]}"
+            }
+            with Cluster(f"{group_name}", graph_attr=graph_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(group_name)):
                     # Create an instance of the node class, if not valid print name of not valid node
                     try:
-                        instances.append(globals()[member](f"{self.nodes_text[member]}" + self.link))
+                        instances.append(
+                            globals()[member](f"{self.nodes_text[member]}" + self.link, pos=f"{self.nodes_x[member]},"
+                                                                                            f"{self.nodes_y[member]}!"))
                     except KeyError:
                         print(
                             f"KeyError in {self.load_path}: '{member}' is not given in 'icons', that's why it does "
@@ -142,7 +170,6 @@ class BuildDiagram:
             self.create_nodes(instances, members)
             # Create connections
             self.create_connections(instances, instance_names)
-
             # # Group 1
             # with Cluster("Gruppe 1"):
             #     # The Mater Device in the Group
