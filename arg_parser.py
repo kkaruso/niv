@@ -4,6 +4,7 @@ Parser class for Arguments when you start NIV
 
 import argparse
 import os
+
 from config_parser import ConfigParser
 
 
@@ -51,10 +52,6 @@ class ArgParser:
                             nargs='?', metavar='INPUT_PATH',
                             help='Create visualization with a given .yaml file')
 
-        parser.add_argument('-i', '--icons', type=int, nargs='?', metavar='INT',
-                            default=self.config["DEFAULT"]["std_icons"], choices=self.ICONS,
-                            help='Choose the icons you want to use for the visualization; 1: cisco, 2: osa (DEFAULT: 1)')
-
         parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
                             default=self.config["DEFAULT"]["std_details"], choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
@@ -90,7 +87,9 @@ class ArgParser:
         return self.parser
 
     def get_save_path(self):
-
+        """
+        :return: returns save path
+        """
         return self.parser.save
 
     @staticmethod
@@ -116,11 +115,23 @@ class ArgParser:
         generate name from input file and return it
         :return: generated filename
         """
-        file_name = self.get_load()
+        file_name = ""
+        default_name = self.config["DEFAULT"]["std_out"]
         file_format = self.config["DEFAULT"]["std_type"]
-        file_name = file_name.split('/')[-1].split('.')[0]
-        file_name = f"{file_name}{file_format}"
-        return file_name
+
+        if default_name == "_":
+            # access load argument, workaround for program start
+            for i, arg in enumerate(self.args):
+                if arg in ("-l", "--load"):
+                    file_name = self.args[i + 1]
+                    break
+            if file_name == "":
+                raise Exception("Can\'t access file_name")
+            file_name = file_name.split('/')[-1].split('.')[0]
+            file_name = f"{file_name}{file_format}"
+            return file_name
+
+        return default_name + file_format
 
     def save_to_path(self, file_path):
         """
@@ -135,9 +146,6 @@ class ArgParser:
         file_path = file_path.lstrip()
         last_element = file_path.split('/')[-1]
         # Workaround that adds a "./" at the start of the path if no "./" is entered
-        if file_path[0:2] != "./":
-            file_path = "./" + file_path
-        path = file_path.removesuffix(f'{last_element}')
 
         # If the path is just a '.' create a file in the current directory
         if file_path == '.':
@@ -147,6 +155,10 @@ class ArgParser:
             file = open(f"{file_name}", "a")
             file.close()
             return file_name
+
+        if file_path[0:2] != "./":
+            file_path = "./" + file_path
+        path = file_path.removesuffix(f'{last_element}')
 
         # If there is a '.' in the name of the last element of the
         # path, it is a file, else it is a directory
@@ -180,7 +192,6 @@ class ArgParser:
         :return: true, if arguments are compatible. false, if not
         """
         # Set variable to True if argument is given
-        icons = "--icons" in self.args or "-i" in self.args
         detail = "--detail" in self.args or "-d" in self.args
         load = "--load" in self.args or "-l" in self.args
         save = "--save" in self.args or "-s" in self.args
@@ -190,7 +201,7 @@ class ArgParser:
         hlp = "--help" in self.args or "-h" in self.args
 
         # variable for or operation on all arguments except gui
-        eegui = icons or detail or load or save or run
+        eegui = detail or load or save or run
         # If no arguments are given
         if len(self.args) == 0:
             return True

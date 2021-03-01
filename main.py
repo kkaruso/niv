@@ -13,4 +13,5 @@ if __name__ == '__main__':
     args = arg_parser.get_parser()
 
 
-    diagram_builder = BuildDiagram(arg_parser.get_load(), str(arg_parser.get_save_path()))
+    diagram_builder = BuildDiagram("templates/template.yaml", "Test.svg")
+    diagram_builder.create_diagram()

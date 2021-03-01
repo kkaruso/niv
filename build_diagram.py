@@ -9,9 +9,11 @@ Dynamically creates the diagram
 """
 import yaml_parser
 from diagrams import *
+from diagrams.icons.ciscoPng import *
 from diagrams.icons.osa import *
 from diagrams.icons.cisco import *
 from config_parser import ConfigParser
+from diagrams.icons.osaPng import *
 
 
 class BuildDiagram:
