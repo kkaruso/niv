@@ -11,5 +11,5 @@ if __name__ == '__main__':
     # Call the function "set_args"
     args = arg_parser.get_parser()
 
-    diagram_builder = BuildDiagram("templates/template.yaml", "Test.svg")
+    diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg")
     diagram_builder.create_diagram()
