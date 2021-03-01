@@ -54,6 +54,7 @@ groupDefaults: &groupDefaults #Use current values as defaults
   stroke: black  # Color of the group box
   members: none  # Array of members for group. e.g. [dns,lb,server1,server2,server3]
   name: none  # Name of group
+
 connectionDefaults: &connectionDefaults #Use current values as defaults
   color: "green"  # Text color of the connection
   stroke: "red"  # Color of the connected line
@@ -66,6 +67,7 @@ noteDefaults: &noteDefaults
   stroke: black  # Group box color of the note
   xAlign: center  # X-alignment of the text
   yAlign: center  # Y-alignment of the text
+
 icons: #enter devices here. Maybe change "icons" to "devices" later.
   Antenna: {<<: *iconDefaults, icon: dns, text: GoogleCloud, x: 2, y: 3 }
   OsaDatabase: {<<: *iconDefaults, icon: lb, text: MySQL Database, y: "-1" }
@@ -73,9 +75,11 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
   OsaServerWeb: {<<: *iconDefaults, icon: server, text: My WebServer, x: "+1" }
   OsaServerTerminal: {<<: *iconDefaults, icon: server, text: Central Terminal, x: "+1" }
   OsaDesktopImac: {<<: *iconDefaults, icon: server, text: My Desktop, x: "+1" }
-groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner] }
-  moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
+
+groups: #add a group to target multiple objects at once, if you don't, delete subpoints
+  group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner], url: https://hs-worms.de }
+  moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal], url: https://google.com }
+  moinmusa2: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
 
 connections: #enter your connections here
 - { <<: *connectionDefaults, endpoints: [Antenna, OsaDatabase] }

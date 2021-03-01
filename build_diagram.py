@@ -61,6 +61,13 @@ class BuildDiagram:
         for i in range(0, len(self.yaml.get("connections"))):
             self.connections.append(self.yaml.get("connections")[i].get("endpoints"))
 
+        # Get the URL of each group, clear empty URLs
+        self.group_url = {}
+        for url in self.yaml.get("groups").keys():
+            self.group_url[f'{url}'] = self.yaml.get('groups')[url].get('url')
+            if self.yaml.get('groups')[url].get('url') is None:
+                self.group_url[f'{url}'] = ""
+
         # Just for "debugging"
         # TODO: delete when finished with the file
         print(f"output_format: {self.output_format}")
@@ -72,11 +79,13 @@ class BuildDiagram:
         print(f"group_members: {self.group_members}")
         print(f"nodes_text: {self.nodes_text}")
         print(f"connections: {self.connections}\n")
+        print(f"group_url: {self.group_url}\n")
 
     def create_nodes(self, instances, members):
         """
         Create nodes outside and inside of clusters
         """
+
         # Fill "members" list with all the group members
         for group_name in self.group_members:
             for member in list(self.group_members.get(group_name)):
@@ -94,7 +103,11 @@ class BuildDiagram:
 
         # Dynamically create the amount of groups given by "group_count" with the corresponding group name
         for group_name in self.group_members:
-            with Cluster(f"{group_name}"):
+            graph_attr = {
+                "fontsize": "30",
+                "URL": f"{self.group_url[group_name]}"
+            }
+            with Cluster(f"{group_name}", graph_attr=graph_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(group_name)):
                     # Create an instance of the node class, if not valid print name of not valid node
