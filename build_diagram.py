@@ -21,7 +21,7 @@ class BuildDiagram:
     """
 
     # IP Example
-    IP = "192.168.x.x"
+    IP = "\n192.168.x.x"
 
     config = yaml_parser.get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
 
@@ -48,23 +48,25 @@ class BuildDiagram:
         self.title_subtext = self.yaml.get("title").get("subText")
         self.title_font_size = self.yaml.get("title").get("fontSize")
 
-        # TODO: Only add link when output_format is svg
-        if self.output_format == "svg":
-            self.link = f"\n<a xlink:href=\"{self.filename}.svg\"> {self.IP} </a>"
-        else:
-            self.link = ""
-
         # Only get coordinates if layout = neato
         if self.graph_layout == "neato":
             # Get X coordinate of each node
             self.nodes_x = {}
             for node in self.yaml.get("icons"):
-                self.nodes_x[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('x')
+                # Check if a value for x is given, if not set it to 0 to prevent crashing
+                if self.yaml.get("icons").get(f'{node}').get('x') is not None:
+                    self.nodes_x[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('x')
+                else:
+                    self.nodes_x[f'{node}'] = 0
 
             # Get Y coordinate of each node
             self.nodes_y = {}
             for node in self.yaml.get("icons"):
-                self.nodes_y[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('y')
+                # Check if a value for y is given, if not set it to 0 to prevent crashing
+                if self.yaml.get("icons").get(f'{node}').get('y') is not None:
+                    self.nodes_y[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('y')
+                else:
+                    self.nodes_y[f'{node}'] = 0
 
             print(f"Xs: {self.nodes_x}\n")
             print(f"Ys: {self.nodes_y}\n")
@@ -91,6 +93,13 @@ class BuildDiagram:
             if self.yaml.get('groups')[url].get('url') is None:
                 self.group_url[f'{url}'] = ""
 
+        # Get the URL of each node, clear empty URLs
+        self.icons_url = {}
+        for url in self.yaml.get("icons").keys():
+            self.icons_url[f'{url}'] = self.yaml.get('icons')[url].get('url')
+            if self.yaml.get('icons')[url].get('url') is None:
+                self.icons_url[f'{url}'] = ""
+
         self.instances = []
 
         # Just for "debugging"
@@ -104,6 +113,7 @@ class BuildDiagram:
         print(f"group_members: {self.group_members}")
         print(f"nodes_text: {self.nodes_text}")
         print(f"group_url: {self.group_url}")
+        print(f"icons_url: {self.icons_url}")
         print(f"connections: {self.connections}\n")
 
     def create_nodes(self, instances, members):
@@ -118,20 +128,21 @@ class BuildDiagram:
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_text:
             if node not in members:
-                # self.create_single_node(self.instances, node)
-                try:
-                    # Only pass coordinates to node creation if layout == neato
-                    if self.graph_layout == "neato":
-                        instances.append(
-                            globals()[node](f"{self.nodes_text[node]}" + self.link,
-                                            pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!"))
-                    else:
-                        instances.append(
-                            globals()[node](f"{self.nodes_text[node]}" + self.link))
-                except KeyError:
-                    print(f"KeyError in {self.load_path}: '{node}' is not a valid icon, that's why it does not show "
-                          f"in the diagram. Please refer to the icon catalog for more information about available "
-                          f"icons.")
+                self.create_single_node(node)
+                # Create an instance of the node class, if not valid print name of not valid node
+                # try:
+                #     # Only pass coordinates to node creation if layout == neato
+                #     if self.graph_layout == "neato":
+                #         instances.append(
+                #             globals()[node](f"{self.nodes_text[node]}" + self.link,
+                #                             pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!"))
+                #     else:
+                #         instances.append(
+                #             globals()[node](f"{self.nodes_text[node]}" + self.link))
+                # except KeyError:
+                #     print(f"KeyError in {self.load_path}: '{node}' is not a valid icon, that's why it does not show "
+                #           f"in the diagram. Please refer to the icon catalog for more information about available "
+                #           f"icons.")
 
         # Dynamically create the amount of groups given by "group_count" with the corresponding group name
         for group_name in self.group_members:
@@ -142,21 +153,21 @@ class BuildDiagram:
             with Cluster(f"{group_name}", graph_attr=clustr_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(group_name)):
-                    # self.create_single_node(self.instances, member)
+                    self.create_single_node(member)
                     # Create an instance of the node class, if not valid print name of not valid node
-                    try:
-                        # Only pass coordinates to node creation if layout == neato
-                        if self.graph_layout == "neato":
-                            instances.append(
-                                globals()[member](f"{self.nodes_text[member]}" + self.link,
-                                                  pos=f"{self.nodes_x[member]}, {self.nodes_y[member]}!"))
-                        else:
-                            instances.append(
-                                globals()[member](f"{self.nodes_text[member]}" + self.link))
-                    except KeyError:
-                        print(
-                            f"KeyError in {self.load_path}: '{member}' is not given in 'icons', that's why it does "
-                            f"not show in the diagram. Add it to 'icons' or remove it as a member.")
+                    # try:
+                    #     # Only pass coordinates to node creation if layout == neato
+                    #     if self.graph_layout == "neato":
+                    #         instances.append(
+                    #             globals()[member](f"{self.nodes_text[member]}" + self.link,
+                    #                               pos=f"{self.nodes_x[member]}, {self.nodes_y[member]}!"))
+                    #     else:
+                    #         instances.append(
+                    #             globals()[member](f"{self.nodes_text[member]}" + self.link))
+                    # except KeyError:
+                    #     print(
+                    #         f"KeyError in {self.load_path}: '{member}' is not given in 'icons', that's why it does "
+                    #         f"not show in the diagram. Add it to 'icons' or remove it as a member.")
 
     def create_connections(self, instances, instance_names):
         """
@@ -195,7 +206,7 @@ class BuildDiagram:
             "fontname": "helvetica-bold"
         }
 
-        with Diagram(f"{self.title_text}", filename=self.filename, outformat=self.output_format,
+        with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename, outformat=self.output_format,
                      show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
             members = []
             instance_names = []
@@ -232,23 +243,6 @@ class BuildDiagram:
             # # External Connections between the Groups can be: From >> To, To << From or Point - Point
             # master2 - master1 - master3
 
-        # TODO: Add logic to only embed links in .svg (and maybe .pdf if it's possible)
-        # Only add link to diagram if it's a .svg
-        # if self.output_format == "svg":
-        self.html_to_ascii()
-
-    def html_to_ascii(self):
-        """
-        Replace html-entity with ascii-symbol for embedding hyperlinks in svg
-        """
-        fin = open(f"{self.save_path}", "rt")
-        data = fin.read()
-        data = data.replace('&lt;', '<').replace('&gt;', '>').replace('&quot;', '"')
-        fin.close()
-        fin = open(f"{self.save_path}", "wt")
-        fin.write(data)
-        fin.close()
-
     def create_single_node(self, member):
         """
         Creates a single node
@@ -257,11 +251,11 @@ class BuildDiagram:
             # Only pass coordinates to node creation if layout == neato
             if self.graph_layout == "neato":
                 self.instances.append(
-                    globals()[member](f"{self.nodes_text[member]}" + self.link,
-                                      pos=f"{self.nodes_x[member]}, {self.nodes_y[member]}!"))
+                    globals()[member](self.nodes_text[member] + self.IP, URL=self.icons_url[member],
+                                      pos=f"{self.nodes_x[member]}, {self.nodes_y[member]}!", fontcolor="red"))
             else:
                 self.instances.append(
-                    globals()[member](f"{self.nodes_text[member]}" + self.link))
+                    globals()[member](self.nodes_text[member] + self.IP, URL=self.icons_url[member]))
         except KeyError:
             print(
                 f"KeyError in {self.load_path}: '{member}' is not given in 'icons', that's why it does "
