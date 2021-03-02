@@ -1,0 +1,11 @@
+2021/03/02 13:19:12 - root - ERROR - Unexpected Error in: main.py in line 16
+Traceback (most recent call last):
+  File "C:\Users\Danie\Desktop\TOP\niv\main.py", line 16, in <module>
+    arg_parser = ArgParser(sys.argv[1:])
+  File "C:\Users\Danie\Desktop\TOP\niv\arg_parser.py", line 38, in __init__
+    self.set_args()
+  File "C:\Users\Danie\Desktop\TOP\niv\arg_parser.py", line 75, in set_args
+    if self.check_args_compatibility():
+  File "C:\Users\Danie\Desktop\TOP\niv\arg_parser.py", line 218, in check_args_compatibility
+    raise Exception("To use NIV you need load as an argument :)")
+Exception: To use NIV you need load as an argument :)
