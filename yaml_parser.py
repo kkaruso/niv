@@ -4,6 +4,8 @@ Parses given .yaml file
 import yaml
 
 
+# TODO: DARWIN MUSS HIER DAS IST EINE KLASSE PACKEN
+
 def get_yaml(path):
     """
     Reads in a .yaml file from a given path

@@ -3,12 +3,9 @@ Parser class for Arguments when you start NIV
 """
 
 import argparse
-import logging
 import os
-import sys
-import traceback
 
-from niv_logger import Nivlogger
+from niv_logger import NivLogger
 from yaml_parser import get_yaml
 
 
@@ -24,7 +21,7 @@ class ArgParser:
     config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
-    logger = Nivlogger
+    logger = NivLogger
     # Dictionary for argument choices
     ICONS = [1, 2, 3]
     DETAIL = [1, 2, 3]
@@ -72,7 +69,7 @@ class ArgParser:
         if self.check_args_compatibility():
             self.parser = parser.parse_args(self.args)
             return
-        raise Exception("Arguments are not compatible")
+        raise ValueError("Arguments are not compatible")
 
     def get_load(self):
         """
@@ -83,7 +80,7 @@ class ArgParser:
             if arg in ("-l", "--load"):
                 file_name = self.args[i + 1]
                 return file_name
-        raise Exception("Can\'t access file_name")
+        raise OSError("Can\'t access file_name")
 
     def get_parser(self):
         """
@@ -112,8 +109,8 @@ class ArgParser:
             file_type = file_name.split('.')[-1]
             if file_type == "yaml":
                 return file_path
-            raise Exception(f'"{file_name}" is not a .yaml')
-        raise Exception(f'"{file_path}" is not a valid file path')
+            raise TypeError(f'"{file_name}" is not a .yaml')
+        raise OSError(f'"{file_path}" is not a valid file path')
 
     def create_filename(self):
         """
@@ -131,7 +128,7 @@ class ArgParser:
                 file_name = self.args[i + 1]
                 break
         if file_name == "":
-            raise Exception("Can\'t access file_name")
+            raise OSError("Can\'t access file_name")
         file_name = file_name.split('/')[-1].split('.')[0]
         file_name = f"{file_name}{file_format}"
         return file_name
@@ -174,7 +171,7 @@ class ArgParser:
                 if os.path.isdir(path):
                     return file_path
                     # raise FileExistsError(f"{last_element} already exists")
-                raise Exception(f'"{path}": directory doesn\'t exist')
+                raise OSError(f'"{path}": directory doesn\'t exist')
             raise TypeError(f'"{last_element}" is the wrong file format (must be either .svg, .png, .jpg, .pdf)')
 
         # Check if directory exists. If it does return the file_path, else raise Exception
@@ -188,7 +185,7 @@ class ArgParser:
             file.close()
             return file_path
 
-        raise Exception(f'"{file_path}": directory doesn\'t exist')
+        raise OSError(f'"{file_path}": directory doesn\'t exist')
 
     def check_args_compatibility(self):
         """
@@ -212,4 +209,4 @@ class ArgParser:
         # If load is an argument
         if load:
             return True
-        raise Exception("To use NIV you need load as an argument :)")
+        raise ValueError("To use NIV you need load as an argument :)")
