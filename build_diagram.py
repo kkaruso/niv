@@ -27,13 +27,14 @@ class BuildDiagram:
 
     # TODO: Add coordinates in icons and groups and integrate into create_diagram function
     # TODO: Add options for different layouts and to change graph_attr in .yaml
-    def __init__(self, load_path, save_path):
+    def __init__(self, load_path, save_path, detail_level):
         # Initialize variables for dynamically getting the values from the .yaml file
         # TODO: cleanup (delete not needed comments like old prints)
         # Load the .yaml from the given path
         self.yaml = yaml_parser.get_yaml(load_path)
         self.save_path = save_path
         self.load_path = load_path
+        self.detail_level = detail_level
         self.output_format = save_path.split('.')[-1]
         self.filename = os.path.splitext(save_path)[0]
 
