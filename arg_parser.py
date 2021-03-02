@@ -6,7 +6,7 @@ import argparse
 import os
 import sys
 
-from config_parser import ConfigParser
+from yaml_parser import get_yaml
 
 
 class ArgParser:
@@ -18,8 +18,7 @@ class ArgParser:
     set_args():
         Adds the needed arguments to the ArgumentParser class
     """
-    config_parsers = ConfigParser()
-    config = config_parsers.get_config()
+    config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
 
     # To make Error-messages in console 1-liners
     sys.tracebacklimit = 0
@@ -56,8 +55,8 @@ class ArgParser:
                             nargs=1, metavar='LOAD_PATH',
                             help='Create visualization with a given .yaml file',)
 
-        parser.add_argument('-d', '--detail', type=int, nargs="?", metavar='INT',
-                            default=self.config["DEFAULT"]["std_details"], choices=self.DETAIL,
+        parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
+                            default=self.config.get('default').get('std_details'), choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
                                  '2: medium detail, 3: most detail (DEFAULT: 1)')
 
@@ -120,22 +119,22 @@ class ArgParser:
         :return: generated filename
         """
         file_name = ""
-        default_name = self.config["DEFAULT"]["std_out"]
-        file_format = self.config["DEFAULT"]["std_type"]
+        # default_name = self.config["DEFAULT"]["std_out"]
+        file_format = self.config.get('default').get('std_type')
 
-        if default_name == "_":
-            # access load argument, workaround for program start
-            for i, arg in enumerate(self.args):
-                if arg in ("-l", "--load"):
-                    file_name = self.args[i + 1]
-                    break
-            if file_name == "":
-                raise Exception("Can\'t access file_name")
-            file_name = file_name.split('/')[-1].split('.')[0]
-            file_name = f"{file_name}{file_format}"
-            return file_name
+        # if default_name == "_":
+        # access load argument, workaround for program start
+        for i, arg in enumerate(self.args):
+            if arg in ("-l", "--load"):
+                file_name = self.args[i + 1]
+                break
+        if file_name == "":
+            raise Exception("Can\'t access file_name")
+        file_name = file_name.split('/')[-1].split('.')[0]
+        file_name = f"{file_name}{file_format}"
+        return file_name
 
-        return default_name + file_format
+        # return default_name + file_format
 
     def save_to_path(self, file_path):
         """
