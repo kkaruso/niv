@@ -3,9 +3,12 @@ Parser class for Arguments when you start NIV
 """
 
 import argparse
+import logging
 import os
 import sys
+import traceback
 
+from niv_logger import Nivlogger
 from yaml_parser import get_yaml
 
 
@@ -20,9 +23,8 @@ class ArgParser:
     """
     config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
 
-    # To make Error-messages in console 1-liners
-    sys.tracebacklimit = 0
-
+    # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
+    logger = Nivlogger
     # Dictionary for argument choices
     ICONS = [1, 2, 3]
     DETAIL = [1, 2, 3]
@@ -53,7 +55,7 @@ class ArgParser:
 
         parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file,
                             nargs=1, metavar='LOAD_PATH',
-                            help='Create visualization with a given .yaml file',)
+                            help='Create visualization with a given .yaml file', )
 
         parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
                             default=self.config.get('default').get('std_details'), choices=self.DETAIL,
@@ -210,7 +212,4 @@ class ArgParser:
         # If load is an argument
         if load:
             return True
-
-        # If load isnt an argument -> the program would do nothing
         raise Exception("To use NIV you need load as an argument :)")
-        # return False
