@@ -1,6 +1,7 @@
 diagram: # Diagram properties
   backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding: 0.5  # Padding around the graph (default: 0.5; type: double)
+  # TODO: Fix when using neato that no groups are showing
   layout: fdp  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
 
 title: # Text underneath the diagram.
@@ -14,12 +15,8 @@ title: # Text underneath the diagram.
   date: "01.01.2021"  # Default date is current date or enter specific date as string
   version: "1.0"  # Version of the diagram as string
 
-iconDefaults: &iconDefaults # Use current values as defaults
+iconDefaults: &iconDefaults # Default values for each icon
   color: black  # Text color underneath icon
-  x: 0
-  y: 0
-  h: 1  # Height of icon
-  w: 1  # Width of icon
   ip:  # Enter ip or leave blank
   port:  # Enter ports or leave blank
 
@@ -37,8 +34,8 @@ connectionDefaults: &connectionDefaults #Use current values as defaults
   endpoint:  # Array of 2 icons. e.g. [dns, lb]
 
 icons: #enter devices here. Maybe change "icons" to "devices" later.
-  OsaCloud: {<<: *iconDefaults, icon: dns, text: Text der hier steht, x: 0, y: 3 }
-  OsaDatabase: {<<: *iconDefaults, icon: lb, text: MySQL Database, x: 0, y: 0  }
+  OsaCloud: {<<: *iconDefaults, icon: dns, text: Text der hier steht, x: 0, y: 3, url: https://theuselessweb.com/}
+  OsaDatabase: {<<: *iconDefaults, icon: lb, text: MySQL Database, x: 0, y: 0, url: }
   OsaDeviceScanner: {<<: *iconDefaults, icon: server, text: Local Device Scanner, x: 0, y: 6 }
   OsaServerWeb: {<<: *iconDefaults, icon: server, text: My WebServer, x: 5, y: 2 }
   OsaServerTerminal: {<<: *iconDefaults, icon: server, text: Central Terminal, x: 5, y: 5 }
@@ -49,7 +46,6 @@ groups: #add a group to target multiple objects at once, if you don't, delete th
   group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner], url: https://hs-worms.de }
   moinmusa: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal], url: https://google.com }
   moinmusa2: { <<: *groupDefaults, name: My Servers, members: [OsaServer, OsaServerWeb, OsaServerTerminal] }
-
 
 connections: #enter your connections here
 - { <<: *connectionDefaults, endpoints: [OsaCloud, OsaDatabase] }
