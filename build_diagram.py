@@ -21,7 +21,7 @@ class BuildDiagram:
     """
 
     # IP Example
-    IP = "\n192.168.x.x"
+    # IP = "\n192.168.x.x"
 
     config = yaml_parser.get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
 
@@ -48,6 +48,42 @@ class BuildDiagram:
         self.title_subtext = self.yaml.get("title").get("subText")
         self.title_font_size = self.yaml.get("title").get("fontSize")
 
+        # Get ip of each node
+        self.nodes_ip = {}
+        for node in self.yaml.get("icons"):
+            self.nodes_ip[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('ip')
+            if self.yaml.get('icons')[node].get('ip') is None:
+                self.nodes_ip[f'{node}'] = ""
+
+        # Get name and text of nodes and save as key value pairs in "nodes_text"
+        self.nodes_text = {}
+        for node in self.yaml.get("icons"):
+            self.nodes_text[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('text')
+
+        # Get name and members of groups and save as key value pairs in "group_members"
+        self.group_members = {}
+        for member in self.yaml.get("groups").keys():
+            self.group_members[f'{member}'] = self.yaml.get('groups')[member].get('members')
+
+        # Save each endpoint of a connection as a list in "connections" list
+        self.connections = []
+        for i in range(0, len(self.yaml.get("connections"))):
+            self.connections.append(self.yaml.get("connections")[i].get("endpoints"))
+
+        # Get the URL of each group, clear empty URLs
+        self.group_url = {}
+        for url in self.yaml.get("groups").keys():
+            self.group_url[f'{url}'] = self.yaml.get('groups')[url].get('url')
+            if self.yaml.get('groups')[url].get('url') is None:
+                self.group_url[f'{url}'] = ""
+
+        # Get the URL of each node, clear empty URLs
+        self.nodes_url = {}
+        for url in self.yaml.get("icons").keys():
+            self.nodes_url[f'{url}'] = self.yaml.get('icons')[url].get('url')
+            if self.yaml.get('icons')[url].get('url') is None:
+                self.nodes_url[f'{url}'] = ""
+
         # Only get coordinates if layout = neato
         if self.graph_layout == "neato":
             # Get X coordinate of each node
@@ -71,35 +107,6 @@ class BuildDiagram:
             print(f"Xs: {self.nodes_x}\n")
             print(f"Ys: {self.nodes_y}\n")
 
-        # Get name and members of groups and save as key value pairs in "group_members"
-        self.group_members = {}
-        for member in self.yaml.get("groups").keys():
-            self.group_members[f'{member}'] = self.yaml.get('groups')[member].get('members')
-
-        # Get name and text of nodes and save as key value pairs in "nodes_text"
-        self.nodes_text = {}
-        for node in self.yaml.get("icons"):
-            self.nodes_text[f'{node}'] = self.yaml.get("icons").get(f'{node}').get('text')
-
-        # Save each endpoint of a connection as a list in "connections" list
-        self.connections = []
-        for i in range(0, len(self.yaml.get("connections"))):
-            self.connections.append(self.yaml.get("connections")[i].get("endpoints"))
-
-        # Get the URL of each group, clear empty URLs
-        self.group_url = {}
-        for url in self.yaml.get("groups").keys():
-            self.group_url[f'{url}'] = self.yaml.get('groups')[url].get('url')
-            if self.yaml.get('groups')[url].get('url') is None:
-                self.group_url[f'{url}'] = ""
-
-        # Get the URL of each node, clear empty URLs
-        self.icons_url = {}
-        for url in self.yaml.get("icons").keys():
-            self.icons_url[f'{url}'] = self.yaml.get('icons')[url].get('url')
-            if self.yaml.get('icons')[url].get('url') is None:
-                self.icons_url[f'{url}'] = ""
-
         self.instances = []
 
         # Just for "debugging"
@@ -111,9 +118,10 @@ class BuildDiagram:
         print("Created variables from .yaml:")
         print(f"title: {self.title_text}")
         print(f"group_members: {self.group_members}")
-        print(f"nodes_text: {self.nodes_text}")
         print(f"group_url: {self.group_url}")
-        print(f"icons_url: {self.icons_url}")
+        print(f"nodes_text: {self.nodes_text}")
+        print(f"nodes_url: {self.nodes_url}")
+        print(f"nodes_ip: {self.nodes_ip}")
         print(f"connections: {self.connections}\n")
 
     def create_nodes(self, instances, members):
@@ -148,6 +156,7 @@ class BuildDiagram:
         for group_name in self.group_members:
             clustr_attr = {
                 "fontname": "helvetica-bold",
+                "margin": "20",
                 "URL": f"{self.group_url[group_name]}"
             }
             with Cluster(f"{group_name}", graph_attr=clustr_attr):
@@ -251,11 +260,11 @@ class BuildDiagram:
             # Only pass coordinates to node creation if layout == neato
             if self.graph_layout == "neato":
                 self.instances.append(
-                    globals()[member](self.nodes_text[member] + self.IP, URL=self.icons_url[member],
-                                      pos=f"{self.nodes_x[member]}, {self.nodes_y[member]}!", fontcolor="red"))
+                    globals()[member](f"{self.nodes_text[member]}\n{self.nodes_ip[member]}", URL=self.nodes_url[member],
+                                      pos=f"{self.nodes_x[member]}, {self.nodes_y[member]}!"))
             else:
                 self.instances.append(
-                    globals()[member](self.nodes_text[member] + self.IP, URL=self.icons_url[member]))
+                    globals()[member](f"{self.nodes_text[member]}\n{self.nodes_ip[member]}", URL=self.nodes_url[member]))
         except KeyError:
             print(
                 f"KeyError in {self.load_path}: '{member}' is not given in 'icons', that's why it does "

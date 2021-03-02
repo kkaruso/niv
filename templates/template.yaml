@@ -16,7 +16,6 @@ title: # Text underneath the diagram.
   version: "1.0"  # Version of the diagram as string
 
 iconDefaults: &iconDefaults # Default values for each icon
-  color: black  # Text color underneath icon
   ip:  # Enter ip or leave blank
   port:  # Enter ports or leave blank
 
@@ -34,7 +33,7 @@ connectionDefaults: &connectionDefaults #Use current values as defaults
   endpoint:  # Array of 2 icons. e.g. [dns, lb]
 
 icons: #enter devices here. Maybe change "icons" to "devices" later.
-  OsaCloud: {<<: *iconDefaults, icon: dns, text: Text der hier steht, x: 0, y: 3, url: https://theuselessweb.com/}
+  OsaCloud: {<<: *iconDefaults, icon: dns, text: Text der hier steht, ip: 192.168.0.1,x: 0, y: 3, url: https://theuselessweb.com/}
   OsaDatabase: {<<: *iconDefaults, icon: lb, text: MySQL Database, x: 0, y: 0, url: }
   OsaDeviceScanner: {<<: *iconDefaults, icon: server, text: Local Device Scanner, x: 0, y: 6 }
   OsaServerWeb: {<<: *iconDefaults, icon: server, text: My WebServer, x: 5, y: 2 }

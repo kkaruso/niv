@@ -3,6 +3,7 @@ Main
 """
 import os
 import sys
+from contextlib import suppress
 from arg_parser import ArgParser
 from build_diagram import BuildDiagram
 from niv_logger import Nivlogger
@@ -16,9 +17,9 @@ if __name__ == '__main__':
         arg_parser = ArgParser(sys.argv[1:])
         # Call the function "set_args"
         args = arg_parser.get_parser()
-
-        diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg")
-        diagram_builder.create_diagram()
+        with suppress(KeyError):
+            diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg")
+            diagram_builder.create_diagram()
 
     except Exception as e:
         # create variables to look on which files the error occured
