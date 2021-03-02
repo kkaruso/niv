@@ -9,7 +9,7 @@ import os
 log_file_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/logs/niv.log'
 
 
-class Nivlogger:
+class NivLogger:
     """
     class for generating log entries
     """
