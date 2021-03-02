@@ -43,19 +43,19 @@ class TestArgParser(TestCase):
 
         parser = ArgParser(["-s", f"{self.test_directory_path}test2.svg", "-l", "./tests.yaml"])
         self.assertEqual(
-            argparse.Namespace(save=f"./{self.test_directory_path}test2.svg", load="./tests.yaml", detail=1),
+            argparse.Namespace(save=[f"./{self.test_directory_path}test2.svg"], load=["./tests.yaml"], detail=1),
             parser.get_parser())
 
         parser = ArgParser(["-l", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", detail=1),
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=1),
                          parser.get_parser())
 
         parser = ArgParser(["--load", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", detail=1),
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=1),
                          parser.get_parser())
 
         parser = ArgParser(["-d", "2", "-l", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load="./tests.yaml", detail=2),
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=2),
                          parser.get_parser())
 
     def test_is_path_to_yaml_file(self):
@@ -150,17 +150,8 @@ class TestArgParser(TestCase):
         with self.assertRaises(Exception):
             ArgParser(["123"])
 
-        self.assertTrue(["-l"])
-
-        self.assertTrue(["-s"])
-
-        self.assertTrue(["-d"])
-
-        self.assertTrue(["-d", "-l"])
-
-        self.assertTrue(["-s", "-l"])
-
-        self.assertTrue(["-r", "-s"])
+        parser = ArgParser(["-l", "./tests.yaml"])
+        self.assertTrue(parser.check_args_compatibility())
 
     def tearDown(self) -> None:
         """

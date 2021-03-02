@@ -3,8 +3,8 @@ Parser class for Arguments when you start NIV
 """
 
 import argparse
-import logging
 import os
+import sys
 
 from config_parser import ConfigParser
 
@@ -21,6 +21,9 @@ class ArgParser:
     config_parsers = ConfigParser()
     config = config_parsers.get_config()
 
+    # To make Error-messages in console 1-liners
+    sys.tracebacklimit = 0
+
     # Dictionary for argument choices
     ICONS = [1, 2, 3]
     DETAIL = [1, 2, 3]
@@ -29,9 +32,6 @@ class ArgParser:
         self.args = args
         self.parser = argparse.ArgumentParser
         self.set_args()
-
-        self.logger = logging.getLogger("Logger1")
-        self.logger2 = logging.getLogger("Logger2")
 
     def set_args(self):
         """
@@ -45,18 +45,18 @@ class ArgParser:
 
         parser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
 
-        parser.add_argument('-v', '--version', action='version', version='1.0',
+        parser.add_argument('-v', '--version', action='version', version='0.3',
                             help="Show program's version number and exit")
 
         parser.add_argument('-s', '--save', type=self.save_to_path,
-                            nargs='?', metavar='OUTPUT_PATH',
+                            nargs=1, metavar='SAVE_PATH',
                             help='Save .svg, .png, .jpg or .pdf file to a given path (DEFAULT: .svg)')
 
         parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file,
-                            nargs='?', metavar='INPUT_PATH',
-                            help='Create visualization with a given .yaml file')
+                            nargs=1, metavar='LOAD_PATH',
+                            help='Create visualization with a given .yaml file',)
 
-        parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
+        parser.add_argument('-d', '--detail', type=int, nargs="?", metavar='INT',
                             default=self.config["DEFAULT"]["std_details"], choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
                                  '2: medium detail, 3: most detail (DEFAULT: 1)')
@@ -77,7 +77,12 @@ class ArgParser:
         """
         :return: returns data from argument load
         """
-        return self.parser.load
+        # access load argument, workaround for program start
+        for i, arg in enumerate(self.args):
+            if arg in ("-l", "--load"):
+                file_name = self.args[i + 1]
+                return file_name
+        raise Exception("Can\'t access file_name")
 
     def get_parser(self):
         """
@@ -106,8 +111,8 @@ class ArgParser:
             file_type = file_name.split('.')[-1]
             if file_type == "yaml":
                 return file_path
-            raise Exception(f'\n"{file_name}" is not a .yaml')
-        raise Exception(f'\n"{file_path}" is not a valid file path')
+            raise Exception(f'"{file_name}" is not a .yaml')
+        raise Exception(f'"{file_path}" is not a valid file path')
 
     def create_filename(self):
         """
@@ -168,8 +173,8 @@ class ArgParser:
                 if os.path.isdir(path):
                     return file_path
                     # raise FileExistsError(f"{last_element} already exists")
-                raise Exception(f'\n"{path}": directory doesn\'t exist')
-            raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpg, .pdf)")
+                raise Exception(f'"{path}": directory doesn\'t exist')
+            raise TypeError(f'"{last_element}" is the wrong file format (must be either .svg, .png, .jpg, .pdf)')
 
         # Check if directory exists. If it does return the file_path, else raise Exception
         if os.path.isdir(file_path):
@@ -181,29 +186,32 @@ class ArgParser:
             file = open(f"{file_path}{file_name}", "a")
             file.close()
             return file_path
-        raise Exception(f'\n"{file_path}": directory doesn\'t exist')
+
+        raise Exception(f'"{file_path}": directory doesn\'t exist')
 
     def check_args_compatibility(self):
         """
         Checks if the given arguments are compatible with each other
-        (e.g: --gui can't be used with any other argument)
 
         :return: true, if arguments are compatible. false, if not
         """
         # Set variable to True if argument is given
-        detail = "--detail" in self.args or "-d" in self.args
         load = "--load" in self.args or "-l" in self.args
-        save = "--save" in self.args or "-s" in self.args
         version = "--version" in self.args or "-v" in self.args
         hlp = "--help" in self.args or "-h" in self.args
 
         # If no arguments are given
         if len(self.args) == 0:
             return True
+
         # If only help or version are given
         if len(self.args) == 1 and (version or hlp):
             return True
-        # If neither load, run or gui are as arguments -> the program would do nothing
-        if not load:
-            raise Exception("To use NIV you need either load, run or gui as an argument :)")
-        return True
+
+        # If load is an argument
+        if load:
+            return True
+
+        # If load isnt an argument -> the program would do nothing
+        raise Exception("To use NIV you need load as an argument :)")
+        # return False
