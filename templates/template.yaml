@@ -15,31 +15,23 @@ title: # Text underneath the diagram.
   date: "01.01.2021"  # Default date is current date or enter specific date as string
   version: "1.0"  # Version of the diagram as string
 
-iconDefaults: &iconDefaults # Default values for each icon
-  ip:  # Enter ip or leave blank
-  port:  # Enter ports or leave blank
-
 groupDefaults: &groupDefaults #Use current values as defaults
-  fill: "none"  # Fill the background of the group box
-  color: black  # Color of the text
-  stroke: black  # Color of the group box
-  members: none  # Array of members for group. e.g. [dns,lb,server1,server2,server3]
-  name: none  # Name of group
+  backgroundColor: lightblue  # Fill the background of the group box
 
 connectionDefaults: &connectionDefaults #Use current values as defaults
   color: "green"  # Text color of the connection
   stroke: "red"  # Color of the connected line
   strokewidth: 1  # Width of the connection line
-  endpoint:  # Array of 2 icons. e.g. [dns, lb]
 
+# TODO: change icon names to variables and put current name into "icon"
 icons: #enter devices here. Maybe change "icons" to "devices" later.
-  OsaCloud: {<<: *iconDefaults, icon: dns, text: Text der hier steht, ip: 192.168.0.1,x: 0, y: 3, url: https://theuselessweb.com/}
-  OsaDatabase: {<<: *iconDefaults, icon: lb, text: MySQL Database, x: 0, y: 0, url: }
-  OsaDeviceScanner: {<<: *iconDefaults, icon: server, text: Local Device Scanner, x: 0, y: 6 }
-  OsaServerWeb: {<<: *iconDefaults, icon: server, text: My WebServer, x: 5, y: 2 }
-  OsaServerTerminal: {<<: *iconDefaults, icon: server, text: Central Terminal, x: 5, y: 5 }
-  OsaDesktopImac: {<<: *iconDefaults, icon: server, text: My Desktop, x: 3, y: 0 }
-  Osa: {<<: *iconDefaults, icon: server, text: Test, x: 1 }
+  OsaCloud: {icon: dns, text: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
+  OsaDatabase: {icon: lb, text: MySQL Database, port: 25565, x: 0, y: 0, url: }
+  OsaDeviceScanner: {icon: server, text: Local Device Scanner, x: 0, y: 6 }
+  OsaServerWeb: {icon: server, text: My WebServer, x: 5, y: 2 }
+  OsaServerTerminal: {icon: server, text: Central Terminal, x: 5, y: 5 }
+  OsaDesktopImac: {icon: server, text: My Desktop, x: 3, y: 0 }
+  Osa: {icon: server, text: Test, x: 1 }
 
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   group1: { <<: *groupDefaults, name: My Servers, members: [OsaCloud, OsaDatabase, OsaDeviceScanner], url: https://hs-worms.de }
