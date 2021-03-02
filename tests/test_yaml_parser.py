@@ -5,10 +5,8 @@ import os
 from unittest import TestCase
 import yaml
 
-from yaml_parser import get_yaml
+from yaml_parser import get_yaml  # pylint: disable=import-error
 
-
-# TODO: DARWIN MUSS HIER PYLINT MIT 10/10 SCHAFFEN UND MAX 1 IGNORE
 
 class Test(TestCase):
     """

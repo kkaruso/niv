@@ -94,6 +94,12 @@ class ArgParser:
         """
         return self.parser.save
 
+    def get_detail_level(self):
+        """
+        :return: return detail level
+        """
+        return self.parser.detail
+
     @staticmethod
     def is_path_to_yaml_file(file_path):
         """
