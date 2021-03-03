@@ -176,11 +176,10 @@ class BuildDiagram:
         # Create connections
         for i, _ in enumerate(instance_names):
             for j, _ in enumerate(self.connections_endpoints):
-                if instance_names[i] == self.connections_endpoints[j][0] or instance_names[i] == \
-                        self.connections_endpoints[j][0] + "Png":
+
+                if instance_names[i] == self.connections_endpoints[j][0]:
                     for k, _ in enumerate(instance_names):
-                        if self.connections_endpoints[j][1] == instance_names[k] or \
-                                self.connections_endpoints[j][1] + "Png" == instance_names[k]:
+                        if self.connections_endpoints[j][1] == instance_names[k]:
                             _ = self.instances[k] - \
                                 Edge(color=f"{self.connections_color[j]}",
                                      label=f"{self.connections_text[j]}",
