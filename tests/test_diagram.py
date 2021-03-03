@@ -26,14 +26,13 @@ class TestBuildDiagram(TestCase):
         create_nodes tests
         """
         with Diagram("test", filename="test", outformat="svg", show=False):
-            instances = []
             members = []
             diagram = BuildDiagram(
-                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/templates/template.yaml', "")
-            diagram.create_nodes(instances, members)
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/templates/template.yaml', "", 1)
+            diagram.create_nodes(members)
 
             test_members = ['OsaCloud', 'OsaDatabase', 'OsaDeviceScanner', 'OsaServer', 'OsaServerWeb',
-                            'OsaServerTerminal']
+                            'OsaServerTerminal', 'OsaServer', 'OsaServerWeb', 'OsaServerTerminal']
             self.assertEqual(test_members, members)
 
     def test_create_connections(self):
@@ -41,19 +40,17 @@ class TestBuildDiagram(TestCase):
         create_connections tests
         """
         with Diagram("test", filename="test", outformat="svg", show=False):
-            instance_names = []
             instances = []
             members = []
             diagram = BuildDiagram(
-                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/templates/template.yaml', "")
-            diagram.create_nodes(instances, members)
-            diagram.create_connections(instances, instance_names)
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/templates/template.yaml', "", 1)
+            diagram.create_nodes(members)
+            diagram.create_connections(instances)
 
-            test_instance_names = ['Antenna',
-                                   'OsaDesktopImac', 'OsaDatabase', 'OsaDeviceScanner', 'OsaServerWeb',
-                                   'OsaServerTerminal']
+            test_instance_names = ['OsaDesktopImac', 'OsaCloud', 'OsaDatabase', 'OsaDeviceScanner', 'OsaServerWeb',
+                                   'OsaServerTerminal', 'OsaServerWeb', 'OsaServerTerminal']
 
-            self.assertEqual(test_instance_names, instance_names)
+            self.assertEqual(test_instance_names, instances)
 
     def tearDown(self) -> None:
         """
