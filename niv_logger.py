@@ -21,10 +21,8 @@ class NivLogger:
     @staticmethod
     def log_error(log_message):
         """
-        function to clear log file and input error messages
+        function to input error messages
         """
-        with open(log_file_path, 'w'):
-            pass
         logging.error(log_message, exc_info=True)
 
     @staticmethod
@@ -33,3 +31,11 @@ class NivLogger:
         function to add input to log file
         """
         logging.info("%s \n", log_message)
+
+    @staticmethod
+    def clear_log():
+        """
+        function to clear the log file
+        """
+        with open(log_file_path, 'w'):
+            pass

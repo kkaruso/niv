@@ -11,6 +11,7 @@ from niv_logger import NivLogger
 if __name__ == '__main__':
     # Create an instance of the logger Class
     Logger = NivLogger
+    Logger.clear_log()
 
     try:
         # Create an instance of the ArgParser class
@@ -21,7 +22,7 @@ if __name__ == '__main__':
             diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg", arg_parser.get_detail_level())
             diagram_builder.create_diagram()
 
-    except (OSError, ValueError, TypeError) as error_message:
+    except (OSError, ValueError, TypeError, AssertionError) as error_message:
         # create variables to look on which files the error occurred
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
