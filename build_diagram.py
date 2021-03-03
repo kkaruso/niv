@@ -3,6 +3,7 @@
 # pylint: disable=wildcard-import
 # pylint: disable=fixme
 # pylint: disable=too-many-instance-attributes
+# pylint: disable=too-many-statements
 """
 build_diagram.py
 Dynamically creates the diagram
@@ -24,6 +25,8 @@ class BuildDiagram:
 
     # TODO: Add check if ip is a valid ip and check if url is a valid url (for ip checking:
     #  https://stackoverflow.com/questions/3462784/check-if-a-string-matches-an-ip-address-pattern-in-python)
+
+    # TODO: Find a way to add margins between node and its text, and margin between the diagram and the title
     def __init__(self, load_path, save_path, detail_level):
         # Initialize variables for dynamically getting the values from the .yaml file
         # TODO: cleanup (delete not needed comments like old prints)
@@ -40,47 +43,48 @@ class BuildDiagram:
         self.graph_bg_color = self.set_variables("diagram", "backgroundColor", "transparent")
         self.graph_padding = self.set_variables("diagram", "padding", 0.5)
         self.graph_layout = self.set_variables("diagram", "layout", "fdp")
+        self.graph_splines = self.set_variables("diagram", "connectionStyle", "curved")
 
         # Load title properties
         self.title_text = self.set_variables("title", "text", "Diagram")
         self.title_subtext = self.set_variables("title", "subText", "")
         self.title_font_size = self.set_variables("title", "fontSize", 15)
 
+        # TODO: Add placeholder icon to set as default for nodes_icon
         # Get icon of each node
-        self.nodes_icon = {}
-        self.fill_icon_dictionary(self.nodes_icon, "icon")
+        self.nodes_icon = self.fill_dictionary("icons", "icon", "")
 
         # Get text of each node
-        self.nodes_text = {}
-        self.fill_icon_dictionary(self.nodes_text, "text")
-        # for node in self.yaml.get("icons"):
-        #     self.nodes_text[node] = self.yaml.get("icons").get(node).get('text')
-        #     if self.yaml.get('icons')[node].get('text') is None:
-        #         self.nodes_text[node] = ""
+        self.nodes_text = self.fill_dictionary("icons", "text", "node")
 
         # Get ip of each node
-        self.nodes_ip = {}
-        self.fill_icon_dictionary(self.nodes_ip, "ip")
-        # for node in self.yaml.get("icons"):
-        #     self.nodes_ip[node] = self.yaml.get("icons").get(node).get('ip')
-        #     if self.yaml.get('icons')[node].get('ip') is None:
-        #         self.nodes_ip[node] = ""
+        self.nodes_ip = self.fill_dictionary("icons", "ip", "")
 
         # Get port of each node
-        self.nodes_port = {}
-        self.fill_icon_dictionary(self.nodes_port, "port")
-        # for node in self.yaml.get("icons"):
-        #     self.nodes_port[node] = self.yaml.get("icons").get(node).get('port')
-        #     if self.yaml.get('icons')[node].get('port') is None:
-        #         self.nodes_port[node] = ""
+        self.nodes_port = self.fill_dictionary("icons", "port", "")
 
         # Get the URL of each node, clear empty URLs
-        self.nodes_url = {}
-        self.fill_icon_dictionary(self.nodes_url, "url")
-        # for url in self.yaml.get("icons").keys():
-        #     self.nodes_url[url] = self.yaml.get('icons')[url].get('url')
-        #     if self.yaml.get('icons')[url].get('url') is None:
-        #         self.nodes_url[url] = ""
+        self.nodes_url = self.fill_dictionary("icons", "url", "")
+
+        # Get name of each group
+        self.group_name = self.fill_dictionary("groups", "name", "Group")
+
+        # Get members of each group
+        self.group_members = self.fill_dictionary("groups", "members", "")
+
+        # Get the URL of each group, clear empty URLs
+        self.group_url = self.fill_dictionary("groups", "url", "")
+
+        # Only get coordinates from nodes if layout = neato
+        if self.graph_layout == "neato":
+            # Get X coordinate of each node
+            self.nodes_x = self.fill_dictionary("icons", "x", 0)
+
+            # Get Y coordinate of each node
+            self.nodes_y = self.fill_dictionary("icons", "y", 0)
+
+            print(f"\nXs: {self.nodes_x}")
+            print(f"Ys: {self.nodes_y}\n")
 
         # Save each endpoint of a connection as a list in "connections" list
         self.connections_endpoints = []
@@ -101,53 +105,20 @@ class BuildDiagram:
             else:
                 self.connections_text[i] = ""
 
-        # Get name and members of groups and save as key value pairs in "group_members"
-        self.group_members = {}
-        for member in self.yaml.get("groups").keys():
-            self.group_members[member] = self.yaml.get('groups')[member].get('members')
-
-        # Get the URL of each group, clear empty URLs
-        self.group_url = {}
-        for url in self.yaml.get("groups").keys():
-            self.group_url[url] = self.yaml.get('groups')[url].get('url')
-            if self.yaml.get('groups')[url].get('url') is None:
-                self.group_url[url] = ""
-
-        # Only get coordinates from nodes if layout = neato
-        if self.graph_layout == "neato":
-            # Get X coordinate of each node
-            self.nodes_x = {}
-            for node in self.yaml.get("icons"):
-                # Check if a value for x is given, if not set it to 0 to prevent crashing
-                if self.yaml.get("icons").get(node).get('x') is not None:
-                    self.nodes_x[node] = self.yaml.get("icons").get(node).get('x')
-                else:
-                    self.nodes_x[node] = 0
-
-            # Get Y coordinate of each node
-            self.nodes_y = {}
-            for node in self.yaml.get("icons"):
-                # Check if a value for y is given, if not set it to 0 to prevent crashing
-                if self.yaml.get("icons").get(node).get('y') is not None:
-                    self.nodes_y[node] = self.yaml.get("icons").get(node).get('y')
-                else:
-                    self.nodes_y[node] = 0
-
-            print(f"Xs: {self.nodes_x}\n")
-            print(f"Ys: {self.nodes_y}\n")
-
         self.instances = []
 
         # Just for "debugging"
         # TODO: delete when finished with the file
         print(f"output_format: {self.output_format}")
         print(f"save_path: {self.save_path}")
-        print(f"filename: {self.filename}\n")
+        print(f"filename: {self.filename}")
+        print(f"detail_level: {self.detail_level}\n")
 
         print("Created variables from .yaml:")
         print(f"graph_bg_color: {self.graph_bg_color}")
         print(f"graph_padding: {self.graph_padding}")
-        print(f"graph_layout: {self.graph_layout}\n")
+        print(f"graph_layout: {self.graph_layout}")
+        print(f"graph_splines: {self.graph_splines}\n")
         print(f"title_text: {self.title_text}")
         print(f"title_subtext: {self.title_subtext}")
         print(f"title_fontsize: {self.title_font_size}\n")
@@ -155,6 +126,7 @@ class BuildDiagram:
         print(f"nodes_text: {self.nodes_text}")
         print(f"nodes_url: {self.nodes_url}")
         print(f"nodes_ip: {self.nodes_ip}\n")
+        print(f"group_name: {self.group_name}")
         print(f"group_members: {self.group_members}")
         print(f"group_url: {self.group_url}\n")
         print(f"connections: {self.connections_endpoints}")
@@ -177,16 +149,16 @@ class BuildDiagram:
                 self.create_single_node(node)
 
         # Dynamically create the amount of groups given by "group_count" with the corresponding group name
-        for group_name in self.group_members:
+        for name in self.group_members:
             clustr_attr = {
                 "fontname": "helvetica-bold",
                 "margin": "20",
-                "URL": f"{self.group_url[group_name]}"
+                "URL": f"{self.group_url[name]}"
                 # "bgcolor:": "black"
             }
-            with Cluster(group_name, graph_attr=clustr_attr):
+            with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
-                for member in list(self.group_members.get(group_name)):
+                for member in list(self.group_members.get(name)):
                     self.create_single_node(member)
 
     def create_connections(self):
@@ -202,7 +174,6 @@ class BuildDiagram:
             key_of_instance_name = list(self.nodes_icon.keys())[list(self.nodes_icon.values()).index(instance_name)]
             instance_names.append(key_of_instance_name)
 
-        print(f"instance_names:{instance_names}, instances:{self.instances}")
         # Check if any endpoints are not given in 'icons', if not print an error
         for connection in self.connections_endpoints:
             for endpoint in connection:
@@ -233,7 +204,7 @@ class BuildDiagram:
             "fontname": "helvetica-bold",
             "nodesep": "1.0",
             "ranksep": "2.0",
-            "splines": "curved"
+            "splines": f"{self.graph_splines}"
         }
 
         with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename, outformat=self.output_format,
@@ -299,23 +270,29 @@ class BuildDiagram:
             else:
                 self.instances.append(
                     globals()[self.nodes_icon[node]](node_text,
-                                                     URL=self.nodes_url[node]))
+                                                     URL=self.nodes_url[node],
+                                                     tooltip="Test tooltip"))
         except KeyError:
             print(
                 f"KeyError in {self.load_path}: '{node}' is not given in 'icons', that's why it does "
                 f"not show in the diagram. Add it to 'icons' or remove it as a member.")
 
-    def fill_icon_dictionary(self, _dict: Dict, _field: str):
+    def fill_dictionary(self, _object: str, _subobject: str, _default: any) -> dict:
         """
         Fills a given dictionary with information from a field in a .yaml
 
-        :param _dict: the given dictionary to fill
-        :param _field: to fill the dictionary with
+        :param _object: object in the .yaml
+        :param _subobject: sub-object in the .yaml
+        :param _default: default value for the variable
         """
-        for node in self.yaml.get("icons"):
-            _dict[node] = self.yaml.get("icons").get(node).get(_field)
-            if self.yaml.get('icons')[node].get(_field) is None:
-                _dict[node] = ""
+        _dict = {}
+        for i in self.yaml.get(_object):
+            _dict[i] = self.yaml.get(_object).get(i).get(_subobject)
+            if self.yaml.get(_object)[i].get(_subobject) is None:
+                if _object == "groups" and _subobject == "members":
+                    print(f"{i}: No members given, group won\'t be shown. Add members to group or remove group! :)")
+                _dict[i] = _default
+        return _dict
 
     def set_variables(self, _object: str, _subobject: str, _default: any):
         """
