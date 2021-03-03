@@ -91,19 +91,11 @@ class BuildDiagram:
         for i in range(0, len(self.yaml.get("connections"))):
             self.connections_endpoints.append(self.yaml.get("connections")[i].get("endpoints"))
 
-        self.connections_color = {}
-        for i, connection in enumerate(self.yaml.get("connections")):
-            if connection.get("color") is not None:
-                self.connections_color[i] = connection.get("color")
-            else:
-                self.connections_color[i] = "#7B8894"
+        # Get color of connections
+        self.connections_color = self.fill_connection_dictionary("connections", "color", "#7B8894")
 
-        self.connections_text = {}
-        for i, connection in enumerate(self.yaml.get("connections")):
-            if connection.get("text") is not None:
-                self.connections_text[i] = connection.get("text")
-            else:
-                self.connections_text[i] = ""
+        # Get text of connections
+        self.connections_text = self.fill_connection_dictionary("connections", "text", "")
 
         self.instances = []
 
@@ -280,13 +272,31 @@ class BuildDiagram:
                 f"KeyError in {self.load_path}: '{node}' is not given in 'icons', that's why it does "
                 f"not show in the diagram. Add it to 'icons' or remove it as a member.")
 
-    def fill_dictionary(self, _object: str, _subobject: str, _default: any) -> dict:
+    def fill_connection_dictionary(self, _object: str, _subobject: str, _default: any) -> dict:
         """
-        Fills a given dictionary with information from a field in a .yaml
+        Fills a given dictionary with color or text of connection from a .yaml
 
         :param _object: object in the .yaml
         :param _subobject: sub-object in the .yaml
         :param _default: default value for the variable
+        :return: filled dictionary
+        """
+        _dict = {}
+        for i, connection in enumerate(self.yaml.get(_object)):
+            if connection.get(_subobject) is not None:
+                _dict[i] = connection.get(_subobject)
+            else:
+                _dict[i] = _default
+        return _dict
+
+    def fill_dictionary(self, _object: str, _subobject: str, _default: any) -> dict:
+        """
+        Fills a given dictionary with information from a .yaml
+
+        :param _object: object in the .yaml
+        :param _subobject: sub-object in the .yaml
+        :param _default: default value for the variable
+        :return: filled dictionary
         """
         _dict = {}
         for i in self.yaml.get(_object):
