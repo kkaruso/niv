@@ -16,6 +16,7 @@ test:pytest:
     - pip install pytest --quiet
     - pip install pyyaml
     - pip install graphviz
-    - python -m pytest
     - apt-get update && apt-get install graphviz
+    - python -m pytest
+    
 
