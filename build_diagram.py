@@ -186,7 +186,7 @@ class BuildDiagram:
 
     def create_diagram(self):
         """
-        Creates the diagram with the right amount of of nodes, clusters and connections
+        Creates the diagram with the right amount of nodes, clusters and connections
         """
         members = []
         instance_names = []
@@ -208,42 +208,19 @@ class BuildDiagram:
             # Create connections
             self.create_connections(instance_names)
 
-            # # Group 1
-            # with Cluster("Gruppe 1"):
-            #     # The Mater Device in the Group
-            #     master1 = OsaDeviceWirelessRouter("Router" + ip)
-            #     # internal connections
-            #     master1 - OsaHub("Switch") - [OsaDesktop("PC \n" + ip), OsaPrinter("Printer\n" + ip),
-            #                                   OsaIphone("Iphone\n" + ip), OsaDeviceScanner("Scanner\n" + ip),
-            #                                   OsaServer("Server\n" + ip) - OsaServer("Server")]
-            #
-            # # Group 2
-            # with Cluster("Gruppe 2", graph_attr=clus_attr):
-            #     master2 = OsaDeviceWirelessRouter("Router" + ip)
-            #     master2 - OsaHub("Switch") - [OsaDesktop("PC \n" + ip), OsaPrinter("Printer\n" + ip),
-            #                                   OsaIphone("Iphone\n" + ip), OsaDeviceScanner("Scanenr\n" + ip),
-            #                                   OsaServer("Server\n" + ip)]
-            #
-            # # Group 3
-            # with Cluster("Gruppe 3"):
-            #     hub1 = OsaHub("Switch", shape="plantext", pin="True")
-            #     hub2 = OsaHub("Switch", pin="True", pos="2")
-            #     master3 = OsaDeviceWirelessRouter("Router" + ip)
-            #     master3 - [hub1, hub2]
-            #     hub1 - [OsaPrinter("Printer" + ip), OsaDeviceScanner("Scanenr" + ip)]
-            #     hub2 - [OsaIphone("Iphone" + ip), OsaDesktop("Desktop" + ip)]
-            #
-            # # External Connections between the Groups can be: From >> To, To << From or Point - Point
-            # master2 - master1 - master3
-
     def create_single_node(self, node):
         """
         Create an instance of a given node class, if not valid print name of not valid node
         """
         try:
-            node_text = f"{self.nodes_text[node]}\n" \
-                        f"{self.nodes_ip[node]}\n" \
-                        f"{self.nodes_port[node]}"
+            if self.detail_level == 2:
+                node_text = f"{self.nodes_text[node]}\n" \
+                            f"IP: {self.nodes_ip[node]}\n" \
+                            f"Port: {self.nodes_port[node]}"
+            else:
+                node_text = f"{self.nodes_text[node]}\n" \
+                            f"IP: {self.nodes_ip[node]}\n"
+
             # Remove double newlines for the case when port is given but no url
             node_text = node_text.replace("\n\n", "\n")
 
