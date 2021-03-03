@@ -2,8 +2,8 @@ diagram: # Diagram properties
   backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding: 0.5  # Padding around the graph (default: 0.5; type: double)
   # TODO: Fix when using neato that no groups are showing
-  layout: neato  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
-  connectionStyle: curved  # Style of connections between nodes or clusters (default: curved; type: string; options: curved or ortho)
+  layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
+  connectionStyle: curved  # Style of connections between nodes (default: curved; type: string; options: curved or ortho)
 
 title: # Text underneath the diagram.
   text: NIV  # Title under the Diagram (default: Diagram; type: string)

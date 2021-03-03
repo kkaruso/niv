@@ -188,7 +188,10 @@ class BuildDiagram:
                     for k, _ in enumerate(instance_names):
                         if self.connections_endpoints[j][1] == instance_names[k]:
                             _ = self.instances[k] - \
-                                Edge(color=f"{self.connections_color[j]}", label=f"{self.connections_text[j]}") - \
+                                Edge(color=f"{self.connections_color[j]}",
+                                     label=f"{self.connections_text[j]}",
+                                     tooltip=f"{self.connections_text[j]}",
+                                     labeltooltip=f"{self.connections_text[j]}") - \
                                 self.instances[i]
 
     def create_diagram(self):
@@ -209,7 +212,6 @@ class BuildDiagram:
 
         with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename, outformat=self.output_format,
                      show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
-
             # Create nodes and clusters
             self.create_nodes()
             # Create connections
@@ -261,17 +263,19 @@ class BuildDiagram:
                     self.instances.append(
                         globals()[self.nodes_icon[node] + "Png"](node_text,
                                                                  URL=self.nodes_url[node],
-                                                                 pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!"))
+                                                                 pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!",
+                                                                 tooltip=f"{self.nodes_text[node]}"))
                 else:
                     self.instances.append(
                         globals()[self.nodes_icon[node]](node_text,
                                                          URL=self.nodes_url[node],
-                                                         pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!"))
+                                                         pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!",
+                                                         tooltip=f"{self.nodes_text[node]}"))
             else:
                 self.instances.append(
                     globals()[self.nodes_icon[node]](node_text,
                                                      URL=self.nodes_url[node],
-                                                     tooltip="Test tooltip"))
+                                                     tooltip=f"{self.nodes_text[node]}"))
         except KeyError:
             print(
                 f"KeyError in {self.load_path}: '{node}' is not given in 'icons', that's why it does "
