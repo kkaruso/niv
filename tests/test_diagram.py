@@ -28,11 +28,10 @@ class TestBuildDiagram(TestCase):
         with Diagram("test", filename="test", outformat="svg", show=False):
             members = []
             diagram = BuildDiagram(
-                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/templates/template.yaml', "", 1)
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '\\tests\\test_template.yaml', "", 1)
             diagram.create_nodes(members)
 
-            test_members = ['OsaCloud', 'OsaDatabase', 'OsaDeviceScanner', 'OsaServer', 'OsaServerWeb',
-                            'OsaServerTerminal', 'OsaServer', 'OsaServerWeb', 'OsaServerTerminal']
+            test_members = ["cloud1", "db1", "deviceScanner1"]
             self.assertEqual(test_members, members)
 
     def test_create_connections(self):
@@ -43,12 +42,11 @@ class TestBuildDiagram(TestCase):
             instances = []
             members = []
             diagram = BuildDiagram(
-                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/templates/template.yaml', "", 1)
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '\\tests\\test_template.yaml', "", 1)
             diagram.create_nodes(members)
             diagram.create_connections(instances)
 
-            test_instance_names = ['OsaDesktopImac', 'OsaCloud', 'OsaDatabase', 'OsaDeviceScanner', 'OsaServerWeb',
-                                   'OsaServerTerminal', 'OsaServerWeb', 'OsaServerTerminal']
+            test_instance_names = ["cloud1", "db1", "deviceScanner1"]
 
             self.assertEqual(test_instance_names, instances)
 

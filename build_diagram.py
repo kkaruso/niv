@@ -133,11 +133,10 @@ class BuildDiagram:
         print(f"connections_color: {self.connections_color}")
         print(f"connections_text: {self.connections_text}\n")
 
-    def create_nodes(self):
+    def create_nodes(self, members):
         """
         Create nodes outside and inside of clusters
         """
-        members = []
         # Fill "members" list with all the group members
         for group_name in self.group_members:
             for member in list(self.group_members.get(group_name)):
@@ -161,11 +160,10 @@ class BuildDiagram:
                 for member in list(self.group_members.get(name)):
                     self.create_single_node(member)
 
-    def create_connections(self):
+    def create_connections(self, instance_names):
         """
         Create connections between nodes
         """
-        instance_names = []
         # Get the names of the instances as strings to create the connections
         for instance in self.instances:
             # Only get the name of the icon as a string
@@ -198,7 +196,8 @@ class BuildDiagram:
         """
         Creates the diagram with the right amount of of nodes, clusters and connections
         """
-
+        members = []
+        instance_names = []
         graph_attr = {
             "bgcolor": f"{self.graph_bg_color}",
             "pad": f"{self.graph_padding}",
@@ -213,9 +212,9 @@ class BuildDiagram:
         with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename, outformat=self.output_format,
                      show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
             # Create nodes and clusters
-            self.create_nodes()
+            self.create_nodes(members)
             # Create connections
-            self.create_connections()
+            self.create_connections(instance_names)
 
             # # Group 1
             # with Cluster("Gruppe 1"):
