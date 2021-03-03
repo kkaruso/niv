@@ -160,6 +160,8 @@ class BuildDiagram:
         for instance in self.instances:
             # Only get the name of the icon as a string
             instance_name = str(instance).split('.')[-1].split('>')[0]
+            if self.output_format != "svg":
+                instance_name = str(instance).split('.')[-1].split('Png')[0]
             # Get the key of the name of the instance in the dictionary
             key_of_instance_name = list(self.nodes_icon.keys())[list(self.nodes_icon.values()).index(instance_name)]
             instance_names.append(key_of_instance_name)
@@ -174,9 +176,11 @@ class BuildDiagram:
         # Create connections
         for i, _ in enumerate(instance_names):
             for j, _ in enumerate(self.connections_endpoints):
-                if instance_names[i] == self.connections_endpoints[j][0]:
+                if instance_names[i] == self.connections_endpoints[j][0] or instance_names[i] == \
+                        self.connections_endpoints[j][0] + "Png":
                     for k, _ in enumerate(instance_names):
-                        if self.connections_endpoints[j][1] == instance_names[k]:
+                        if self.connections_endpoints[j][1] == instance_names[k] or \
+                                self.connections_endpoints[j][1] + "Png" == instance_names[k]:
                             _ = self.instances[k] - \
                                 Edge(color=f"{self.connections_color[j]}",
                                      label=f"{self.connections_text[j]}",
@@ -240,10 +244,17 @@ class BuildDiagram:
                                                          pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!",
                                                          tooltip=f"{self.nodes_text[node]}"))
             else:
-                self.instances.append(
-                    globals()[self.nodes_icon[node]](node_text,
-                                                     URL=self.nodes_url[node],
-                                                     tooltip=f"{self.nodes_text[node]}"))
+                if self.output_format != "svg":
+                    self.instances.append(
+                        globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                 URL=self.nodes_url[node],
+                                                                 tooltip=f"{self.nodes_text[node]}"))
+                else:
+                    self.instances.append(
+                        globals()[self.nodes_icon[node]](node_text,
+                                                         URL=self.nodes_url[node],
+                                                         tooltip=f"{self.nodes_text[node]}"))
+
         except KeyError:
             print(
                 f"KeyError in {self.load_path}: '{node}' is not given in 'icons', that's why it does "
