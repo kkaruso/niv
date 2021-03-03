@@ -6,6 +6,7 @@ test:pylint:
     - pip install pylint --quiet
     - pip install pyyaml
     - pylint --ignored-classes=_socketobject --max-line-length=150 *.py
+    - pylint --max-statements=100 *.py
 
 test:pytest:
   image: python:3.9
