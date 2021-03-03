@@ -37,17 +37,20 @@ class BuildDiagram:
 
         # TODO: Add checks if value not given
         # Load diagram properties
-        self.graph_bg_color = self.yaml.get("diagram").get("backgroundColor")
-        self.graph_padding = self.yaml.get("diagram").get("padding")
-        self.graph_layout = self.yaml.get("diagram").get("layout")
+        self.graph_bg_color = self.set_variables("diagram", "backgroundColor", "transparent")
+        self.graph_padding = self.set_variables("diagram", "padding", 0.5)
+        self.graph_layout = self.set_variables("diagram", "layout", "fdp")
 
         # Load title properties
-        self.title_text = self.yaml.get("title").get("text")
-        self.title_subtext = self.yaml.get("title").get("subText")
-        self.title_font_size = self.yaml.get("title").get("fontSize")
+        self.title_text = self.set_variables("title", "text", "Diagram")
+        self.title_subtext = self.set_variables("title", "subText", "")
+        self.title_font_size = self.set_variables("title", "fontSize", 15)
 
-        # TODO: Create function like "fill_dictionary(dict, field)" or so for the following for loops
-        # Get name and text of nodes and save as key value pairs in "nodes_text"
+        # Get icon of each node
+        self.nodes_icon = {}
+        self.fill_icon_dictionary(self.nodes_icon, "icon")
+
+        # Get text of each node
         self.nodes_text = {}
         self.fill_icon_dictionary(self.nodes_text, "text")
         # for node in self.yaml.get("icons"):
@@ -80,9 +83,23 @@ class BuildDiagram:
         #         self.nodes_url[url] = ""
 
         # Save each endpoint of a connection as a list in "connections" list
-        self.connections = []
+        self.connections_endpoints = []
         for i in range(0, len(self.yaml.get("connections"))):
-            self.connections.append(self.yaml.get("connections")[i].get("endpoints"))
+            self.connections_endpoints.append(self.yaml.get("connections")[i].get("endpoints"))
+
+        self.connections_color = {}
+        for i, connection in enumerate(self.yaml.get("connections")):
+            if connection.get("color") is not None:
+                self.connections_color[i] = connection.get("color")
+            else:
+                self.connections_color[i] = "#7B8894"
+
+        self.connections_text = {}
+        for i, connection in enumerate(self.yaml.get("connections")):
+            if connection.get("text") is not None:
+                self.connections_text[i] = connection.get("text")
+            else:
+                self.connections_text[i] = ""
 
         # Get name and members of groups and save as key value pairs in "group_members"
         self.group_members = {}
@@ -128,18 +145,27 @@ class BuildDiagram:
         print(f"filename: {self.filename}\n")
 
         print("Created variables from .yaml:")
-        print(f"title: {self.title_text}")
-        print(f"group_members: {self.group_members}")
-        print(f"group_url: {self.group_url}")
+        print(f"graph_bg_color: {self.graph_bg_color}")
+        print(f"graph_padding: {self.graph_padding}")
+        print(f"graph_layout: {self.graph_layout}\n")
+        print(f"title_text: {self.title_text}")
+        print(f"title_subtext: {self.title_subtext}")
+        print(f"title_fontsize: {self.title_font_size}\n")
+        print(f"nodes_icon: {self.nodes_icon}")
         print(f"nodes_text: {self.nodes_text}")
         print(f"nodes_url: {self.nodes_url}")
-        print(f"nodes_ip: {self.nodes_ip}")
-        print(f"connections: {self.connections}\n")
+        print(f"nodes_ip: {self.nodes_ip}\n")
+        print(f"group_members: {self.group_members}")
+        print(f"group_url: {self.group_url}\n")
+        print(f"connections: {self.connections_endpoints}")
+        print(f"connections_color: {self.connections_color}")
+        print(f"connections_text: {self.connections_text}\n")
 
-    def create_nodes(self, members):
+    def create_nodes(self):
         """
         Create nodes outside and inside of clusters
         """
+        members = []
         # Fill "members" list with all the group members
         for group_name in self.group_members:
             for member in list(self.group_members.get(group_name)):
@@ -156,23 +182,29 @@ class BuildDiagram:
                 "fontname": "helvetica-bold",
                 "margin": "20",
                 "URL": f"{self.group_url[group_name]}"
+                # "bgcolor:": "black"
             }
             with Cluster(group_name, graph_attr=clustr_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(group_name)):
                     self.create_single_node(member)
 
-    def create_connections(self, instance_names):
+    def create_connections(self):
         """
         Create connections between nodes
         """
+        instance_names = []
         # Get the names of the instances as strings to create the connections
         for instance in self.instances:
+            # Only get the name of the icon as a string
             instance_name = str(instance).split('.')[-1].split('>')[0]
-            instance_names.append(instance_name)
+            # Get the key of the name of the instance in the dictionary
+            key_of_instance_name = list(self.nodes_icon.keys())[list(self.nodes_icon.values()).index(instance_name)]
+            instance_names.append(key_of_instance_name)
 
+        print(f"instance_names:{instance_names}, instances:{self.instances}")
         # Check if any endpoints are not given in 'icons', if not print an error
-        for connection in self.connections:
+        for connection in self.connections_endpoints:
             for endpoint in connection:
                 if endpoint not in self.nodes_text:
                     print(f"KeyError in {self.load_path}: '{endpoint}' is not given in 'icons', that's why it "
@@ -180,11 +212,13 @@ class BuildDiagram:
 
         # Create connections
         for i, _ in enumerate(instance_names):
-            for j, _ in enumerate(self.connections):
-                if instance_names[i] == self.connections[j][0]:
+            for j, _ in enumerate(self.connections_endpoints):
+                if instance_names[i] == self.connections_endpoints[j][0]:
                     for k, _ in enumerate(instance_names):
-                        if self.connections[j][1] == instance_names[k]:
-                            _ = self.instances[k] - self.instances[i]
+                        if self.connections_endpoints[j][1] == instance_names[k]:
+                            _ = self.instances[k] - \
+                                Edge(color=f"{self.connections_color[j]}", label=f"{self.connections_text[j]}") - \
+                                self.instances[i]
 
     def create_diagram(self):
         """
@@ -204,13 +238,11 @@ class BuildDiagram:
 
         with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename, outformat=self.output_format,
                      show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
-            members = []
-            instance_names = []
 
             # Create nodes and clusters
-            self.create_nodes(members)
+            self.create_nodes()
             # Create connections
-            self.create_connections(instance_names)
+            self.create_connections()
 
             # # Group 1
             # with Cluster("Gruppe 1"):
@@ -256,24 +288,24 @@ class BuildDiagram:
                 # If output format is other than svg, create diagram with png icons, else with svg icons
                 if self.output_format != "svg":
                     self.instances.append(
-                        globals()[node + "Png"](node_text,
-                                                URL=self.nodes_url[node],
-                                                pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!"))
+                        globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                 URL=self.nodes_url[node],
+                                                                 pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!"))
                 else:
                     self.instances.append(
-                        globals()[node](node_text,
-                                        URL=self.nodes_url[node],
-                                        pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!"))
+                        globals()[self.nodes_icon[node]](node_text,
+                                                         URL=self.nodes_url[node],
+                                                         pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!"))
             else:
                 self.instances.append(
-                    globals()[node](node_text,
-                                    URL=self.nodes_url[node]))
+                    globals()[self.nodes_icon[node]](node_text,
+                                                     URL=self.nodes_url[node]))
         except KeyError:
             print(
                 f"KeyError in {self.load_path}: '{node}' is not given in 'icons', that's why it does "
                 f"not show in the diagram. Add it to 'icons' or remove it as a member.")
 
-    def fill_icon_dictionary(self, _dict, _field):
+    def fill_icon_dictionary(self, _dict: Dict, _field: str):
         """
         Fills a given dictionary with information from a field in a .yaml
 
@@ -284,3 +316,18 @@ class BuildDiagram:
             _dict[node] = self.yaml.get("icons").get(node).get(_field)
             if self.yaml.get('icons')[node].get(_field) is None:
                 _dict[node] = ""
+
+    def set_variables(self, _object: str, _subobject: str, _default: any):
+        """
+        Set a given variable
+
+        :param _object: object in the .yaml
+        :param _subobject: sub-object in the .yaml
+        :param _default: default value for the variable
+        """
+        _var = None
+        if self.yaml.get(_object).get(_subobject) is not None:
+            _var = self.yaml.get(_object).get(_subobject)
+        else:
+            _var = _default
+        return _var
