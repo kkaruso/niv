@@ -1,0 +1,54 @@
+diagram: # Diagram properties
+  backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
+  padding:   # Padding around the graph (default: 0.5; type: double)
+  # TODO: Fix when using neato that no groups are showing
+  layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
+
+title: # Text underneath the diagram.
+  text: NIV  # Title under the Diagram (default: Diagram; type: string)
+  subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
+  fontSize: 15  # Font size (default: 15; type: int)
+
+  # TODO: Find a way to add this information to the diagram or delete it
+  author: "Tom Themas"  # Author's name: enter string
+  company: Empty  # Enter company name or leave empty
+  date: "01.01.2021"  # Default date is current date or enter specific date as string
+  version: "1.0"  # Version of the diagram as string
+
+groupDefaults: &groupDefaults #Use current values as defaults
+  backgroundColor: lightblue  # Fill the background of the group box
+
+# TODO: change icon names to variables and put current name into "icon"
+icons: #enter devices here. Maybe change "icons" to "devices" later.
+  cloud1: {icon: OsaCloud, text: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
+  db1: {icon: OsaDatabase, text: MySQL Database, port: 25565, x: 0, y: 0, url: }
+  deviceScanner1: {icon: OsaDeviceScanner, text: Local Device Scanner, x: 0, y: 6 }
+  serverWeb1: {icon: OsaServerWeb, text: My WebServer, x: 5, y: 2 }
+  serverTerminal1: {icon: OsaServerTerminal, text: Central Terminal, x: 5, y: 5 }
+  desktop1: {icon: OsaDesktopImac, text: My Desktop, x: 3, y: 0 }
+  Osa: {icon: server, text: Test, x: 1 }
+  phone1: { icon: OsaIphone, text: Iphone, x: 1, y: 1 }
+  cameraWeb1: { icon: OsaCameraWeb, text: CameraWeb, x: 0, y: -1 }
+  laptop1: { icon: OsaLaptop, text: Laptop, x: 0, y: 1 }
+  hub1: {icon: CiscoHub, text: Hub, x: 1, y: 4}
+
+
+
+# TODO: Implement that you can group other groups
+groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
+  group1: { <<: *groupDefaults, name: My Servers, members: [hub1, cloud1, db1, deviceScanner1], url: https://hs-worms.de }
+  moinmusa: { <<: *groupDefaults, name: My Servers, members: [server1, serverWeb1, serverTerminal1, laptop1], url: https://google.com }
+  moinmusa2: { <<: *groupDefaults, name: My Servers, members: [server1, serverWeb1] }
+
+connections: #enter your connections here
+- {endpoints: [cloud1, db1], text: Test, color: red}
+- {endpoints: [server1, serverWeb1] }
+- {endpoints: [server1, deviceScanner1] }
+- {endpoints: [desktop1, db1], text: Das ist ein text, color: blue}
+- {endpoints: [deviceScanner1, serverTerminal1], text: Die connection ist purple, color: purple}
+- {endpoints: [desktop1, phone1], color: green }
+- {endpoints: [serverTerminal1, laptop1], color: purple}
+- {endpoints: [cameraWeb1, desktop1] }
+- {endpoints: [serverWeb1, hub1] }
+- {endpoints: [cloud1, hub1] }
+
