@@ -144,8 +144,11 @@ class BuildDiagram:
             clustr_attr = {
                 "fontname": "helvetica-bold",
                 "margin": "20",
-                "URL": f"{self.group_url[name]}"
                 # "bgcolor:": "black"
+                "URL": f"{self.group_url[name]}"
+                # Connect the main diagram with the created under-diagrams with a URL-link
+                # "URL": f"group_diagrams/{self.filename}_{name}.{self.output_format}"
+
             }
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
@@ -156,6 +159,7 @@ class BuildDiagram:
         """
         Create connections between nodes
         """
+
         # Get the names of the instances as strings to create the connections
         for instance in self.instances:
             # Only get the name of the icon as a string
@@ -176,7 +180,6 @@ class BuildDiagram:
         # Create connections
         for i, _ in enumerate(instance_names):
             for j, _ in enumerate(self.connections_endpoints):
-
                 if instance_names[i] == self.connections_endpoints[j][0]:
                     for k, _ in enumerate(instance_names):
                         if self.connections_endpoints[j][1] == instance_names[k]:
@@ -186,6 +189,7 @@ class BuildDiagram:
                                      tooltip=f"{self.connections_text[j]}",
                                      labeltooltip=f"{self.connections_text[j]}") - \
                                 self.instances[i]
+        self.instances = []
 
     def create_diagram(self):
         """
@@ -210,6 +214,20 @@ class BuildDiagram:
             self.create_nodes(members)
             # Create connections
             self.create_connections(instance_names)
+
+        # # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
+        # for i, r in enumerate(self.yaml.get("groups")):
+        #     with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=f"group_diagrams/{self.filename}_{r}",
+        #                  outformat=self.output_format,
+        #                  show=False, graph_attr=graph_attr):
+        #
+        #         instance_names = []
+        #         # Create the nodes of the group inside a cluster
+        #         with Cluster(f"{r}"):
+        #             for member in list(self.group_members.get(r)):
+        #                 self.create_single_node(member)
+        #             # Create connections inside the group
+        #             self.create_connections(instance_names)
 
     def create_single_node(self, node):
         """
