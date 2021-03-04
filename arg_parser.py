@@ -24,7 +24,7 @@ class ArgParser:
     logger = NivLogger
     # Dictionary for argument choices
     ICONS = [1, 2, 3]
-    DETAIL = [1, 2, 3]
+    DETAIL = [0, 1, 2, 3]
 
     def __init__(self, args):
         self.args = args
@@ -57,7 +57,7 @@ class ArgParser:
         parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
                             default=self.config.get('default').get('std_details'), choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
-                                 '2: medium detail, 3: most detail (DEFAULT: 1)')
+                                 '2: medium detail, 3: most detail (DEFAULT: 0)')
 
         # print(parser.parse_args("-g".split()))
         # If no argument given, print help
