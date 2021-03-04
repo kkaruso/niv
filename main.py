@@ -20,7 +20,7 @@ if __name__ == '__main__':
         args = arg_parser.get_parser()
         with suppress(KeyError):
             diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg", arg_parser.get_detail_level())
-            diagram_builder.create_diagram()
+            diagram_builder.run()
 
     except (OSError, ValueError, TypeError, AssertionError) as error_message:
         # create variables to look on which files the error occurred

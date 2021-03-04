@@ -22,6 +22,7 @@ class BuildDiagram:
     """
 
     config = yaml_parser.get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
+    counter = 1
 
     # TODO: Add check if ip is a valid ip and check if url is a valid url (for ip checking:
     #  https://stackoverflow.com/questions/3462784/check-if-a-string-matches-an-ip-address-pattern-in-python)
@@ -183,6 +184,7 @@ class BuildDiagram:
                 if instance_names[i] == self.connections_endpoints[j][0]:
                     for k, _ in enumerate(instance_names):
                         if self.connections_endpoints[j][1] == instance_names[k]:
+                            print(f"TEST: {self.instances[k]}")
                             _ = self.instances[k] - \
                                 Edge(color=f"{self.connections_color[j]}",
                                      label=f"{self.connections_text[j]}",
@@ -191,7 +193,14 @@ class BuildDiagram:
                                 self.instances[i]
         self.instances = []
 
-    def create_diagram(self):
+    def run(self):
+        if self.detail_level == 0:
+            for i in range(2):
+                self.create_diagram(suffix=str(i))
+        else:
+            self.create_diagram()
+
+    def create_diagram(self, suffix=""):
         """
         Creates the diagram with the right amount of nodes, clusters and connections
         """
@@ -207,8 +216,8 @@ class BuildDiagram:
             "ranksep": "2.0",
             "splines": f"{self.graph_splines}"
         }
-
-        with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename, outformat=self.output_format,
+        with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename + suffix,
+                     outformat=self.output_format,
                      show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
             # Create nodes and clusters
             self.create_nodes(members)
@@ -234,13 +243,21 @@ class BuildDiagram:
         Create an instance of a given node class, if not valid print name of not valid node
         """
         try:
-            if self.detail_level == 2:
+            if self.detail_level == 0:
+                if self.counter == 1:
+                    node_text = f"{self.nodes_text[node]}\n" \
+                                f"IP: {self.nodes_ip[node]}\n"
+                else:
+                    node_text = f"{self.nodes_text[node]}\n" \
+                                f"IP: {self.nodes_ip[node]}\n" \
+                                f"Port: {self.nodes_port[node]}"
+            elif self.detail_level == 1:
+                node_text = f"{self.nodes_text[node]}\n" \
+                            f"IP: {self.nodes_ip[node]}\n"
+            else:
                 node_text = f"{self.nodes_text[node]}\n" \
                             f"IP: {self.nodes_ip[node]}\n" \
                             f"Port: {self.nodes_port[node]}"
-            else:
-                node_text = f"{self.nodes_text[node]}\n" \
-                            f"IP: {self.nodes_ip[node]}\n"
 
             # Remove double newlines for the case when port is given but no url
             node_text = node_text.replace("\n\n", "\n")
