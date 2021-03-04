@@ -44,7 +44,7 @@ class BuildDiagram:
         self.graph_bg_color = self.set_variables("diagram", "backgroundColor", "transparent")
         self.graph_padding = self.set_variables("diagram", "padding", 0.5)
         self.graph_layout = self.set_variables("diagram", "layout", "fdp")
-        self.graph_splines = self.set_variables("diagram", "connectionStyle", "curved")
+        self.graph_splines = self.set_variables("diagram", "connectionStyle", "spline")
 
         # Load title properties
         self.title_text = self.set_variables("title", "text", "Diagram")
@@ -98,6 +98,7 @@ class BuildDiagram:
         # Get text of connections
         self.connections_text = self.fill_connection_dictionary("connections", "text", "")
 
+        self.instances_keys = []
         self.instances = []
 
         # Just for "debugging"
@@ -156,20 +157,22 @@ class BuildDiagram:
                 for member in list(self.group_members.get(name)):
                     self.create_single_node(member)
 
-    def create_connections(self, instance_names):
+    def create_connections(self):
         """
         Create connections between nodes
         """
 
         # Get the names of the instances as strings to create the connections
-        for instance in self.instances:
-            # Only get the name of the icon as a string
-            instance_name = str(instance).split('.')[-1].split('>')[0]
-            if self.output_format != "svg":
-                instance_name = str(instance).split('.')[-1].split('Png')[0]
-            # Get the key of the name of the instance in the dictionary
-            key_of_instance_name = list(self.nodes_icon.keys())[list(self.nodes_icon.values()).index(instance_name)]
-            instance_names.append(key_of_instance_name)
+        # for instance in self.instances:
+        #     # Only get the name of the icon as a string
+        #     instance_name = str(instance).split('.')[-1].split('>')[0]
+        #     print(f"INSTANCE_NAMES_1:{instance_name}")
+        #     if self.output_format != "svg":
+        #         instance_name = str(instance).split('.')[-1].split('Png')[0]
+        #         print(f"INSTANCE_NAMES_2:{instance_name}")
+        # Get the key of the name of the instance in the dictionary
+        # key_of_instance_name = list(self.nodes_icon.keys())[list(self.nodes_icon.values()).index(instance_name)]
+        # instance_names.append(instance_name)
 
         # Check if any endpoints are not given in 'icons', if not print an error
         for connection in self.connections_endpoints:
@@ -179,19 +182,19 @@ class BuildDiagram:
                           f"does not show in the diagram. Add it to 'icons' or remove it as an endpoint.")
 
         # Create connections
-        for i, _ in enumerate(instance_names):
+        for i, _ in enumerate(self.instances_keys):
             for j, _ in enumerate(self.connections_endpoints):
-                if instance_names[i] == self.connections_endpoints[j][0]:
-                    for k, _ in enumerate(instance_names):
-                        if self.connections_endpoints[j][1] == instance_names[k]:
-                            print(f"TEST: {self.instances[k]}")
+                if self.instances_keys[i] == self.connections_endpoints[j][0]:
+                    for k, _ in enumerate(self.instances_keys):
+                        if self.connections_endpoints[j][1] == self.instances_keys[k]:
                             _ = self.instances[k] - \
                                 Edge(color=f"{self.connections_color[j]}",
                                      label=f"{self.connections_text[j]}",
                                      tooltip=f"{self.connections_text[j]}",
                                      labeltooltip=f"{self.connections_text[j]}") - \
                                 self.instances[i]
-        self.instances = []
+
+        self.instances_keys = []
 
     def run(self):
         """
@@ -209,7 +212,6 @@ class BuildDiagram:
         Creates the diagram with the right amount of nodes, clusters and connections
         """
         members = []
-        instance_names = []
         graph_attr = {
             "bgcolor": f"{self.graph_bg_color}",
             "pad": f"{self.graph_padding}",
@@ -223,11 +225,10 @@ class BuildDiagram:
         with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename + suffix,
                      outformat=self.output_format,
                      show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
-            instance_names = []
             # Create nodes and clusters
             self.create_nodes(members)
             # Create connections
-            self.create_connections(instance_names)
+            self.create_connections()
 
         # # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
         # for i, r in enumerate(self.yaml.get("groups")):
@@ -271,32 +272,39 @@ class BuildDiagram:
             # Remove double newlines for the case when port is given but no url
             node_text = node_text.replace("\n\n", "\n")
 
-            # Only pass coordinates to node creation if layout == neato
-            if self.graph_layout == "neato":
-                # If output format is other than svg, create diagram with png icons, else with svg icons
-                if self.output_format != "svg":
-                    self.instances.append(
-                        globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                 URL=self.nodes_url[node],
-                                                                 pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!",
-                                                                 tooltip=f"{self.nodes_text[node]}"))
+            try:
+                # Only pass coordinates to node creation if layout == neato
+                if self.graph_layout == "neato":
+                    # If output format is other than svg, create diagram with png icons, else with svg icons
+                    if self.output_format != "svg":
+                        self.instances.append(
+                            globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                     URL=self.nodes_url[node],
+                                                                     pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!",
+                                                                     tooltip=f"{self.nodes_text[node]}"))
+                    else:
+                        self.instances.append(
+                            globals()[self.nodes_icon[node]](node_text,
+                                                             URL=self.nodes_url[node],
+                                                             pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!",
+                                                             tooltip=f"{self.nodes_text[node]}"))
                 else:
-                    self.instances.append(
-                        globals()[self.nodes_icon[node]](node_text,
-                                                         URL=self.nodes_url[node],
-                                                         pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!",
-                                                         tooltip=f"{self.nodes_text[node]}"))
-            else:
-                if self.output_format != "svg":
-                    self.instances.append(
-                        globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                 URL=self.nodes_url[node],
-                                                                 tooltip=f"{self.nodes_text[node]}"))
-                else:
-                    self.instances.append(
-                        globals()[self.nodes_icon[node]](node_text,
-                                                         URL=self.nodes_url[node],
-                                                         tooltip=f"{self.nodes_text[node]}"))
+                    if self.output_format != "svg":
+                        self.instances.append(
+                            globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                     URL=self.nodes_url[node],
+                                                                     tooltip=f"{self.nodes_text[node]}"))
+                    else:
+                        self.instances.append(
+                            globals()[self.nodes_icon[node]](node_text,
+                                                             URL=self.nodes_url[node],
+                                                             tooltip=f"{self.nodes_text[node]}"))
+                self.instances_keys.append(node)
+            except KeyError:
+                print(
+                    f"KeyError in {self.load_path}: '{self.nodes_icon[node]}' is not a valid icon, "
+                    f"that's why it does not show in the diagram "
+                    f"Please take a look at the icon catalog in resources or remove the node.")
 
         except KeyError:
             print(

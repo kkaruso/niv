@@ -37,8 +37,8 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   group1: { <<: *groupDefaults, name: My Servers, members: [hub1, cloud1, db1, deviceScanner1], url: https://hs-worms.de }
-  moinmusa: { <<: *groupDefaults, name: My Servers, members: [server1, serverWeb1, serverTerminal1, laptop1], url: https://google.com }
-  moinmusa2: { <<: *groupDefaults, name: My Servers, members: [server1, serverWeb1] }
+  moinmusa: { <<: *groupDefaults, name: My Servers2, members: [server1, serverWeb1, serverTerminal1, laptop1], url: https://google.com }
+  moinmusa2: { <<: *groupDefaults, name: My Servers3, members: [server1, serverWeb1] }
 
 connections: #enter your connections here
 - {endpoints: [cloud1, db1], text: Test, color: red}

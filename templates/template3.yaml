@@ -49,23 +49,23 @@ groups: #add a group to target multiple objects at once, if you don't, delete th
 
 
 connections: #enter your connections here
-- {endpoints: [switch1, pc1], text: Test, color: red }
-- {endpoints: [switch1, pc2], text: Test, color: black }
-- {endpoints: [switch1, pc3], text: Test, color: purple }
-- {endpoints: [switch1, pc4], text: Test, color: green }
-- {endpoints: [switch1, pc5], text: Test, color: red }
-- {endpoints: [switch1, pc6], text: Test, color: red }
+- {endpoints: [switch1, pc1], color: red }
+- {endpoints: [switch1, pc2], color: black }
+- {endpoints: [switch1, pc3], color: purple }
+- {endpoints: [switch1, pc4], color: green }
+- {endpoints: [switch1, pc5], color: red }
+- {endpoints: [switch1, pc6], color: red }
 - {endpoints: [router1, switch1], color: purple }
 - {endpoints: [switch2, router1], color: blue }
-- {endpoints: [atmrouter1, switch2], text: Test, color: red}
-- {endpoints: [atmrouter1, switch2], text: Test, color: red}
-- {endpoints: [atmrouter1, switch2], text: Test, color: red}
-- {endpoints: [atmrouter1 ,switch2], text: Test, color: red}
-- {endpoints: [prozessor1, atmrouter1], text: Test, color: red}
-- {endpoints: [server1, prozessor1], text: Test, color: red}
-- {endpoints: [router1, cloud1], text: Test, color: red}
-- {endpoints: [laptop1, cloud1], text: Test, color: red}
-- {endpoints: [vpn1, cloud1], text: Test, color: red}
+- {endpoints: [atmrouter1, switch2], color: red}
+- {endpoints: [atmrouter2, switch2], color: red}
+- {endpoints: [atmrouter3, switch2], color: red}
+- {endpoints: [atmrouter4 ,switch2], color: red}
+- {endpoints: [prozessor1, atmrouter1], color: red}
+- {endpoints: [server1, prozessor1], color: red}
+- {endpoints: [router1, cloud1], color: red}
+- {endpoints: [laptop1, cloud1], color: red}
+- {endpoints: [vpn1, cloud1], color: red}
 
 
 
