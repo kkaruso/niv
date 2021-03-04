@@ -148,7 +148,6 @@ class BuildDiagram:
             clustr_attr = {
                 "fontname": "helvetica-bold",
                 "margin": "20",
-                # "bgcolor:": "black",
                 "URL": f"{self.group_url[name]}"
                 # Connect the main diagram with the created under-diagrams with a URL-link
                 # "URL": f"group_diagrams/{self.filename}_{name}.{self.output_format}"
@@ -196,7 +195,10 @@ class BuildDiagram:
                                      labeltooltip=f"{self.connections_text[j]}") - \
                                 self.instances[i]
 
+        # Clear both lists to have empty lists for every diagram creation to fix not seeing connections
+        # when multiple diagrams are created
         self.instances_keys = []
+        self.instances = []
 
     def run(self):
         """
