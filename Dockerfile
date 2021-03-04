@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 
-RUN apt install -y graphviz
+RUN sudo apt update
+RUN sudo apt install -y graphviz
 
 COPY . /apps/
 
