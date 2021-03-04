@@ -157,9 +157,9 @@ class BuildDiagram:
             clustr_attr = {
                 "fontname": "helvetica-bold",
                 "margin": "20",
-                "URL": f"{self.group_url[name]}"
+                # "URL": f"{self.group_url[name]}"
                 # Connect the main diagram with the created under-diagrams with a URL-link
-                # "URL": f"group_diagrams/{self.filename}_{name}.{self.output_format}"
+                "URL": f"group_diagrams/{self.filename}_{name}.{self.output_format}"
 
             }
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
@@ -206,7 +206,7 @@ class BuildDiagram:
 
         # Clear both lists to have empty lists for every diagram creation to fix not seeing connections
         # when multiple diagrams are created
-        self.instances_keys = []
+        self.instances_keys.clear()
         self.instances = []
 
     def run(self):
@@ -245,19 +245,19 @@ class BuildDiagram:
             # Create connections
             self.create_connections()
 
-        # # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
-        # for i, r in enumerate(self.yaml.get("groups")):
-        #     with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=f"group_diagrams/{self.filename}_{r}",
-        #                  outformat=self.output_format,
-        #                  show=False, graph_attr=graph_attr):
-        #
-        #         instance_names = []
-        #         # Create the nodes of the group inside a cluster
-        #         with Cluster(f"{r}"):
-        #             for member in list(self.group_members.get(r)):
-        #                 self.create_single_node(member)
-        #             # Create connections inside the group
-        #             self.create_connections(instance_names)
+        # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
+        for i, r in enumerate(self.yaml.get("groups")):
+            with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=f"group_diagrams/{self.filename}_{r}",
+                         outformat=self.output_format,
+                         show=False, graph_attr=graph_attr):
+
+                instance_names = []
+                # Create the nodes of the group inside a cluster
+                with Cluster(f"{r}"):
+                    for member in list(self.group_members.get(r)):
+                        self.create_single_node(member)
+                    # Create connections inside the group
+                    self.create_connections()
 
     def set_diagram_title(self):
         """
@@ -285,21 +285,21 @@ class BuildDiagram:
             # Counter checks how many diagrams have been created thus far
             if self.detail_level == 0:
                 if self.counter == 1:
-                    node_text = f"{self.nodes_text[node]}\n" \
-                                f"IP: {self.nodes_ip[node]}\n"
+                    node_text = f"\n{self.nodes_text[node]}\n" \
+                                f" {self.nodes_ip[node]}\n"
                 else:
-                    node_text = f"{self.nodes_text[node]}\n" \
-                                f"IP: {self.nodes_ip[node]}\n" \
-                                f"Port: {self.nodes_port[node]}"
+                    node_text = f"\n{self.nodes_text[node]}\n" \
+                                f" {self.nodes_ip[node]}\n" \
+                                f" {self.nodes_port[node]}"
             # Detail level 1 shows text and IP's
             elif self.detail_level == 1:
-                node_text = f"{self.nodes_text[node]}\n" \
-                            f"IP: {self.nodes_ip[node]}\n"
+                node_text = f"\n{self.nodes_text[node]}\n" \
+                            f" {self.nodes_ip[node]}\n"
             # Detail level 2 shows text, IP's and Ports
             else:
-                node_text = f"{self.nodes_text[node]}\n" \
-                            f"IP: {self.nodes_ip[node]}\n" \
-                            f"Port: {self.nodes_port[node]}"
+                node_text = f"\n{self.nodes_text[node]}\n" \
+                            f" {self.nodes_ip[node]}\n" \
+                            f" {self.nodes_port[node]}"
 
             # Remove double newlines for the case when port is given but no url
             node_text = node_text.replace("\n\n", "\n")

@@ -2,12 +2,12 @@ diagram: # Diagram properties
   backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding: 0.5  # Padding around the graph (default: 0.5; type: double)
   # TODO: Fix when using neato that no groups are showing
-  layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
+  layout: neato  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
   connectionStyle: curved # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
   direction: TB #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
 
 title: # Text underneath the diagram.
-  text: NIV  # Title under the Diagram (default: Diagram; type: string)
+  text: \n\nNIV  # Title under the Diagram (default: Diagram; type: string)
   subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
   fontSize: 15  # Font size (default: 15; type: int)
 
@@ -22,107 +22,176 @@ groupDefaults: &groupDefaults #Use current values as defaults
 
 # TODO: change icon names to variables and put current name into "icon"
 icons: #enter devices here. Maybe change "icons" to "devices" later.
-  cloud1: {icon: Cloud, text: Cloud, x: 6, y: 5}
-  router1: { icon: RouterFirewall, text: Router Firewall, x: 4, y: 2 }
-  safeharbor01: {icon: SafeharborIcon, text: SafeharborIcon a1, x: 4, y: 2 }
-  safeharbor02: { icon: SafeharborIcon, text: SafeharborIcon a2, x: 7, y: 2 }
-  safeharbor11: { icon: SafeharborIcon, text: SafeharborIcon b1, x: 7, y: 2 }
-  safeharbor12: { icon: SafeharborIcon, text: SafeharborIcon b2, x: 7, y: 2 }
-  safeharbor13: { icon: SafeharborIcon, text: SafeharborIcon b3, x: 7, y: 2 }
-  safeharbor14: { icon: SafeharborIcon, text: SafeharborIcon b4, x: 7, y: 2 }
-  switch1: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 9, y: 2 }
-  switch2: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 9, y: 2 }
-  switch3: { icon: WorkgroupSwitch, text: Work group Switch c3, x: 9, y: 2 }
-  switch4: { icon: WorkgroupSwitch, text: Work group Switch c4, x: 9, y: 2 }
-  switch5: { icon: WorkgroupSwitch, text: Work group Switch c5, x: 9, y: 2 }
-  switch6: { icon: WorkgroupSwitch, text: Work group Switch c6, x: 9, y: 2 }
-  server1: { icon: FileServer, text: Server 1, x: 9, y: 2 }
-  server2: { icon: FileServer, text: Server 2, x: 9, y: 2 }
-  server3: { icon: FileServer, text: Server 3, x: 9, y: 2 }
-  server4: { icon: FileServer, text: Server 4, x: 9, y: 2 }
-  server5: { icon: FileServer, text: Server 5, x: 9, y: 2 }
-  server6: { icon: FileServer, text: Server 6, x: 9, y: 2 }
-  server7: { icon: FileServer, text: Server 7, x: 9, y: 2 }
-  server8: { icon: FileServer, text: Server 8, x: 9, y: 2 }
-  server9: { icon: FileServer, text: Server 9, x: 9, y: 2 }
-  server10: { icon: FileServer, text: Server 10, x: 9, y: 2 }
-  server11: { icon: FileServer, text: Server 11, x: 9, y: 2 }
-  server12: { icon: FileServer, text: Server 12, x: 9, y: 2 }
-
+  cloud1: {icon: Cloud, text: Internet, x: 24, y: 26}
+  router1: { icon: RouterFirewall, text: Router Firewall, x: 24, y: 22 }
+  core-Switch1:  {icon: SafeharborIcon, text: core-Switch 1, x: 22, y: 18 }
+  core-Switch2:  {icon: SafeharborIcon, text: core-Switch 2, x: 26, y: 18 }
+  spine-Switch1: {icon: SafeharborIcon, text: spine-Switch 1, x: 18, y: 12 }
+  spine-Switch2: {icon: SafeharborIcon, text: spine-Switch 2, x: 22, y: 12 }
+  spine-Switch3: {icon: SafeharborIcon, text: spine-Switch 3, x: 26, y: 12 }
+  spine-Switch4: {icon: SafeharborIcon, text: spine-Switch 4, x: 30, y: 12 }
+  switch1: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 1, y: 6 }
+  switch2: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 4, y: 6 }
+  switch3: { icon: WorkgroupSwitch, text: Work group Switch c3, x: 11, y: 6 }
+  switch4: { icon: WorkgroupSwitch, text: Work group Switch c4, x: 14, y: 6 }
+  switch5: { icon: WorkgroupSwitch, text: Work group Switch c5, x: 21, y: 6 }
+  switch6: { icon: WorkgroupSwitch, text: Work group Switch c6, x: 24, y: 6 }
+  switch7: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 31, y: 6 }
+  switch8: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 34, y: 6 }
+  switch9: { icon: WorkgroupSwitch, text: Work group Switch c3, x: 41, y: 6 }
+  switch10: { icon: WorkgroupSwitch, text: Work group Switch c4, x: 44, y: 6 }
+  switch11: { icon: WorkgroupSwitch, text: Work group Switch c5, x: 51, y: 6 }
+  switch12: { icon: WorkgroupSwitch, text: Work group Switch c6, x: 54, y: 6 }
+  server1: { icon: FileServer, text: Server 1, x: 0, y: 2 }
+  server2: { icon: FileServer, text: Server 2, x: 2, y: 2 }
+  server3: { icon: FileServer, text: Server 3, x: 4, y: 2 }
+  server4: { icon: FileServer, text: Server 4, x: 6, y: 2 }
+  server5: { icon: FileServer, text: Server 5, x: 10, y: 2 }
+  server6: { icon: FileServer, text: Server 6, x: 12, y: 2 }
+  server7: { icon: FileServer, text: Server 7, x: 14, y: 2 }
+  server8: { icon: FileServer, text: Server 8, x: 16, y: 2 }
+  server9: { icon: FileServer, text: Server 9, x: 20, y: 2 }
+  server10: { icon: FileServer, text: Server 10, x: 22, y: 2 }
+  server11: { icon: FileServer, text: Server 11, x: 24, y: 2 }
+  server12: { icon: FileServer, text: Server 12, x: 26, y: 2 }
+  server13: { icon: FileServer, text: Server 1, x: 30, y: 2 }
+  server14: { icon: FileServer, text: Server 2, x: 32, y: 2 }
+  server15: { icon: FileServer, text: Server 3, x: 34, y: 2 }
+  server16: { icon: FileServer, text: Server 4, x: 36, y: 2 }
+  server17: { icon: FileServer, text: Server 5, x: 40, y: 2 }
+  server18: { icon: FileServer, text: Server 6, x: 42, y: 2 }
+  server19: { icon: FileServer, text: Server 7, x: 44, y: 2 }
+  server20: { icon: FileServer, text: Server 8, x: 46, y: 2 }
+  server21: { icon: FileServer, text: Server 9, x: 50, y: 2 }
+  server22: { icon: FileServer, text: Server 10, x: 52, y: 2 }
+  server23: { icon: FileServer, text: Server 11, x: 54, y: 2 }
+  server24: { icon: FileServer, text: Server 12, x: 56, y: 2 }
 
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  group1: { <<: *groupDefaults, name: Cloud, members: [safeharbor01, safeharbor02], url: https://hs-worms.de }
-  group2: { <<: *groupDefaults, name: SafeharborIcon b, members: [safeharbor11, safeharbor12, safeharbor13, safeharbor14] }
-  group3: { <<: *groupDefaults, name: Switch, members: [ switch1, switch2, switch3, switch4, switch5, switch6 ] }
-  group4: { <<: *groupDefaults, name: Server A, members: [ server1, server2] }
-  group5: { <<: *groupDefaults, name: Server B, members: [ server3, server4] }
-  group6: { <<: *groupDefaults, name: Server C, members: [ server5, server6] }
-  group7: { <<: *groupDefaults, name: Server D, members: [ server7, server8] }
-  group8: { <<: *groupDefaults, name: Server E, members: [ server9, server10] }
-  group9: { <<: *groupDefaults, name: Server F, members: [ server11, server12] }
+  group1: { <<: *groupDefaults, name: Core-Swiches , members: [core-Switch1, core-Switch2], url: https://hs-worms.de }
+  group2: { <<: *groupDefaults, name: Spine-Swiches, members: [spine-Switch1, spine-Switch2, spine-Switch3, spine-Switch4] }
+  group4: { <<: *groupDefaults, name: Rack 1, members: [ server1, server2, server3, server4, switch1, switch2] }
+  group5: { <<: *groupDefaults, name: Rack 2, members: [ server5, server6, server7, server8, switch3, switch4] }
+  group6: { <<: *groupDefaults, name: Rack 3, members: [ server9, server10, server11, server12, switch5, switch6] }
+  group7: { <<: *groupDefaults, name: Rack 4, members: [ server13, server14, server15, server16, switch7, switch8] }
+  group8: { <<: *groupDefaults, name: Rack 5, members: [ server17, server18, server19, server20, switch9, switch10] }
+  group9: { <<: *groupDefaults, name: Rack 6, members: [ server21, server22, server23, server24, switch11, switch12] }
 
 
 
 connections: #enter your connections here
 - {endpoints: [router1, cloud1], color: red}
-- {endpoints: [safeharbor01, router1], color: red}
-- {endpoints: [safeharbor02, router1], color: red}
+
+- {endpoints: [core-Switch1, router1], color: red}
+- {endpoints: [core-Switch2, router1], color: red}
+
+- {endpoints: [spine-Switch1, core-Switch1], color: red}
+- {endpoints: [spine-Switch2, core-Switch1], color: red}
+- {endpoints: [spine-Switch3, core-Switch1], color: red}
+- {endpoints: [spine-Switch4, core-Switch1], color: red}
+
+- {endpoints: [spine-Switch1, core-Switch2], color: red}
+- {endpoints: [spine-Switch2, core-Switch2], color: red}
+- {endpoints: [spine-Switch3, core-Switch2], color: red}
+- {endpoints: [spine-Switch4, core-Switch2], color: red}
 
 
-- {endpoints: [safeharbor11, safeharbor01], color: blue}
-- {endpoints: [safeharbor12, safeharbor01], color: blue}
-- {endpoints: [safeharbor13, safeharbor01], color: blue}
-- {endpoints: [safeharbor14, safeharbor01], color: blue}
+- {endpoints: [switch1, spine-Switch1], color: red}
+- {endpoints: [switch2, spine-Switch1], color: red}
+- {endpoints: [switch3, spine-Switch1], color: red}
+- {endpoints: [switch4, spine-Switch1], color: red}
+- {endpoints: [switch5, spine-Switch1], color: red}
+- {endpoints: [switch6, spine-Switch1], color: red}
+- {endpoints: [switch7, spine-Switch1], color: red}
+- {endpoints: [switch8, spine-Switch1], color: red}
+- {endpoints: [switch9, spine-Switch1], color: red}
+- {endpoints: [switch10, spine-Switch1], color: red}
+- {endpoints: [switch11, spine-Switch1], color: red}
+- {endpoints: [switch12, spine-Switch1], color: red}
 
-- {endpoints: [safeharbor11, safeharbor02], color: green}
-- {endpoints: [safeharbor12, safeharbor02], color: green}
-- {endpoints: [safeharbor13, safeharbor02], color: green}
-- {endpoints: [safeharbor14, safeharbor02], color: green}
+- {endpoints: [switch1, spine-Switch2], color: red}
+- {endpoints: [switch2, spine-Switch2], color: red}
+- {endpoints: [switch3, spine-Switch2], color: red}
+- {endpoints: [switch4, spine-Switch2], color: red}
+- {endpoints: [switch5, spine-Switch2], color: red}
+- {endpoints: [switch6, spine-Switch2], color: red}
+- {endpoints: [switch7, spine-Switch2], color: red}
+- {endpoints: [switch8, spine-Switch2], color: red}
+- {endpoints: [switch9, spine-Switch2], color: red}
+- {endpoints: [switch10, spine-Switch2], color: red}
+- {endpoints: [switch11, spine-Switch2], color: red}
+- {endpoints: [switch12, spine-Switch2], color: red}
 
-- {endpoints: [switch1, safeharbor11], color: purple}
-- {endpoints: [switch2, safeharbor11], color: purple}
-- {endpoints: [switch3, safeharbor11], color: purple}
-- {endpoints: [switch4, safeharbor11], color: purple}
-- {endpoints: [switch5, safeharbor11], color: purple}
-- {endpoints: [switch6, safeharbor11], color: purple}
+- {endpoints: [switch1, spine-Switch3], color: red}
+- {endpoints: [switch2, spine-Switch3], color: red}
+- {endpoints: [switch3, spine-Switch3], color: red}
+- {endpoints: [switch4, spine-Switch3], color: red}
+- {endpoints: [switch5, spine-Switch3], color: red}
+- {endpoints: [switch6, spine-Switch3], color: red}
+- {endpoints: [switch7, spine-Switch3], color: red}
+- {endpoints: [switch8, spine-Switch3], color: red}
+- {endpoints: [switch9, spine-Switch3], color: red}
+- {endpoints: [switch10, spine-Switch3], color: red}
+- {endpoints: [switch11, spine-Switch3], color: red}
+- {endpoints: [switch12, spine-Switch3], color: red}
 
-- {endpoints: [switch1, safeharbor12], color: purple}
-- {endpoints: [switch2, safeharbor12], color: purple}
-- {endpoints: [switch3, safeharbor12], color: purple}
-- {endpoints: [switch4, safeharbor12], color: purple}
-- {endpoints: [switch5, safeharbor12], color: purple}
-- {endpoints: [switch6, safeharbor12], color: purple}
-
-- {endpoints: [switch1, safeharbor13], color: purple}
-- {endpoints: [switch2, safeharbor13], color: purple}
-- {endpoints: [switch3, safeharbor13], color: purple}
-- {endpoints: [switch4, safeharbor13], color: purple}
-- {endpoints: [switch5, safeharbor13], color: purple}
-- {endpoints: [switch6, safeharbor13], color: purple}
-
-- {endpoints: [switch1, safeharbor14], color: purple}
-- {endpoints: [switch2, safeharbor14], color: purple}
-- {endpoints: [switch3, safeharbor14], color: purple}
-- {endpoints: [switch4, safeharbor14], color: purple}
-- {endpoints: [switch5, safeharbor14], color: purple}
-- {endpoints: [switch6, safeharbor14], color: purple}
+- {endpoints: [switch1, spine-Switch4], color: red}
+- {endpoints: [switch2, spine-Switch4], color: red}
+- {endpoints: [switch3, spine-Switch4], color: red}
+- {endpoints: [switch4, spine-Switch4], color: red}
+- {endpoints: [switch5, spine-Switch4], color: red}
+- {endpoints: [switch6, spine-Switch4], color: red}
+- {endpoints: [switch7, spine-Switch4], color: red}
+- {endpoints: [switch8, spine-Switch4], color: red}
+- {endpoints: [switch9, spine-Switch4], color: red}
+- {endpoints: [switch10, spine-Switch4], color: red}
+- {endpoints: [switch11, spine-Switch4], color: red}
+- {endpoints: [switch12, spine-Switch4], color: red}
 
 - {endpoints: [server1, switch1], color: black}
+- {endpoints: [server1, switch2], color: black }
 - {endpoints: [server2, switch1], color: black}
-
-- {endpoints: [server3, switch2], color: black}
-- {endpoints: [server4, switch2], color: black}
-
+- {endpoints: [server2, switch2], color: black }
+- {endpoints: [server3, switch1], color: black }
+- {endpoints: [server3, switch2], color: black }
+- {endpoints: [server4, switch1], color: black }
+- {endpoints: [server4, switch2], color: black }
 - {endpoints: [server5, switch3], color: black}
+- {endpoints: [server5, switch4], color: black }
 - {endpoints: [server6, switch3], color: black}
-
-- {endpoints: [server7, switch4], color: black}
-- {endpoints: [server8, switch4], color: black}
-
+- {endpoints: [server6, switch4], color: black }
+- {endpoints: [server7, switch3], color: black }
+- {endpoints: [server7, switch4], color: black }
+- {endpoints: [server8, switch3], color: black }
+- {endpoints: [server8, switch4], color: black }
 - {endpoints: [server9, switch5], color: black}
+- {endpoints: [server9, switch6], color: black }
 - {endpoints: [server10, switch5], color: black}
-
-- {endpoints: [server11, switch6], color: black}
-- {endpoints: [server12, switch6], color: black}
-
+- {endpoints: [server10, switch6], color: black }
+- {endpoints: [server11, switch5], color: black }
+- {endpoints: [server11, switch6], color: black }
+- {endpoints: [server12, switch5], color: black }
+- {endpoints: [server12, switch6], color: black }
+- {endpoints: [server13, switch7], color: black}
+- {endpoints: [server13, switch8], color: black }
+- {endpoints: [server14, switch7], color: black}
+- {endpoints: [server14, switch8], color: black }
+- {endpoints: [server15, switch7], color: black }
+- {endpoints: [server15, switch8], color: black }
+- {endpoints: [server16, switch7], color: black }
+- {endpoints: [server16, switch8], color: black }
+- {endpoints: [server17, switch9], color: black}
+- {endpoints: [server17, switch10], color: black }
+- {endpoints: [server18, switch9], color: black}
+- {endpoints: [server18, switch10], color: black }
+- {endpoints: [server19, switch9], color: black }
+- {endpoints: [server19, switch10], color: black }
+- {endpoints: [server20, switch9], color: black }
+- {endpoints: [server20, switch10], color: black }
+- {endpoints: [server21, switch11], color: black}
+- {endpoints: [server21, switch12], color: black }
+- {endpoints: [server22, switch11], color: black}
+- {endpoints: [server22, switch12], color: black }
+- {endpoints: [server23, switch11], color: black }
+- {endpoints: [server23, switch12], color: black }
