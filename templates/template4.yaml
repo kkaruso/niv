@@ -70,7 +70,7 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   group1: { <<: *groupDefaults, name: Core-Swiches , members: [core-Switch1, core-Switch2], url: https://hs-worms.de }
-  group2: { <<: *groupDefaults, name: Spine-Swiches, members: [spine-Switch1, spine-Switch2, spine-Switch3, spine-Switch4] }
+  group2: { <<: *groupDefaults, name: Spine-Switches, members: [spine-Switch1, spine-Switch2, spine-Switch3, spine-Switch4] }
   group4: { <<: *groupDefaults, name: Rack 1, members: [ server1, server2, server3, server4, switch1, switch2] }
   group5: { <<: *groupDefaults, name: Rack 2, members: [ server5, server6, server7, server8, switch3, switch4] }
   group6: { <<: *groupDefaults, name: Rack 3, members: [ server9, server10, server11, server12, switch5, switch6] }
@@ -195,3 +195,5 @@ connections: #enter your connections here
 - {endpoints: [server22, switch12], color: black }
 - {endpoints: [server23, switch11], color: black }
 - {endpoints: [server23, switch12], color: black }
+- {endpoints: [server24, switch11], color: black }
+- {endpoints: [server24, switch12], color: black }
