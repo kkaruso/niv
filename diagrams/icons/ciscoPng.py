@@ -813,7 +813,7 @@ class RouteSwitchProcessorPng(_Cisco):
 
 
 class RouterFirewallPng(_Cisco):
-    _icon = "routerfirewall.png"
+    _icon = "router-firewall.png"
 
 
 class RouterWithSiliconSwitchPng(_Cisco):
