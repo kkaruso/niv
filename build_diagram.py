@@ -9,8 +9,8 @@ build_diagram.py
 Dynamically creates the diagram
 """
 import ipaddress
-import yaml_parser
 from datetime import datetime
+import yaml_parser
 from niv_logger import NivLogger
 from diagrams import *
 from diagrams.icons.ciscoPng import *
@@ -247,7 +247,8 @@ class BuildDiagram:
 
         # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
         for _, i in enumerate(self.yaml.get("groups")):
-            with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=f"group_diagrams/{self.filename}_{i}",
+            with Diagram(self.set_diagram_title(),
+                         filename=f"group_diagrams/{self.filename}_{i}",
                          outformat=self.output_format,
                          show=False, graph_attr=graph_attr):
 
