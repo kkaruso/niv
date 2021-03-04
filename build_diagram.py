@@ -247,7 +247,8 @@ class BuildDiagram:
 
         # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
         for i, r in enumerate(self.yaml.get("groups")):
-            with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=f"group_diagrams/{self.filename}_{r}",
+            with Diagram(self.set_diagram_title(),
+                         filename=f"group_diagrams/{self.filename}_{r}",
                          outformat=self.output_format,
                          show=False, graph_attr=graph_attr):
 
