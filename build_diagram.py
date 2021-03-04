@@ -194,9 +194,13 @@ class BuildDiagram:
         self.instances = []
 
     def run(self):
+        """
+        Checks detail level and call create_diagram()
+        """
         if self.detail_level == 0:
             for i in range(2):
                 self.create_diagram(suffix=str(i))
+                self.counter += 1
         else:
             self.create_diagram()
 
@@ -219,6 +223,7 @@ class BuildDiagram:
         with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename + suffix,
                      outformat=self.output_format,
                      show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
+            instance_names = []
             # Create nodes and clusters
             self.create_nodes(members)
             # Create connections
@@ -243,6 +248,8 @@ class BuildDiagram:
         Create an instance of a given node class, if not valid print name of not valid node
         """
         try:
+            # For detail level 0 check counter to create corresponding text nodes
+            # Counter checks how many diagrams have been created thus far
             if self.detail_level == 0:
                 if self.counter == 1:
                     node_text = f"{self.nodes_text[node]}\n" \
@@ -251,9 +258,11 @@ class BuildDiagram:
                     node_text = f"{self.nodes_text[node]}\n" \
                                 f"IP: {self.nodes_ip[node]}\n" \
                                 f"Port: {self.nodes_port[node]}"
+            # Detail level 1 shows text and IP's
             elif self.detail_level == 1:
                 node_text = f"{self.nodes_text[node]}\n" \
                             f"IP: {self.nodes_ip[node]}\n"
+            # Detail level 2 shows text, IP's and Ports
             else:
                 node_text = f"{self.nodes_text[node]}\n" \
                             f"IP: {self.nodes_ip[node]}\n" \
