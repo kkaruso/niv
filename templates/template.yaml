@@ -30,12 +30,17 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
   desktop1: {icon: OsaDesktopImac, text: My Desktop, x: 3, y: 0 }
   desktop2: {icon: OsaDesktopImac, text: My Desktop2, x: 3, y: 0 }
   Osa: {icon: server, text: Test, x: 1 }
+  grade1: { icon: OsaFirewall, text: Detail 0,  x: 0, y: 0, url: Test_Diagram0.svg }
+  grade2: { icon: OsaFirewall, text: Detail 1,  x: 1, y: 1, url: Test_Diagram1.svg }
+  grade3: { icon: OsaFirewall, text: Detail 2,  x: 2, y: 2, url: Test_Diagram2.svg }
+
 
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   group1: { <<: *groupDefaults, name: Servers, members: [cloud1, db1, deviceScanner1], url: https://hs-worms.de }
   moinmusa: { <<: *groupDefaults, name: Desktops, members: [server1, serverWeb1, serverTerminal1], url: https://google.com }
   moinmusa2: { <<: *groupDefaults, name: Group, members: [server1, serverWeb1, desktop1] }
+  grades: { name: Detail Grades, members: [grade1, grade2, grade3] }
 
 connections: #enter your connections here
 - {endpoints: [cloud1, db1], text: Test, color: red}
