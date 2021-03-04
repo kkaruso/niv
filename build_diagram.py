@@ -45,6 +45,7 @@ class BuildDiagram:
         self.graph_padding = self.set_variables("diagram", "padding", 0.5)
         self.graph_layout = self.set_variables("diagram", "layout", "fdp")
         self.graph_splines = self.set_variables("diagram", "connectionStyle", "spline")
+        self.graph_direction = self.set_variables("diagram", "direction", "LR")
 
         # Load title properties
         self.title_text = self.set_variables("title", "text", "Diagram")
@@ -112,7 +113,8 @@ class BuildDiagram:
         print(f"graph_bg_color: {self.graph_bg_color}")
         print(f"graph_padding: {self.graph_padding}")
         print(f"graph_layout: {self.graph_layout}")
-        print(f"graph_splines: {self.graph_splines}\n")
+        print(f"graph_splines: {self.graph_splines}")
+        print(f"graph_direction: {self.graph_direction}\n")
         print(f"title_text: {self.title_text}")
         print(f"title_subtext: {self.title_subtext}")
         print(f"title_fontsize: {self.title_font_size}\n")
@@ -146,7 +148,7 @@ class BuildDiagram:
             clustr_attr = {
                 "fontname": "helvetica-bold",
                 "margin": "20",
-                # "bgcolor:": "black"
+                # "bgcolor:": "black",
                 "URL": f"{self.group_url[name]}"
                 # Connect the main diagram with the created under-diagrams with a URL-link
                 # "URL": f"group_diagrams/{self.filename}_{name}.{self.output_format}"
@@ -220,7 +222,8 @@ class BuildDiagram:
             "fontname": "helvetica-bold",
             "nodesep": "1.0",
             "ranksep": "2.0",
-            "splines": f"{self.graph_splines}"
+            "splines": f"{self.graph_splines}",
+            "rankdir": f"{self.graph_direction}"
         }
         with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename + suffix,
                      outformat=self.output_format,
