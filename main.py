@@ -19,7 +19,7 @@ if __name__ == '__main__':
         # Call the function "set_args"
         args = arg_parser.get_parser()
         with suppress(KeyError):
-            diagram_builder = BuildDiagram("templates/template4.yaml", "Test_Diagram.pdf",
+            diagram_builder = BuildDiagram("templates/template4.yaml", "Test_Diagram.svg",
                                            arg_parser.get_detail_level())
             diagram_builder.run()
 

@@ -260,21 +260,21 @@ class BuildDiagram:
             # Counter checks how many diagrams have been created thus far
             if self.detail_level == 0:
                 if self.counter == 1:
-                    node_text = f"{self.nodes_text[node]}\n" \
-                                f"IP: {self.nodes_ip[node]}\n"
+                    node_text = f"\n{self.nodes_text[node]}\n" \
+                                f" {self.nodes_ip[node]}\n"
                 else:
-                    node_text = f"{self.nodes_text[node]}\n" \
-                                f"IP: {self.nodes_ip[node]}\n" \
-                                f"Port: {self.nodes_port[node]}"
+                    node_text = f"\n{self.nodes_text[node]}\n" \
+                                f" {self.nodes_ip[node]}\n" \
+                                f" {self.nodes_port[node]}"
             # Detail level 1 shows text and IP's
             elif self.detail_level == 1:
-                node_text = f"{self.nodes_text[node]}\n" \
-                            f"IP: {self.nodes_ip[node]}\n"
+                node_text = f"\n{self.nodes_text[node]}\n" \
+                            f" {self.nodes_ip[node]}\n"
             # Detail level 2 shows text, IP's and Ports
             else:
-                node_text = f"{self.nodes_text[node]}\n" \
-                            f"IP: {self.nodes_ip[node]}\n" \
-                            f"Port: {self.nodes_port[node]}"
+                node_text = f"\n{self.nodes_text[node]}\n" \
+                            f" {self.nodes_ip[node]}\n" \
+                            f" {self.nodes_port[node]}"
 
             # Remove double newlines for the case when port is given but no url
             node_text = node_text.replace("\n\n", "\n")
