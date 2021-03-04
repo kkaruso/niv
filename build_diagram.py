@@ -10,6 +10,7 @@ Dynamically creates the diagram
 """
 import ipaddress
 import yaml_parser
+from datetime import datetime
 from niv_logger import NivLogger
 from diagrams import *
 from diagrams.icons.ciscoPng import *
@@ -50,9 +51,15 @@ class BuildDiagram:
         self.graph_direction = self.set_variables("diagram", "direction", "LR")
 
         # Load title properties
-        self.title_text = self.set_variables("title", "text", "Diagram")
-        self.title_subtext = self.set_variables("title", "subText", "")
+
+        # Put it into set_diagram_title()
+        # self.title_text = self.set_variables("title", "text", "Diagram")
+        # self.title_subtext = self.set_variables("title", "subText", "")
         self.title_font_size = self.set_variables("title", "fontSize", 15)
+        # self.title_author = self.set_variables("title", "author", "")
+        # self.title_date = self.set_variables("title", "date", datetime.today().strftime('%d.%m.%Y'))
+        # self.title_company = self.set_variables("title", "company", "")
+        # self.title_version = self.set_variables("title", "version", "1.0")
 
         # TODO: Add placeholder icon to set as default for nodes_icon
         # Get icon of each node
@@ -117,8 +124,8 @@ class BuildDiagram:
         print(f"graph_layout: {self.graph_layout}")
         print(f"graph_splines: {self.graph_splines}")
         print(f"graph_direction: {self.graph_direction}\n")
-        print(f"title_text: {self.title_text}")
-        print(f"title_subtext: {self.title_subtext}")
+        # print(f"title_text: {self.title_text}")
+        # print(f"title_subtext: {self.title_subtext}")
         print(f"title_fontsize: {self.title_font_size}\n")
         print(f"nodes_icon: {self.nodes_icon}")
         print(f"nodes_text: {self.nodes_text}")
@@ -229,7 +236,8 @@ class BuildDiagram:
             "splines": f"{self.graph_splines}",
             "rankdir": f"{self.graph_direction}"
         }
-        with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=self.filename + suffix,
+        with Diagram(self.set_diagram_title(),
+                     filename=self.filename + suffix,
                      outformat=self.output_format,
                      show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
             # Create nodes and clusters
@@ -250,6 +258,23 @@ class BuildDiagram:
         #                 self.create_single_node(member)
         #             # Create connections inside the group
         #             self.create_connections(instance_names)
+
+    def set_diagram_title(self):
+        """
+        Build title for diagram from title section in .yaml
+        :return: Title of diagram
+        """
+        _dict = {"Title": self.set_variables("title", "text", "Diagram"),
+                 "Description": self.set_variables("title", "subText", ""),
+                 "Author": self.set_variables("title", "author", ""),
+                 "Date": self.set_variables("title", "date", datetime.today().strftime('%d.%m.%Y')),
+                 "Company": self.set_variables("title", "company", ""),
+                 "Version": self.set_variables("title", "version", "1.0")}
+        title = ""
+        for item in _dict:
+            if _dict[item] != "":
+                title += item + ": " + _dict[item] + "\n"
+        return title
 
     def create_single_node(self, node):
         """
