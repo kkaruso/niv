@@ -1,0 +1,128 @@
+diagram: # Diagram properties
+  backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
+  padding: 0.5  # Padding around the graph (default: 0.5; type: double)
+  # TODO: Fix when using neato that no groups are showing
+  layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
+  connectionStyle: curved # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
+  direction: TB #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
+
+title: # Text underneath the diagram.
+  text: NIV  # Title under the Diagram (default: Diagram; type: string)
+  subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
+  fontSize: 15  # Font size (default: 15; type: int)
+
+  # TODO: Find a way to add this information to the diagram or delete it
+  author: "Tom Themas"  # Author's name: enter string
+  company: Empty  # Enter company name or leave empty
+  date: "01.01.2021"  # Default date is current date or enter specific date as string
+  version: "1.0"  # Version of the diagram as string
+
+groupDefaults: &groupDefaults #Use current values as defaults
+  backgroundColor: lightblue  # Fill the background of the group box
+
+# TODO: change icon names to variables and put current name into "icon"
+icons: #enter devices here. Maybe change "icons" to "devices" later.
+  cloud1: {icon: Cloud, text: Cloud, x: 6, y: 5}
+  router1: { icon: RouterFirewall, text: Router Firewall, x: 4, y: 2 }
+  safeharbor01: {icon: SafeharborIcon, text: SafeharborIcon a1, x: 4, y: 2 }
+  safeharbor02: { icon: SafeharborIcon, text: SafeharborIcon a2, x: 7, y: 2 }
+  safeharbor11: { icon: SafeharborIcon, text: SafeharborIcon b1, x: 7, y: 2 }
+  safeharbor12: { icon: SafeharborIcon, text: SafeharborIcon b2, x: 7, y: 2 }
+  safeharbor13: { icon: SafeharborIcon, text: SafeharborIcon b3, x: 7, y: 2 }
+  safeharbor14: { icon: SafeharborIcon, text: SafeharborIcon b4, x: 7, y: 2 }
+  switch1: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 9, y: 2 }
+  switch2: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 9, y: 2 }
+  switch3: { icon: WorkgroupSwitch, text: Work group Switch c3, x: 9, y: 2 }
+  switch4: { icon: WorkgroupSwitch, text: Work group Switch c4, x: 9, y: 2 }
+  switch5: { icon: WorkgroupSwitch, text: Work group Switch c5, x: 9, y: 2 }
+  switch6: { icon: WorkgroupSwitch, text: Work group Switch c6, x: 9, y: 2 }
+  server1: { icon: FileServer, text: Server 1, x: 9, y: 2 }
+  server2: { icon: FileServer, text: Server 2, x: 9, y: 2 }
+  server3: { icon: FileServer, text: Server 3, x: 9, y: 2 }
+  server4: { icon: FileServer, text: Server 4, x: 9, y: 2 }
+  server5: { icon: FileServer, text: Server 5, x: 9, y: 2 }
+  server6: { icon: FileServer, text: Server 6, x: 9, y: 2 }
+  server7: { icon: FileServer, text: Server 7, x: 9, y: 2 }
+  server8: { icon: FileServer, text: Server 8, x: 9, y: 2 }
+  server9: { icon: FileServer, text: Server 9, x: 9, y: 2 }
+  server10: { icon: FileServer, text: Server 10, x: 9, y: 2 }
+  server11: { icon: FileServer, text: Server 11, x: 9, y: 2 }
+  server12: { icon: FileServer, text: Server 12, x: 9, y: 2 }
+
+
+# TODO: Implement that you can group other groups
+groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
+  group1: { <<: *groupDefaults, name: Cloud, members: [safeharbor01, safeharbor02], url: https://hs-worms.de }
+  group2: { <<: *groupDefaults, name: SafeharborIcon b, members: [safeharbor11, safeharbor12, safeharbor13, safeharbor14] }
+  group3: { <<: *groupDefaults, name: Switch, members: [ switch1, switch2, switch3, switch4, switch5, switch6 ] }
+  group4: { <<: *groupDefaults, name: Server A, members: [ server1, server2] }
+  group5: { <<: *groupDefaults, name: Server B, members: [ server3, server4] }
+  group6: { <<: *groupDefaults, name: Server C, members: [ server5, server6] }
+  group7: { <<: *groupDefaults, name: Server D, members: [ server7, server8] }
+  group8: { <<: *groupDefaults, name: Server E, members: [ server9, server10] }
+  group9: { <<: *groupDefaults, name: Server F, members: [ server11, server12] }
+
+
+
+connections: #enter your connections here
+- {endpoints: [router1, cloud1], color: red}
+- {endpoints: [safeharbor01, router1], color: red}
+- {endpoints: [safeharbor02, router1], color: red}
+
+
+- {endpoints: [safeharbor11, safeharbor01], color: blue}
+- {endpoints: [safeharbor12, safeharbor01], color: blue}
+- {endpoints: [safeharbor13, safeharbor01], color: blue}
+- {endpoints: [safeharbor14, safeharbor01], color: blue}
+
+- {endpoints: [safeharbor11, safeharbor02], color: green}
+- {endpoints: [safeharbor12, safeharbor02], color: green}
+- {endpoints: [safeharbor13, safeharbor02], color: green}
+- {endpoints: [safeharbor14, safeharbor02], color: green}
+
+- {endpoints: [switch1, safeharbor11], color: purple}
+- {endpoints: [switch2, safeharbor11], color: purple}
+- {endpoints: [switch3, safeharbor11], color: purple}
+- {endpoints: [switch4, safeharbor11], color: purple}
+- {endpoints: [switch5, safeharbor11], color: purple}
+- {endpoints: [switch6, safeharbor11], color: purple}
+
+- {endpoints: [switch1, safeharbor12], color: purple}
+- {endpoints: [switch2, safeharbor12], color: purple}
+- {endpoints: [switch3, safeharbor12], color: purple}
+- {endpoints: [switch4, safeharbor12], color: purple}
+- {endpoints: [switch5, safeharbor12], color: purple}
+- {endpoints: [switch6, safeharbor12], color: purple}
+
+- {endpoints: [switch1, safeharbor13], color: purple}
+- {endpoints: [switch2, safeharbor13], color: purple}
+- {endpoints: [switch3, safeharbor13], color: purple}
+- {endpoints: [switch4, safeharbor13], color: purple}
+- {endpoints: [switch5, safeharbor13], color: purple}
+- {endpoints: [switch6, safeharbor13], color: purple}
+
+- {endpoints: [switch1, safeharbor14], color: purple}
+- {endpoints: [switch2, safeharbor14], color: purple}
+- {endpoints: [switch3, safeharbor14], color: purple}
+- {endpoints: [switch4, safeharbor14], color: purple}
+- {endpoints: [switch5, safeharbor14], color: purple}
+- {endpoints: [switch6, safeharbor14], color: purple}
+
+- {endpoints: [server1, switch1], color: black}
+- {endpoints: [server2, switch1], color: black}
+
+- {endpoints: [server3, switch2], color: black}
+- {endpoints: [server4, switch2], color: black}
+
+- {endpoints: [server5, switch3], color: black}
+- {endpoints: [server6, switch3], color: black}
+
+- {endpoints: [server7, switch4], color: black}
+- {endpoints: [server8, switch4], color: black}
+
+- {endpoints: [server9, switch5], color: black}
+- {endpoints: [server10, switch5], color: black}
+
+- {endpoints: [server11, switch6], color: black}
+- {endpoints: [server12, switch6], color: black}
+

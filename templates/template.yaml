@@ -17,9 +17,6 @@ title: # Text underneath the diagram.
   date: "01.01.2021"  # Default date is current date or enter specific date as string
   version: "1.0"  # Version of the diagram as string
 
-groupDefaults: &groupDefaults #Use current values as defaults
-  backgroundColor: lightblue  # Fill the background of the group box
-
 # TODO: change icon names to variables and put current name into "icon"
 icons: #enter devices here. Maybe change "icons" to "devices" later.
   cloud1: {icon: OsaCloud, text: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
@@ -34,13 +31,12 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
   grade2: { icon: OsaFirewall, text: Detail 1,  x: 1, y: 1, url: Test_Diagram1.svg }
   grade3: { icon: OsaFirewall, text: Detail 2,  x: 2, y: 2, url: Test_Diagram2.svg }
 
-
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  group1: { <<: *groupDefaults, name: Servers, members: [cloud1, db1, deviceScanner1], url: https://hs-worms.de }
-  moinmusa: { <<: *groupDefaults, name: Desktops, members: [server1, serverWeb1, serverTerminal1], url: https://google.com }
-  moinmusa2: { <<: *groupDefaults, name: Group, members: [server1, serverWeb1, desktop1] }
-  grades: { name: Detail Grades, members: [grade1, grade2, grade3] }
+  group1: { name: Servers, members: [cloud1, db1, deviceScanner1], url: https://hs-worms.de }
+  moinmusa: { name: Desktops, members: [server1, serverWeb1, serverTerminal1], url: https://google.com }
+  moinmusa2: { name: Group, members: [server1, serverWeb1, desktop1] }
+  grades: { name: Detail grades, members: [grade1, grade2, grade3] }
 
 connections: #enter your connections here
 - {endpoints: [cloud1, db1], text: Test, color: red}

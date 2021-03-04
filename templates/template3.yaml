@@ -17,10 +17,6 @@ title: # Text underneath the diagram.
   date: "01.01.2021"  # Default date is current date or enter specific date as string
   version: "1.0"  # Version of the diagram as string
 
-groupDefaults: &groupDefaults #Use current values as defaults
-  backgroundColor: lightblue  # Fill the background of the group box
-
-# TODO: change icon names to variables and put current name into "icon"
 icons: #enter devices here. Maybe change "icons" to "devices" later.
   pc1: {icon: Pc, text: PC1, ip: 172.19.176.131, x: -3, y: 3 }
   pc2: {icon: Pc, text: PC2, ip: 172.19.176.132, x: -3, y: 2 }
@@ -41,13 +37,10 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
   laptop1: {icon: Laptop, text: Laptop, x: -5, y: 2}
   vpn1: {icon: Vsvgateway, text: VPN Gateway, x: -4, y: 2}
 
-
-
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  group1: { <<: *groupDefaults, name: PCs, members: [pc1, pc2, pc3, pc4, pc5, pc6, switch1]}
-  group2: { <<: *groupDefaults, name: ATM Router, members: [switch2, atmrouter1, atmrouter2, atmrouter3, atmrouter4, prozessor1, server1]}
-
+  group1: {name: PCs, members: [pc1, pc2, pc3, pc4, pc5, pc6, switch1]}
+  group2: {name: ATM Router, members: [switch2, atmrouter1, atmrouter2, atmrouter3, atmrouter4, prozessor1, server1]}
 
 connections: #enter your connections here
 - {endpoints: [switch1, pc1], color: red }
