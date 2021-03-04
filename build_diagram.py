@@ -8,7 +8,9 @@
 build_diagram.py
 Dynamically creates the diagram
 """
+import ipaddress
 import yaml_parser
+from niv_logger import NivLogger
 from diagrams import *
 from diagrams.icons.ciscoPng import *
 from diagrams.icons.osa import *
@@ -349,6 +351,10 @@ class BuildDiagram:
                 if _object == "groups" and _subobject == "members":
                     print(f"{i}: No members given, group won\'t be shown. Add members to group or remove group! :)")
                 _dict[i] = _default
+            elif _subobject == "ip":
+                if not self.validate_ip(_dict[i]):
+                    print(f"'{_dict[i]}' does not seem to be a valid IPv4 or IPv6 address")
+
         return _dict
 
     def set_variables(self, _object: str, _subobject: str, _default: any):
@@ -365,3 +371,20 @@ class BuildDiagram:
         else:
             _var = _default
         return _var
+
+    @staticmethod
+    def validate_ip(ip_string: str) -> bool:
+        """
+        Check if an ip is a valid IPv4/6 address
+
+        :param ip_string: IP to check
+        :return: True if IP is valid, otherwise false
+        """
+        try:
+            ipaddress.ip_address(ip_string)
+            return True
+
+        except ValueError as error:
+            logger = NivLogger()
+            logger.log_error(error)
+            return False
