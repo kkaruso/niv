@@ -246,16 +246,14 @@ class BuildDiagram:
             self.create_connections()
 
         # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
-        for i, r in enumerate(self.yaml.get("groups")):
-            with Diagram(self.set_diagram_title(),
-                         filename=f"group_diagrams/{self.filename}_{r}",
+        for _, i in enumerate(self.yaml.get("groups")):
+            with Diagram(f"{self.title_text}\n{self.title_subtext}", filename=f"group_diagrams/{self.filename}_{i}",
                          outformat=self.output_format,
                          show=False, graph_attr=graph_attr):
 
-                instance_names = []
                 # Create the nodes of the group inside a cluster
-                with Cluster(f"{r}"):
-                    for member in list(self.group_members.get(r)):
+                with Cluster(f"{i}"):
+                    for member in list(self.group_members.get(i)):
                         self.create_single_node(member)
                     # Create connections inside the group
                     self.create_connections()
