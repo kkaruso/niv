@@ -243,7 +243,7 @@ class BuildDiagram:
                          show=False, graph_attr=graph_attr):
 
                 # Create the nodes of the group inside a cluster
-                with Cluster(f"{i}"):
+                with Cluster(self.yaml.get("groups").get(f"{i}").get("name")):
                     for member in list(self.group_members.get(i)):
                         self.create_single_node(member)
                     # Create connections inside the group
