@@ -1,0 +1,27 @@
+connections:
+  color: null
+  text: null
+diagram:
+  backgroundColor: null
+  connectionStyle: null
+  direction: null
+  layout: null
+  padding: null
+groups:
+  name: null
+  url: null
+icons:
+  ip: null
+  port: null
+  text: null
+  url: null
+  x: null
+  y: null
+title:
+  author: null
+  company: null
+  date: null
+  fontSize: null
+  subText: null
+  text: null
+  version: null

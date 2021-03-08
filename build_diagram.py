@@ -23,12 +23,15 @@ class BuildDiagram:
     """
     Handles creation of diagram
     """
+    path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    config = yaml_parser.get_yaml(path_to_project + '/niv/config.yaml')
 
-    config = yaml_parser.get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
+    # Read yaml_defaults.yaml if it exists, otherwise create the file and assign empty default to yaml_defaults
+    yaml_defaults = yaml_parser.get_yaml(path_to_project + '/niv/yaml_defaults.yaml') if os.path.isfile(
+        path_to_project + '/niv/yaml_defaults.yaml') else yaml_parser.create_yaml_defaults(
+        path_to_project + '/niv/yaml_defaults.yaml')
+
     counter = 1
-
-    # TODO: Add check if ip is a valid ip and check if url is a valid url (for ip checking:
-    #  https://stackoverflow.com/questions/3462784/check-if-a-string-matches-an-ip-address-pattern-in-python)
 
     # TODO: Find a way to add margins between node and its text, and margin between the diagram and the title
     def __init__(self, load_path, save_path, detail_level):
@@ -44,46 +47,61 @@ class BuildDiagram:
 
         # TODO: Add checks if value not given
         # Load diagram properties
-        self.graph_bg_color = self.set_variables("diagram", "backgroundColor", "transparent")
-        self.graph_padding = self.set_variables("diagram", "padding", 0.5)
-        self.graph_layout = self.set_variables("diagram", "layout", "fdp")
-        self.graph_splines = self.set_variables("diagram", "connectionStyle", "spline")
-        self.graph_direction = self.set_variables("diagram", "direction", "LR")
+        self.graph_bg_color = self.set_variables("diagram", "backgroundColor",
+                                                 self.yaml_defaults.get('diagram').get(
+                                                     'backgroundColor') or 'transparent')
+        self.graph_padding = self.set_variables("diagram", "padding", self.yaml_defaults.get('diagram').get(
+            'padding') or 0.5)
+        self.graph_layout = self.set_variables("diagram", "layout", self.yaml_defaults.get('diagram').get(
+            'layout') or "fdp")
+        self.graph_splines = self.set_variables("diagram", "connectionStyle", self.yaml_defaults.get('diagram').get(
+            'connectionStyle') or "spline")
+        self.graph_direction = self.set_variables("diagram", "direction", self.yaml_defaults.get('diagram').get(
+            'direction') or "LR")
 
         # Load title properties (others are in set_diagram_title())
-        self.title_font_size = self.set_variables("title", "fontSize", 15)
+        self.title_font_size = self.set_variables("title", "fontSize", self.yaml_defaults.get('title').get(
+            'fontSize') or 15)
 
         # TODO: Add placeholder icon to set as default for nodes_icon
         # Get icon of each node
-        self.nodes_icon = self.fill_dictionary("icons", "icon", "")
+        self.nodes_icon = self.fill_dictionary("nodes", "icon", "")
 
         # Get text of each node
-        self.nodes_text = self.fill_dictionary("icons", "text", "node")
+        self.nodes_text = self.fill_dictionary("nodes", "text", self.yaml_defaults.get('icons').get(
+            'text') or "node")
 
         # Get ip of each node
-        self.nodes_ip = self.fill_dictionary("icons", "ip", "")
+        self.nodes_ip = self.fill_dictionary("nodes", "ip", self.yaml_defaults.get('icons').get(
+            'ip') or "")
 
         # Get port of each node
-        self.nodes_port = self.fill_dictionary("icons", "port", "")
+        self.nodes_port = self.fill_dictionary("nodes", "port", self.yaml_defaults.get('icons').get(
+            'port') or "")
 
         # Get the URL of each node, clear empty URLs
-        self.nodes_url = self.fill_dictionary("icons", "url", "")
+        self.nodes_url = self.fill_dictionary("nodes", "url", self.yaml_defaults.get('icons').get(
+            'url') or "")
 
         # Get name of each group
-        self.group_name = self.fill_dictionary("groups", "name", "Group")
+        self.group_name = self.fill_dictionary("groups", "name", self.yaml_defaults.get('groups').get(
+            'name') or "Group")
 
         # Get members of each group
         self.group_members = self.fill_dictionary("groups", "members", "")
 
         # Get the URL of each group, clear empty URLs
-        self.group_url = self.fill_dictionary("groups", "url", "")
+        self.group_url = self.fill_dictionary("groups", "url", self.yaml_defaults.get('groups').get(
+            'url') or "")
 
         # Only get coordinates from nodes if layout = neato
         # Get X coordinate of each node
-        self.nodes_x = self.fill_dictionary("icons", "x", 0)
+        self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('icons').get(
+            'x') or 0)
 
         # Get Y coordinate of each node
-        self.nodes_y = self.fill_dictionary("icons", "y", 0)
+        self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('icons').get(
+            'y') or 0)
 
         print(f"\nXs: {self.nodes_x}")
         print(f"Ys: {self.nodes_y}\n")
@@ -94,10 +112,17 @@ class BuildDiagram:
             self.connections_endpoints.append(self.yaml.get("connections")[i].get("endpoints"))
 
         # Get color of connections
-        self.connections_color = self.fill_connection_dictionary("connections", "color", "#7B8894")
+        self.connections_color = self.fill_connection_dictionary("connections", "color",
+                                                                 self.yaml_defaults.get('connections').get(
+                                                                     'color') or "#7B8894")
 
         # Get text of connections
-        self.connections_text = self.fill_connection_dictionary("connections", "text", "")
+        self.connections_text = self.fill_connection_dictionary("connections", "text",
+                                                                self.yaml_defaults.get('connections').get(
+                                                                    'text') or "")
+
+        # Get width of connections
+        self.connections_width = self.fill_connection_dictionary("connections", "width", "")
 
         self.instances_keys = []
         self.instances = []
@@ -173,12 +198,12 @@ class BuildDiagram:
         # key_of_instance_name = list(self.nodes_icon.keys())[list(self.nodes_icon.values()).index(instance_name)]
         # instance_names.append(instance_name)
 
-        # Check if any endpoints are not given in 'icons', if not print an error
+        # Check if any endpoints are not given in 'nodes', if not print an error
         for connection in self.connections_endpoints:
             for endpoint in connection:
                 if endpoint not in self.nodes_text:
-                    print(f"KeyError in {self.load_path}: '{endpoint}' is not given in 'icons', that's why it "
-                          f"does not show in the diagram. Add it to 'icons' or remove it as an endpoint.")
+                    print(f"KeyError in {self.load_path}: '{endpoint}' is not given in 'nodes', that's why it "
+                          f"does not show in the diagram. Add it to 'nodes' or remove it as an endpoint.")
 
         # Create connections
         for i, _ in enumerate(self.instances_keys):
@@ -190,7 +215,8 @@ class BuildDiagram:
                                 Edge(color=f"{self.connections_color[j]}",
                                      label=f"{self.connections_text[j]}",
                                      tooltip=f"{self.connections_text[j]}",
-                                     labeltooltip=f"{self.connections_text[j]}") - \
+                                     labeltooltip=f"{self.connections_text[j]}",
+                                     penwidth=f"{self.connections_width[j]}") - \
                                 self.instances[i]
 
         # Clear both lists to have empty lists for every diagram creation to fix not seeing connections
@@ -357,8 +383,8 @@ class BuildDiagram:
 
         except KeyError:
             print(
-                f"KeyError in {self.load_path}: '{node}' is not given in 'icons', that's why it does "
-                f"not show in the diagram. Add it to 'icons' or remove it as a member.")
+                f"KeyError in {self.load_path}: '{node}' is not given in 'nodes', that's why it does "
+                f"not show in the diagram. Add it to 'nodes' or remove it as a member.")
 
     def fill_connection_dictionary(self, _object: str, _subobject: str, _default: any) -> dict:
         """

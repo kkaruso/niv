@@ -16,7 +16,7 @@ title: # Text underneath the diagram.
   version: # Version of the diagram (default: 1.0; type: double)
 
 # TODO: change icon names to variables and put current name into "icon"
-icons: # List every single node that should be in the diagram here
+nodes: # List every single node that should be in the diagram here
   # Syntax:
   # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, port: port number, x: x-coordinate, y: y-coordinate, url: link to a website or another file }
   cloud1: { icon: OsaCloud, text: Random text, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/ }
@@ -38,8 +38,8 @@ groups: # List every group of nodes here
 
 connections: # List every connection between 2 points here
   # Syntax:
-  # - { endpoints: [ list of the 2 nodes that should be connected ], text: text shown somewhere by the connection, color: color of the connection }
-  - { endpoints: [ cloud1, db1 ], text: Test, color: red }
+  # - { endpoints: [ list of the 2 nodes that should be connected ], text: text shown somewhere by the connection, color: color of the connection, width: width of the connection }
+  - { endpoints: [ cloud1, db1 ], text: Test, color: red, width: 2}
   - { endpoints: [ server1, serverWeb1 ] }
   - { endpoints: [ server1, deviceScanner1 ] }
   - { endpoints: [ desktop1, db1 ], text: Here is some text, color: blue }
