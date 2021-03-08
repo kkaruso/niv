@@ -34,7 +34,7 @@ groups: # List every group of nodes here
   # Syntax:
   # group name: { name: Text shown in the corner of the group, members: [ list of nodes in this group ], tooltip: text shown in the tooltip }
   # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
-  # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
+  # rack: Sets direction (default: False; type: boolean; options: True, False) "no effect on layout: neato"
   group1: { name: Servers, members: [ cloud1, db1, deviceScanner1 ], layout:, rack: True, tooltip: That's a tooltip }
   group2: { name: Desktops, members: [ server1, serverWeb1, serverTerminal1 ]}
   group3: { name: Group, members: [ server1, serverWeb1, desktop1 ]}
