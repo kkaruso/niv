@@ -22,6 +22,7 @@ groupDefaults: &groupDefaults #Use current values as defaults
 
 # TODO: change icon names to variables and put current name into "icon"
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
+  # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
   cloud1: {icon: Cloud, text: Internet, x: 24, y: 26}
   router1: { icon: RouterFirewall, text: Router Firewall, x: 24, y: 22 }
   core-Switch1:  {icon: SafeharborIcon, text: core-Switch 1, x: 22, y: 18 }
@@ -69,16 +70,17 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
 
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  group1: { <<: *groupDefaults, name: Core-Swiches , members: [core-Switch1, core-Switch2], rack: True}
+
+ # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+ # rack: Sets direction (default: False; type: boolean; options: True, False)
+  group1: { <<: *groupDefaults, name: Core-Swiches , members: [core-Switch1, core-Switch2], layout: neato, rack: True}
   group2: { <<: *groupDefaults, name: Spine-Switches, members: [spine-Switch1, spine-Switch2, spine-Switch3, spine-Switch4] }
-  group4: { <<: *groupDefaults, name: Rack 1, members: [ server1, server2, server3, server4, switch1, switch2], layout: neato,  rack: True}
+  group4: { <<: *groupDefaults, name: Rack 1, members: [ server1, server2, server3, server4, switch1, switch2], layout:,  rack: True}
   group5: { <<: *groupDefaults, name: Rack 2, members: [ server5, server6, server7, server8, switch3, switch4] }
   group6: { <<: *groupDefaults, name: Rack 3, members: [ server9, server10, server11, server12, switch5, switch6] }
   group7: { <<: *groupDefaults, name: Rack 4, members: [ server13, server14, server15, server16, switch7, switch8] }
   group8: { <<: *groupDefaults, name: Rack 5, members: [ server17, server18, server19, server20, switch9, switch10] }
   group9: { <<: *groupDefaults, name: Rack 6, members: [ server21, server22, server23, server24, switch11, switch12] }
-
-
 
 connections: #enter your connections here
 - {endpoints: [router1, cloud1], color: red}

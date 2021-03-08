@@ -19,6 +19,7 @@ title: # Text underneath the diagram.
 nodes: # List every single node that should be in the diagram here
   # Syntax:
   # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, port: port number, x: x-coordinate, y: y-coordinate, url: link to a website or another file, tooltip: text shown in the tooltip }
+  # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
   cloud1: { icon: OsaCloud, text: Random text, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/, tooltip: Test tooltip }
   db1: { icon: OsaDatabase, text: MySQL Database, ip: 192.164.41.3333, port: 25565, x: 0, y: 0, url: }
   deviceScanner1: { icon: OsaDeviceScanner, text: Local Device Scanner, x: 0, y: 6 }
@@ -31,10 +32,12 @@ nodes: # List every single node that should be in the diagram here
 # TODO: Implement that you can group other groups
 groups: # List every group of nodes here
   # Syntax:
-  # group name: { name: Text shown in the corner of the group, members: [ list of nodes in this group ], url: link to another file or website, tooltip: text shown in the tooltip }
-  group1: { name: Servers, members: [ cloud1, db1, deviceScanner1 ], url: https://hs-worms.de, tooltip: That's a tooltip }
-  group2: { name: Desktops, members: [ server1, serverWeb1, serverTerminal1 ], url: https://google.com }
-  group3: { name: Group, members: [ server1, serverWeb1, desktop1 ] }
+  # group name: { name: Text shown in the corner of the group, members: [ list of nodes in this group ], tooltip: text shown in the tooltip }
+  # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+  # rack: Sets direction (default: False; type: boolean; options: True, False)
+  group1: { name: Servers, members: [ cloud1, db1, deviceScanner1 ], layout:, rack: True, tooltip: That's a tooltip }
+  group2: { name: Desktops, members: [ server1, serverWeb1, serverTerminal1 ]}
+  group3: { name: Group, members: [ server1, serverWeb1, desktop1 ]}
 
 connections: # List every connection between 2 points here
   # Syntax:

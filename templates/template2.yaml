@@ -20,6 +20,7 @@ groupDefaults: &groupDefaults #Use current values as defaults
 
 # TODO: change icon names to variables and put current name into "icon"
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
+  # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
   cloud1: {icon: OsaCloud, text: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
   db1: {icon: OsaDatabase, text: MySQL Database, port: 25565, x: 0, y: 0, url: }
   deviceScanner1: {icon: OsaDeviceScanner, text: Local Device Scanner, x: 0, y: 6 }
@@ -36,7 +37,9 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
 
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  group1: { <<: *groupDefaults, name: My Servers, members: [hub1, cloud1, db1, deviceScanner1], url: https://hs-worms.de }
+  # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+  # rack: Sets direction (default: False; type: boolean; options: True, False)
+  group1: { <<: *groupDefaults, name: My Servers, members: [hub1, cloud1, db1, deviceScanner1], layout:, rack: True}
   moinmusa: { <<: *groupDefaults, name: My Servers2, members: [server1, serverWeb1, serverTerminal1, laptop1], url: https://google.com }
   moinmusa2: { <<: *groupDefaults, name: My Servers3, members: [server1, serverWeb1] }
 
