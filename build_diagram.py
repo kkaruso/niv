@@ -4,6 +4,7 @@
 # pylint: disable=fixme
 # pylint: disable=too-many-instance-attributes
 # pylint: disable=too-many-statements
+# pylint: disable=too-many-nested-blocks
 """
 build_diagram.py
 Dynamically creates the diagram
@@ -69,6 +70,9 @@ class BuildDiagram:
         # Get the URL of each node, clear empty URLs
         self.nodes_url = self.fill_dictionary("icons", "url", "")
 
+        # Get the tooltip of each node
+        self.nodes_tooltip = self.fill_dictionary("icons", "tooltip", "")
+
         # Get name of each group
         self.group_name = self.fill_dictionary("groups", "name", "Group")
 
@@ -77,6 +81,9 @@ class BuildDiagram:
 
         # Get the URL of each group, clear empty URLs
         self.group_url = self.fill_dictionary("groups", "url", "")
+
+        # Get the tooltip of each group
+        self.group_tooltip = self.fill_dictionary("groups", "tooltip", "")
 
         # Only get coordinates from nodes if layout = neato
         if self.graph_layout == "neato":
@@ -100,6 +107,9 @@ class BuildDiagram:
         # Get text of connections
         self.connections_text = self.fill_connection_dictionary("connections", "text", "")
 
+        # Get the tooltip of each connection
+        self.connections_tooltip = self.fill_connection_dictionary("connections", "tooltip", "")
+
         self.instances_keys = []
         self.instances = []
 
@@ -120,13 +130,16 @@ class BuildDiagram:
         print(f"nodes_icon: {self.nodes_icon}")
         print(f"nodes_text: {self.nodes_text}")
         print(f"nodes_url: {self.nodes_url}")
-        print(f"nodes_ip: {self.nodes_ip}\n")
+        print(f"nodes_ip: {self.nodes_ip}")
+        print(f"nodes_tooltip: {self.nodes_tooltip}\n")
         print(f"group_name: {self.group_name}")
         print(f"group_members: {self.group_members}")
-        print(f"group_url: {self.group_url}\n")
+        print(f"group_url: {self.group_url}")
+        print(f"group_tooltip: {self.group_tooltip}\n")
         print(f"connections: {self.connections_endpoints}")
         print(f"connections_color: {self.connections_color}")
-        print(f"connections_text: {self.connections_text}\n")
+        print(f"connections_text: {self.connections_text}")
+        print(f"connections_tooltip: {self.connections_tooltip}\n")
 
     def create_nodes(self, members):
         """
@@ -142,15 +155,21 @@ class BuildDiagram:
             if node not in members:
                 self.create_single_node(node)
 
-        # Dynamically create the amount of groups given by "group_count" with the corresponding group name
+        # Dynamically create the amount of groups with the corresponding group name
+        # If no tooltip is given within the group, set the current name of the group as the tooltip
         for name in self.group_members:
+            if self.group_tooltip[name] == "":
+                tooltip = self.group_name[name]
+            else:
+                tooltip = self.group_tooltip[name]
+
             clustr_attr = {
                 "fontname": "helvetica-bold",
                 "margin": "20",
                 # "URL": f"{self.group_url[name]}"
                 # Connect the main diagram with the created under-diagrams with a URL-link
-                "URL": f"group_diagrams/{self.filename}_{name}.{self.output_format}"
-
+                "URL": f"group_diagrams/{self.filename}_{name}.{self.output_format}",
+                "tooltip": f"{tooltip}"
             }
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
@@ -187,11 +206,18 @@ class BuildDiagram:
                 if self.instances_keys[i] == self.connections_endpoints[j][0]:
                     for k, _ in enumerate(self.instances_keys):
                         if self.connections_endpoints[j][1] == self.instances_keys[k]:
+                            # If no tooltip is given within the connection, set both endpoints as the tooltip
+                            if self.connections_tooltip[j] == "":
+                                tooltip = f"{self.nodes_text[self.connections_endpoints[j][1]]} <---> " \
+                                          f"{self.nodes_text[self.connections_endpoints[j][0]]}"
+                            else:
+                                tooltip = self.connections_tooltip[j]
+
                             _ = self.instances[k] - \
                                 Edge(color=f"{self.connections_color[j]}",
                                      label=f"{self.connections_text[j]}",
-                                     tooltip=f"{self.connections_text[j]}",
-                                     labeltooltip=f"{self.connections_text[j]}") - \
+                                     labeltooltip=f"{self.connections_text[j]}",
+                                     edgetooltip=tooltip) - \
                                 self.instances[i]
 
         # Clear both lists to have empty lists for every diagram creation to fix not seeing connections
@@ -242,8 +268,19 @@ class BuildDiagram:
                          outformat=self.output_format,
                          show=False, graph_attr=graph_attr):
 
+                # If no tooltip is given within the group, set the current name of the group as the tooltip
+                if self.group_tooltip[i] == "":
+                    tooltip = self.group_name[i]
+                else:
+                    tooltip = self.group_tooltip[i]
+
+                clustr_attr = {
+                    "fontname": "helvetica-bold",
+                    "margin": "20",
+                    "tooltip": f"{tooltip}"
+                }
                 # Create the nodes of the group inside a cluster
-                with Cluster(self.yaml.get("groups").get(f"{i}").get("name")):
+                with Cluster(self.yaml.get("groups").get(f"{i}").get("name"), graph_attr=clustr_attr):
                     for member in list(self.group_members.get(i)):
                         self.create_single_node(member)
                     # Create connections inside the group
@@ -272,56 +309,45 @@ class BuildDiagram:
         Create an instance of a given node class, if not valid print name of not valid node
         """
         try:
-            # For detail level 0 check counter to create corresponding text nodes
-            # Counter checks how many diagrams have been created thus far
-            if self.detail_level == 0:
-                if self.counter == 1:
-                    node_text = f"\n{self.nodes_text[node]}\n" \
-                                f" {self.nodes_ip[node]}\n"
-                else:
-                    node_text = f"\n{self.nodes_text[node]}\n" \
-                                f" {self.nodes_ip[node]}\n" \
-                                f" {self.nodes_port[node]}"
-            # Detail level 1 shows text and IP's
-            elif self.detail_level == 1:
-                node_text = f"\n{self.nodes_text[node]}\n" \
-                            f" {self.nodes_ip[node]}\n"
-            # Detail level 2 shows text, IP's and Ports
-            else:
-                node_text = f"\n{self.nodes_text[node]}\n" \
-                            f" {self.nodes_ip[node]}\n" \
-                            f" {self.nodes_port[node]}"
+            node_text = self.set_node_text(node)
 
             # Remove double newlines for the case when port is given but no url
             node_text = node_text.replace("\n\n", "\n")
+            url = self.nodes_url[node]
+            # If no tooltip is given, set the current name of the node as the tooltip
+            if self.nodes_tooltip[node] == "":
+                tooltip = self.nodes_text[node]
+            else:
+                tooltip = self.nodes_tooltip[node]
 
             try:
                 # Only pass coordinates to node creation if layout == neato
                 if self.graph_layout == "neato":
+                    pos = f"{self.nodes_x[node]}, {self.nodes_y[node]}!"
                     # If output format is other than svg, create diagram with png icons, else with svg icons
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                     URL=self.nodes_url[node],
-                                                                     pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!",
-                                                                     tooltip=f"{self.nodes_text[node]}"))
+                                                                     URL=url,
+                                                                     pos=pos,
+                                                                     tooltip=tooltip))
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
-                                                             URL=self.nodes_url[node],
-                                                             pos=f"{self.nodes_x[node]}, {self.nodes_y[node]}!",
-                                                             tooltip=f"{self.nodes_text[node]}"))
+                                                             URL=url,
+                                                             pos=pos,
+                                                             tooltip=tooltip))
                 else:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                     URL=self.nodes_url[node],
-                                                                     tooltip=f"{self.nodes_text[node]}"))
+                                                                     URL=url,
+                                                                     tooltip=tooltip))
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
-                                                             URL=self.nodes_url[node],
-                                                             tooltip=f"{self.nodes_text[node]}"))
+                                                             URL=url,
+                                                             tooltip=tooltip))
                 self.instances_keys.append(node)
             except KeyError:
                 print(
@@ -333,6 +359,34 @@ class BuildDiagram:
             print(
                 f"KeyError in {self.load_path}: '{node}' is not given in 'icons', that's why it does "
                 f"not show in the diagram. Add it to 'icons' or remove it as a member.")
+
+    def set_node_text(self, node) -> str:
+        """
+        Set text (label) of a given node
+
+        :param node: the node to set the text for
+        :return: text of the node
+        """
+        # For detail level 0 check counter to create corresponding text nodes
+        # Counter checks how many diagrams have been created thus far
+        if self.detail_level == 0:
+            if self.counter == 1:
+                node_text = f"\n{self.nodes_text[node]}\n" \
+                            f" {self.nodes_ip[node]}\n"
+            else:
+                node_text = f"\n{self.nodes_text[node]}\n" \
+                            f" {self.nodes_ip[node]}\n" \
+                            f" {self.nodes_port[node]}"
+        # Detail level 1 shows text and IP's
+        elif self.detail_level == 1:
+            node_text = f"\n{self.nodes_text[node]}\n" \
+                        f" {self.nodes_ip[node]}\n"
+        # Detail level 2 shows text, IP's and Ports
+        else:
+            node_text = f"\n{self.nodes_text[node]}\n" \
+                        f" {self.nodes_ip[node]}\n" \
+                        f" {self.nodes_port[node]}"
+        return node_text
 
     def fill_connection_dictionary(self, _object: str, _subobject: str, _default: any) -> dict:
         """
