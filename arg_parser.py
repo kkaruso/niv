@@ -1,6 +1,12 @@
+"""
+Parser class for Arguments when you start NIV
+"""
+
 import argparse
 import os
-from datetime import date
+
+from niv_logger import NivLogger
+from yaml_parser import get_yaml
 
 
 class ArgParser:
@@ -12,15 +18,20 @@ class ArgParser:
     set_args():
         Adds the needed arguments to the ArgumentParser class
     """
+    config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
 
+    # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
+    logger = NivLogger
     # Dictionary for argument choices
     ICONS = [1, 2, 3]
-    DETAIL = [1, 2, 3]
+    DETAIL = [0, 1, 2, 3]
 
-    def __init__(self):
-        return
+    def __init__(self, args):
+        self.args = args
+        self.parser = argparse.ArgumentParser
+        self.set_args()
 
-    def set_args(self, args):
+    def set_args(self):
         """
         Adds the needed arguments to the ArgumentParser class
 
@@ -32,38 +43,62 @@ class ArgParser:
 
         parser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
 
-        parser.add_argument('-v', '--version', action='version', version='1.0', help="Show program's version "
-                                                                                     "number and exit")
+        parser.add_argument('-v', '--version', action='version', version='0.3',
+                            help="Show program's version number and exit")
 
-        parser.add_argument('-s', '--save', type=self.save_to_path, nargs='?', metavar='OUTPUT_PATH',
-                            help='Save .svg, .png or .jpeg file to a given path (DEFAULT: .svg)')
+        parser.add_argument('-s', '--save', type=self.save_to_path,
+                            nargs=1, metavar='SAVE_PATH',
+                            help='Save .svg, .png, .jpg or .pdf file to a given path (DEFAULT: .svg)')
 
-        parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file, nargs='?', metavar='INPUT_PATH',
-                            help='Create visualization with a given .yaml file')
+        parser.add_argument('-l', '--load', type=self.is_path_to_yaml_file,
+                            nargs=1, metavar='LOAD_PATH',
+                            help='Create visualization with a given .yaml file', )
 
-        parser.add_argument('-i', '--icons', type=int, nargs='?', metavar='INT', default=1, choices=self.ICONS,
-                            help='Choose the icons you want to use for the visualization; 1: cisco, 2: osa (DEFAULT: 1)')
-
-        parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT', default=1, choices=self.DETAIL,
+        parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
+                            default=self.config.get('default').get('std_details'), choices=self.DETAIL,
                             help='The level of detail you want to use for the visualization; 1: least detail, '
-                                 '2: medium detail, 3: most detail (DEFAULT: 1)')
-
-        parser.add_argument('-r', '--run', action='store_true',
-                            help='Create visualization without saving any files')
-
-        parser.add_argument('-g', '--gui', action='store_true', help='Start niv gui')
+                                 '2: medium detail, 3: most detail (DEFAULT: 0)')
 
         # print(parser.parse_args("-g".split()))
         # If no argument given, print help
-        if len(args) == 0:
+        if len(self.args) == 0:
             print('You didnt specify any arguments, here is some help:\n')
             parser.print_help()
 
         # Checks if the arguments are compatible with each other, else raise Exception
-        if self.check_args_compatibility(args):
-            return parser.parse_args(args)
-        else:
-            Exception("Arguments are not compatible")
+        if self.check_args_compatibility():
+            self.parser = parser.parse_args(self.args)
+            return
+        raise ValueError("Arguments are not compatible")
+
+    def get_load(self):
+        """
+        :return: returns data from argument load
+        """
+        # access load argument, workaround for program start
+        for i, arg in enumerate(self.args):
+            if arg in ("-l", "--load"):
+                file_name = self.args[i + 1]
+                return file_name
+        raise OSError("Can\'t access file_name")
+
+    def get_parser(self):
+        """
+        :return: returns set parser from set_parser()
+        """
+        return self.parser
+
+    def get_save_path(self):
+        """
+        :return: returns save path
+        """
+        return self.parser.save
+
+    def get_detail_level(self):
+        """
+        :return: return detail level
+        """
+        return self.parser.detail
 
     @staticmethod
     def is_path_to_yaml_file(file_path):
@@ -80,36 +115,36 @@ class ArgParser:
             file_type = file_name.split('.')[-1]
             if file_type == "yaml":
                 return file_path
-            else:
-                raise argparse.ArgumentTypeError(f'\n"{file_name}" is not a .yaml')
-        else:
-            raise Exception(f'\n"{file_path}" is not a valid file path')
+            raise TypeError(f'"{file_name}" is not a .yaml')
+        raise OSError(f'"{file_path}" is not a valid file path')
 
-    @staticmethod
-    def create_filename(file_path):
+    def create_filename(self):
         """
-        Generate a file name with today's date and check if file with the same name already exists. If it does add a
-        number at the end of the name
-
-        :param file_path: path to where the file should be saved
+        generate name from input file and return it
         :return: generated filename
         """
-        i = 1
-        date_today = "{:%Y%m%d}".format(date.today())
-        file_name = f"{date_today}_NIV_Diagram.svg"
-        # Add an incrementing number to end of file if file name already exists
-        while os.path.isfile(f"{file_path}{file_name}"):
-            file_name = file_name.split('.')[0].split('-')[0]
-            file_name = f"{file_name}-{i}"
-            file_name = f"{file_name}.svg"
-            i += 1
+        file_name = ""
+        # default_name = self.config["DEFAULT"]["std_out"]
+        file_format = self.config.get('default').get('std_type')
 
+        # if default_name == "_":
+        # access load argument, workaround for program start
+        for i, arg in enumerate(self.args):
+            if arg in ("-l", "--load"):
+                file_name = self.args[i + 1]
+                break
+        if file_name == "":
+            raise OSError("Can\'t access file_name")
+        file_name = file_name.split('/')[-1].split('.')[0]
+        file_name = f"{file_name}{file_format}"
         return file_name
 
-    @staticmethod
-    def save_to_path(file_path):
+        # return default_name + file_format
+
+    def save_to_path(self, file_path):
         """
-        Checks if the path is a file path or a directory path and creates the output file in the corresponding
+        Checks if the path is a file path or a directory path
+        and creates the output file in the corresponding
         directory with a suitable name, if no name is given
 
         :param file_path: path to where the file should be saved
@@ -119,77 +154,65 @@ class ArgParser:
         file_path = file_path.lstrip()
         last_element = file_path.split('/')[-1]
         # Workaround that adds a "./" at the start of the path if no "./" is entered
+
+        # If the path is just a '.' create a file in the current directory
+        if file_path == '.':
+            # file_name = ArgParser.create_filename(f"{file_path}/")
+            file_name = self.create_filename()
+            # Create the file in the current directory
+            file = open(f"{file_name}", "a")
+            file.close()
+            return file_name
+
         if file_path[0:2] != "./":
             file_path = "./" + file_path
         path = file_path.removesuffix(f'{last_element}')
 
-        # If the path is just a '.' create a file in the current directory
-        if file_path == '.':
-            file_name = ArgParser.create_filename(f"{file_path}/")
-            # Create the file in the current directory
-            f = open(f"{file_name}", "a")
-            f.close()
-            return file_name
-
-        # If there is a '.' in the name of the last element of the path, it is a file, else it is a directory
-        elif '.' in last_element:
+        # If there is a '.' in the name of the last element of the
+        # path, it is a file, else it is a directory
+        if '.' in last_element:
             # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
-            if last_element.lower().endswith(('.svg', '.png', '.jpeg')):
+            if last_element.lower().endswith(('.svg', '.png', '.jpg', 'pdf')):
                 # Check if the directory above the file exists, else raise Exception
                 if os.path.isdir(path):
-                    # Check if file already exists. If it doesn't create file, else raise FileExistsError
-                    if not os.path.isfile(file_path):
-                        # Create the given file in the given directory
-                        f = open(f"{file_path}", "a")
-                        f.close()
-                        return file_path
-                    else:
-                        raise FileExistsError(f"{last_element} already exists")
-                else:
-                    raise Exception(f'\n"{path}": directory doesn\'t exist')
-            else:
-                raise TypeError(f"{last_element} is the wrong file format (must be either .svg, .png, .jpeg)")
+                    return file_path
+                    # raise FileExistsError(f"{last_element} already exists")
+                raise OSError(f'"{path}": directory doesn\'t exist')
+            raise TypeError(f'"{last_element}" is the wrong file format (must be either .svg, .png, .jpg, .pdf)')
 
-        else:
-            # Check if directory exists. If it does return the file_path, else raise Exception
-            if os.path.isdir(file_path):
-                # Check if last symbol is a "/" otherwise add a "/"
-                if file_path[-1] != "/":
-                    file_path += "/"
-                file_name = ArgParser.create_filename(file_path)
-                # Create the file in the given directory
-                f = open(f"{file_path}{file_name}", "a")
-                f.close()
-                return file_path
-            else:
-                raise Exception(f'\n"{file_path}": directory doesn\'t exist')
+        # Check if directory exists. If it does return the file_path, else raise Exception
+        if os.path.isdir(file_path):
+            # Check if last symbol is a "/" otherwise add a "/"
+            if file_path[-1] != "/":
+                file_path += "/"
+            file_name = self.create_filename()
+            # Create the file in the given directory
+            file = open(f"{file_path}{file_name}", "a")
+            file.close()
+            return file_path
 
-    @staticmethod
-    def check_args_compatibility(args):
+        raise OSError(f'"{file_path}": directory doesn\'t exist')
+
+    def check_args_compatibility(self):
         """
-        Checks if the given arguments are compatible with each other (e.g: --gui can't be used with any other argument)
+        Checks if the given arguments are compatible with each other
 
-        :param args: parsed arguments as a namespace
         :return: true, if arguments are compatible. false, if not
         """
         # Set variable to True if argument is given
-        icons = "--icons" in args or "-i" in args
-        detail = "--detail" in args or "-d" in args
-        load = "--load" in args or "-l" in args
-        save = "--save" in args or "-s" in args
-        run = "--run" in args or "-r" in args
-        gui = "--gui" in args or "-g" in args
+        load = "--load" in self.args or "-l" in self.args
+        version = "--version" in self.args or "-v" in self.args
+        hlp = "--help" in self.args or "-h" in self.args
 
         # If no arguments are given
-        if len(args) == 0:
+        if len(self.args) == 0:
             return True
-        # If -g/--gui is used with any other argument, raise ArgumentError
-        elif (icons or detail or load or save or run) and gui:
-            raise Exception("Can\'t use -g/--gui with other arguments :)")
-        # If -r/--run is used with -l/--load, raise ArgumentError
-        elif run and load:
-            raise Exception("Can\'t use -r/--run with -l/--load :)")
-        # If neither load, run or gui are as arguments -> the program would do nothing
-        elif not (load or run or gui):
-            raise Exception("To use NIV you need either load, run or gui as an argument :)")
-        return True
+
+        # If only help or version are given
+        if len(self.args) == 1 and (version or hlp):
+            return True
+
+        # If load is an argument
+        if load:
+            return True
+        raise ValueError("To use NIV you need load as an argument :)")

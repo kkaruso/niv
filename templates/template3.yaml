@@ -1,0 +1,68 @@
+diagram: # Diagram properties
+  backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
+  padding: 0.5  # Padding around the graph (default: 0.5; type: double)
+  # TODO: Fix when using neato that no groups are showing
+  layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
+  connectionStyle: spline # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
+  direction: LR #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
+
+title: # Text underneath the diagram.
+  text: NIV  # Title under the Diagram (default: Diagram; type: string)
+  subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
+  fontSize: 15  # Font size (default: 15; type: int)
+
+  # TODO: Find a way to add this information to the diagram or delete it
+  author: "Tom Themas"  # Author's name: enter string
+  company: Empty  # Enter company name or leave empty
+  date: "01.01.2021"  # Default date is current date or enter specific date as string
+  version: "1.0"  # Version of the diagram as string
+
+nodes: #enter devices here. Maybe change "icons" to "devices" later.
+  # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
+  pc1: {icon: Pc, text: PC1, ip: 172.19.176.131, x: -3, y: 3 }
+  pc2: {icon: Pc, text: PC2, ip: 172.19.176.132, x: -3, y: 2 }
+  pc3: {icon: Pc, text: PC3, ip: 172.19.176.133, x: -3, y: 1 }
+  pc4: {icon: Pc, text: PC4, ip: 172.19.176.134, x: -3, y: 0 }
+  pc5: {icon: Pc, text: PC5, ip: 172.19.176.135, x: -3, y: -1 }
+  pc6: {icon: Pc, text: PC6, ip: 172.19.176.136, x: -3, y: -2 }
+  switch1: {icon: WorkgroupSwitch, text: Work group Switch, x: 4, y: 0}
+  router1: {icon: Router, text: Router1, x: 5, y: 0 }
+  switch2: {icon: VoiceAtmSwitch, text: Work group Switch 2, x: 10, y: 0}
+  atmrouter1: {icon: AtmRouter, text: Atm Router1, x: 7, y: 2 }
+  atmrouter2: {icon: AtmRouter, text: Atm Router2, x: 7, y: 1 }
+  atmrouter3: {icon: AtmRouter, text: Atm Router3, x: 7, y: -1 }
+  atmrouter4: {icon: AtmRouter, text: Atm Router4, x: 7, y: -2 }
+  prozessor1: {icon: RouteSwitchProcessor, text: Prozessor, x: 11, y: 0}
+  server1: {icon: FileServer, text: DHCP/DNS/TFTP, x: 12, y: 9}
+  cloud1: {icon: Cloud, text: Cloud, x: -5, y: 3}
+  laptop1: {icon: Laptop, text: Laptop, x: -5, y: 2}
+  vpn1: {icon: Vsvgateway, text: VPN Gateway, x: -4, y: 2}
+
+# TODO: Implement that you can group other groups
+groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
+  # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+  # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
+  group1: {name: PCs, members: [pc1, pc2, pc3, pc4, pc5, pc6, switch1]}
+  group2: {name: ATM Router, members: [switch2, atmrouter1, atmrouter2, atmrouter3, atmrouter4, prozessor1, server1], layout: dot, rack: True}
+
+connections: #enter your connections here
+- {endpoints: [switch1, pc1], color: red }
+- {endpoints: [switch1, pc2], color: black }
+- {endpoints: [switch1, pc3], color: purple }
+- {endpoints: [switch1, pc4], color: green }
+- {endpoints: [switch1, pc5], color: red }
+- {endpoints: [switch1, pc6], color: red }
+- {endpoints: [router1, switch1], color: purple }
+- {endpoints: [switch2, router1], color: blue }
+- {endpoints: [atmrouter1, switch2], color: red}
+- {endpoints: [atmrouter2, switch2], color: red}
+- {endpoints: [atmrouter3, switch2], color: red}
+- {endpoints: [atmrouter4 ,switch2], color: red}
+- {endpoints: [prozessor1, atmrouter1], color: red}
+- {endpoints: [server1, prozessor1], color: red}
+- {endpoints: [router1, cloud1], color: red}
+- {endpoints: [laptop1, cloud1], color: red}
+- {endpoints: [vpn1, cloud1], color: red}
+
+
+

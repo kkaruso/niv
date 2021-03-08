@@ -1,0 +1,31 @@
+# .yaml file for testing build_diagram.py functions
+
+diagram: # Diagram properties
+  backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
+  padding: 0.5  # Padding around the graph (default: 0.5; type: double)
+  layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
+  connectionStyle: curved  # Style of connections between nodes (default: curved; type: string; options: curved or ortho)
+
+title: # Text underneath the diagram.
+  text: NIV  # Title under the Diagram (default: Diagram; type: string)
+  subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
+  fontSize: 15  # Font size (default: 15; type: int)
+
+  author: "Tom Themas"  # Author's name: enter string
+  company: Empty  # Enter company name or leave empty
+  date: "01.01.2021"  # Default date is current date or enter specific date as string
+  version: "1.0"  # Version of the diagram as string
+
+groupDefaults: &groupDefaults #Use current values as defaults
+  backgroundColor: lightblue  # Fill the background of the group box
+
+nodes: #enter devices here. Maybe change "icons" to "devices" later.
+  cloud1: {icon: OsaCloud, text: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
+  db1: {icon: OsaDatabase, text: MySQL Database, port: 25565, x: 0, y: 0, url: }
+  deviceScanner1: {icon: OsaDeviceScanner, text: Local Device Scanner, x: 0, y: 6 }
+
+groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
+  group1: { <<: *groupDefaults, name: Servers, members: [cloud1, db1, deviceScanner1], url: https://hs-worms.de }
+
+connections: #enter your connections here
+- {endpoints: [cloud1, db1], text: Test, color: red}
