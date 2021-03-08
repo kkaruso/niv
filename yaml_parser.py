@@ -36,6 +36,11 @@ def create_yaml_defaults(path):
 
 
 def get_yaml_default_preset():
+    """
+    Contains preset of yaml_default necessary for creating a new yaml_defaults.yaml
+
+    :return: data for yaml_default.yaml
+    """
     data = """\
         diagram:
             backgroundColor: # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
