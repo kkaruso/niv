@@ -17,7 +17,7 @@ title: # Text underneath the diagram.
   date: "01.01.2021"  # Default date is current date or enter specific date as string
   version: "1.0"  # Version of the diagram as string
 
-icons: #enter devices here. Maybe change "icons" to "devices" later.
+nodes: #enter devices here. Maybe change "icons" to "devices" later.
   pc1: {icon: Pc, text: PC1, ip: 172.19.176.131, x: -3, y: 3 }
   pc2: {icon: Pc, text: PC2, ip: 172.19.176.132, x: -3, y: 2 }
   pc3: {icon: Pc, text: PC3, ip: 172.19.176.133, x: -3, y: 1 }

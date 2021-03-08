@@ -95,17 +95,16 @@ class BuildDiagram:
             'url') or "")
 
         # Only get coordinates from nodes if layout = neato
-        if self.graph_layout == "neato":
-            # Get X coordinate of each node
-            self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('icons').get(
-                'x') or 0)
+        # Get X coordinate of each node
+        self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('icons').get(
+            'x') or 0)
 
-            # Get Y coordinate of each node
-            self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('icons').get(
-                'y') or 0)
+        # Get Y coordinate of each node
+        self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('icons').get(
+            'y') or 0)
 
-            print(f"\nXs: {self.nodes_x}")
-            print(f"Ys: {self.nodes_y}\n")
+        print(f"\nXs: {self.nodes_x}")
+        print(f"Ys: {self.nodes_y}\n")
 
         # Save each endpoint of a connection as a list in "connections" list
         self.connections_endpoints = []
@@ -165,7 +164,7 @@ class BuildDiagram:
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_text:
             if node not in members:
-                self.create_single_node(node)
+                self.create_single_node(node, self.graph_layout)
 
         # Dynamically create the amount of groups given by "group_count" with the corresponding group name
         for name in self.group_members:
@@ -180,7 +179,7 @@ class BuildDiagram:
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(name)):
-                    self.create_single_node(member)
+                    self.create_single_node(member, self.graph_layout)
 
     def create_connections(self):
         """
@@ -252,6 +251,7 @@ class BuildDiagram:
             "splines": f"{self.graph_splines}",
             "rankdir": f"{self.graph_direction}"
         }
+
         with Diagram(self.set_diagram_title(),
                      filename=self.filename + suffix,
                      outformat=self.output_format,
@@ -263,15 +263,41 @@ class BuildDiagram:
 
         # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
         for _, i in enumerate(self.yaml.get("groups")):
+
+            # if rack in yaml is on True then the direction of the sub-group icons will be Left to Right
+            if str(self.yaml.get("groups").get(f"{i}").get("rack")) == "True":
+                direction = "LR"
+            else:
+                direction = self.graph_direction
+
+            # if the sub-group has no layout then the main layout of the diagram will be used instead
+            if self.yaml.get("groups").get(f"{i}").get("layout") is None:
+                layout = str(self.graph_layout)
+            else:
+                layout = str(self.yaml.get("groups").get(f"{i}").get("layout"))
+
+            # modify the subgroup with attributes
+            subgraph_attr = {
+                "bgcolor": f"{self.graph_bg_color}",
+                "pad": f"{self.graph_padding}",
+                "layout": layout,
+                "fontsize": f"{self.title_font_size}",
+                "fontname": "helvetica-bold",
+                "nodesep": "1.0",
+                "ranksep": "2.0",
+                "splines": f"{self.yaml.get}",
+                "rankdir": direction
+            }
+
             with Diagram(self.set_diagram_title(),
                          filename=f"group_diagrams/{self.filename}_{i}",
                          outformat=self.output_format,
-                         show=False, graph_attr=graph_attr):
+                         show=False, graph_attr=subgraph_attr):
 
                 # Create the nodes of the group inside a cluster
                 with Cluster(self.yaml.get("groups").get(f"{i}").get("name")):
                     for member in list(self.group_members.get(i)):
-                        self.create_single_node(member)
+                        self.create_single_node(member, layout)
                     # Create connections inside the group
                     self.create_connections()
 
@@ -293,7 +319,7 @@ class BuildDiagram:
                 title += item + ": " + str(_dict[item]) + "\n"
         return title
 
-    def create_single_node(self, node):
+    def create_single_node(self, node, layout):
         """
         Create an instance of a given node class, if not valid print name of not valid node
         """
@@ -323,8 +349,8 @@ class BuildDiagram:
 
             try:
                 # Only pass coordinates to node creation if layout == neato
-                if self.graph_layout == "neato":
-                    # If output format is other than svg, create diagram with png nodes, else with svg nodes
+                if layout == "neato":
+                    # If output format is other than svg, create diagram with png icons, else with svg icons
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
