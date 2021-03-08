@@ -113,10 +113,19 @@ class BuildDiagram:
         print(f"\nXs: {self.nodes_x}")
         print(f"Ys: {self.nodes_y}\n")
 
-        # Save each endpoint of a connection as a list in "connections" list
+        # Save each endpoint of a connection as a list
         self.connections_endpoints = []
         for i in range(0, len(self.yaml.get("connections"))):
             self.connections_endpoints.append(self.yaml.get("connections")[i].get("endpoints"))
+
+        # Get each port of a connection as a list
+        self.connections_ports = []
+        for i in range(0, len(self.yaml.get("connections"))):
+            print(f"Moin:{self.yaml.get('connections')[i].get('ports')}")
+            if self.yaml.get("connections")[i].get("ports") is not None:
+                self.connections_ports.append(self.yaml.get("connections")[i].get("ports"))
+            else:
+                self.connections_ports.append(["", ""])
 
         # Get color of connections
         self.connections_color = self.fill_connection_dictionary("connections", "color",
@@ -160,7 +169,8 @@ class BuildDiagram:
         print(f"group_members: {self.group_members}")
         print(f"group_url: {self.group_url}")
         print(f"group_tooltip: {self.group_tooltip}\n")
-        print(f"connections: {self.connections_endpoints}")
+        print(f"connections_endpoints: {self.connections_endpoints}")
+        print(f"connections_ports: {self.connections_ports}")
         print(f"connections_color: {self.connections_color}")
         print(f"connections_text: {self.connections_text}")
         print(f"connections_tooltip: {self.connections_tooltip}\n")
@@ -215,10 +225,14 @@ class BuildDiagram:
 
         # Create connections
         for i, _ in enumerate(self.instances_keys):
+            # print(f"i:{i}, _:{_}")
             for j, _ in enumerate(self.connections_endpoints):
+                # print(f"j:{j}, _:{_}")
                 if self.instances_keys[i] == self.connections_endpoints[j][0]:
                     for k, _ in enumerate(self.instances_keys):
+                        # print(f"k:{k}, _:{_}")
                         if self.connections_endpoints[j][1] == self.instances_keys[k]:
+                            # print("Yeeeehaaawwww")
                             # If no tooltip is given within the connection, set both endpoints as the tooltip
                             if self.connections_tooltip[j] == "":
                                 tooltip = f"{self.nodes_text[self.connections_endpoints[j][1]]} <---> " \
@@ -226,12 +240,15 @@ class BuildDiagram:
                             else:
                                 tooltip = self.connections_tooltip[j]
 
-                            _ = self.instances[k] - \
+                            self.instances[k] - \
                                 Edge(color=f"{self.connections_color[j]}",
                                      label=f"{self.connections_text[j]}",
                                      labeltooltip=f"{self.connections_text[j]}",
                                      penwidth=f"{self.connections_width[j]}",
-                                     edgetooltip=tooltip) - \
+                                     edgetooltip=tooltip,
+                                     headlabel=f"{self.connections_ports[j][0]}",
+                                     # head_lp="#%2000,%3000('!')?", #%f,%f('!')?
+                                     taillabel=f"{self.connections_ports[j][1]}") - \
                                 self.instances[i]
 
         # Clear both lists to have empty lists for every diagram creation to fix not seeing connections

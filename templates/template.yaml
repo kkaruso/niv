@@ -41,9 +41,9 @@ groups: # List every group of nodes here
 
 connections: # List every connection between 2 points here
   # Syntax:
-  # - { endpoints: [ list of the 2 nodes that should be connected ], text: text shown somewhere by the connection, color: color of the connection, tooltip: text shown in the tooltip, width: thickness of the connection line }
+  # - { endpoints: [ list of the 2 nodes that should be connected ], text: text shown somewhere by the connection, color: color of the connection, tooltip: text shown in the tooltip, width: thickness of the connection line, ports: list of ports( first number corresponds to first device in endpoints) }
   - { endpoints: [ cloud1, db1 ], text: Test, color: red, tooltip: This is some random tooltip, width: 2 }
   - { endpoints: [ server1, serverWeb1 ] }
   - { endpoints: [ server1, deviceScanner1 ] }
-  - { endpoints: [ desktop1, db1 ], text: Here is some text, color: blue }
-  - { endpoints: [ deviceScanner1, serverTerminal1 ], text: This connection is purple, color: purple }
+  - { endpoints: [ desktop1, db1 ], color: blue, ports: [1337, 255] }
+  - { endpoints: [ deviceScanner1, serverTerminal1 ], color: purple }
