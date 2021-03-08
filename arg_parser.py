@@ -59,6 +59,9 @@ class ArgParser:
                             help='The level of detail you want to use for the visualization; 1: least detail, '
                                  '2: medium detail, 3: most detail (DEFAULT: 0)')
 
+        parser.add_argument('-vv', '--verbose', action='store_true',
+                            help='Increase verbosity of console messages')
+
         # print(parser.parse_args("-g".split()))
         # If no argument given, print help
         if len(self.args) == 0:
@@ -68,6 +71,7 @@ class ArgParser:
         # Checks if the arguments are compatible with each other, else raise Exception
         if self.check_args_compatibility():
             self.parser = parser.parse_args(self.args)
+            self.logger.log_debug("Arguments are compatible")
             return
         raise ValueError("Arguments are not compatible")
 
@@ -93,6 +97,12 @@ class ArgParser:
         :return: returns save path
         """
         return self.parser.save
+
+    def get_verbose(self):
+        """
+        :return: return verbose value
+        """
+        return self.parser.verbose
 
     def get_detail_level(self):
         """

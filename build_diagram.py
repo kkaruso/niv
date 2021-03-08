@@ -27,6 +27,9 @@ class BuildDiagram:
     path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     config = yaml_parser.get_yaml(path_to_project + '/niv/config.yaml')
 
+    # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
+    logger = NivLogger
+
     # Read yaml_defaults.yaml if it exists, otherwise create the file and assign empty default to yaml_defaults
     yaml_defaults = yaml_parser.get_yaml(path_to_project + '/niv/yaml_defaults.yaml') if os.path.isfile(
         path_to_project + '/niv/yaml_defaults.yaml') else yaml_parser.create_yaml_defaults(
@@ -35,8 +38,12 @@ class BuildDiagram:
     counter = 1
 
     # TODO: Find a way to add margins between node and its text, and margin between the diagram and the title
-    def __init__(self, load_path, save_path, detail_level):
+    def __init__(self, load_path, save_path, detail_level, verbose):
         # Initialize variables for dynamically getting the values from the .yaml file
+
+        # get verbosity level (True/False)
+        self.verbose = verbose
+
         # TODO: cleanup (delete not needed comments like old prints)
         # Load the .yaml from the given path
         self.yaml = yaml_parser.get_yaml(load_path)
@@ -110,8 +117,8 @@ class BuildDiagram:
         self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('icons').get(
             'y') or 0)
 
-        print(f"\nXs: {self.nodes_x}")
-        print(f"Ys: {self.nodes_y}\n")
+        self.logger.log_debug(f"\nXs: {self.nodes_x}")
+        self.logger.log_debug(f"Ys: {self.nodes_y}\n")
 
         # Save each endpoint of a connection as a list
         self.connections_endpoints = []
@@ -220,9 +227,10 @@ class BuildDiagram:
                 if endpoint not in self.nodes_text and error:
                     # Avoid printing the same error message multiple times, just because we call the same function
                     # various times while creating more than 1 diagram
-                    print(f"KeyError in {self.load_path}: '{endpoint}' is not given in 'nodes', that's why it "
-                          f"does not show in the diagram. Add it to 'nodes' or remove it as an endpoint.\n")
-
+                    log_message = f"KeyError in {self.load_path}: '{endpoint}' is not given in 'nodes', that's why it" \
+                                  f"does not show in the diagram. Add it to 'nodes' or remove it as an endpoint."
+                    self.logger.verbose_warning(log_message, self.verbose)
+                    print(log_message)
         # Create connections
         for i, _ in enumerate(self.instances_keys):
             # print(f"i:{i}, _:{_}")
@@ -410,17 +418,19 @@ class BuildDiagram:
             except KeyError:
                 # Avoid printing the same error message multiple times
                 if error:
-                    print(
-                        f"KeyError in {self.load_path}: '{self.nodes_icon[node]}' is not a valid icon, "
-                        f"that's why it does not show in the diagram. "
-                        f"Please take a look at the icon catalog in resources or remove the node.\n")
+                    log_message = f"KeyError in {self.load_path}: '{self.nodes_icon[node]}' is not a valid icon, " \
+                                  f"that's why it does not show in the diagram " \
+                                  f"Please take a look at the icon catalog in resources or remove the node."
+                    self.logger.verbose_warning(log_message, self.verbose)
+                    print(log_message)
 
         except KeyError:
             # Avoid printing the same error message multiple times
             if error:
-                print(
-                    f"KeyError in {self.load_path}: '{node}' is not given in 'nodes', that's why it does "
-                    f"not show in the diagram. Add it to 'nodes' or remove it as a member.\n")
+                log_message = f"KeyError in {self.load_path}: '{node}' is not given in 'nodes', that's why it does " \
+                              f"not show in the diagram. Add it to 'nodes' or remove it as a member."
+                self.logger.verbose_warning(log_message, self.verbose)
+                print(log_message)
 
     def set_node_text(self, node) -> str:
         """
@@ -481,11 +491,16 @@ class BuildDiagram:
             _dict[i] = self.yaml.get(_object).get(i).get(_subobject)
             if self.yaml.get(_object)[i].get(_subobject) is None:
                 if _object == "groups" and _subobject == "members":
-                    print(f"{i}: No members given, group won\'t be shown. Add members to group or remove group! :)")
+                    log_message = f"{i}: No members given, group won\'t be shown. Add members to group or remove " \
+                                  f"group! :) "
+                    self.logger.verbose_warning(log_message, self.verbose)
+                    print(log_message)
                 _dict[i] = _default
             elif _subobject == "ip":
                 if not self.validate_ip(_dict[i]):
-                    print(f"'{_dict[i]}' does not seem to be a valid IPv4 or IPv6 address")
+                    log_message = f"'{_dict[i]}' does not seem to be a valid IPv4 or IPv6 address"
+                    self.logger.verbose_warning(log_message, self.verbose)
+                    print(log_message)
 
         return _dict
 
