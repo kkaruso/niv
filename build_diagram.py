@@ -248,7 +248,7 @@ class BuildDiagram:
                             else:
                                 tooltip = self.connections_tooltip[j]
 
-                            self.instances[k] - \
+                            _ = self.instances[k] - \
                                 Edge(color=f"{self.connections_color[j]}",
                                      label=f"{self.connections_text[j]}",
                                      labeltooltip=f"{self.connections_text[j]}",
