@@ -2,7 +2,7 @@ diagram: # Diagram properties
   backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding: 0.5  # Padding around the graph (default: 0.5; type: double)
   # TODO: Fix when using neato that no groups are showing
-  layout: neato  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
+  layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
   connectionStyle: curved # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
   direction: TB #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
 
@@ -69,9 +69,9 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
 
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-  group1: { <<: *groupDefaults, name: Core-Swiches , members: [core-Switch1, core-Switch2], url: https://hs-worms.de }
+  group1: { <<: *groupDefaults, name: Core-Swiches , members: [core-Switch1, core-Switch2], rack: True}
   group2: { <<: *groupDefaults, name: Spine-Switches, members: [spine-Switch1, spine-Switch2, spine-Switch3, spine-Switch4] }
-  group4: { <<: *groupDefaults, name: Rack 1, members: [ server1, server2, server3, server4, switch1, switch2] }
+  group4: { <<: *groupDefaults, name: Rack 1, members: [ server1, server2, server3, server4, switch1, switch2], layout: neato,  rack: True}
   group5: { <<: *groupDefaults, name: Rack 2, members: [ server5, server6, server7, server8, switch3, switch4] }
   group6: { <<: *groupDefaults, name: Rack 3, members: [ server9, server10, server11, server12, switch5, switch6] }
   group7: { <<: *groupDefaults, name: Rack 4, members: [ server13, server14, server15, server16, switch7, switch8] }
