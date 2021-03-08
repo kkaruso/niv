@@ -14,7 +14,8 @@ test:pytest:
   script:
     - pip install pytest --quiet
     - pip install pyyaml
-    - sudo apt-get install python-ruamel.yaml
+    - pip install -U pip setuptools wheel
+    - pip install ruamel.yaml
     - pip install graphviz
     - apt-get update && apt-get upgrade -y graphviz
     - python -m pytest
