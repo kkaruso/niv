@@ -184,7 +184,7 @@ class BuildDiagram:
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_text:
             if node not in members:
-                self.create_single_node(node, self.graph_layout)
+                self.create_single_node(node, self.graph_layout, True)
 
         # Dynamically create the amount of groups with the corresponding group name
         # If no tooltip is given within the group, set the current name of the group as the tooltip
@@ -205,34 +205,22 @@ class BuildDiagram:
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(name)):
-                    self.create_single_node(member, self.graph_layout)
+                    self.create_single_node(member, self.graph_layout, True)
 
-    def create_connections(self):
+    def create_connections(self, error: bool):
         """
         Create connections between nodes
         """
-
-        # Get the names of the instances as strings to create the connections
-        # for instance in self.instances:
-        #     # Only get the name of the icon as a string
-        #     instance_name = str(instance).split('.')[-1].split('>')[0]
-        #     print(f"INSTANCE_NAMES_1:{instance_name}")
-        #     if self.output_format != "svg":
-        #         instance_name = str(instance).split('.')[-1].split('Png')[0]
-        #         print(f"INSTANCE_NAMES_2:{instance_name}")
-        # Get the key of the name of the instance in the dictionary
-        # key_of_instance_name = list(self.nodes_icon.keys())[list(self.nodes_icon.values()).index(instance_name)]
-        # instance_names.append(instance_name)
-
         # Check if any endpoints are not given in 'nodes', if not print an error
         for connection in self.connections_endpoints:
             for endpoint in connection:
-                if endpoint not in self.nodes_text:
+                if endpoint not in self.nodes_text and error:
+                    # Avoid printing the same error message multiple times, just because we call the same function
+                    # various times while creating more than 1 diagram
                     log_message = f"KeyError in {self.load_path}: '{endpoint}' is not given in 'nodes', that's why it" \
                                   f"does not show in the diagram. Add it to 'nodes' or remove it as an endpoint."
                     self.logger.verbose_warning(log_message, self.verbose)
                     print(log_message)
-
         # Create connections
         for i, _ in enumerate(self.instances_keys):
             for j, _ in enumerate(self.connections_endpoints):
@@ -294,7 +282,7 @@ class BuildDiagram:
             # Create nodes and clusters
             self.create_nodes(members)
             # Create connections
-            self.create_connections()
+            self.create_connections(True)
 
         # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
         for _, i in enumerate(self.yaml.get("groups")):
@@ -343,9 +331,9 @@ class BuildDiagram:
                 # Create the nodes of the group inside a cluster
                 with Cluster(self.yaml.get("groups").get(f"{i}").get("name"), graph_attr=clustr_attr):
                     for member in list(self.group_members.get(i)):
-                        self.create_single_node(member, layout)
+                        self.create_single_node(member, layout, False)
                     # Create connections inside the group
-                    self.create_connections()
+                    self.create_connections(False)
 
     def set_diagram_title(self):
         """
@@ -365,7 +353,7 @@ class BuildDiagram:
                 title += item + ": " + str(_dict[item]) + "\n"
         return title
 
-    def create_single_node(self, node, layout):
+    def create_single_node(self, node, layout, error):
         """
         Create an instance of a given node class, if not valid print name of not valid node
         """
@@ -411,17 +399,21 @@ class BuildDiagram:
                                                              tooltip=tooltip))
                 self.instances_keys.append(node)
             except KeyError:
-                log_message = f"KeyError in {self.load_path}: '{self.nodes_icon[node]}' is not a valid icon, " \
-                              f"that's why it does not show in the diagram " \
-                              f"Please take a look at the icon catalog in resources or remove the node."
-                self.logger.verbose_warning(log_message, self.verbose)
-                print(log_message)
+                # Avoid printing the same error message multiple times
+                if error:
+                    log_message = f"KeyError in {self.load_path}: '{self.nodes_icon[node]}' is not a valid icon, " \
+                                  f"that's why it does not show in the diagram " \
+                                  f"Please take a look at the icon catalog in resources or remove the node."
+                    self.logger.verbose_warning(log_message, self.verbose)
+                    print(log_message)
 
         except KeyError:
-            log_message = f"KeyError in {self.load_path}: '{node}' is not given in 'nodes', that's why it does " \
-                          f"not show in the diagram. Add it to 'nodes' or remove it as a member."
-            self.logger.verbose_warning(log_message, self.verbose)
-            print(log_message)
+            # Avoid printing the same error message multiple times
+            if error:
+                log_message = f"KeyError in {self.load_path}: '{node}' is not given in 'nodes', that's why it does " \
+                              f"not show in the diagram. Add it to 'nodes' or remove it as a member."
+                self.logger.verbose_warning(log_message, self.verbose)
+                print(log_message)
 
     def set_node_text(self, node) -> str:
         """

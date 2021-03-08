@@ -5,6 +5,7 @@ test:pylint:
   script:
     - pip install pylint --quiet
     - pip install pyyaml
+    - pip install ruamel.yaml
     - pylint --ignored-classes=_socketobject --max-line-length=150 --max-statements=50 *.py
 
 test:pytest:
@@ -14,6 +15,7 @@ test:pytest:
   script:
     - pip install pytest --quiet
     - pip install pyyaml
+    - pip install ruamel.yaml
     - pip install graphviz
     - apt-get update && apt-get upgrade -y graphviz
     - python -m pytest
