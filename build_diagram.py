@@ -40,11 +40,11 @@ class BuildDiagram:
         # TODO: cleanup (delete not needed comments like old prints)
         # Load the .yaml from the given path
         self.yaml = yaml_parser.get_yaml(load_path)
-        self.save_path = save_path
+        self.save_path = ''.join(save_path)
         self.load_path = load_path
         self.detail_level = detail_level
-        self.output_format = save_path.split('.')[-1]
-        self.filename = os.path.splitext(save_path)[0]
+        self.output_format = self.save_path.split('.')[-1]
+        self.filename = os.path.splitext(self.save_path)[0]
 
         # TODO: Add checks if value not given
         # Load diagram properties
