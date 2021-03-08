@@ -20,7 +20,7 @@ if __name__ == '__main__':
         args = arg_parser.get_parser()
         with suppress(KeyError):
             diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg",
-                                           arg_parser.get_detail_level())
+                                           arg_parser.get_detail_level(),arg_parser.get_verbose())
             diagram_builder.run()
 
     except (OSError, ValueError, TypeError, AssertionError) as error_message:

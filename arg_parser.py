@@ -71,6 +71,7 @@ class ArgParser:
         # Checks if the arguments are compatible with each other, else raise Exception
         if self.check_args_compatibility():
             self.parser = parser.parse_args(self.args)
+            self.logger.log_debug("Arguments are compatible")
             return
         raise ValueError("Arguments are not compatible")
 

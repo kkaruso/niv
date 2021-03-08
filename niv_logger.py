@@ -33,6 +33,29 @@ class NivLogger:
         logging.info("%s \n", log_message)
 
     @staticmethod
+    def log_debug(log_message):
+        """
+        function to add input to log file as debug
+        """
+        logging.debug("%s \n", log_message)
+
+    @staticmethod
+    def log_warning(log_message):
+        """
+        function to add input to log file as a warning
+        """
+        logging.warning("%s \n", log_message)
+
+    @staticmethod
+    def verbose_warning(log_message, verbose):
+        """
+        function to add warnings to logfile
+        if verbosity is True
+        """
+        if verbose:
+            logging.warning("%s \n", log_message)
+
+    @staticmethod
     def clear_log():
         """
         function to clear the log file
