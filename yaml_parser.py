@@ -18,3 +18,22 @@ def get_yaml(path):
             return yaml_parsed
         except yaml.YAMLError as exc:
             raise Exception from exc
+
+
+def create_yaml_defaults(path):
+    """
+    Creates yaml_defaults.yaml at given path
+
+    :param path: path where the .yaml file will be created
+    :return: empty yaml defaults
+    """
+    print("No yaml_defaults.yaml found. Creating file in " + path)
+    data = {'diagram': {'backgroundColor': None, 'padding': None, 'layout': None, 'connectionStyle': None,
+                        'direction': None},
+            'title': {'text': None, 'subText': None, 'fontSize': None, 'author': None, 'company': None, 'date': None,
+                      'version': None},
+            'icons': {'text': None, 'x': None, 'y': None, 'ip': None, 'port': None, 'url': None},
+            'groups': {'name': None, 'url': None}, 'connections': {'text': None, 'color': None}}
+    with open(path, 'w') as file:
+        yaml.dump(data, file)
+    return data
