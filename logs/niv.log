@@ -1,11 +1,19 @@
-2021/03/02 13:19:12 - root - ERROR - Unexpected Error in: main.py in line 16
-Traceback (most recent call last):
-  File "C:\Users\Danie\Desktop\TOP\niv\main.py", line 16, in <module>
-    arg_parser = ArgParser(sys.argv[1:])
-  File "C:\Users\Danie\Desktop\TOP\niv\arg_parser.py", line 38, in __init__
-    self.set_args()
-  File "C:\Users\Danie\Desktop\TOP\niv\arg_parser.py", line 75, in set_args
-    if self.check_args_compatibility():
-  File "C:\Users\Danie\Desktop\TOP\niv\arg_parser.py", line 218, in check_args_compatibility
-    raise Exception("To use NIV you need load as an argument :)")
-Exception: To use NIV you need load as an argument :)
+2021/03/08 12:04:34 - graphviz.files - DEBUG - write 31380 bytes to 'Test_Diagram'
+2021/03/08 12:04:34 - graphviz.backend - DEBUG - run ['dot', '-Tsvg', '-O', 'Test_Diagram']
+2021/03/08 12:04:34 - graphviz.backend - DEBUG - view: 'Test_Diagram.svg'
+2021/03/08 12:04:34 - graphviz.files - DEBUG - write 1281 bytes to 'group_diagrams/Test_Diagram_group1'
+2021/03/08 12:04:34 - graphviz.backend - DEBUG - run ['dot', '-Tsvg', '-O', 'Test_Diagram_group1']
+2021/03/08 12:04:34 - graphviz.files - DEBUG - write 1667 bytes to 'group_diagrams/Test_Diagram_group2'
+2021/03/08 12:04:34 - graphviz.backend - DEBUG - run ['dot', '-Tsvg', '-O', 'Test_Diagram_group2']
+2021/03/08 12:04:35 - graphviz.files - DEBUG - write 3541 bytes to 'group_diagrams/Test_Diagram_group4'
+2021/03/08 12:04:35 - graphviz.backend - DEBUG - run ['dot', '-Tsvg', '-O', 'Test_Diagram_group4']
+2021/03/08 12:04:35 - graphviz.files - DEBUG - write 3535 bytes to 'group_diagrams/Test_Diagram_group5'
+2021/03/08 12:04:35 - graphviz.backend - DEBUG - run ['dot', '-Tsvg', '-O', 'Test_Diagram_group5']
+2021/03/08 12:04:36 - graphviz.files - DEBUG - write 3547 bytes to 'group_diagrams/Test_Diagram_group6'
+2021/03/08 12:04:36 - graphviz.backend - DEBUG - run ['dot', '-Tsvg', '-O', 'Test_Diagram_group6']
+2021/03/08 12:04:36 - graphviz.files - DEBUG - write 3531 bytes to 'group_diagrams/Test_Diagram_group7'
+2021/03/08 12:04:36 - graphviz.backend - DEBUG - run ['dot', '-Tsvg', '-O', 'Test_Diagram_group7']
+2021/03/08 12:04:36 - graphviz.files - DEBUG - write 3541 bytes to 'group_diagrams/Test_Diagram_group8'
+2021/03/08 12:04:36 - graphviz.backend - DEBUG - run ['dot', '-Tsvg', '-O', 'Test_Diagram_group8']
+2021/03/08 12:04:36 - graphviz.files - DEBUG - write 3547 bytes to 'group_diagrams/Test_Diagram_group9'
+2021/03/08 12:04:36 - graphviz.backend - DEBUG - run ['dot', '-Tsvg', '-O', 'Test_Diagram_group9']
