@@ -110,6 +110,7 @@ class BuildDiagram:
         self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('icons').get(
             'y') or 0)
 
+        # TODO: Print
         print(f"\nXs: {self.nodes_x}")
         print(f"Ys: {self.nodes_y}\n")
 
@@ -221,6 +222,7 @@ class BuildDiagram:
         for connection in self.connections_endpoints:
             for endpoint in connection:
                 if endpoint not in self.nodes_text:
+                    # TODO: Print
                     print(f"KeyError in {self.load_path}: '{endpoint}' is not given in 'nodes', that's why it "
                           f"does not show in the diagram. Add it to 'nodes' or remove it as an endpoint.")
 
@@ -402,12 +404,14 @@ class BuildDiagram:
                                                              tooltip=tooltip))
                 self.instances_keys.append(node)
             except KeyError:
+                # TODO: Print
                 print(
                     f"KeyError in {self.load_path}: '{self.nodes_icon[node]}' is not a valid icon, "
                     f"that's why it does not show in the diagram "
                     f"Please take a look at the icon catalog in resources or remove the node.")
 
         except KeyError:
+            # TODO: Print
             print(
                 f"KeyError in {self.load_path}: '{node}' is not given in 'nodes', that's why it does "
                 f"not show in the diagram. Add it to 'nodes' or remove it as a member.")
@@ -471,10 +475,12 @@ class BuildDiagram:
             _dict[i] = self.yaml.get(_object).get(i).get(_subobject)
             if self.yaml.get(_object)[i].get(_subobject) is None:
                 if _object == "groups" and _subobject == "members":
+                    # TODO: PRINT
                     print(f"{i}: No members given, group won\'t be shown. Add members to group or remove group! :)")
                 _dict[i] = _default
             elif _subobject == "ip":
                 if not self.validate_ip(_dict[i]):
+                    # TODO: PRINT
                     print(f"'{_dict[i]}' does not seem to be a valid IPv4 or IPv6 address")
 
         return _dict
