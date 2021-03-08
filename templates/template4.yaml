@@ -21,7 +21,7 @@ groupDefaults: &groupDefaults #Use current values as defaults
   backgroundColor: lightblue  # Fill the background of the group box
 
 # TODO: change icon names to variables and put current name into "icon"
-icons: #enter devices here. Maybe change "icons" to "devices" later.
+nodes: #enter devices here. Maybe change "icons" to "devices" later.
   cloud1: {icon: Cloud, text: Internet, x: 24, y: 26}
   router1: { icon: RouterFirewall, text: Router Firewall, x: 24, y: 22 }
   core-Switch1:  {icon: SafeharborIcon, text: core-Switch 1, x: 22, y: 18 }
