@@ -55,19 +55,19 @@ class BuildDiagram:
 
         # TODO: Add placeholder icon to set as default for nodes_icon
         # Get icon of each node
-        self.nodes_icon = self.fill_dictionary("icons", "icon", "")
+        self.nodes_icon = self.fill_dictionary("nodes", "icon", "")
 
         # Get text of each node
-        self.nodes_text = self.fill_dictionary("icons", "text", "node")
+        self.nodes_text = self.fill_dictionary("nodes", "text", "node")
 
         # Get ip of each node
-        self.nodes_ip = self.fill_dictionary("icons", "ip", "")
+        self.nodes_ip = self.fill_dictionary("nodes", "ip", "")
 
         # Get port of each node
-        self.nodes_port = self.fill_dictionary("icons", "port", "")
+        self.nodes_port = self.fill_dictionary("nodes", "port", "")
 
         # Get the URL of each node, clear empty URLs
-        self.nodes_url = self.fill_dictionary("icons", "url", "")
+        self.nodes_url = self.fill_dictionary("nodes", "url", "")
 
         # Get name of each group
         self.group_name = self.fill_dictionary("groups", "name", "Group")
@@ -81,10 +81,10 @@ class BuildDiagram:
         # Only get coordinates from nodes if layout = neato
         if self.graph_layout == "neato":
             # Get X coordinate of each node
-            self.nodes_x = self.fill_dictionary("icons", "x", 0)
+            self.nodes_x = self.fill_dictionary("nodes", "x", 0)
 
             # Get Y coordinate of each node
-            self.nodes_y = self.fill_dictionary("icons", "y", 0)
+            self.nodes_y = self.fill_dictionary("nodes", "y", 0)
 
             print(f"\nXs: {self.nodes_x}")
             print(f"Ys: {self.nodes_y}\n")
@@ -99,6 +99,9 @@ class BuildDiagram:
 
         # Get text of connections
         self.connections_text = self.fill_connection_dictionary("connections", "text", "")
+
+        # Get width of connections
+        self.connections_width = self.fill_connection_dictionary("connections", "width", "")
 
         self.instances_keys = []
         self.instances = []
@@ -174,12 +177,12 @@ class BuildDiagram:
         # key_of_instance_name = list(self.nodes_icon.keys())[list(self.nodes_icon.values()).index(instance_name)]
         # instance_names.append(instance_name)
 
-        # Check if any endpoints are not given in 'icons', if not print an error
+        # Check if any endpoints are not given in 'nodes', if not print an error
         for connection in self.connections_endpoints:
             for endpoint in connection:
                 if endpoint not in self.nodes_text:
-                    print(f"KeyError in {self.load_path}: '{endpoint}' is not given in 'icons', that's why it "
-                          f"does not show in the diagram. Add it to 'icons' or remove it as an endpoint.")
+                    print(f"KeyError in {self.load_path}: '{endpoint}' is not given in 'nodes', that's why it "
+                          f"does not show in the diagram. Add it to 'nodes' or remove it as an endpoint.")
 
         # Create connections
         for i, _ in enumerate(self.instances_keys):
@@ -191,7 +194,8 @@ class BuildDiagram:
                                 Edge(color=f"{self.connections_color[j]}",
                                      label=f"{self.connections_text[j]}",
                                      tooltip=f"{self.connections_text[j]}",
-                                     labeltooltip=f"{self.connections_text[j]}") - \
+                                     labeltooltip=f"{self.connections_text[j]}",
+                                     penwidth=f"{self.connections_width[j]}") - \
                                 self.instances[i]
 
         # Clear both lists to have empty lists for every diagram creation to fix not seeing connections
@@ -298,7 +302,7 @@ class BuildDiagram:
             try:
                 # Only pass coordinates to node creation if layout == neato
                 if self.graph_layout == "neato":
-                    # If output format is other than svg, create diagram with png icons, else with svg icons
+                    # If output format is other than svg, create diagram with png nodes, else with svg nodes
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
@@ -331,8 +335,8 @@ class BuildDiagram:
 
         except KeyError:
             print(
-                f"KeyError in {self.load_path}: '{node}' is not given in 'icons', that's why it does "
-                f"not show in the diagram. Add it to 'icons' or remove it as a member.")
+                f"KeyError in {self.load_path}: '{node}' is not given in 'nodes', that's why it does "
+                f"not show in the diagram. Add it to 'nodes' or remove it as a member.")
 
     def fill_connection_dictionary(self, _object: str, _subobject: str, _default: any) -> dict:
         """
