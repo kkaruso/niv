@@ -41,7 +41,7 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
-  # rack: Sets direction (default: False; type: boolean; options: True, False) "no effect on layout: neato"
+  # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
   group1: {name: PCs, members: [pc1, pc2, pc3, pc4, pc5, pc6, switch1]}
   group2: {name: ATM Router, members: [switch2, atmrouter1, atmrouter2, atmrouter3, atmrouter4, prozessor1, server1], layout: dot, rack: True}
 
