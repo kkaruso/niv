@@ -19,7 +19,7 @@ title: # Text underneath the diagram.
 groupDefaults: &groupDefaults #Use current values as defaults
   backgroundColor: lightblue  # Fill the background of the group box
 
-icons: #enter devices here. Maybe change "icons" to "devices" later.
+nodes: #enter devices here. Maybe change "icons" to "devices" later.
   cloud1: {icon: OsaCloud, text: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
   db1: {icon: OsaDatabase, text: MySQL Database, port: 25565, x: 0, y: 0, url: }
   deviceScanner1: {icon: OsaDeviceScanner, text: Local Device Scanner, x: 0, y: 6 }

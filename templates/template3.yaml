@@ -17,7 +17,8 @@ title: # Text underneath the diagram.
   date: "01.01.2021"  # Default date is current date or enter specific date as string
   version: "1.0"  # Version of the diagram as string
 
-icons: #enter devices here. Maybe change "icons" to "devices" later.
+nodes: #enter devices here. Maybe change "icons" to "devices" later.
+  # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
   pc1: {icon: Pc, text: PC1, ip: 172.19.176.131, x: -3, y: 3 }
   pc2: {icon: Pc, text: PC2, ip: 172.19.176.132, x: -3, y: 2 }
   pc3: {icon: Pc, text: PC3, ip: 172.19.176.133, x: -3, y: 1 }
@@ -39,8 +40,10 @@ icons: #enter devices here. Maybe change "icons" to "devices" later.
 
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
+  # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+  # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
   group1: {name: PCs, members: [pc1, pc2, pc3, pc4, pc5, pc6, switch1]}
-  group2: {name: ATM Router, members: [switch2, atmrouter1, atmrouter2, atmrouter3, atmrouter4, prozessor1, server1]}
+  group2: {name: ATM Router, members: [switch2, atmrouter1, atmrouter2, atmrouter3, atmrouter4, prozessor1, server1], layout: dot, rack: True}
 
 connections: #enter your connections here
 - {endpoints: [switch1, pc1], color: red }
