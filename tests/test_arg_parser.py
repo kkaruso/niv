@@ -5,6 +5,8 @@ import argparse
 import os
 import shutil
 from unittest import TestCase
+
+import yaml_parser
 from arg_parser import ArgParser
 
 
@@ -37,6 +39,9 @@ class TestArgParser(TestCase):
         """
         set_args function tests
         """
+        path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        config = yaml_parser.get_yaml(path_to_project + '/config.yaml')
+        detail = config.get('default').get('std_details')
         parser = ArgParser("")
         self.assertEqual(argparse.Namespace(save=None, load=None, detail=1, verbose=False),
                          parser.get_parser())
@@ -44,15 +49,15 @@ class TestArgParser(TestCase):
         parser = ArgParser(["-s", f"{self.test_directory_path}test2.svg", "-l", "./tests.yaml"])
         self.assertEqual(
             argparse.Namespace(save=[f"./{self.test_directory_path}test2.svg"], load=["./tests.yaml"],
-                               detail=1, verbose=False),
+                               detail=detail, verbose=False),
             parser.get_parser())
 
         parser = ArgParser(["-l", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=1, verbose=False),
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=detail, verbose=False),
                          parser.get_parser())
 
         parser = ArgParser(["--load", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=1, verbose=False),
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=detail, verbose=False),
                          parser.get_parser())
 
         parser = ArgParser(["-d", "2", "-l", "./tests.yaml"])
@@ -60,7 +65,7 @@ class TestArgParser(TestCase):
                          parser.get_parser())
 
         parser = ArgParser(["-l", "./tests.yaml", "-vv"])
-        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=1, verbose=True),
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=detail, verbose=True),
                          parser.get_parser())
 
     def test_is_path_to_yaml_file(self):
