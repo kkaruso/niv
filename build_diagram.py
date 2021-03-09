@@ -199,10 +199,8 @@ class BuildDiagram:
         # Dynamically create the amount of groups with the corresponding group name
         # If no tooltip is given within the group, set the current name of the group as the tooltip
         for name in self.group_members:
-            if self.group_tooltip[name] == "":
-                tooltip = self.group_name[name]
-            else:
-                tooltip = self.group_tooltip[name]
+            # Create tooltip for each group
+            tooltip = self.create_tooltip(element="group", group=name)
 
             clustr_attr = {
                 "fontname": "helvetica-bold",
@@ -231,6 +229,7 @@ class BuildDiagram:
                                   f"does not show in the diagram. Add it to 'nodes' or remove it as an endpoint."
                     self.logger.verbose_warning(log_message, self.verbose)
                     print(log_message)
+
         # Create connections
         for i, _ in enumerate(self.instances_keys):
             # print(f"i:{i}, _:{_}")
@@ -241,12 +240,9 @@ class BuildDiagram:
                         # print(f"k:{k}, _:{_}")
                         if self.connections_endpoints[j][1] == self.instances_keys[k]:
                             # print("Yeeeehaaawwww")
-                            # If no tooltip is given within the connection, set both endpoints as the tooltip
-                            if self.connections_tooltip[j] == "":
-                                tooltip = f"{self.nodes_text[self.connections_endpoints[j][1]]} <---> " \
-                                          f"{self.nodes_text[self.connections_endpoints[j][0]]}"
-                            else:
-                                tooltip = self.connections_tooltip[j]
+
+                            # Create tooltip for each connection
+                            tooltip = self.create_tooltip(element="connection", connection=j)
 
                             _ = self.instances[k] - \
                                 Edge(color=f"{self.connections_color[j]}",
@@ -254,9 +250,11 @@ class BuildDiagram:
                                      labeltooltip=f"{self.connections_text[j]}",
                                      penwidth=f"{self.connections_width[j]}",
                                      edgetooltip=tooltip,
-                                     headlabel=f"{self.connections_ports[j][0]}",
-                                     # head_lp="#%2000,%3000('!')?", #%f,%f('!')?
-                                     taillabel=f"{self.connections_ports[j][1]}") - \
+                                     # headlabel=f"{self.connections_ports[j][0]}",
+                                     # labeldistance="3.5",
+                                     # labelangle="30",
+                                     # taillabel=f"{self.connections_ports[j][1]}"
+                                     ) - \
                                 self.instances[i]
 
         # Clear both lists to have empty lists for every diagram creation to fix not seeing connections
@@ -334,11 +332,8 @@ class BuildDiagram:
                          outformat=self.output_format,
                          show=False, graph_attr=subgraph_attr):
 
-                # If no tooltip is given within the group, set the current name of the group as the tooltip
-                if self.group_tooltip[i] == "":
-                    tooltip = self.group_name[i]
-                else:
-                    tooltip = self.group_tooltip[i]
+                # Create tooltip for each group
+                tooltip = self.create_tooltip(element="group", group=i)
 
                 clustr_attr = {
                     "fontname": "helvetica-bold",
@@ -375,16 +370,15 @@ class BuildDiagram:
         Create an instance of a given node class, if not valid print name of not valid node
         """
         try:
+            # Set text label for each node
             node_text = self.set_node_text(node)
-
             # Remove double newlines for the case when port is given but no url
             node_text = node_text.replace("\n\n", "\n")
+
             url = self.nodes_url[node]
-            # If no tooltip is given, set the current name of the node as the tooltip
-            if self.nodes_tooltip[node] == "":
-                tooltip = self.nodes_text[node]
-            else:
-                tooltip = self.nodes_tooltip[node]
+
+            # Create tooltip for each node
+            tooltip = self.create_tooltip(element="node", node=node)
 
             try:
                 # Only pass coordinates to node creation if layout == neato
@@ -439,25 +433,24 @@ class BuildDiagram:
         :param node: the node to set the text for
         :return: text of the node
         """
+        # node_text = f"\n{self.nodes_text[node]}\n" \
+        #             f" {self.nodes_ip[node]}\n"
+        # TODO: Add more information to show when using different detail levels
         # For detail level 0 check counter to create corresponding text nodes
         # Counter checks how many diagrams have been created thus far
         if self.detail_level == 0:
             if self.counter == 1:
-                node_text = f"\n{self.nodes_text[node]}\n" \
-                            f" {self.nodes_ip[node]}\n"
+                node_text = f"\n{self.nodes_text[node]}\n"
             else:
                 node_text = f"\n{self.nodes_text[node]}\n" \
-                            f" {self.nodes_ip[node]}\n" \
-                            f" {self.nodes_port[node]}"
+                            f" {self.nodes_ip[node]}\n"
         # Detail level 1 shows text and IP's
         elif self.detail_level == 1:
-            node_text = f"\n{self.nodes_text[node]}\n" \
-                        f" {self.nodes_ip[node]}\n"
+            node_text = f"\n{self.nodes_text[node]}\n"
         # Detail level 2 shows text, IP's and Ports
         else:
             node_text = f"\n{self.nodes_text[node]}\n" \
-                        f" {self.nodes_ip[node]}\n" \
-                        f" {self.nodes_port[node]}"
+                        f" {self.nodes_ip[node]}\n"
         return node_text
 
     def fill_connection_dictionary(self, _object: str, _subobject: str, _default: any) -> dict:
@@ -535,3 +528,65 @@ class BuildDiagram:
             logger = NivLogger()
             logger.log_error(error)
             return False
+
+    def create_tooltip(self, element, node="", group="", connection=None):
+        """
+        Create a tooltip for a given element
+
+        :param element: type of element you want to create a tooltip for (e.g. node, group, connection)
+        :param node: the node you want to create the tooltip for
+        :param group: the group you want to create the tooltip for
+        :param connection: the connection you want to create the tooltip for
+        :return: tooltip text
+        """
+        tooltip = ""
+
+        if element == "node":
+            tooltip = self.nodes_tooltip[node]
+            if self.nodes_tooltip[node] == "":
+                tooltip = self.nodes_text[node]
+
+        elif element == "group":
+            # If no tooltip is given within the group, set the current name of the group as the tooltip
+            tooltip = self.group_tooltip[group]
+            if self.group_tooltip[group] == "":
+                tooltip = self.group_name[group]
+
+        elif element == "connection":
+            first_endpoint = self.connections_endpoints[connection][0]
+            second_endpoint = self.connections_endpoints[connection][1]
+            first_port = self.connections_ports[connection][0]
+            second_port = self.connections_ports[connection][1]
+
+            tooltip_without_port = f"{self.nodes_text[second_endpoint]} " \
+                                   f"<---> " \
+                                   f"{self.nodes_text[first_endpoint]}"
+
+            tooltip_with_port = f"{self.nodes_text[second_endpoint]} (Port: {second_port}) " \
+                                f"<---> " \
+                                f"{self.nodes_text[first_endpoint]} (Port: {first_port})"
+
+            # If a tooltip is given within the connections, set it as the tooltip
+            tooltip = self.connections_tooltip[connection]
+            # If no tooltip is given within the connection, set both endpoints as the tooltip
+            if self.connections_tooltip[connection] == "":
+                # If no ports are given for a connection only print endpoints
+                if self.connections_ports[connection][1] == "" or self.connections_ports[connection][0] == "":
+                    tooltip = tooltip_without_port
+                else:
+                    # Detail level 0 creates both diagrams for deatail level 1 and 2
+                    if self.detail_level == 0:
+                        if self.counter == 1:
+                            tooltip = tooltip_without_port
+                        else:
+                            tooltip = tooltip_with_port
+
+                    # Detail level 1 shows no ports in tooltip
+                    elif self.detail_level == 1:
+                        tooltip = tooltip_without_port
+
+                    # Detail level 2 shows ports aswell
+                    else:
+                        tooltip = tooltip_with_port
+
+        return tooltip
