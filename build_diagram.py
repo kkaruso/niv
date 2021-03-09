@@ -390,24 +390,54 @@ class BuildDiagram:
                             globals()[self.nodes_icon[node] + "Png"](node_text,
                                                                      URL=url,
                                                                      pos=pos,
-                                                                     tooltip=tooltip))
+                                                                     tooltip=tooltip,
+                                                                     style="rounded",
+                                                                     color="red",
+                                                                     imagepos="tc",
+                                                                     fixedsize="box",
+                                                                     width="1",
+                                                                     height="2.5",
+                                                                     imagescale="true"))
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
                                                              URL=url,
                                                              pos=pos,
-                                                             tooltip=tooltip))
+                                                             tooltip=tooltip,
+                                                             style="rounded",
+                                                             color="red",
+                                                             imagepos="tc",
+                                                             fixedsize="box",
+                                                             width="1",
+                                                             height="2.5",
+                                                             imagescale="true"))
                 else:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
                                                                      URL=url,
-                                                                     tooltip=tooltip))
+                                                                     tooltip=tooltip,
+                                                                     style="rounded",
+                                                                     color="red",
+                                                                     imagepos="tc",
+                                                                     fixedsize="box",
+                                                                     width="1",
+                                                                     height="2.5",
+                                                                     imagescale="true"
+                                                                     ))
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
                                                              URL=url,
-                                                             tooltip=tooltip))
+                                                             tooltip=tooltip,
+                                                             style="rounded",
+                                                             color="red",
+                                                             imagepos="tc",
+                                                             fixedsize="box",
+                                                             width="1",
+                                                             height="2.5",
+                                                             imagescale="true"
+                        ))
                 self.instances_keys.append(node)
             except KeyError:
                 # Avoid printing the same error message multiple times
