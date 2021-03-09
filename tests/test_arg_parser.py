@@ -43,7 +43,8 @@ class TestArgParser(TestCase):
         config = yaml_parser.get_yaml(path_to_project + '/config.yaml')
         detail = config.get('default').get('std_details')
         parser = ArgParser("")
-        self.assertEqual(argparse.Namespace(save=None, load=None, detail=1, verbose=False),
+
+        self.assertEqual(argparse.Namespace(save=None, load=None, detail=detail, verbose=False),
                          parser.get_parser())
 
         parser = ArgParser(["-s", f"{self.test_directory_path}test2.svg", "-l", "./tests.yaml"])
