@@ -92,7 +92,28 @@ class BuildDiagram:
             'url') or "")
 
         # Get the tooltip of each node
-        self.nodes_tooltip = self.fill_dictionary("nodes", "tooltip", "")
+        self.nodes_tooltip = self.fill_dictionary("nodes", "tooltip", self.yaml_defaults.get('icons').get(
+            'tooltip') or "")
+
+        # Get mac addresses of each node
+        self.nodes_mac = self.fill_dictionary("nodes", "mac", self.yaml_defaults.get('icons').get(
+            'mac') or "")
+
+        # Get model number of each node
+        self.nodes_modelnr = self.fill_dictionary("nodes", "modelnr", self.yaml_defaults.get('icons').get(
+            'modelnr') or "")
+
+        # Get manufacturer of each node
+        self.nodes_manufactuer = self.fill_dictionary("nodes", "manufacturer", self.yaml_defaults.get('icons').get(
+            'manufacturer') or "")
+
+        # Get X coordinate of each node
+        self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('icons').get(
+            'x') or 0)
+
+        # Get Y coordinate of each node
+        self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('icons').get(
+            'y') or 0)
 
         # Get name of each group
         self.group_name = self.fill_dictionary("groups", "name", self.yaml_defaults.get('groups').get(
@@ -107,15 +128,6 @@ class BuildDiagram:
 
         # Get the tooltip of each group
         self.group_tooltip = self.fill_dictionary("groups", "tooltip", "")
-
-        # Only get coordinates from nodes if layout = neato
-        # Get X coordinate of each node
-        self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('icons').get(
-            'x') or 0)
-
-        # Get Y coordinate of each node
-        self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('icons').get(
-            'y') or 0)
 
         self.logger.log_debug(f"\nXs: {self.nodes_x}")
         self.logger.log_debug(f"Ys: {self.nodes_y}\n")
@@ -171,7 +183,10 @@ class BuildDiagram:
         print(f"nodes_text: {self.nodes_text}")
         print(f"nodes_url: {self.nodes_url}")
         print(f"nodes_ip: {self.nodes_ip}")
-        print(f"nodes_tooltip: {self.nodes_tooltip}\n")
+        print(f"nodes_tooltip: {self.nodes_tooltip}")
+        print(f"nodes_mac: {self.nodes_mac}")
+        print(f"nodes_modelnr: {self.nodes_modelnr}")
+        print(f"nodes_manufactuer: {self.nodes_manufactuer}\n")
         print(f"group_name: {self.group_name}")
         print(f"group_members: {self.group_members}")
         print(f"group_url: {self.group_url}")
@@ -437,7 +452,7 @@ class BuildDiagram:
                                                              width="1",
                                                              height="2.5",
                                                              imagescale="true"
-                        ))
+                                                             ))
                 self.instances_keys.append(node)
             except KeyError:
                 # Avoid printing the same error message multiple times
@@ -463,8 +478,7 @@ class BuildDiagram:
         :param node: the node to set the text for
         :return: text of the node
         """
-        # node_text = f"\n{self.nodes_text[node]}\n" \
-        #             f" {self.nodes_ip[node]}\n"
+        # TODO: Rework so it works with the names in front aswell ("Name:", "IP:")
         # TODO: Add more information to show when using different detail levels
         # For detail level 0 check counter to create corresponding text nodes
         # Counter checks how many diagrams have been created thus far
@@ -574,7 +588,17 @@ class BuildDiagram:
         if element == "node":
             tooltip = self.nodes_tooltip[node]
             if self.nodes_tooltip[node] == "":
-                tooltip = self.nodes_text[node]
+                # TODO: Rework so it works with the names in front aswell
+                # tooltip = f"Name: {self.nodes_text[node]}\n" \
+                #           f"MAC-Address: {self.nodes_mac[node]}\n" \
+                #           f"Modelnr: {self.nodes_modelnr[node]}\n" \
+                #           f"Manufacturer: {self.nodes_manufactuer[node]}"
+                tooltip = f"{self.nodes_text[node]}\n" \
+                          f"{self.nodes_mac[node]}\n" \
+                          f"{self.nodes_modelnr[node]}\n" \
+                          f"{self.nodes_manufactuer[node]}"
+                tooltip = tooltip.replace("\n\n\n", "\n")
+                tooltip = tooltip.replace("\n\n", "\n")
 
         elif element == "group":
             # If no tooltip is given within the group, set the current name of the group as the tooltip
