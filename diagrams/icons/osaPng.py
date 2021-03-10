@@ -36,6 +36,14 @@ class OsaDatabasePng(_OSA):
     _icon = "osa-database.png"
 
 
+class OsaEthernetFreePng(_OSA):
+    _icon = "ethernet-free.png"
+
+
+class OsaEthernetBusyPng(_OSA):
+    _icon = "ethernet-busy.png"
+
+
 class OsaDesktopImacPng(_OSA):
     _icon = "osa-desktop-imac.png"
 
@@ -302,6 +310,5 @@ class OsaWarningPng(_OSA):
 
 class OsaWirelessNetworkPng(_OSA):
     _icon = "osa-wireless-network.png"
-
 
 # Aliases

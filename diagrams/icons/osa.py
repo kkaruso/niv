@@ -16,6 +16,14 @@ class OsaArrowYellowRight(_OSA):
     _icon = "osa-arrow-yellow-right.svg"
 
 
+class OsaEthernetFree(_OSA):
+    _icon = "ethernet-free.svg"
+
+
+class OsaEthernetBusy(_OSA):
+    _icon = "ethernet-busy.svg"
+
+
 class OsaAwareness(_OSA):
     _icon = "osa-awareness.svg"
 
@@ -302,6 +310,5 @@ class OsaWarning(_OSA):
 
 class OsaWirelessNetwork(_OSA):
     _icon = "osa-wireless-network.svg"
-
 
 # Aliases
