@@ -199,9 +199,6 @@ class ArgParser:
             if file_path[-1] != "/":
                 file_path += "/"
             file_name = self.create_filename()
-            # Create the file in the given directory
-            file = open(f"{file_path}{file_name}", "a")
-            file.close()
             return file_path
 
         raise OSError(f'"{file_path}": directory doesn\'t exist')

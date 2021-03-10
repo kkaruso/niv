@@ -26,6 +26,7 @@ class BuildDiagram:
     """
     path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     config = yaml_parser.get_yaml(path_to_project + '/niv/config.yaml')
+    # TODO: Create config.yaml if it has been deleted
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
     logger = NivLogger
@@ -37,7 +38,7 @@ class BuildDiagram:
 
     counter = 1
 
-    # TODO: Find a way to add margin between the diagram and the title
+    # TODO: Find a way to add margins between node and its text, and margin between the diagram and the title
     def __init__(self, load_path, save_path, detail_level, verbose):
         # Initialize variables for dynamically getting the values from the .yaml file
 
@@ -47,12 +48,14 @@ class BuildDiagram:
         # TODO: cleanup (delete not needed comments like old prints)
         # Load the .yaml from the given path
         self.yaml = yaml_parser.get_yaml(load_path)
-        self.save_path = ''.join(save_path)
+        self.save_path = save_path if save_path is not None \
+            else f"./Diagram{self.config.get('default').get('std_type') or '.svg'} "
         self.load_path = load_path
         self.detail_level = detail_level
         self.output_format = self.save_path.split('.')[-1]
         self.filename = os.path.splitext(self.save_path)[0]
 
+        # TODO: Add checks if value not given
         # Load diagram properties
         self.graph_bg_color = self.set_variables("diagram", "backgroundColor",
                                                  self.yaml_defaults.get('diagram').get(
@@ -386,6 +389,8 @@ class BuildDiagram:
         try:
             # Set text label for each node
             node_text = self.set_node_text(node)
+            # Remove double newlines for the case when port is given but no url
+            node_text = node_text.replace("\n\n", "\n")
 
             url = self.nodes_url[node]
 
@@ -592,11 +597,11 @@ class BuildDiagram:
                           f"Manufacturer: {self.nodes_manufactuer[node]}\n"
 
                 # Remove double and triple newlines and "names: " for the case when not all values are given
-                tooltip = tooltip.replace("\n\n\n", "\n")\
-                    .replace("\n\n", "\n")\
-                    .replace("Name: \n", "")\
-                    .replace("MAC-Address: \n", "")\
-                    .replace("Modelnr: \n", "")\
+                tooltip = tooltip.replace("\n\n\n", "\n") \
+                    .replace("\n\n", "\n") \
+                    .replace("Name: \n", "") \
+                    .replace("MAC-Address: \n", "") \
+                    .replace("Modelnr: \n", "") \
                     .replace("Manufacturer: \n", "")
 
         elif element == "group":
