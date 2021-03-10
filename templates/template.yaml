@@ -15,7 +15,6 @@ title: # Text underneath the diagram.
   date: # Date (default: current date; type: string)
   version: # Version of the diagram (default: 1.0; type: double)
 
-# TODO: change icon names to variables and put current name into "icon"
 nodes: # List every single node that should be in the diagram here
   # Syntax:
   # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, x: x-coordinate, y: y-coordinate, url: link to a website or another file, tooltip: text shown in the tooltip }
@@ -23,9 +22,9 @@ nodes: # List every single node that should be in the diagram here
   cloud1: { icon: OsaCloud, text: Random text, ip: 192.168.0.1, x: 0, y: 3, url: https://theuselessweb.com/, tooltip: Test tooltip }
   db1: { icon: OsaDatabase, text: MySQL Database, ip: 192.164.41.3333, x: 0, y: 0, mac: 00:0a:95:9d:68:16, modelnr: 133742069, manufacturer: HP}
   deviceScanner1: { icon: OsaDeviceScanner, text: Local Device Scanner, x: 0, y: 6, modelnr: 2321331 }
-  serverWeb1: { icon: OsaServerWeb, text: My WebServer, x: 5, y: 2 }
-  serverTerminal1: { icon: OsaServerTerminal, text: Central Terminal, x: 5, y: 5 }
-  desktop1: { icon: OsaDesktopImac, text: My Desktop, x: 3, y: 0 }
+  serverWeb1: { icon: OsaServerWeb, text: My WebServer, x: 5, y: 2, manufacturer: Acer }
+  serverTerminal1: { icon: OsaServerTerminal, text: Central Terminal, x: 5, y: 5, mac: 22:0a:95:9d:12:16 }
+  desktop1: { icon: OsaDesktopImac, x: 3, y: 0, manufacturer: Asus }
   desktop2: { icon: OsaDesktopImac, text: My Desktop 2, x: 3, y: 0 }
   Osa: { icon: invalid_icon, text: Invalid Node, x: 1 }
 

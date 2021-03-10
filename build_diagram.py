@@ -37,7 +37,7 @@ class BuildDiagram:
 
     counter = 1
 
-    # TODO: Find a way to add margins between node and its text, and margin between the diagram and the title
+    # TODO: Find a way to add margin between the diagram and the title
     def __init__(self, load_path, save_path, detail_level, verbose):
         # Initialize variables for dynamically getting the values from the .yaml file
 
@@ -53,7 +53,6 @@ class BuildDiagram:
         self.output_format = self.save_path.split('.')[-1]
         self.filename = os.path.splitext(self.save_path)[0]
 
-        # TODO: Add checks if value not given
         # Load diagram properties
         self.graph_bg_color = self.set_variables("diagram", "backgroundColor",
                                                  self.yaml_defaults.get('diagram').get(
@@ -387,8 +386,6 @@ class BuildDiagram:
         try:
             # Set text label for each node
             node_text = self.set_node_text(node)
-            # Remove double newlines for the case when port is given but no url
-            node_text = node_text.replace("\n\n", "\n")
 
             url = self.nodes_url[node]
 
@@ -478,8 +475,6 @@ class BuildDiagram:
         :param node: the node to set the text for
         :return: text of the node
         """
-        # TODO: Rework so it works with the names in front aswell ("Name:", "IP:")
-        # TODO: Add more information to show when using different detail levels
         # For detail level 0 check counter to create corresponding text nodes
         # Counter checks how many diagrams have been created thus far
         if self.detail_level == 0:
@@ -495,6 +490,9 @@ class BuildDiagram:
         else:
             node_text = f"\n{self.nodes_text[node]}\n" \
                         f" {self.nodes_ip[node]}\n"
+
+        # Remove double newlines for the case when port is given but no url
+        node_text = node_text.replace("\n\n", "\n")
         return node_text
 
     def fill_connection_dictionary(self, _object: str, _subobject: str, _default: any) -> dict:
@@ -588,17 +586,18 @@ class BuildDiagram:
         if element == "node":
             tooltip = self.nodes_tooltip[node]
             if self.nodes_tooltip[node] == "":
-                # TODO: Rework so it works with the names in front aswell
-                # tooltip = f"Name: {self.nodes_text[node]}\n" \
-                #           f"MAC-Address: {self.nodes_mac[node]}\n" \
-                #           f"Modelnr: {self.nodes_modelnr[node]}\n" \
-                #           f"Manufacturer: {self.nodes_manufactuer[node]}"
-                tooltip = f"{self.nodes_text[node]}\n" \
-                          f"{self.nodes_mac[node]}\n" \
-                          f"{self.nodes_modelnr[node]}\n" \
-                          f"{self.nodes_manufactuer[node]}"
-                tooltip = tooltip.replace("\n\n\n", "\n")
-                tooltip = tooltip.replace("\n\n", "\n")
+                tooltip = f"Name: {self.nodes_text[node]}\n" \
+                          f"MAC-Address: {self.nodes_mac[node]}\n" \
+                          f"Modelnr: {self.nodes_modelnr[node]}\n" \
+                          f"Manufacturer: {self.nodes_manufactuer[node]}\n"
+
+                # Remove double and triple newlines and "names: " for the case when not all values are given
+                tooltip = tooltip.replace("\n\n\n", "\n")\
+                    .replace("\n\n", "\n")\
+                    .replace("Name: \n", "")\
+                    .replace("MAC-Address: \n", "")\
+                    .replace("Modelnr: \n", "")\
+                    .replace("Manufacturer: \n", "")
 
         elif element == "group":
             # If no tooltip is given within the group, set the current name of the group as the tooltip

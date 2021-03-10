@@ -7,11 +7,9 @@ diagram: # Diagram properties
   direction: TB #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
 
 title: # Text underneath the diagram.
-  text: \n\nNIV  # Title under the Diagram (default: Diagram; type: string)
+  text: NIV  # Title under the Diagram (default: Diagram; type: string)
   subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
   fontSize: 15  # Font size (default: 15; type: int)
-
-  # TODO: Find a way to add this information to the diagram or delete it
   author: "Tom Themas"  # Author's name: enter string
   company: Empty  # Enter company name or leave empty
   date: "01.01.2021"  # Default date is current date or enter specific date as string
@@ -20,7 +18,6 @@ title: # Text underneath the diagram.
 groupDefaults: &groupDefaults #Use current values as defaults
   backgroundColor: lightblue  # Fill the background of the group box
 
-# TODO: change icon names to variables and put current name into "icon"
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
   cloud1: {icon: Cloud, text: Internet, x: 24, y: 26}
