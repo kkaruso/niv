@@ -24,6 +24,10 @@ class OsaEthernetBusy(_OSA):
     _icon = "ethernet-busy.svg"
 
 
+class OsaEthernetCable(_OSA):
+    _icon = "EthernetWithCable.svg"
+
+
 class OsaAwareness(_OSA):
     _icon = "osa-awareness.svg"
 
