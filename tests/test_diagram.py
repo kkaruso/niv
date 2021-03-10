@@ -34,21 +34,13 @@ class TestBuildDiagram(TestCase):
             test_members = ["cloud1", "db1", "deviceScanner1"]
             self.assertEqual(test_members, members)
 
-    # def test_create_connections(self):
-    #     """
-    #     create_connections tests
-    #     """
-    #     with Diagram("test", filename="test", outformat="svg", show=False):
-    #         instances = []
-    #         members = []
-    #         diagram = BuildDiagram(
-    #             os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/tests/test_template.yaml', "", 1)
-    #         diagram.create_nodes(members)
-    #         diagram.create_connections()
-    #
-    #         test_instance_names = ["cloud1", "db1", "deviceScanner1"]
-    #
-    #         self.assertEqual(test_instance_names, instances)
+    def test_create_diagram(self):
+        self.assertIsNotNone(BuildDiagram("../templates/template.yaml", "Test_Diagram.svg", 1, False))
+
+        # self.assertIsNotNone(BuildDiagram("../templates/template.yaml", None, 1, False))
+
+        with self.assertRaises(FileNotFoundError):
+            self.assertIsNone(BuildDiagram("templates/template.yaml", "Test_Diagram.svg", 1, False))
 
     def tearDown(self) -> None:
         """
