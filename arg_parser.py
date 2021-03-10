@@ -80,7 +80,7 @@ class ArgParser:
         :return: returns data from argument load
         """
         # For the case when no argument is given
-        if len(self.args) == 0:
+        if len(self.args) < 1:
             return
         # access load argument, workaround for program start
         for i, arg in enumerate(self.args):

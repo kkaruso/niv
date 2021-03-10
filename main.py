@@ -19,11 +19,12 @@ if __name__ == '__main__':
         # Call the function "set_args"
         args = arg_parser.get_parser()
         with suppress(KeyError):
-            # diagram_builder = BuildDiagram(arg_parser.get_load(), arg_parser.get_save_path(),
-            #                                arg_parser.get_detail_level(), arg_parser.get_verbose())
-            diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg",
-                                           arg_parser.get_detail_level(), arg_parser.get_verbose())
-            diagram_builder.run()
+            if arg_parser.get_load():
+                diagram_builder = BuildDiagram(arg_parser.get_load(), arg_parser.get_save_path(),
+                                               arg_parser.get_detail_level(), arg_parser.get_verbose())
+                # diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg",
+                #                                arg_parser.get_detail_level(), arg_parser.get_verbose())
+                diagram_builder.run()
 
     except (OSError, ValueError, TypeError, AssertionError) as error_message:
         # create variables to look on which files the error occurred
