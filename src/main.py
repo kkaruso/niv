@@ -18,14 +18,14 @@ def main():
     try:
         # Create an instance of the ArgParser class
         arg_parser = ArgParser(sys.argv[1:])
-        # Call the function "set_args"
         args = arg_parser.get_parser()
         with suppress(KeyError):
-            diagram_builder = BuildDiagram(arg_parser.get_load(), arg_parser.get_save_path(),
-                                           arg_parser.get_detail_level(), arg_parser.get_verbose())
-            # diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg",
-            #                                arg_parser.get_detail_level(), arg_parser.get_verbose())
-            diagram_builder.run()
+            if args.load:
+                diagram_builder = BuildDiagram(arg_parser.get_load(), arg_parser.get_save_path(),
+                                               arg_parser.get_detail_level(), arg_parser.get_verbose())
+                # diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg",
+                #                                arg_parser.get_detail_level(), arg_parser.get_verbose())
+                diagram_builder.run()
 
     except (OSError, ValueError, TypeError, AssertionError) as error_message:
         # create variables to look on which files the error occurred

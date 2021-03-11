@@ -1,4 +1,4 @@
 graft resources/icons/*
-include logs/*
+include logs/niv.log
 include src/config.yaml
 include src/yaml_defaults.yaml
