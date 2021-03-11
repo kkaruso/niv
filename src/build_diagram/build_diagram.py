@@ -142,7 +142,6 @@ class BuildDiagram:
         # Get each port of a connection as a list
         self.connections_ports = []
         for i in range(0, len(self.yaml.get("connections"))):
-            print(f"Moin:{self.yaml.get('connections')[i].get('ports')}")
             if self.yaml.get("connections")[i].get("ports") is not None:
                 self.connections_ports.append(self.yaml.get("connections")[i].get("ports"))
             else:
