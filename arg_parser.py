@@ -71,9 +71,9 @@ class ArgParser:
         # Checks if the arguments are compatible with each other, else raise Exception
         if self.check_args_compatibility():
             self.parser = parser.parse_args(self.args)
-            self.logger.log_debug("Arguments are compatible")
+            self.logger.log_debug("Arguments are compatible.")
             return
-        raise ValueError("Arguments are not compatible")
+        raise ValueError("Arguments are not compatible.")
 
     def get_load(self):
         """
@@ -87,7 +87,7 @@ class ArgParser:
             if arg in ("-l", "--load"):
                 file_name = self.args[i + 1]
                 return file_name
-        raise OSError("Can\'t access file_name")
+        raise OSError("Can\'t access file_name.")
 
     def get_parser(self):
         """
@@ -128,8 +128,8 @@ class ArgParser:
             file_type = file_name.split('.')[-1]
             if file_type == "yaml":
                 return file_path
-            raise TypeError(f'"{file_name}" is not a .yaml')
-        raise OSError(f'"{file_path}" is not a valid file path')
+            raise TypeError(f'"{file_name}" is not a .yaml.')
+        raise OSError(f'"{file_path}" is not a valid file path or file doesn\'t exist.')
 
     def create_filename(self):
         """
@@ -147,7 +147,7 @@ class ArgParser:
                 file_name = self.args[i + 1]
                 break
         if file_name == "":
-            raise OSError("Can\'t access file_name")
+            raise OSError("Can\'t access file_name.")
         file_name = file_name.split('/')[-1].split('.')[0]
         file_name = f"{file_name}{file_format}"
         return file_name

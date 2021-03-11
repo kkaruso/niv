@@ -7,8 +7,9 @@ from contextlib import suppress
 from arg_parser import ArgParser
 from build_diagram import BuildDiagram
 from niv_logger import NivLogger
+from setuptools import find_packages
 
-if __name__ == '__main__':
+def main():
     # Create an instance of the logger Class
     Logger = NivLogger
     Logger.clear_log()
@@ -34,3 +35,9 @@ if __name__ == '__main__':
         # add log message in log file
         Logger.log_error(f"Unexpected Error in: {fname} in line {exc_tb.tb_lineno}")
         print(error_message)
+
+
+if __name__ == '__main__':
+    print(find_packages())
+    main()
+
