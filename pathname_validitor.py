@@ -120,3 +120,34 @@ def is_path_exists_or_creatable(pathname: str) -> bool:
     # other exceptions are unrelated fatal issues and should not be caught here.
     except OSError:
         return False
+
+
+def check_file_format(pathname: str) -> bool:
+    """
+    check if given filename ends with svg, png, pdf or jpg
+    return True if format is valid, False if invalid
+    """
+    output_format = pathname.endswith((".svg", ".png", ".pdf", "jpg"))
+    if output_format:
+        return True
+    return False
+
+
+def is_file_not_in_directory(pathname: str) -> bool:
+    """
+    check if file in Directory
+    """
+    # get absolute path without filename
+    absolute_path = os.path.abspath(pathname)
+    head_tail_path = os.path.split(absolute_path)
+    # head = path to directory, tail = filename
+    head = head_tail_path[0]
+    tail = head_tail_path[1]
+    # get files from directory
+    files_in_dir = os.listdir(head)
+
+    # go through the list and check files with tail
+    for file in files_in_dir:
+        if file == tail:
+            return False
+    return True
