@@ -4,9 +4,9 @@ Main
 import os
 import sys
 from contextlib import suppress
-from arg_parser import ArgParser
-from build_diagram import BuildDiagram
-from niv_logger import NivLogger
+from src.arg_parser.arg_parser import ArgParser
+from src.build_diagram.build_diagram import BuildDiagram
+from src.niv_logger.niv_logger import NivLogger
 from setuptools import find_packages
 
 
@@ -18,14 +18,14 @@ def main():
     try:
         # Create an instance of the ArgParser class
         arg_parser = ArgParser(sys.argv[1:])
-        # Call the function "set_args"
         args = arg_parser.get_parser()
         with suppress(KeyError):
-            diagram_builder = BuildDiagram(arg_parser.get_load(), arg_parser.get_save_path(),
-                                           arg_parser.get_detail_level(), arg_parser.get_verbose())
-            # diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg",
-            #                                arg_parser.get_detail_level(), arg_parser.get_verbose())
-            diagram_builder.run()
+            if args.load:
+                diagram_builder = BuildDiagram(arg_parser.get_load(), arg_parser.get_save_path(),
+                                               arg_parser.get_detail_level(), arg_parser.get_verbose())
+                # diagram_builder = BuildDiagram("templates/template.yaml", "Test_Diagram.svg",
+                #                                arg_parser.get_detail_level(), arg_parser.get_verbose())
+                diagram_builder.run()
 
     except (OSError, ValueError, TypeError, AssertionError) as error_message:
         # create variables to look on which files the error occurred
@@ -38,5 +38,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print(find_packages())
     main()

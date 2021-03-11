@@ -11,13 +11,13 @@ Dynamically creates the diagram
 """
 import ipaddress
 from datetime import datetime
-import yaml_parser
-from niv_logger import NivLogger
-from diagrams import *
-from diagrams.icons.ciscoPng import *
-from diagrams.icons.osa import *
-from diagrams.icons.cisco import *
-from diagrams.icons.osaPng import *
+from src.niv_logger import niv_logger
+from src.diagrams import *
+from src.diagrams.icons.ciscoPng import *
+from src.diagrams.icons.osa import *
+from src.diagrams.icons.cisco import *
+from src.diagrams.icons.osaPng import *
+from src.yaml_parser import yaml_parser
 
 
 class BuildDiagram:
@@ -25,16 +25,16 @@ class BuildDiagram:
     Handles creation of diagram
     """
     path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    config = yaml_parser.get_yaml(path_to_project + '/niv/config.yaml')
+    config = yaml_parser.get_yaml(path_to_project + '/config.yaml')
     # TODO: Create config.yaml if it has been deleted
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
-    logger = NivLogger
+    logger = niv_logger.NivLogger
 
     # Read yaml_defaults.yaml if it exists, otherwise create the file and assign empty default to yaml_defaults
-    yaml_defaults = yaml_parser.get_yaml(path_to_project + '/niv/yaml_defaults.yaml') if os.path.isfile(
-        path_to_project + '/niv/yaml_defaults.yaml') else yaml_parser.create_yaml_defaults(
-        path_to_project + '/niv/yaml_defaults.yaml')
+    yaml_defaults = yaml_parser.get_yaml(path_to_project + '/yaml_defaults.yaml') if os.path.isfile(
+        path_to_project + '/yaml_defaults.yaml') else yaml_parser.create_yaml_defaults(
+        path_to_project + '/yaml_defaults.yaml')
 
     counter = 1
 
@@ -142,7 +142,6 @@ class BuildDiagram:
         # Get each port of a connection as a list
         self.connections_ports = []
         for i in range(0, len(self.yaml.get("connections"))):
-            print(f"Moin:{self.yaml.get('connections')[i].get('ports')}")
             if self.yaml.get("connections")[i].get("ports") is not None:
                 self.connections_ports.append(self.yaml.get("connections")[i].get("ports"))
             else:
@@ -572,7 +571,7 @@ class BuildDiagram:
             return True
 
         except ValueError as error:
-            logger = NivLogger()
+            logger = niv_logger.NivLogger()
             logger.log_error(error)
             return False
 
