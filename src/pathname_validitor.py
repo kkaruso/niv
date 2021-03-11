@@ -146,10 +146,6 @@ def is_file_not_in_directory(pathname: str) -> bool:
     # get files from directory
     files_in_dir = os.listdir(head)
 
-    print(f"absolute path: {absolute_path}")
-    print(f"head_tail_path: {head_tail_path}")
-    print(f"files in dir: {files_in_dir}")
-
     # go through the list and check files with tail
     for file in files_in_dir:
         print(f"File: {file}, tail: {tail}")

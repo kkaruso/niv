@@ -36,9 +36,9 @@ class TestBuildDiagram(TestCase):
             self.assertEqual(test_members, members)
 
     def test_create_diagram(self):
-        self.assertIsNotNone(BuildDiagram("../templates/template.yaml", "Test_Diagram.svg", 1, False))
+        self.assertIsNotNone(BuildDiagram("test_template.yaml", "Test_Diagram.svg", 1, False))
 
-        self.assertIsNotNone(BuildDiagram("../templates/template.yaml", None, 1, False))
+        self.assertIsNotNone(BuildDiagram("test_template.yaml", None, 1, False))
 
         with self.assertRaises(FileNotFoundError):
             self.assertIsNone(BuildDiagram("templates/template.yaml", "Test_Diagram.svg", 1, False))
