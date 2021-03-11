@@ -3,7 +3,7 @@ Includes all tests for pathname_validator
 """
 import os
 from unittest import TestCase
-import pathname_validitor as pv
+from src import pathname_validitor as pv
 
 
 class TestPathnameValidator(TestCase):

@@ -4,7 +4,7 @@ Parser class for Arguments when you start NIV
 
 import argparse
 import os
-import pathname_validitor as pv
+from src import pathname_validitor as pv
 from src.niv_logger.niv_logger import NivLogger
 from src.yaml_parser.yaml_parser import get_yaml
 
