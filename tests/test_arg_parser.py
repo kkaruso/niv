@@ -132,6 +132,10 @@ class TestArgParser(TestCase):
         with self.assertRaises(OSError):
             parser.save_to_path("./testslmao/")
 
+        parser = ArgParser(["-l", "tests.yaml", "-s", "."])
+
+        self.assertEqual("./tests.svg", parser.get_save_path()[0])
+
     def test_create_filename(self):
         """
         create_filename function tests

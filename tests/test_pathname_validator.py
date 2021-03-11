@@ -28,3 +28,17 @@ class TestPathnameValidator(TestCase):
         self.assertTrue(pv.is_path_exists_or_creatable(os.getcwd()))
         self.assertTrue(pv.is_path_exists_or_creatable("../"))
         self.assertTrue(pv.is_path_exists_or_creatable("./test_diagram.py"))
+
+    def test_is_file_not_in_directory(self):
+        self.assertTrue(pv.is_file_not_in_directory("../setup2.py"))
+        self.assertFalse(pv.is_file_not_in_directory("../setup.py"))
+        self.assertTrue(pv.is_file_not_in_directory("../Setup.py"))
+
+    def test_check_file_format(self):
+        self.assertTrue(pv.check_file_format("nicename.svg"))
+        self.assertTrue(pv.check_file_format("nicename.pdf"))
+        self.assertTrue(pv.check_file_format("nicename.jpg"))
+        self.assertTrue(pv.check_file_format("nicename.png"))
+        self.assertTrue(pv.check_file_format("../nicename.svg"))
+
+        self.assertFalse(pv.check_file_format("notnicename.lala"))
