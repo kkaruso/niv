@@ -6,8 +6,8 @@ import os
 import shutil
 from unittest import TestCase
 
-import yaml_parser
-from arg_parser import ArgParser
+from src import yaml_parser
+from src.arg_parser import ArgParser
 
 
 class TestArgParser(TestCase):
@@ -109,19 +109,28 @@ class TestArgParser(TestCase):
         save_to_path function tests
         """
         parser = ArgParser(["-l", "./tests.yaml"])
-        with self.assertRaises(Exception):
-            parser.save_to_path("./test_directory/")
 
-        with self.assertRaises(TypeError):
-            parser.save_to_path("./tests.yaml")
+        self.assertEqual("./tests.svg", parser.save_to_path("./"))
 
-        self.assertEqual(f"./{self.test_directory_path}test2.svg",
+        self.assertEqual("./tests.svg", parser.save_to_path("."))
+
+        self.assertEqual("ein_anderer_test.svg", parser.save_to_path("ein_anderer_test.svg"))
+
+        self.assertEqual("testdirectory/tests.svg", parser.save_to_path("testdirectory/tests.svg"))
+
+        self.assertEqual(f"{self.test_directory_path}test2.svg",
                          parser.save_to_path(f"{self.test_directory_path}test2.svg"))
 
-        self.assertEqual(f"./{self.test_directory_path}", parser.save_to_path(f"{self.test_directory_path}"))
+        self.assertEqual(f"{self.test_directory_path}tests.svg", parser.save_to_path(f"{self.test_directory_path}"))
 
-        self.assertEqual("./testdirectory/",
-                         parser.save_to_path(f"./{self.test_directory_path}"))
+        self.assertEqual("testdirectory/tests.svg",
+                         parser.save_to_path(f"{self.test_directory_path}"))
+
+        with self.assertRaises(OSError):
+            parser.save_to_path("./testslmao/")
+
+        with self.assertRaises(OSError):
+            parser.save_to_path("./testslmao/")
 
     def test_create_filename(self):
         """

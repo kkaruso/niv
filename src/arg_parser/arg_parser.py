@@ -4,9 +4,9 @@ Parser class for Arguments when you start NIV
 
 import argparse
 import os
-
-from niv_logger import NivLogger
-from yaml_parser import get_yaml
+import pathname_validitor as pv
+from src.niv_logger.niv_logger import NivLogger
+from src.yaml_parser.yaml_parser import get_yaml
 
 
 class ArgParser:
@@ -18,7 +18,7 @@ class ArgParser:
     set_args():
         Adds the needed arguments to the ArgumentParser class
     """
-    config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/config.yaml')
+    config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/config.yaml')
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
     logger = NivLogger
@@ -71,20 +71,23 @@ class ArgParser:
         # Checks if the arguments are compatible with each other, else raise Exception
         if self.check_args_compatibility():
             self.parser = parser.parse_args(self.args)
-            self.logger.log_debug("Arguments are compatible")
+            self.logger.log_debug("Arguments are compatible.")
             return
-        raise ValueError("Arguments are not compatible")
+        raise ValueError("Arguments are not compatible.")
 
     def get_load(self):
         """
         :return: returns data from argument load
         """
+        # For the case when no argument is given
+        if len(self.args) < 1:
+            return
         # access load argument, workaround for program start
         for i, arg in enumerate(self.args):
             if arg in ("-l", "--load"):
                 file_name = self.args[i + 1]
                 return file_name
-        raise OSError("Can\'t access file_name")
+        raise OSError("Can\'t access file_name.")
 
     def get_parser(self):
         """
@@ -125,8 +128,8 @@ class ArgParser:
             file_type = file_name.split('.')[-1]
             if file_type == "yaml":
                 return file_path
-            raise TypeError(f'"{file_name}" is not a .yaml')
-        raise OSError(f'"{file_path}" is not a valid file path')
+            raise TypeError(f'"{file_name}" is not a .yaml.')
+        raise OSError(f'"{file_path}" is not a valid file path or file doesn\'t exist.')
 
     def create_filename(self):
         """
@@ -144,64 +147,77 @@ class ArgParser:
                 file_name = self.args[i + 1]
                 break
         if file_name == "":
-            raise OSError("Can\'t access file_name")
+            raise OSError("Can\'t access file_name.")
         file_name = file_name.split('/')[-1].split('.')[0]
         file_name = f"{file_name}{file_format}"
         return file_name
 
         # return default_name + file_format
 
-    def save_to_path(self, file_path):
+    def save_to_path(self, path):
         """
         Checks if the path is a file path or a directory path
         and creates the output file in the corresponding
         directory with a suitable name, if no name is given
 
-        :param file_path: path to where the file should be saved
+        :param path: path to where the file should be saved
         :return: path to file or raise error
         """
-        # Call lstrip() to remove all whitespaces in front of the path
-        file_path = file_path.lstrip()
-        last_element = file_path.split('/')[-1]
-        # Workaround that adds a "./" at the start of the path if no "./" is entered
+        # check if path is valid and creatable or exists
+        if pv.is_path_exists_or_creatable(path):
+            # if path is directory, create filename
+            if os.path.isdir(path):
+                if path == ".":
+                    path = path + "/"
+                return path + self.create_filename()
+            # if path leads to a file, raise error
+            if os.path.isfile(path):
+                raise FileExistsError(f"{path} already exists")
+            # otherwise return path
+            return path
+        raise OSError(f"{path} is not a valid path")
 
-        # If the path is just a '.' create a file in the current directory
-        if file_path == '.':
-            # file_name = ArgParser.create_filename(f"{file_path}/")
-            file_name = self.create_filename()
-            # Create the file in the current directory
-            file = open(f"{file_name}", "a")
-            file.close()
-            return file_name
 
-        if file_path[0:2] != "./":
-            file_path = "./" + file_path
-        path = file_path.removesuffix(f'{last_element}')
 
-        # If there is a '.' in the name of the last element of the
-        # path, it is a file, else it is a directory
-        if '.' in last_element:
-            # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
-            if last_element.lower().endswith(('.svg', '.png', '.jpg', 'pdf')):
-                # Check if the directory above the file exists, else raise Exception
-                if os.path.isdir(path):
-                    return file_path
-                    # raise FileExistsError(f"{last_element} already exists")
-                raise OSError(f'"{path}": directory doesn\'t exist')
-            raise TypeError(f'"{last_element}" is the wrong file format (must be either .svg, .png, .jpg, .pdf)')
 
-        # Check if directory exists. If it does return the file_path, else raise Exception
-        if os.path.isdir(file_path):
-            # Check if last symbol is a "/" otherwise add a "/"
-            if file_path[-1] != "/":
-                file_path += "/"
-            file_name = self.create_filename()
-            # Create the file in the given directory
-            file = open(f"{file_path}{file_name}", "a")
-            file.close()
-            return file_path
 
-        raise OSError(f'"{file_path}": directory doesn\'t exist')
+
+
+        # # Call lstrip() to remove all whitespaces in front of the path
+        # path = path.lstrip()
+        # last_element = file_path.split('/')[-1]
+        # # Workaround that adds a "./" at the start of the path if no "./" is entered
+        #
+        # # If the path is just a '.' create a file in the current directory
+        # if path == '.':
+        #     # file_name = ArgParser.create_filename(f"{path}/")
+        #     file_name = self.create_filename()
+        #     return file_name
+        #
+        # if path[0:2] != "./":
+        #     path = "./" + file_path
+        # .path = path.removesuffix(f'{last_element}')
+        #
+        # # If there is a '.' in the name of the last element of the
+        # # path, it is a file, else it is a directory
+        # if '.' in last_element:
+        #     # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
+        #     if last_element.lower().endswith(('.svg', '.png', '.jpg', 'pdf')):
+        #         # Check if the directory above the file exists, else raise Exception
+        #         if os.path.isdir(path):
+        #             return file_path
+        #             # raise FileExistsError(f"{last_element} already exists")
+        #         raise OSError(f'"{path}": directory doesn\'t exist')
+        #     raise TypeError(f'"{last_element}" is the wrong file format (must be either .svg, .png, .jpg, .pdf)')
+        #
+        # # Check if directory exists. If it does return the file_path, else raise Exception
+        # if os.path.isdir(file_path):
+        #     # Check if last symbol is a "/" otherwise add a "/"
+        #     if file_path[-1] != "/":
+        #         file_path += "/"
+        #     return file_path
+        #
+        # raise OSError(f'"{file_path}": directory doesn\'t exist')
 
     def check_args_compatibility(self):
         """

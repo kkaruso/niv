@@ -5,7 +5,7 @@ from . import _ICONS
 
 class _OSA(_ICONS):
     _type = "osa"
-    _icon_dir = "resources/icons/osa/svg"
+    _icon_dir = "../resources/icons/osa/svg"
 
 
 class OsaArrowGreenLeft(_OSA):
@@ -14,6 +14,18 @@ class OsaArrowGreenLeft(_OSA):
 
 class OsaArrowYellowRight(_OSA):
     _icon = "osa-arrow-yellow-right.svg"
+
+
+class OsaEthernetFree(_OSA):
+    _icon = "ethernet-free.svg"
+
+
+class OsaEthernetBusy(_OSA):
+    _icon = "ethernet-busy.svg"
+
+
+class OsaEthernetCable(_OSA):
+    _icon = "EthernetWithCable.svg"
 
 
 class OsaAwareness(_OSA):
@@ -302,6 +314,5 @@ class OsaWarning(_OSA):
 
 class OsaWirelessNetwork(_OSA):
     _icon = "osa-wireless-network.svg"
-
 
 # Aliases

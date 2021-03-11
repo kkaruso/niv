@@ -6,7 +6,7 @@ import logging
 import logging.config
 import os
 
-log_file_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/niv/logs/niv.log'
+log_file_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))) + '/logs/niv.log'
 
 
 class NivLogger:

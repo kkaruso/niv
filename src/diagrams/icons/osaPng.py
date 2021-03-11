@@ -5,7 +5,7 @@ from . import _ICONS
 
 class _OSA(_ICONS):
     _type = "osa"
-    _icon_dir = "resources/icons/osa/png"
+    _icon_dir = "../resources/icons/osa/png"
 
 
 class OsaArrowGreenLeftPng(_OSA):
@@ -32,8 +32,20 @@ class OsaContractPng(_OSA):
     _icon = "osa-contract.png"
 
 
+class OsaEthernetCablePng(_OSA):
+    _icon = "EthernetWithCable.Png"
+
+
 class OsaDatabasePng(_OSA):
     _icon = "osa-database.png"
+
+
+class OsaEthernetFreePng(_OSA):
+    _icon = "ethernet-free.png"
+
+
+class OsaEthernetBusyPng(_OSA):
+    _icon = "ethernet-busy.png"
 
 
 class OsaDesktopImacPng(_OSA):
@@ -302,6 +314,5 @@ class OsaWarningPng(_OSA):
 
 class OsaWirelessNetworkPng(_OSA):
     _icon = "osa-wireless-network.png"
-
 
 # Aliases

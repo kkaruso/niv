@@ -1,0 +1,4 @@
+graft resources/icons/*
+include logs/*
+include src/config.yaml
+include src/yaml_defaults.yaml
