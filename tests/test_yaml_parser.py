@@ -5,7 +5,7 @@ import os
 from unittest import TestCase
 import yaml
 
-from src.yaml_parser import get_yaml  # pylint: disable=import-error
+from src.yaml_parser.yaml_parser import get_yaml  # pylint: disable=import-error
 
 
 class Test(TestCase):

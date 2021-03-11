@@ -7,7 +7,7 @@ import shutil
 from unittest import TestCase
 
 from src import yaml_parser
-from src.arg_parser import ArgParser
+from src.arg_parser.arg_parser import ArgParser
 
 
 class TestArgParser(TestCase):
