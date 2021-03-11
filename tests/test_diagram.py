@@ -49,7 +49,7 @@ class TestBuildDiagram(TestCase):
         self.assertIsNotNone(BuildDiagram(yaml, None, 1, False))
 
         with self.assertRaises(FileNotFoundError):
-            self.assertIsNone(BuildDiagram("templates/template.yaml", "Test_Diagram.svg", 1, False))
+            self.assertIsNone(BuildDiagram("../../templates/template.yaml", "Test_Diagram.svg", 1, False))
 
     def tearDown(self) -> None:
         """
