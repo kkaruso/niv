@@ -1,0 +1,9 @@
+graft resources/icons/*
+include logs/*
+include config.yaml
+include yaml_defaults.yaml
+include arg_parser.py
+include main.py
+include build_diagram.py
+include niv_logger.py
+include yaml_parser.py
