@@ -6,7 +6,7 @@ import os
 import shutil
 from unittest import TestCase
 
-from src import yaml_parser
+from src.yaml_parser import yaml_parser
 from src.arg_parser.arg_parser import ArgParser
 
 
@@ -40,14 +40,14 @@ class TestArgParser(TestCase):
         set_args function tests
         """
         path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        config = yaml_parser.get_yaml(path_to_project + '/config.yaml')
+        config = yaml_parser.get_yaml(path_to_project + '/src/config.yaml')
         detail = config.get('default').get('std_details')
         parser = ArgParser("")
 
         self.assertEqual(argparse.Namespace(save=None, load=None, detail=detail, verbose=False),
                          parser.get_parser())
 
-        parser = ArgParser(["-s", f"{self.test_directory_path}test2.svg", "-l", "./tests.yaml"])
+        parser = ArgParser(["-s", f"./{self.test_directory_path}test2.svg", "-l", "./tests.yaml"])
         self.assertEqual(
             argparse.Namespace(save=[f"./{self.test_directory_path}test2.svg"], load=["./tests.yaml"],
                                detail=detail, verbose=False),

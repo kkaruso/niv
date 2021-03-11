@@ -81,7 +81,7 @@ class ArgParser:
         """
         # For the case when no argument is given
         if len(self.args) < 1:
-            return
+            return None
         # access load argument, workaround for program start
         for i, arg in enumerate(self.args):
             if arg in ("-l", "--load"):

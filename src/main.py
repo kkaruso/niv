@@ -1,5 +1,5 @@
 """
-Main
+main.py
 """
 import os
 import sys
@@ -10,6 +10,9 @@ from src.niv_logger.niv_logger import NivLogger
 
 
 def main():
+    """
+    uses arguments to create diagrams
+    """
     # Create an instance of the logger Class
     logger = NivLogger
     logger.clear_log()
@@ -28,7 +31,7 @@ def main():
 
     except (OSError, ValueError, TypeError, AssertionError) as error_message:
         # create variables to look on which files the error occurred
-        exc_type, exc_obj, exc_tb = sys.exc_info()
+        _, _, exc_tb = sys.exc_info()
         f_name = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
 
         # add log message in log file
