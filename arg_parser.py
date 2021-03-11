@@ -4,7 +4,7 @@ Parser class for Arguments when you start NIV
 
 import argparse
 import os
-
+import pathname_validitor as pv
 from niv_logger import NivLogger
 from yaml_parser import get_yaml
 
@@ -154,54 +154,70 @@ class ArgParser:
 
         # return default_name + file_format
 
-    def save_to_path(self, file_path):
+    def save_to_path(self, path):
         """
         Checks if the path is a file path or a directory path
         and creates the output file in the corresponding
         directory with a suitable name, if no name is given
 
-        :param file_path: path to where the file should be saved
+        :param path: path to where the file should be saved
         :return: path to file or raise error
         """
-        # Call lstrip() to remove all whitespaces in front of the path
-        file_path = file_path.lstrip()
-        last_element = file_path.split('/')[-1]
-        # Workaround that adds a "./" at the start of the path if no "./" is entered
+        # check if path is valid and creatable or exists
+        if pv.is_path_exists_or_creatable(path):
+            # if path is directory, create filename
+            if os.path.isdir(path):
+                if path == ".":
+                    path = path + "/"
+                return path + self.create_filename()
+            # if path leads to a file, raise error
+            if os.path.isfile(path):
+                raise FileExistsError(f"{path} already exists")
+            # otherwise return path
+            return path
+        raise OSError(f"{path} is not a valid path")
 
-        # If the path is just a '.' create a file in the current directory
-        if file_path == '.':
-            # file_name = ArgParser.create_filename(f"{file_path}/")
-            file_name = self.create_filename()
-            # Create the file in the current directory
-            file = open(f"{file_name}", "a")
-            file.close()
-            return file_name
 
-        if file_path[0:2] != "./":
-            file_path = "./" + file_path
-        path = file_path.removesuffix(f'{last_element}')
 
-        # If there is a '.' in the name of the last element of the
-        # path, it is a file, else it is a directory
-        if '.' in last_element:
-            # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
-            if last_element.lower().endswith(('.svg', '.png', '.jpg', 'pdf')):
-                # Check if the directory above the file exists, else raise Exception
-                if os.path.isdir(path):
-                    return file_path
-                    # raise FileExistsError(f"{last_element} already exists")
-                raise OSError(f'"{path}": directory doesn\'t exist')
-            raise TypeError(f'"{last_element}" is the wrong file format (must be either .svg, .png, .jpg, .pdf)')
 
-        # Check if directory exists. If it does return the file_path, else raise Exception
-        if os.path.isdir(file_path):
-            # Check if last symbol is a "/" otherwise add a "/"
-            if file_path[-1] != "/":
-                file_path += "/"
-            file_name = self.create_filename()
-            return file_path
 
-        raise OSError(f'"{file_path}": directory doesn\'t exist')
+
+
+        # # Call lstrip() to remove all whitespaces in front of the path
+        # path = path.lstrip()
+        # last_element = file_path.split('/')[-1]
+        # # Workaround that adds a "./" at the start of the path if no "./" is entered
+        #
+        # # If the path is just a '.' create a file in the current directory
+        # if path == '.':
+        #     # file_name = ArgParser.create_filename(f"{path}/")
+        #     file_name = self.create_filename()
+        #     return file_name
+        #
+        # if path[0:2] != "./":
+        #     path = "./" + file_path
+        # .path = path.removesuffix(f'{last_element}')
+        #
+        # # If there is a '.' in the name of the last element of the
+        # # path, it is a file, else it is a directory
+        # if '.' in last_element:
+        #     # Check if the file has the right format (.svg, .png, .jpeg), else raise Exception
+        #     if last_element.lower().endswith(('.svg', '.png', '.jpg', 'pdf')):
+        #         # Check if the directory above the file exists, else raise Exception
+        #         if os.path.isdir(path):
+        #             return file_path
+        #             # raise FileExistsError(f"{last_element} already exists")
+        #         raise OSError(f'"{path}": directory doesn\'t exist')
+        #     raise TypeError(f'"{last_element}" is the wrong file format (must be either .svg, .png, .jpg, .pdf)')
+        #
+        # # Check if directory exists. If it does return the file_path, else raise Exception
+        # if os.path.isdir(file_path):
+        #     # Check if last symbol is a "/" otherwise add a "/"
+        #     if file_path[-1] != "/":
+        #         file_path += "/"
+        #     return file_path
+        #
+        # raise OSError(f'"{file_path}": directory doesn\'t exist')
 
     def check_args_compatibility(self):
         """
