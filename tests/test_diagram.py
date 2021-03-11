@@ -36,6 +36,10 @@ class TestBuildDiagram(TestCase):
             self.assertEqual(test_members, members)
 
     def test_create_diagram(self):
+        print("ICH BIN HIER BEI : ")
+        print(os.getcwd())
+        print("HIER SIND DIESE FILES")
+        print(os.listdir("."))
         self.assertIsNotNone(BuildDiagram("test_template.yaml", "Test_Diagram.svg", 1, False))
 
         self.assertIsNotNone(BuildDiagram("test_template.yaml", None, 1, False))
