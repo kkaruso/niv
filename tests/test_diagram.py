@@ -40,9 +40,13 @@ class TestBuildDiagram(TestCase):
         print(os.getcwd())
         print("HIER SIND DIESE FILES")
         print(os.listdir("."))
-        self.assertIsNotNone(BuildDiagram("test_template.yaml", "Test_Diagram.svg", 1, False))
 
-        self.assertIsNotNone(BuildDiagram("test_template.yaml", None, 1, False))
+        path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        yaml = path_to_project + '/templates/template.yaml'
+
+        self.assertIsNotNone(BuildDiagram(yaml, "Test_Diagram.svg", 1, False))
+
+        self.assertIsNotNone(BuildDiagram(yaml, None, 1, False))
 
         with self.assertRaises(FileNotFoundError):
             self.assertIsNone(BuildDiagram("templates/template.yaml", "Test_Diagram.svg", 1, False))
