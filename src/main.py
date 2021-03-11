@@ -7,7 +7,6 @@ from contextlib import suppress
 from src.arg_parser.arg_parser import ArgParser
 from src.build_diagram.build_diagram import BuildDiagram
 from src.niv_logger.niv_logger import NivLogger
-from setuptools import find_packages
 
 
 def main():
