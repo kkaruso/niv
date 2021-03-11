@@ -5,10 +5,10 @@ from setuptools import find_packages
 with open(file="README.md", mode="r") as readme_handle:
     long_description = readme_handle.read()
 setup(
-    name='niv-test',
+    name='niv',
     author='HS Worms Top',
     author_email='inf3199@hs-worms.de',
-    version='0.4',
+    version='0.1',
     description='console application to visualize network infrastructure using YAML files.',
     long_description=long_description,
     long_description_content_type="text/markdown",
