@@ -1,3 +1,0 @@
-graft resources/icons/*
-include niv_logger/logs/*
-include yaml_parser/*
