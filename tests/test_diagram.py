@@ -4,7 +4,7 @@ Includes all tests for build_diagram
 from unittest import TestCase
 import os
 
-from src.build_diagram import BuildDiagram
+from src.build_diagram.build_diagram import BuildDiagram
 from src.diagrams import Diagram
 
 
@@ -28,7 +28,8 @@ class TestBuildDiagram(TestCase):
         with Diagram("test", filename="test", outformat="svg", show=False):
             members = []
             diagram = BuildDiagram(
-                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/tests/test_template.yaml', "", 1, False)
+                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/tests/test_template.yaml', "test2.svg",
+                1, False)
             diagram.create_nodes(members)
 
             test_members = ["cloud1", "db1", "deviceScanner1"]
@@ -37,7 +38,7 @@ class TestBuildDiagram(TestCase):
     def test_create_diagram(self):
         self.assertIsNotNone(BuildDiagram("../templates/template.yaml", "Test_Diagram.svg", 1, False))
 
-        # self.assertIsNotNone(BuildDiagram("../templates/template.yaml", None, 1, False))
+        self.assertIsNotNone(BuildDiagram("../templates/template.yaml", None, 1, False))
 
         with self.assertRaises(FileNotFoundError):
             self.assertIsNone(BuildDiagram("templates/template.yaml", "Test_Diagram.svg", 1, False))
