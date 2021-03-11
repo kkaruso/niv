@@ -2,6 +2,7 @@
 Includes all tests for pathname_validator
 """
 import os
+import shutil
 from unittest import TestCase
 from src import pathname_validitor as pv
 
@@ -37,7 +38,6 @@ class TestPathnameValidator(TestCase):
         self.assertTrue(pv.is_pathname_valid("../../../"))
 
         self.assertFalse(pv.is_pathname_valid(""))
-        self.assertFalse(pv.is_pathname_valid("random://test/"))
 
     def test_is_path_exists_or_creatable(self):
         self.assertTrue(pv.is_path_exists_or_creatable("."))
@@ -59,3 +59,16 @@ class TestPathnameValidator(TestCase):
         self.assertTrue(pv.check_file_format("../nicename.svg"))
 
         self.assertFalse(pv.check_file_format("notnicename.lala"))
+
+    def tearDown(self) -> None:
+        """
+        Removes files and directory created by testing
+        """
+        try:
+            shutil.rmtree(f'{self.test_directory_path}', ignore_errors=True)
+            os.remove("tests.txt")
+        except OSError:
+            print(f"Deletion of the directory {self.test_directory_path} failed")
+        else:
+            print(f"Successfully deleted the directory {self.test_directory_path}")
+            print("Successfully deleted Test files")
