@@ -48,8 +48,8 @@ class BuildDiagram:
         # TODO: cleanup (delete not needed comments like old prints)
         # Load the .yaml from the given path
         self.yaml = yaml_parser.get_yaml(load_path)
-        self.save_path = save_path if save_path is not None \
-            else f"./Diagram{self.config.get('default').get('std_type') or '.svg'} "
+        self.save_path = save_path[0] if save_path is not None \
+            else f"./Diagram{self.config.get('default').get('std_type') or '.svg'}"
         self.load_path = load_path
         self.detail_level = detail_level
         self.output_format = self.save_path.split('.')[-1]
