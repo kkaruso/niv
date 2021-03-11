@@ -4,8 +4,8 @@ Includes all tests for build_diagram
 from unittest import TestCase
 import os
 
-from build_diagram import BuildDiagram
-from diagrams import Diagram
+from src.build_diagram import BuildDiagram
+from src.diagrams import Diagram
 
 
 class TestBuildDiagram(TestCase):

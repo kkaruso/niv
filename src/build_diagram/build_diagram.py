@@ -11,13 +11,13 @@ Dynamically creates the diagram
 """
 import ipaddress
 from datetime import datetime
-import yaml_parser
-from niv_logger import NivLogger
-from diagrams import *
-from diagrams.icons.ciscoPng import *
-from diagrams.icons.osa import *
-from diagrams.icons.cisco import *
-from diagrams.icons.osaPng import *
+from src.niv_logger import niv_logger
+from src.diagrams import *
+from src.diagrams.icons.ciscoPng import *
+from src.diagrams.icons.osa import *
+from src.diagrams.icons.cisco import *
+from src.diagrams.icons.osaPng import *
+from src.yaml_parser import yaml_parser
 
 
 class BuildDiagram:
@@ -25,16 +25,16 @@ class BuildDiagram:
     Handles creation of diagram
     """
     path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    config = yaml_parser.get_yaml(path_to_project + '/niv/config.yaml')
+    config = yaml_parser.get_yaml(path_to_project + '/config.yaml')
     # TODO: Create config.yaml if it has been deleted
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
-    logger = NivLogger
+    logger = niv_logger.NivLogger
 
     # Read yaml_defaults.yaml if it exists, otherwise create the file and assign empty default to yaml_defaults
-    yaml_defaults = yaml_parser.get_yaml(path_to_project + '/niv/yaml_defaults.yaml') if os.path.isfile(
-        path_to_project + '/niv/yaml_defaults.yaml') else yaml_parser.create_yaml_defaults(
-        path_to_project + '/niv/yaml_defaults.yaml')
+    yaml_defaults = yaml_parser.get_yaml(path_to_project + '/yaml_defaults.yaml') if os.path.isfile(
+        path_to_project + '/yaml_defaults.yaml') else yaml_parser.create_yaml_defaults(
+        path_to_project + '/yaml_defaults.yaml')
 
     counter = 1
 
@@ -49,7 +49,7 @@ class BuildDiagram:
         # Load the .yaml from the given path
         self.yaml = yaml_parser.get_yaml(load_path)
         self.save_path = save_path if save_path is not None \
-            else f"./Diagram{self.config.get('default').get('std_type') or '.svg'} "
+            else f"./Diagram{self.config.get('default').get('std_type') or '.svg'}"
         self.load_path = load_path
         self.detail_level = detail_level
         self.output_format = self.save_path.split('.')[-1]
@@ -572,7 +572,7 @@ class BuildDiagram:
             return True
 
         except ValueError as error:
-            logger = NivLogger()
+            logger = niv_logger.NivLogger()
             logger.log_error(error)
             return False
 

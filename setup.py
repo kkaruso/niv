@@ -5,7 +5,7 @@ from setuptools import find_packages
 with open(file="README.md", mode="r") as readme_handle:
     long_description = readme_handle.read()
 setup(
-    name='niv-top-test',
+    name='niv-test',
     author='HS Worms Top',
     author_email='inf3199@hs-worms.de',
     version='0.2',
@@ -24,7 +24,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'niv = main:main'
+            'niv = src.main:main'
         ],
     },
     include_package_data=True,

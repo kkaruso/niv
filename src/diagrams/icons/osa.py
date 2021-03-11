@@ -5,7 +5,7 @@ from . import _ICONS
 
 class _OSA(_ICONS):
     _type = "osa"
-    _icon_dir = "resources/icons/osa/svg"
+    _icon_dir = "../resources/icons/osa/svg"
 
 
 class OsaArrowGreenLeft(_OSA):

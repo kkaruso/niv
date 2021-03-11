@@ -6,8 +6,8 @@ import os
 import shutil
 from unittest import TestCase
 
-import yaml_parser
-from arg_parser import ArgParser
+from src import yaml_parser
+from src.arg_parser import ArgParser
 
 
 class TestArgParser(TestCase):
