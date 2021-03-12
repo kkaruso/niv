@@ -33,7 +33,7 @@ class OsaContractPng(_OSA):
 
 
 class OsaEthernetCablePng(_OSA):
-    _icon = "EthernetWithCable.Png"
+    _icon = "EthernetWithCable1.Png"
 
 
 class OsaDatabasePng(_OSA):
