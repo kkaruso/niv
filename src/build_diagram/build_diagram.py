@@ -81,6 +81,12 @@ class BuildDiagram:
         self.nodes_text = self.fill_dictionary("nodes", "text", self.yaml_defaults.get('icons').get(
             'text') or "node")
 
+        # Get Ports-number of each switch default = 24
+        self.switch_ports = self.fill_dictionary("nodes", "ports", "24")
+
+        # Get if type switch of each nodes
+        self.switch_type = self.fill_dictionary("nodes", "switch-view", False)
+
         # Get ip of each node
         self.nodes_ip = self.fill_dictionary("nodes", "ip", self.yaml_defaults.get('icons').get(
             'ip') or "")
@@ -356,12 +362,40 @@ class BuildDiagram:
                     "margin": "20",
                     "tooltip": f"{tooltip}"
                 }
-                # Create the nodes of the group inside a cluster
                 with Cluster(self.yaml.get("groups").get(f"{i}").get("name"), graph_attr=clustr_attr):
+
                     for member in list(self.group_members.get(i)):
-                        self.create_single_node(member, layout, False)
-                    # Create connections inside the group
-                    self.create_connections(False)
+                        switches_in_group = []
+                        connectEth = 0
+                        # create Switch-View for the Switches inside the subgroups
+                        if self.switch_type[member]:
+                            switches_in_group.append(member)
+                            switch_nodes = []
+                            for memb, __ in enumerate(self.group_members.get(i)):
+                                for end in range(0, len(self.connections_endpoints)):
+                                    if __ == self.connections_endpoints[end][0]:
+                                        for eth, ___ in enumerate(switches_in_group):
+                                            if self.connections_endpoints[end][1] == ___:
+                                                connectEth = connectEth + 1
+                            self.create_switch(self.switch_ports[member], self.nodes_text[member], switch_nodes,
+                                               connectEth)
+                            connectEth = 0
+
+                        # Create the nodes of the group inside a cluster
+                        else:
+                            self.create_single_node(member, layout, False)
+
+                        if self.instances:
+                            for memb, __ in enumerate(self.group_members.get(i)):
+                                for end in range(0, len(self.connections_endpoints)):
+                                    if __ == self.connections_endpoints[end][0]:
+                                        for eth, ___ in enumerate(switches_in_group):
+                                            if self.connections_endpoints[end][1] == ___:
+                                                switch_nodes[connectEth] - self.instances[memb]
+                                                connectEth = connectEth + 1
+
+                    self.create_connections(True)
+                    self.instances.clear()
 
     def set_diagram_title(self):
         """
@@ -647,3 +681,25 @@ class BuildDiagram:
                         tooltip = tooltip_with_port
 
         return tooltip
+
+    @staticmethod
+    def create_switch(ports, name, nodes, busy):
+        with Cluster(name):
+            if ports % 2:
+                r = (ports - 1) / 2
+                raw = int(r)
+            else:
+                r = ports / 2
+                raw = int(r)
+
+            for k in range(1, busy + 1):
+                # nodes.append(globals()["OsaEthernetFree"](f"eth{k}"))
+                nodes.append(OsaEthernetBusy(f"eth{k}"))
+
+            for k in range(busy + 1, ports + 1):
+                # nodes.append(globals()["OsaEthernetFree"](f"eth{k}"))
+                nodes.append(OsaEthernetFree(f"eth{k}"))
+
+            for b in range(0, raw):
+                if b + raw <= ports:
+                    nodes[b] - Edge(color="transparent") - nodes[b + raw]

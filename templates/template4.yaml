@@ -22,24 +22,24 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
   cloud1: {icon: Cloud, text: Internet, x: 24, y: 26}
   router1: { icon: RouterFirewall, text: Router Firewall, x: 24, y: 22 }
-  core-Switch1:  {icon: SafeharborIcon, text: core-Switch 1, x: 22, y: 18 }
-  core-Switch2:  {icon: SafeharborIcon, text: core-Switch 2, x: 26, y: 18 }
-  spine-Switch1: {icon: SafeharborIcon, text: spine-Switch 1, x: 18, y: 12 }
-  spine-Switch2: {icon: SafeharborIcon, text: spine-Switch 2, x: 22, y: 12 }
-  spine-Switch3: {icon: SafeharborIcon, text: spine-Switch 3, x: 26, y: 12 }
-  spine-Switch4: {icon: SafeharborIcon, text: spine-Switch 4, x: 30, y: 12 }
-  switch1: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 1, y: 6 }
-  switch2: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 4, y: 6 }
-  switch3: { icon: WorkgroupSwitch, text: Work group Switch c3, x: 11, y: 6 }
-  switch4: { icon: WorkgroupSwitch, text: Work group Switch c4, x: 14, y: 6 }
-  switch5: { icon: WorkgroupSwitch, text: Work group Switch c5, x: 21, y: 6 }
-  switch6: { icon: WorkgroupSwitch, text: Work group Switch c6, x: 24, y: 6 }
-  switch7: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 31, y: 6 }
-  switch8: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 34, y: 6 }
-  switch9: { icon: WorkgroupSwitch, text: Work group Switch c3, x: 41, y: 6 }
-  switch10: { icon: WorkgroupSwitch, text: Work group Switch c4, x: 44, y: 6 }
-  switch11: { icon: WorkgroupSwitch, text: Work group Switch c5, x: 51, y: 6 }
-  switch12: { icon: WorkgroupSwitch, text: Work group Switch c6, x: 54, y: 6 }
+  core-Switch1:  {icon: SafeharborIcon, text: core-Switch 1, x: 22, y: 18, switch-view: False, ports: 24}
+  core-Switch2:  {icon: SafeharborIcon, text: core-Switch 2, x: 26, y: 18, switch-view: True, ports: 24}
+  spine-Switch1: {icon: SafeharborIcon, text: spine-Switch 1, x: 18, y: 12, switch-view: True, ports: 24}
+  spine-Switch2: {icon: SafeharborIcon, text: spine-Switch 2, x: 22, y: 12, switch-view: True, ports: 24}
+  spine-Switch3: {icon: SafeharborIcon, text: spine-Switch 3, x: 26, y: 12, switch-view: True, ports: 24}
+  spine-Switch4: {icon: SafeharborIcon, text: spine-Switch 4, x: 30, y: 12, switch-view: True, ports: 24}
+  switch1: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 1, y: 6, switch-view: False, ports: 120}
+  switch2: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 4, y: 6, switch-view: True, ports: 12}
+  switch3: { icon: WorkgroupSwitch, text: Work group Switch c3, x: 11, y: 6, switch-view: True, ports: 12}
+  switch4: { icon: WorkgroupSwitch, text: Work group Switch c4, x: 14, y: 6, switch-view: True, ports: 12}
+  switch5: { icon: WorkgroupSwitch, text: Work group Switch c5, x: 21, y: 6, switch-view: True, ports: 12}
+  switch6: { icon: WorkgroupSwitch, text: Work group Switch c6, x: 24, y: 6, switch-view: True, ports: 12}
+  switch7: { icon: WorkgroupSwitch, text: Work group Switch c7, x: 31, y: 6, switch-view: True,ports: 12}
+  switch8: { icon: WorkgroupSwitch, text: Work group Switch c8, x: 34, y: 6, switch-view: True, ports: 12}
+  switch9: { icon: WorkgroupSwitch, text: Work group Switch c9, x: 41, y: 6, switch-view: True, ports: 12}
+  switch10: { icon: WorkgroupSwitch, text: Work group Switch c10, x: 44, y: 6, switch-view: True, ports: 12}
+  switch11: { icon: WorkgroupSwitch, text: Work group Switch c11, x: 51, y: 6, switch-view: True, ports: 12}
+  switch12: { icon: WorkgroupSwitch, text: Work group Switch c12, x: 54, y: 6, switch-view: True, ports: 12}
   server1: { icon: FileServer, text: Server 1, x: 0, y: 2 }
   server2: { icon: FileServer, text: Server 2, x: 2, y: 2 }
   server3: { icon: FileServer, text: Server 3, x: 4, y: 2 }
@@ -70,9 +70,9 @@ groups: #add a group to target multiple objects at once, if you don't, delete th
 
  # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
  # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
-  group1: { <<: *groupDefaults, name: Core-Swiches , members: [core-Switch1, core-Switch2], layout: fdp, rack: True}
+  group1: { <<: *groupDefaults, name: Core-Swiches , members: [core-Switch1, core-Switch2], layout: , rack: False}
   group2: { <<: *groupDefaults, name: Spine-Switches, members: [spine-Switch1, spine-Switch2, spine-Switch3, spine-Switch4] }
-  group4: { <<: *groupDefaults, name: Rack 1, members: [ server1, server2, server3, server4, switch1, switch2], layout:,  rack: True}
+  group4: { <<: *groupDefaults, name: Rack 1, members: [ server1, server2, server3, server4, switch1, switch2], layout:,  rack: False}
   group5: { <<: *groupDefaults, name: Rack 2, members: [ server5, server6, server7, server8, switch3, switch4] }
   group6: { <<: *groupDefaults, name: Rack 3, members: [ server9, server10, server11, server12, switch5, switch6] }
   group7: { <<: *groupDefaults, name: Rack 4, members: [ server13, server14, server15, server16, switch7, switch8] }
