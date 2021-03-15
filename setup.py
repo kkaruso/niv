@@ -11,7 +11,7 @@ setup(
     name='niv',
     author='HS Worms Top',
     author_email='inf3199@hs-worms.de',
-    version='0.1',
+    version='1.3',
     description='console application to visualize network infrastructure using YAML files.',
     long_description=long_description,
     long_description_content_type="text/markdown",

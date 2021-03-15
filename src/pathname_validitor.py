@@ -148,7 +148,6 @@ def is_file_not_in_directory(pathname: str) -> bool:
 
     # go through the list and check files with tail
     for file in files_in_dir:
-        print(f"File: {file}, tail: {tail}")
         if file == tail:
             return False
     return True

@@ -71,7 +71,7 @@ class BuildDiagram:
 
         # Load title properties (others are in set_diagram_title())
         self.title_font_size = self.set_variables("title", "fontSize", self.yaml_defaults.get('title').get(
-            'fontSize') or 35)
+            'fontSize') or 15)
 
         # TODO: Add placeholder icon to set as default for nodes_icon
         # Get icon of each node
@@ -183,37 +183,37 @@ class BuildDiagram:
 
         # Just for "debugging"
         # TODO: delete when finished with the file
-        print(f"output_format: {self.output_format}")
-        print(f"save_path: {self.save_path}")
-        print(f"filename: {self.filename}")
-        print(f"detail_level: {self.detail_level}\n")
-
-        print("Created variables from .yaml:")
-        print(f"graph_bg_color: {self.graph_bg_color}")
-        print(f"graph_padding: {self.graph_padding}")
-        print(f"graph_layout: {self.graph_layout}")
-        print(f"graph_splines: {self.graph_splines}")
-        print(f"graph_direction: {self.graph_direction}\n")
-        print(f"title_fontsize: {self.title_font_size}\n")
-        print(f"nodes_icon: {self.nodes_icon}")
-        print(f"nodes_text: {self.nodes_text}")
-        print(f"nodes_url: {self.nodes_url}")
-        print(f"nodes_ip: {self.nodes_ip}")
-        print(f"nodes_tooltip: {self.nodes_tooltip}")
-        print(f"nodes_mac: {self.nodes_mac}")
-        print(f"nodes_modelnr: {self.nodes_modelnr}")
-        print(f"nodes_manufactuer: {self.nodes_manufactuer}\n")
-        print(f"nodes_storage: {self.nodes_storage}\n")
-        print(f"group_name: {self.group_name}")
-        print(f"group_members: {self.group_members}")
-        print(f"group_url: {self.group_url}")
-        print(f"group_tooltip: {self.group_tooltip}\n")
-        print(f"connections_endpoints: {self.connections_endpoints}")
-        print(f"connections_ports: {self.connections_ports}")
-        print(f"connections_color: {self.connections_color}")
-        print(f"connections_text: {self.connections_text}")
-        print(f"connections_tooltip: {self.connections_tooltip}\n")
-        print(f"connections_visibility: {self.connections_visibility}\n")
+        # print(f"output_format: {self.output_format}")
+        # print(f"save_path: {self.save_path}")
+        # print(f"filename: {self.filename}")
+        # print(f"detail_level: {self.detail_level}\n")
+        #
+        # print("Created variables from .yaml:")
+        # print(f"graph_bg_color: {self.graph_bg_color}")
+        # print(f"graph_padding: {self.graph_padding}")
+        # print(f"graph_layout: {self.graph_layout}")
+        # print(f"graph_splines: {self.graph_splines}")
+        # print(f"graph_direction: {self.graph_direction}\n")
+        # print(f"title_fontsize: {self.title_font_size}\n")
+        # print(f"nodes_icon: {self.nodes_icon}")
+        # print(f"nodes_text: {self.nodes_text}")
+        # print(f"nodes_url: {self.nodes_url}")
+        # print(f"nodes_ip: {self.nodes_ip}")
+        # print(f"nodes_tooltip: {self.nodes_tooltip}")
+        # print(f"nodes_mac: {self.nodes_mac}")
+        # print(f"nodes_modelnr: {self.nodes_modelnr}")
+        # print(f"nodes_manufactuer: {self.nodes_manufactuer}\n")
+        # print(f"nodes_storage: {self.nodes_storage}\n")
+        # print(f"group_name: {self.group_name}")
+        # print(f"group_members: {self.group_members}")
+        # print(f"group_url: {self.group_url}")
+        # print(f"group_tooltip: {self.group_tooltip}\n")
+        # print(f"connections_endpoints: {self.connections_endpoints}")
+        # print(f"connections_ports: {self.connections_ports}")
+        # print(f"connections_color: {self.connections_color}")
+        # print(f"connections_text: {self.connections_text}")
+        # print(f"connections_tooltip: {self.connections_tooltip}\n")
+        # print(f"connections_visibility: {self.connections_visibility}\n")
 
     def create_nodes(self, members):
         """
@@ -259,7 +259,7 @@ class BuildDiagram:
                     # Avoid printing the same error message multiple times, just because we call the same function
                     # various times while creating more than 1 diagram
                     log_message = f"KeyError in {self.load_path}: '{endpoint}' is not given in 'nodes', that's why it" \
-                                  f"does not show in the diagram. Add it to 'nodes' or remove it as an endpoint."
+                                  f" does not show in the diagram. Add it to 'nodes' or remove it as an endpoint."
                     self.logger.verbose_warning(log_message, self.verbose)
                     print(log_message)
 
