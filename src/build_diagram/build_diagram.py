@@ -71,7 +71,7 @@ class BuildDiagram:
 
         # Load title properties (others are in set_diagram_title())
         self.title_font_size = self.set_variables("title", "fontSize", self.yaml_defaults.get('title').get(
-            'fontSize') or 15)
+            'fontSize') or 35)
 
         # TODO: Add placeholder icon to set as default for nodes_icon
         # Get icon of each node
@@ -114,6 +114,10 @@ class BuildDiagram:
         # Get manufacturer of each node
         self.nodes_manufactuer = self.fill_dictionary("nodes", "manufacturer", self.yaml_defaults.get('icons').get(
             'manufacturer') or "")
+
+        # Get storage information of each node
+        self.nodes_storage = self.fill_dictionary("nodes", "storage", self.yaml_defaults.get('icons').get(
+            'storage') or "")
 
         # Get X coordinate of each node
         self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('icons').get(
@@ -169,6 +173,11 @@ class BuildDiagram:
         # Get the tooltip of each connection
         self.connections_tooltip = self.fill_connection_dictionary("connections", "tooltip", "")
 
+        # Get the visibility of port of each connection
+        self.connections_visibility = self.fill_connection_dictionary("connections", "showports",
+                                                                      self.yaml_defaults.get('connections').get(
+                                                                          'showports') or False)
+
         self.instances_keys = []
         self.instances = []
 
@@ -194,6 +203,7 @@ class BuildDiagram:
         print(f"nodes_mac: {self.nodes_mac}")
         print(f"nodes_modelnr: {self.nodes_modelnr}")
         print(f"nodes_manufactuer: {self.nodes_manufactuer}\n")
+        print(f"nodes_storage: {self.nodes_storage}\n")
         print(f"group_name: {self.group_name}")
         print(f"group_members: {self.group_members}")
         print(f"group_url: {self.group_url}")
@@ -203,6 +213,7 @@ class BuildDiagram:
         print(f"connections_color: {self.connections_color}")
         print(f"connections_text: {self.connections_text}")
         print(f"connections_tooltip: {self.connections_tooltip}\n")
+        print(f"connections_visibility: {self.connections_visibility}\n")
 
     def create_nodes(self, members):
         """
@@ -266,18 +277,32 @@ class BuildDiagram:
                             # Create tooltip for each connection
                             tooltip = self.create_tooltip(element="connection", connection=j)
 
-                            _ = self.instances[k] - \
-                                Edge(color=f"{self.connections_color[j]}",
-                                     label=f"{self.connections_text[j]}",
-                                     labeltooltip=f"{self.connections_text[j]}",
-                                     penwidth=f"{self.connections_width[j]}",
-                                     edgetooltip=tooltip,
-                                     # headlabel=f"{self.connections_ports[j][0]}",
-                                     # labeldistance="3.5",
-                                     # labelangle="30",
-                                     # taillabel=f"{self.connections_ports[j][1]}"
-                                     ) - \
-                                self.instances[i]
+                            if self.connections_visibility[j]:
+                                _ = self.instances[k] - \
+                                    Edge(color=f"{self.connections_color[j]}",
+                                         label=f"{self.connections_text[j]}",
+                                         labeltooltip=f"{self.connections_text[j]}",
+                                         penwidth=f"{self.connections_width[j]}",
+                                         edgetooltip=tooltip,
+                                         headlabel=f"{self.connections_ports[j][0]}",
+                                         labeldistance="3.5",
+                                         labelangle="30",
+                                         taillabel=f"{self.connections_ports[j][1]}"
+                                         ) - \
+                                    self.instances[i]
+                            else:
+                                _ = self.instances[k] - \
+                                    Edge(color=f"{self.connections_color[j]}",
+                                         label=f"{self.connections_text[j]}",
+                                         labeltooltip=f"{self.connections_text[j]}",
+                                         penwidth=f"{self.connections_width[j]}",
+                                         edgetooltip=tooltip,
+                                         # headlabel=f"{self.connections_ports[j][0]}",
+                                         # labeldistance="3.5",
+                                         # labelangle="30",
+                                         # taillabel=f"{self.connections_ports[j][1]}"
+                                         ) - \
+                                    self.instances[i]
 
         # Clear both lists to have empty lists for every diagram creation to fix not seeing connections
         # when multiple diagrams are created
@@ -622,20 +647,24 @@ class BuildDiagram:
         tooltip = ""
 
         if element == "node":
-            tooltip = self.nodes_tooltip[node]
-            if self.nodes_tooltip[node] == "":
-                tooltip = f"Name: {self.nodes_text[node]}\n" \
-                          f"MAC-Address: {self.nodes_mac[node]}\n" \
-                          f"Modelnr: {self.nodes_modelnr[node]}\n" \
-                          f"Manufacturer: {self.nodes_manufactuer[node]}\n"
-
+            # tooltip = self.nodes_tooltip[node]
+            # if self.nodes_tooltip[node] == "":
+            tooltip = f"Name: {self.nodes_text[node]}\n" \
+                      f"MAC-Address: {self.nodes_mac[node]}\n" \
+                      f"Modelnr: {self.nodes_modelnr[node]}\n" \
+                      f"Manufacturer: {self.nodes_manufactuer[node]}\n" \
+                      f"Storage: {self.nodes_storage[node]}\n" \
+                      f"Tooltip: {self.nodes_tooltip[node]}\n" \
+ \
                 # Remove double and triple newlines and "names: " for the case when not all values are given
-                tooltip = tooltip.replace("\n\n\n", "\n") \
-                    .replace("\n\n", "\n") \
-                    .replace("Name: \n", "") \
-                    .replace("MAC-Address: \n", "") \
-                    .replace("Modelnr: \n", "") \
-                    .replace("Manufacturer: \n", "")
+            tooltip = tooltip.replace("\n\n\n", "\n") \
+                .replace("\n\n", "\n") \
+                .replace("Name: \n", "") \
+                .replace("MAC-Address: \n", "") \
+                .replace("Modelnr: \n", "") \
+                .replace("Manufacturer: \n", "") \
+                .replace("Storage: \n", "") \
+                .replace("Tooltip: \n", "")
 
         elif element == "group":
             # If no tooltip is given within the group, set the current name of the group as the tooltip
