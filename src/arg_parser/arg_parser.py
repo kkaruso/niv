@@ -175,7 +175,9 @@ class ArgParser:
             if os.path.isdir(path):
                 if path == ".":
                     path = path + "/"
-                return path + self.create_filename()
+                # Check if last character in path has '/' or '\' otherwise add it
+                return path + "/" + self.create_filename() if path[-1] != '/' and path[-1] != '\\' \
+                    else path + self.create_filename()
 
             # if path leads to a file
             if os.path.isfile(path):
