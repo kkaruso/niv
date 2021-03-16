@@ -141,9 +141,6 @@ class BuildDiagram:
         # Get the tooltip of each group
         self.group_tooltip = self.fill_dictionary("groups", "tooltip", "")
 
-        self.logger.log_debug(f"\nXs: {self.nodes_x}")
-        self.logger.log_debug(f"Ys: {self.nodes_y}\n")
-
         # Save each endpoint of a connection as a list
         self.connections_endpoints = []
         for i in range(0, len(self.yaml.get("connections"))):
@@ -264,45 +261,44 @@ class BuildDiagram:
                     print(log_message)
 
         # Create connections
-        for i, _ in enumerate(self.instances_keys):
-            # print(f"i:{i}, _:{_}")
-            for j, _ in enumerate(self.connections_endpoints):
-                # print(f"j:{j}, _:{_}")
-                if self.instances_keys[i] == self.connections_endpoints[j][0]:
-                    for k, _ in enumerate(self.instances_keys):
-                        # print(f"k:{k}, _:{_}")
-                        if self.connections_endpoints[j][1] == self.instances_keys[k]:
-                            # print("Yeeeehaaawwww")
+        for i, endpoints in enumerate(self.connections_endpoints):
+            first = endpoints[0]
+            second = endpoints[1]
 
-                            # Create tooltip for each connection
-                            tooltip = self.create_tooltip(element="connection", connection=j)
+            # Only create the connection if both endpoints are instanced as nodes
+            if first in self.instances_keys and second in self.instances_keys:
+                try:
+                    # Create tooltip for each connection
+                    tooltip = self.create_tooltip(element="connection", connection=i)
 
-                            if self.connections_visibility[j]:
-                                _ = self.instances[k] - \
-                                    Edge(color=f"{self.connections_color[j]}",
-                                         label=f"{self.connections_text[j]}",
-                                         labeltooltip=f"{self.connections_text[j]}",
-                                         penwidth=f"{self.connections_width[j]}",
-                                         edgetooltip=tooltip,
-                                         headlabel=f"{self.connections_ports[j][0]}",
-                                         labeldistance="3.5",
-                                         labelangle="30",
-                                         taillabel=f"{self.connections_ports[j][1]}"
-                                         ) - \
-                                    self.instances[i]
-                            else:
-                                _ = self.instances[k] - \
-                                    Edge(color=f"{self.connections_color[j]}",
-                                         label=f"{self.connections_text[j]}",
-                                         labeltooltip=f"{self.connections_text[j]}",
-                                         penwidth=f"{self.connections_width[j]}",
-                                         edgetooltip=tooltip,
-                                         # headlabel=f"{self.connections_ports[j][0]}",
-                                         # labeldistance="3.5",
-                                         # labelangle="30",
-                                         # taillabel=f"{self.connections_ports[j][1]}"
-                                         ) - \
-                                    self.instances[i]
+                    # Get index of first and second value to get the corresponding instances
+                    first_index = self.instances_keys.index(first)
+                    second_index = self.instances_keys.index(second)
+
+                    # If the "showports" parameter is set to true show ports next to connection
+                    if self.connections_visibility[i]:
+                        _ = self.instances[first_index] - \
+                            Edge(color=f"{self.connections_color[i]}",
+                                 label=f"{self.connections_text[i]}",
+                                 labeltooltip=f"{self.connections_text[i]}",
+                                 penwidth=f"{self.connections_width[i]}",
+                                 edgetooltip=tooltip) - \
+                            self.instances[second_index]
+                    else:
+                        _ = self.instances[first_index] - \
+                            Edge(color=f"{self.connections_color[i]}",
+                                 label=f"{self.connections_text[i]}",
+                                 labeltooltip=f"{self.connections_text[i]}",
+                                 penwidth=f"{self.connections_width[i]}",
+                                 edgetooltip=tooltip,
+                                 headlabel=f"{self.connections_ports[i][0]}",
+                                 labeldistance="3.5",
+                                 labelangle="30",
+                                 taillabel=f"{self.connections_ports[i][1]}"
+                                 ) - \
+                            self.instances[second_index]
+                except (ValueError, KeyError):
+                    pass
 
         # Clear both lists to have empty lists for every diagram creation to fix not seeing connections
         # when multiple diagrams are created
