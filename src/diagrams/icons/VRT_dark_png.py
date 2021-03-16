@@ -9,295 +9,295 @@ class _Vrt_Dark_DarkPng(_ICONS):
 
 
 class LaserScanner1DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "2dlaserscanner1.png"
+    _icon = "zweidlaserscanner1.png"
 
 
 class LaserScannerDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "2d laser scanner 2.png"
+    _icon = "zweidlaserscanner2.png"
 
 
 class LaserScanner5DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "3dlaserscanner1.png"
+    _icon = "dreidlaserscanner1.png"
 
 
 class LaserScanner4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "3d laser scanner 2.png"
+    _icon = "dreidlaserscanner2.png"
 
 
 class AegisDatacellCellularDataloggerDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "aegis datacell cellular datalogger 2.png"
+    _icon = "aegisdatacellcellulardatalogger2.png"
 
 
 class ApplianceDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "appliance 2.png"
+    _icon = "appliance2.png"
 
 
 class AtmSwitchDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "atm switch 1.png"
+    _icon = "atmswitch1.png"
 
 
 class AtmSwitch2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "atm switch 2.png"
+    _icon = "atmswitch2.png"
 
 
 class AuthenticationServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "authentication server 2.png"
+    _icon = "authenticationserver2.png"
 
 
 class CctvCamera2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "cctv camera 2.png"
+    _icon = "cctvcamera2.png"
 
 
 class CctvCamera4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "cctv camera 4.png"
+    _icon = "cctvcamera4.png"
 
 
 class CommunicationsServerDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "communications server.png"
+    _icon = "communicationsserver.png"
 
 
 class CompactPlc2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "compact plc 2.png"
+    _icon = "compactplc2.png"
 
 
 class DataAcquisitionScadaServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "data acquisition DarkPng(scada) server 2.png"
+    _icon = "dataacquisitionDarkPngscadaserver2.png"
 
 
 class DataLoggerRtu2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "data logger rtu 2.png"
+    _icon = "dataloggerrtu2.png"
 
 
 class DatabaseServerDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "database server 2.png"
+    _icon = "databaseserver2.png"
 
 
 class DesktopDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "desktop 2.png"
+    _icon = "desktop2.png"
 
 
 class Desktop2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "desktop 4.png"
+    _icon = "desktop4.png"
 
 
 class DialUpModemDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "dial-up modem 2.png"
+    _icon = "dialupmodem2.png"
 
 
 class DirectoryServerDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "directory server 2.png"
+    _icon = "directoryserver2.png"
 
 
 class DirectoryServer3DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "directory server.png"
+    _icon = "directoryserver.png"
 
 
 class DocumentScanner2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "document scanner 2.png"
+    _icon = "documentscanner2.png"
 
 
 class DocumentScanner4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "document scanner 4.png"
+    _icon = "documentscanner4.png"
 
 
 class DocumentScanner6DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "document scanner 6.png"
+    _icon = "documentscanner6.png"
 
 
 class DocumentScanner8DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "document scanner 8.png"
+    _icon = "documentscanner8.png"
 
 
 class EndUsers2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "end users 2.png"
+    _icon = "endusers2.png"
 
 
 class Facsimile2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "facsimile 2.png"
+    _icon = "facsimile2.png"
 
 
 class Facsimile4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "facsimile 4.png"
+    _icon = "facsimile4.png"
 
 
 class FibreOpticBreakOutTray2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "FibreOpticBreak-outTray2.png"
+    _icon = "FibreOpticBreakoutTray2.png"
 
 
 class FileServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "file server 2.png"
+    _icon = "fileserver2.png"
 
 
 class Firewall1DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "firewall 1.png"
+    _icon = "firewall1.png"
 
 
 class Firewall2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "firewall 2.png"
+    _icon = "firewall2.png"
 
 
 class FlatPanelDisplay2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "flat panel display 2.png"
+    _icon = "flatpaneldisplay2.png"
 
 
 class GenericBlackBox2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "generic black box 2.png"
+    _icon = "genericblackbox2.png"
 
 
 class GenericPlcDcsController2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "generic plc dcs controller 2.png"
+    _icon = "genericplcdcscontroller2.png"
 
 
 class Hub1DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "hub 1.png"
+    _icon = "hub1.png"
 
 
 class Hub2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "hub 2.png"
+    _icon = "hub2.png"
 
 
 class IndustrialBarcodeScanner2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "industrial barcode scanner 2.png"
+    _icon = "industrialbarcodescanner2.png"
 
 
 class IndustrialBarcodeScanner4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "industrial barcode scanner 4.png"
+    _icon = "industrialbarcodescanner4.png"
 
 
 class IndustrialCellularModem2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "industrial cellular modem 2.png"
+    _icon = "industrialcellularmodem2.png"
 
 
 class IndustrialCellularModem4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "industrial cellular modem 4.png"
+    _icon = "industrialcellularmodem4.png"
 
 
 class IndustrialEthernetToSerialConverter2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "industrial ethernet to serial converter 2.png"
+    _icon = "industrialethernettoserialconverter2.png"
 
 
 class IndustrialFibreToEthernetConverter2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "industrial fibre to ethernet converter 2.png"
+    _icon = "industrialfibretoethernetconverter2.png"
 
 
 class IndustrialPc2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "industrial pc 2.png"
+    _icon = "industrialpc2.png"
 
 
 class IndustrialPc4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "industrial pc 4.png"
+    _icon = "industrialpc4.png"
 
 
 class IndustrialSwitch2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "industrial switch 2.png"
+    _icon = "industrialswitch2.png"
 
 
 class InkjetPrinter2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "inkjet printer 2.png"
+    _icon = "inkjetprinter2.png"
 
 
 class InkjetPrinter4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "inkjet printer 4.png"
+    _icon = "inkjetprinter4.png"
 
 
 class Laptop2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "laptop 2.png"
+    _icon = "laptop2.png"
 
 
 class Laptop4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "laptop 4.png"
+    _icon = "laptop4.png"
 
 
 class LargeHmiPanel2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "large hmi panel 2.png"
+    _icon = "largehmipanel2.png"
 
 
 class LaserPrinter2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "laser printer 2.png"
+    _icon = "laserprinter2.png"
 
 
 class LaserPrinter4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "laser printer 4.png"
+    _icon = "laserprinter4.png"
 
 
 class LeadAcidBattery2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "lead-acid battery 2.png"
+    _icon = "leadacidbattery2.png"
 
 
 class MailServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "mail server 2.png"
+    _icon = "mailserver2.png"
 
 
 class MicrowaveSatelliteBase2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "microwave satellite base 2.png"
+    _icon = "microwavesatellitebase2.png"
 
 
 class MultiRoleServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "multi-role server 2.png"
+    _icon = "multiroleserver2.png"
 
 
 class NetworkAttachedStorage2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "network attached storage 2.png"
+    _icon = "networkattachedstorage2.png"
 
 
 class Projector2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "projector 2.png"
+    _icon = "projector2.png"
 
 
 class RackServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "rack server 2.png"
+    _icon = "rackserver2.png"
 
 
 class RackmountSwitch2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "rackmount switch 2.png"
+    _icon = "rackmountswitch2.png"
 
 
 class RoleEmblemAuthenticationDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - authentication.png"
+    _icon = "roleemblemauthentication.png"
 
 
 class RoleEmblemDataAcquisitionScadaDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - data acquisition DarkPng(scada).png"
+    _icon = "roleemblemdataacquisitionDarkPngscada.png"
 
 
 class RoleEmblemDatabaseDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - database.png"
+    _icon = "roleemblemdatabase.png"
 
 
 class RoleEmblemDirectoryDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - directory.png"
+    _icon = "roleemblemdirectory.png"
 
 
 class RoleEmblemFileDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - file.png"
+    _icon = "roleemblemfile.png"
 
 
 class RoleEmblemMailDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - mail.png"
+    _icon = "roleemblemmail.png"
 
 
 class RoleEmblemVideoDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - video.png"
+    _icon = "roleemblemvideo.png"
 
 
 class RoleEmblemVirtualisationObjectDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - virtualisation object.png"
+    _icon = "roleemblemvirtualisationobject.png"
 
 
 class RoleEmblemVirtualisationDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - virtualisation.png"
+    _icon = "roleemblemvirtualisation.png"
 
 
 class RoleEmblemWebDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "role emblem - web.png"
+    _icon = "roleemblemweb.png"
 
 
 class Router2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "router 2.png"
+    _icon = "router2.png"
 
 
 class RouterFirewallDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "router firewall.png"
+    _icon = "routerfirewall.png"
 
 
 class RouterDarkPng(_Vrt_Dark_DarkPng):
@@ -305,194 +305,194 @@ class RouterDarkPng(_Vrt_Dark_DarkPng):
 
 
 class ServerRackOpenDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "server rack - open.png"
+    _icon = "serverrackopen.png"
 
 
 class ServerRackDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "server rack.png"
+    _icon = "serverrack.png"
 
 
 class SinglePhaseEnergyMeter2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "single-phase energy meter 2.png"
+    _icon = "singlephaseenergymeter2.png"
 
 
 class SmallHmiPanel2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "small hmi panel 2.png"
+    _icon = "smallhmipanel2.png"
 
 
 class SmallTouchPanel2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "small touch panel 2.png"
+    _icon = "smalltouchpanel2.png"
 
 
 class Smartphone2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "smartphone 2.png"
+    _icon = "smartphone2.png"
 
 
 class Smartphone4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "smartphone 4.png"
+    _icon = "smartphone4.png"
 
 
 class Switch1DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "switch 1.png"
+    _icon = "switch1.png"
 
 
 class Switch2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "switch 2.png"
+    _icon = "switch2.png"
 
 
 class Tablet2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "tablet 2.png"
+    _icon = "tablet2.png"
 
 
 class Tablet4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "tablet 4.png"
+    _icon = "tablet4.png"
 
 
 class Telephone2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "telephone 2.png"
+    _icon = "telephone2.png"
 
 
 class Telephone4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "telephone 4.png"
+    _icon = "telephone4.png"
 
 
 class ThinClient2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "thin client 2.png"
+    _icon = "thinclient2.png"
 
 
 class ThinClient4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "thin client 4.png"
+    _icon = "thinclient4.png"
 
 
 class ThreePhaseEnergyMeter2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "three-phase energy meter 2.png"
+    _icon = "threephaseenergymeter2.png"
 
 
 class ThreePhaseMultiFunctionMeter2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "three-phase multi-function meter 2.png"
+    _icon = "threephasemultifunctionmeter2.png"
 
 
 class ThreePhasePowerQualityAnalyser2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "three-phase power quality analyser 2.png"
+    _icon = "threephasepowerqualityanalyser2.png"
 
 
 class TowerServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "tower server 2.png"
+    _icon = "towerserver2.png"
 
 
 class UnifiedCommunicationsServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "unified communications server 2.png"
+    _icon = "unifiedcommunicationsserver2.png"
 
 
 class UninterruptiblePowerSupplyUps2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "uninterruptible power supply DarkPng(ups) 2.png"
+    _icon = "uninterruptiblepowersupplyDarkPngups2.png"
 
 
 class UsbKeyDongle1DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "usb key dongle 1.png"
+    _icon = "usbkeydongle1.png"
 
 
 class UsbKeyDongle2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "usb key dongle 2.png"
+    _icon = "usbkeydongle2.png"
 
 
 class UsbKeyDongle3DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "usb key dongle 3.png"
+    _icon = "usbkeydongle3.png"
 
 
 class UsbKeyDongle4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "usb key dongle 4.png"
+    _icon = "usbkeydongle4.png"
 
 
 class UsbKeyDongle5DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "usb key dongle 5.png"
+    _icon = "usbkeydongle5.png"
 
 
 class UsbKeyDongle6DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "usb key dongle 6.png"
+    _icon = "usbkeydongle6.png"
 
 
 class UsbKeyDongle7DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "usb key dongle 7.png"
+    _icon = "usbkeydongle7.png"
 
 
 class UsbKeyDongle8DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "usb key dongle 8.png"
+    _icon = "usbkeydongle8.png"
 
 
 class VideoServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "video server 2.png"
+    _icon = "videoserver2.png"
 
 
 class VideoWallCubeDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "video wall cube.png"
+    _icon = "videowallcube.png"
 
 
 class VideoWallDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "video wall.png"
+    _icon = "videowall.png"
 
 
 class VirtualisationObjectServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "virtualisation object server 2.png"
+    _icon = "virtualisationobjectserver2.png"
 
 
 class VirtualisationServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "virtualisation server 2.png"
+    _icon = "virtualisationserver2.png"
 
 
 class VpnConcentrator1DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "vpn concentrator 1.png"
+    _icon = "vpnconcentrator1.png"
 
 
 class VpnConcentrator2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "vpn concentrator 2.png"
+    _icon = "vpnconcentrator2.png"
 
 
 class WagesHubASeries2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wages hub a series 2.png"
+    _icon = "wageshubaseries2.png"
 
 
 class WebServer2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "web server 2.png"
+    _icon = "webserver2.png"
 
 
 class WiredSegmentInternetDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wired segment DarkPng(internet).png"
+    _icon = "wiredsegmentDarkPnginternet.png"
 
 
 class WiredSegmentSubnetDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wired segment DarkPng(subnet).png"
+    _icon = "wiredsegmentDarkPngsubnet.png"
 
 
 class WirelessAccessPoint1DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wireless access point 1.png"
+    _icon = "wirelessaccesspoint1.png"
 
 
 class WirelessAccessPoint2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wireless access point 2.png"
+    _icon = "wirelessaccesspoint2.png"
 
 
 class WirelessBase2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wireless base 2.png"
+    _icon = "wirelessbase2.png"
 
 
 class WirelessRouterAccessPoint2DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wireless router access point 2.png"
+    _icon = "wirelessrouteraccesspoint2.png"
 
 
 class WirelessRouterAccessPoint4DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wireless router access point 4.png"
+    _icon = "wirelessrouteraccesspoint4.png"
 
 
 class WirelessRouterFirewallDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wireless router firewall.png"
+    _icon = "wirelessrouterfirewall.png"
 
 
 class WirelessRouterDarkPng(_Vrt_Dark_DarkPng):
-    _icon = "wireless router.png"
+    _icon = "wirelessrouter.png"
 
 
 class WorkgroupSwitch3DarkPng(_Vrt_Dark_DarkPng):
-    _icon = "workgroup switch 2.png"
+    _icon = "workgroupswitch2.png"
 
 # Aliases
