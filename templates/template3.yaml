@@ -17,24 +17,24 @@ title: # Text underneath the diagram.
 
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
-  pc1: {icon: Pc, text: PC1, ip: 172.19.176.131, x: -3, y: 3 }
-  pc2: {icon: Pc, text: PC2, ip: 172.19.176.132, x: -3, y: 2 }
-  pc3: {icon: Pc, text: PC3, ip: 172.19.176.133, x: -3, y: 1 }
-  pc4: {icon: Pc, text: PC4, ip: 172.19.176.134, x: -3, y: 0 }
-  pc5: {icon: Pc, text: PC5, ip: 172.19.176.135, x: -3, y: -1 }
-  pc6: {icon: Pc, text: PC6, ip: 172.19.176.136, x: -3, y: -2 }
-  switch1: {icon: WorkgroupSwitch, text: Work group Switch, x: 4, y: 0}
-  router1: {icon: Router, text: Router1, x: 5, y: 0 }
-  switch2: {icon: VoiceAtmSwitch, text: Work group Switch 2, x: 10, y: 0}
-  atmrouter1: {icon: AtmRouter, text: Atm Router1, x: 7, y: 2 }
-  atmrouter2: {icon: AtmRouter, text: Atm Router2, x: 7, y: 1 }
-  atmrouter3: {icon: AtmRouter, text: Atm Router3, x: 7, y: -1 }
-  atmrouter4: {icon: AtmRouter, text: Atm Router4, x: 7, y: -2 }
-  prozessor1: {icon: RouteSwitchProcessor, text: Prozessor, x: 11, y: 0}
-  server1: {icon: FileServer, text: DHCP/DNS/TFTP, x: 12, y: 9}
-  cloud1: {icon: Cloud, text: Cloud, x: -5, y: 3}
-  laptop1: {icon: Laptop, text: Laptop, x: -5, y: 2}
-  vpn1: {icon: Vsvgateway, text: VPN Gateway, x: -4, y: 2}
+  pc1: {icon: Pc, name: PC1, ip: 172.19.176.131, x: -3, y: 3 }
+  pc2: {icon: Pc, name: PC2, ip: 172.19.176.132, x: -3, y: 2 }
+  pc3: {icon: Pc, name: PC3, ip: 172.19.176.133, x: -3, y: 1 }
+  pc4: {icon: Pc, name: PC4, ip: 172.19.176.134, x: -3, y: 0 }
+  pc5: {icon: Pc, name: PC5, ip: 172.19.176.135, x: -3, y: -1 }
+  pc6: {icon: Pc, name: PC6, ip: 172.19.176.136, x: -3, y: -2 }
+  switch1: {icon: WorkgroupSwitch, name: Work group Switch, x: 4, y: 0}
+  router1: {icon: Router, name: Router1, x: 5, y: 0 }
+  switch2: {icon: VoiceAtmSwitch, name: Work group Switch 2, x: 10, y: 0}
+  atmrouter1: {icon: AtmRouter, name: Atm Router1, x: 7, y: 2 }
+  atmrouter2: {icon: AtmRouter, name: Atm Router2, x: 7, y: 1 }
+  atmrouter3: {icon: AtmRouter, name: Atm Router3, x: 7, y: -1 }
+  atmrouter4: {icon: AtmRouter, name: Atm Router4, x: 7, y: -2 }
+  prozessor1: {icon: RouteSwitchProcessor, name: Prozessor, x: 11, y: 0}
+  server1: {icon: FileServer, name: DHCP/DNS/TFTP, x: 12, y: 9}
+  cloud1: {icon: Cloud, name: Cloud, x: -5, y: 3}
+  laptop1: {icon: Laptop, name: Laptop, x: -5, y: 2}
+  vpn1: {icon: Vsvgateway, name: VPN Gateway, x: -4, y: 2}
 
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints

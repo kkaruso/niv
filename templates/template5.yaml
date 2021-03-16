@@ -22,56 +22,56 @@ groupDefaults: &groupDefaults #Use current values as defaults
 
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
-  cloud1: {icon: Cloud, text: Internet, x: 24, y: 26}
-  router1: { icon: RouterFirewall, text: Router Firewall, x: 24, y: 22 }
-  core-Switch1:  {icon: SafeharborIcon, text: core-Switch 1, x: 22, y: 18 }
-  core-Switch2:  {icon: SafeharborIcon, text: core-Switch 2, x: 26, y: 18 }
-  spine-Switch1: {icon: SafeharborIcon, text: spine-Switch 1, x: 18, y: 12 }
-  spine-Switch2: {icon: SafeharborIcon, text: spine-Switch 2, x: 22, y: 12 }
-  spine-Switch3: {icon: SafeharborIcon, text: spine-Switch 3, x: 26, y: 12 }
-  spine-Switch4: {icon: SafeharborIcon, text: spine-Switch 4, x: 30, y: 12 }
-  switch1: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 1, y: 6 }
-  switch2: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 4, y: 6 }
-  switch3: { icon: WorkgroupSwitch, text: Work group Switch c3, x: 11, y: 6 }
-  switch4: { icon: WorkgroupSwitch, text: Work group Switch c4, x: 14, y: 6 }
-  switch5: { icon: WorkgroupSwitch, text: Work group Switch c5, x: 21, y: 6 }
-  switch6: { icon: WorkgroupSwitch, text: Work group Switch c6, x: 24, y: 6 }
-  switch7: { icon: WorkgroupSwitch, text: Work group Switch c7, x: 31, y: 6 }
-  switch8: { icon: WorkgroupSwitch, text: Work group Switch c8, x: 34, y: 6 }
+  cloud1: {icon: Cloud, name: Internet, x: 24, y: 26}
+  router1: { icon: RouterFirewall, name: Router Firewall, x: 24, y: 22 }
+  core-Switch1:  {icon: SafeharborIcon, name: core-Switch 1, x: 22, y: 18 }
+  core-Switch2:  {icon: SafeharborIcon, name: core-Switch 2, x: 26, y: 18 }
+  spine-Switch1: {icon: SafeharborIcon, name: spine-Switch 1, x: 18, y: 12 }
+  spine-Switch2: {icon: SafeharborIcon, name: spine-Switch 2, x: 22, y: 12 }
+  spine-Switch3: {icon: SafeharborIcon, name: spine-Switch 3, x: 26, y: 12 }
+  spine-Switch4: {icon: SafeharborIcon, name: spine-Switch 4, x: 30, y: 12 }
+  switch1: { icon: WorkgroupSwitch, name: Work group Switch c1, x: 1, y: 6 }
+  switch2: { icon: WorkgroupSwitch, name: Work group Switch c2, x: 4, y: 6 }
+  switch3: { icon: WorkgroupSwitch, name: Work group Switch c3, x: 11, y: 6 }
+  switch4: { icon: WorkgroupSwitch, name: Work group Switch c4, x: 14, y: 6 }
+  switch5: { icon: WorkgroupSwitch, name: Work group Switch c5, x: 21, y: 6 }
+  switch6: { icon: WorkgroupSwitch, name: Work group Switch c6, x: 24, y: 6 }
+  switch7: { icon: WorkgroupSwitch, name: Work group Switch c7, x: 31, y: 6 }
+  switch8: { icon: WorkgroupSwitch, name: Work group Switch c8, x: 34, y: 6 }
 
-  switch10: { icon: WorkgroupSwitch, text: Work group Switch c10, x: 41, y: 6 }
-  switch11: { icon: WorkgroupSwitch, text: Work group Switch c11, x: 51, y: 6 }
-  switch12: { icon: WorkgroupSwitch, text: Work group Switch c12, x: 54, y: 6 }
+  switch10: { icon: WorkgroupSwitch, name: Work group Switch c10, x: 41, y: 6 }
+  switch11: { icon: WorkgroupSwitch, name: Work group Switch c11, x: 51, y: 6 }
+  switch12: { icon: WorkgroupSwitch, name: Work group Switch c12, x: 54, y: 6 }
 
-  server1: { icon: FileServer, text: Server 1, x: 0, y: 2 }
-  server2: { icon: FileServer, text: Server 2, x: 2, y: 2 }
-  server3: { icon: FileServer, text: Server 3, x: 4, y: 2 }
-  server4: { icon: FileServer, text: Server 4, x: 6, y: 2 }
-  server5: { icon: FileServer, text: Server 5, x: 10, y: 2 }
-  server6: { icon: FileServer, text: Server 6, x: 12, y: 2 }
+  server1: { icon: FileServer, name: Server 1, x: 0, y: 2 }
+  server2: { icon: FileServer, name: Server 2, x: 2, y: 2 }
+  server3: { icon: FileServer, name: Server 3, x: 4, y: 2 }
+  server4: { icon: FileServer, name: Server 4, x: 6, y: 2 }
+  server5: { icon: FileServer, name: Server 5, x: 10, y: 2 }
+  server6: { icon: FileServer, name: Server 6, x: 12, y: 2 }
 
-  server9: { icon: FileServer, text: Server 9, x: 20, y: 2 }
-  server10: { icon: FileServer, text: Server 10, x: 22, y: 2 }
-  server11: { icon: FileServer, text: Server 11, x: 24, y: 2 }
-  server12: { icon: FileServer, text: Server 12, x: 26, y: 2 }
-  server13: { icon: FileServer, text: Server 1, x: 30, y: 2 }
-  server14: { icon: FileServer, text: Server 2, x: 32, y: 2 }
-  server15: { icon: FileServer, text: Server 3, x: 34, y: 2 }
+  server9: { icon: FileServer, name: Server 9, x: 20, y: 2 }
+  server10: { icon: FileServer, name: Server 10, x: 22, y: 2 }
+  server11: { icon: FileServer, name: Server 11, x: 24, y: 2 }
+  server12: { icon: FileServer, name: Server 12, x: 26, y: 2 }
+  server13: { icon: FileServer, name: Server 1, x: 30, y: 2 }
+  server14: { icon: FileServer, name: Server 2, x: 32, y: 2 }
+  server15: { icon: FileServer, name: Server 3, x: 34, y: 2 }
 
-  server17: { icon: FileServer, text: Server 5, x: 40, y: 2 }
-  server18: { icon: FileServer, text: Server 6, x: 42, y: 2 }
-  server19: { icon: FileServer, text: Server 7, x: 44, y: 2 }
-  server20: { icon: FileServer, text: Server 8, x: 46, y: 2 }
-  server21: { icon: FileServer, text: Server 9, x: 50, y: 2 }
-  server22: { icon: FileServer, text: Server 10, x: 52, y: 2 }
-  server23: { icon: FileServer, text: Server 11, x: 54, y: 2 }
-  printer1: {icon: Printer, text: Printer1, x: 1, y: 9 }
-  scanner1: {icon: Scanner, text: Scanner1, x: 5, y: 9 }
-  pc1: { icon: Pc, text: Pc 1, x: 51, y: 10 }
-  laptop1: { icon: Laptop, text: Laptop 1, x: 44, y: 10 }
-  db1: { icon: OsaDatabase, text: MySQL Database, ip: 192.164.41.3333, x: 45, y: 18, mac: 00:0a:95:9d:68:16, modelnr: 133742069, manufacturer: HP }
-  laptop2: {icon: OsaLaptop, text: Laptop 2, x: 8, y: 9 }
-  serverWeb1: { icon: OsaServerWeb, text: My WebServer, x: 15, y: 2 }
+  server17: { icon: FileServer, name: Server 5, x: 40, y: 2 }
+  server18: { icon: FileServer, name: Server 6, x: 42, y: 2 }
+  server19: { icon: FileServer, name: Server 7, x: 44, y: 2 }
+  server20: { icon: FileServer, name: Server 8, x: 46, y: 2 }
+  server21: { icon: FileServer, name: Server 9, x: 50, y: 2 }
+  server22: { icon: FileServer, name: Server 10, x: 52, y: 2 }
+  server23: { icon: FileServer, name: Server 11, x: 54, y: 2 }
+  printer1: {icon: Printer, name: Printer1, x: 1, y: 9 }
+  scanner1: {icon: Scanner, name: Scanner1, x: 5, y: 9 }
+  pc1: { icon: Pc, name: Pc 1, x: 51, y: 10 }
+  laptop1: { icon: Laptop, name: Laptop 1, x: 44, y: 10 }
+  db1: { icon: OsaDatabase, name: MySQL Database, ip: 192.164.41.3333, x: 45, y: 18, mac: 00:0a:95:9d:68:16, modelnr: 133742069, manufacturer: HP }
+  laptop2: {icon: OsaLaptop, name: Laptop 2, x: 8, y: 9 }
+  serverWeb1: { icon: OsaServerWeb, name: My WebServer, x: 15, y: 2 }
 
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
 

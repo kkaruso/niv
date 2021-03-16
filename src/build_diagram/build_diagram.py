@@ -78,53 +78,55 @@ class BuildDiagram:
         self.nodes_icon = self.fill_dictionary("nodes", "icon", "")
 
         # Get text of each node
-        self.nodes_text = self.fill_dictionary("nodes", "text", self.yaml_defaults.get('icons').get(
-            'text') or "node")
+        self.nodes_name = self.fill_dictionary("nodes", "name", self.yaml_defaults.get('nodes').get(
+            'name') or "Node")
 
         # Get Ports-number of each switch default = 24
-        self.switch_ports = self.fill_dictionary("nodes", "ports", "24")
+        self.switch_ports = self.fill_dictionary("nodes", "ports", self.yaml_defaults.get('nodes').get(
+            'ports') or 24)
 
         # Get if type switch of each nodes
-        self.switch_type = self.fill_dictionary("nodes", "switch-view", False)
+        self.switch_type = self.fill_dictionary("nodes", "switch-view", self.yaml_defaults.get('nodes').get(
+            'switch-view') or False)
 
         # Get ip of each node
-        self.nodes_ip = self.fill_dictionary("nodes", "ip", self.yaml_defaults.get('icons').get(
+        self.nodes_ip = self.fill_dictionary("nodes", "ip", self.yaml_defaults.get('nodes').get(
             'ip') or "")
 
         # Get port of each node
-        self.nodes_port = self.fill_dictionary("nodes", "port", self.yaml_defaults.get('icons').get(
+        self.nodes_port = self.fill_dictionary("nodes", "port", self.yaml_defaults.get('nodes').get(
             'port') or "")
 
         # Get the URL of each node, clear empty URLs
-        self.nodes_url = self.fill_dictionary("nodes", "url", self.yaml_defaults.get('icons').get(
+        self.nodes_url = self.fill_dictionary("nodes", "url", self.yaml_defaults.get('nodes').get(
             'url') or "")
 
         # Get the tooltip of each node
-        self.nodes_tooltip = self.fill_dictionary("nodes", "tooltip", self.yaml_defaults.get('icons').get(
+        self.nodes_tooltip = self.fill_dictionary("nodes", "tooltip", self.yaml_defaults.get('nodes').get(
             'tooltip') or "")
 
         # Get mac addresses of each node
-        self.nodes_mac = self.fill_dictionary("nodes", "mac", self.yaml_defaults.get('icons').get(
+        self.nodes_mac = self.fill_dictionary("nodes", "mac", self.yaml_defaults.get('nodes').get(
             'mac') or "")
 
         # Get model number of each node
-        self.nodes_modelnr = self.fill_dictionary("nodes", "modelnr", self.yaml_defaults.get('icons').get(
+        self.nodes_modelnr = self.fill_dictionary("nodes", "modelnr", self.yaml_defaults.get('nodes').get(
             'modelnr') or "")
 
         # Get manufacturer of each node
-        self.nodes_manufactuer = self.fill_dictionary("nodes", "manufacturer", self.yaml_defaults.get('icons').get(
+        self.nodes_manufactuer = self.fill_dictionary("nodes", "manufacturer", self.yaml_defaults.get('nodes').get(
             'manufacturer') or "")
 
         # Get storage information of each node
-        self.nodes_storage = self.fill_dictionary("nodes", "storage", self.yaml_defaults.get('icons').get(
+        self.nodes_storage = self.fill_dictionary("nodes", "storage", self.yaml_defaults.get('nodes').get(
             'storage') or "")
 
         # Get X coordinate of each node
-        self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('icons').get(
+        self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('nodes').get(
             'x') or 0)
 
         # Get Y coordinate of each node
-        self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('icons').get(
+        self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('nodes').get(
             'y') or 0)
 
         # Get name of each group
@@ -224,7 +226,7 @@ class BuildDiagram:
                 members.append(member)
 
         # If a node is not a member of a group, create it outside of a cluster
-        for node in self.nodes_text:
+        for node in self.nodes_name:
             if node not in members:
                 self.create_single_node(node, self.graph_layout, True)
 
@@ -254,7 +256,7 @@ class BuildDiagram:
         # Check if any endpoints are not given in 'nodes', if not print an error
         for connection in self.connections_endpoints:
             for endpoint in connection:
-                if endpoint not in self.nodes_text and error:
+                if endpoint not in self.nodes_name and error:
                     # Avoid printing the same error message multiple times, just because we call the same function
                     # various times while creating more than 1 diagram
                     log_message = f"KeyError in {self.load_path}: '{endpoint}' is not given in 'nodes', that's why it" \
@@ -382,46 +384,47 @@ class BuildDiagram:
                 with Cluster(self.yaml.get("groups").get(i).get("name"), graph_attr=clustr_attr):
                     switches_nodes = {}
                     intent_con_ports = {}
-                    inEtherPort = {}
-                    outEtherPort = {}
+                    in_ether_port = {}
+                    out_ether_port = {}
                     switches_in_group = []
 
                     for member in list(self.group_members.get(i)):
                         intent_con_ports[member] = 0
-                        inEtherPort[member] = 0
-                        outEtherPort[member] = 0
+                        in_ether_port[member] = 0
+                        out_ether_port[member] = 0
                     # find out how many connections are inside each group
                     for member in list(self.group_members.get(i)):
-                        inEthernet = 0
-                        ethBetweenSwitches = 0
+                        in_ethernet = 0
+                        eth_between_switches = 0
                         for membr in self.group_members.get(i):
+                            print(f"member: {member}, membr: {membr}")
                             for endpoint in range(0, len(self.connections_endpoints)):
                                 if membr == self.connections_endpoints[endpoint][0]:
                                     if self.connections_endpoints[endpoint][1] == member:
                                         if not self.switch_type[membr]:
-                                            inEthernet = inEthernet + 1
+                                            in_ethernet = in_ethernet + 1
                                         else:
-                                            ethBetweenSwitches = ethBetweenSwitches + 1
+                                            eth_between_switches = eth_between_switches + 1
                                             intent_con_ports[membr] = intent_con_ports[membr] + 1
-                                            inEthernet = inEthernet + 1
-                        inEtherPort[member] = inEthernet
+                                            in_ethernet = in_ethernet + 1
+                        in_ether_port[member] = in_ethernet
                     for member in list(self.group_members.get(i)):
-                        groupsDiagrams = []
+                        groups_diagrams = []
                         # create a list of switches with switch-view for each group
                         if self.switch_type[member]:
                             switches_in_group.append(member)
                             switch_nodes = []
                             # How many ethernet ports are going outside the group ?
                             for _, switch in enumerate(switches_in_group):
-                                outEther = 0
+                                out_ether = 0
                                 for __ in range(len(self.connections_endpoints)):
                                     if switch in self.connections_endpoints[__]:
                                         if self.connections_endpoints[__][0] not in self.group_members.get(i):
-                                            outEther += 1
+                                            out_ether += 1
                                         if self.connections_endpoints[__][1] not in self.group_members.get(i):
-                                            outEther += 1
+                                            out_ether += 1
 
-                            outEtherPort[member] = outEther
+                            out_ether_port[member] = out_ether
 
                             # read url for each port and save it in a list
                             for __ in range(len(self.connections_endpoints)):
@@ -435,7 +438,7 @@ class BuildDiagram:
                                             # and add it to the list
                                             if group_member in self.connections_endpoints[__]:
                                                 if member not in self.group_members.get(group):
-                                                    groupsDiagrams.append(group)
+                                                    groups_diagrams.append(group)
 
                                 # if member == self.connections_endpoints[__][0]:
                                 #     for o in self.yaml.get("groups"):
@@ -451,9 +454,9 @@ class BuildDiagram:
                                 #                     groupsDiagrams.append(o)
 
                             # create the ports with the colored icons for every single switch
-                            self.create_switch(self.switch_ports[member], self.nodes_text[member], switch_nodes,
-                                               inEtherPort[member] + intent_con_ports[member], outEtherPort[member],
-                                               groupsDiagrams)
+                            self.create_switch(self.switch_ports[member], self.nodes_name[member], switch_nodes,
+                                               in_ether_port[member] + intent_con_ports[member], out_ether_port[member],
+                                               groups_diagrams)
                             switches_nodes[member] = switch_nodes
                         else:
                             # Create other devices except switches
@@ -471,20 +474,20 @@ class BuildDiagram:
                                 # check if group_member is in endpoints at [0]
                                 if membr == self.connections_endpoints[endpoint][0]:
                                     # iterate through switches
-                                    for endEth in switches_in_group:
+                                    for end_eth in switches_in_group:
                                         # check if the other endpoint is a switch
-                                        if self.connections_endpoints[endpoint][1] == endEth:
-                                            eths = switches_nodes.get(endEth)
+                                        if self.connections_endpoints[endpoint][1] == end_eth:
+                                            eths = switches_nodes.get(end_eth)
                                             if membr in switches_in_group:
                                                 ets = switches_nodes.get(membr)
                                                 _ = ets[counter_for_eth_in_switch[membr]] - eths[
-                                                    counter_for_eth_in_switch[endEth]]
-                                                counter_for_eth_in_switch[endEth] += 1
+                                                    counter_for_eth_in_switch[end_eth]]
+                                                counter_for_eth_in_switch[end_eth] += 1
                                                 counter_for_eth_in_switch[membr] += 1
                                             else:
-                                                _ = eths[counter_for_eth_in_switch[endEth]] - self.instances[
-                                                    counter_for_eth_in_switch[endEth]]
-                                                counter_for_eth_in_switch[endEth] += 1
+                                                _ = eths[counter_for_eth_in_switch[end_eth]] - self.instances[
+                                                    counter_for_eth_in_switch[end_eth]]
+                                                counter_for_eth_in_switch[end_eth] += 1
                     self.create_connections(True)
                     self.instances.clear()
 
@@ -497,12 +500,17 @@ class BuildDiagram:
 
         :return: Title of diagram
         """
-        _dict = {"Title": self.set_variables("title", "text", "Diagram"),
-                 "Description": self.set_variables("title", "subText", ""),
-                 "Author": self.set_variables("title", "author", ""),
+        _dict = {"Title": self.set_variables("title", "text", self.yaml_defaults.get('title').get(
+                     'text') or "Diagram"),
+                 "Description": self.set_variables("title", "subText", self.yaml_defaults.get('title').get(
+                     'subText') or ""),
+                 "Author": self.set_variables("title", "author", self.yaml_defaults.get('title').get(
+                     'author') or ""),
                  "Date": self.set_variables("title", "date", datetime.today().strftime('%d.%m.%Y')),
-                 "Company": self.set_variables("title", "company", ""),
-                 "Version": self.set_variables("title", "version", 1.0)}
+                 "Company": self.set_variables("title", "company", self.yaml_defaults.get('title').get(
+                     'company') or ""),
+                 "Version": self.set_variables("title", "version", self.yaml_defaults.get('title').get(
+                     'version') or 1.0)}
         title = ""
         for item in _dict:
             if _dict[item] != "":
@@ -611,16 +619,16 @@ class BuildDiagram:
         # Counter checks how many diagrams have been created thus far
         if self.detail_level == 0:
             if self.counter == 1:
-                node_text = f"\n{self.nodes_text[node]}\n"
+                node_text = f"\n{self.nodes_name[node]}\n"
             else:
-                node_text = f"\n{self.nodes_text[node]}\n" \
+                node_text = f"\n{self.nodes_name[node]}\n" \
                             f" {self.nodes_ip[node]}\n"
         # Detail level 1 shows text and IP's
         elif self.detail_level == 1:
-            node_text = f"\n{self.nodes_text[node]}\n"
+            node_text = f"\n{self.nodes_name[node]}\n"
         # Detail level 2 shows text, IP's and Ports
         else:
-            node_text = f"\n{self.nodes_text[node]}\n" \
+            node_text = f"\n{self.nodes_name[node]}\n" \
                         f" {self.nodes_ip[node]}\n"
 
         # Remove double newlines for the case when port is given but no url
@@ -718,7 +726,7 @@ class BuildDiagram:
         if element == "node":
             # tooltip = self.nodes_tooltip[node]
             # if self.nodes_tooltip[node] == "":
-            tooltip = f"Name: {self.nodes_text[node]}\n" \
+            tooltip = f"Name: {self.nodes_name[node]}\n" \
                       f"MAC-Address: {self.nodes_mac[node]}\n" \
                       f"Modelnr: {self.nodes_modelnr[node]}\n" \
                       f"Manufacturer: {self.nodes_manufactuer[node]}\n" \
@@ -747,13 +755,13 @@ class BuildDiagram:
             first_port = self.connections_ports[connection][0]
             second_port = self.connections_ports[connection][1]
 
-            tooltip_without_port = f"{self.nodes_text[second_endpoint]} " \
+            tooltip_without_port = f"{self.nodes_name[second_endpoint]} " \
                                    f"<---> " \
-                                   f"{self.nodes_text[first_endpoint]}"
+                                   f"{self.nodes_name[first_endpoint]}"
 
-            tooltip_with_port = f"{self.nodes_text[second_endpoint]} (Port: {second_port}) " \
+            tooltip_with_port = f"{self.nodes_name[second_endpoint]} (Port: {second_port}) " \
                                 f"<---> " \
-                                f"{self.nodes_text[first_endpoint]} (Port: {first_port})"
+                                f"{self.nodes_name[first_endpoint]} (Port: {first_port})"
 
             # If a tooltip is given within the connections, set it as the tooltip
             tooltip = self.connections_tooltip[connection]
@@ -783,18 +791,24 @@ class BuildDiagram:
     def create_switch(self, ports, name, nodes, busy, out, url):
         """
         function create switches as busy or free
+
+        :param url:
+        :param out:
         :param ports: how many ports to create
         :param name: the name of the switch
         :param nodes: empty list to fill with the created switches
         :param busy: how many busy nodes to create
         """
+        if busy + out > ports:
+            ports = busy + out
+
         with Cluster(name):
             if ports % 2:
-                r = (ports - 1) / 2
-                raw = int(r)
+                raw = (ports - 1) / 2
+                raw = int(raw)
             else:
-                r = ports / 2
-                raw = int(r)
+                raw = ports / 2
+                raw = int(raw)
             # create busy ports
             for k in range(0, busy):
                 nodes.append(OsaEthernetBusy(f"eth{k + 1}"))
@@ -802,17 +816,27 @@ class BuildDiagram:
             # create Free ports
             for k in range(busy, out + busy):
                 if not url:
-                    nodes.append(OsaEthernetCable(f"eth{k + 1}"))
+                    nodes.append(OsaEthernetCable(f"\n\neth {k + 1}\nto\n{switch}\nin\n{self.group_name[group]}",
+                                                  URL=f"{self.filename}_{group}.{self.output_format}"))
+                    # nodes.append(OsaEthernetCable(f"eth{k + 1}"))
                 else:
-                    nodes.append(OsaEthernetCable(f"eth{k + 1}",
-                                                  URL=f"{self.filename}_{url.pop()}.{self.output_format}"))
+                    switch = url.pop()
+                    group = url.pop()
+                    nodes.append(OsaEthernetCable(
+                        f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
+                        URL=f"{self.filename}_{group}.{self.output_format}"))
+                # if not url:
+                #     nodes.append(OsaEthernetCable(f"eth{k + 1}"))
+                # else:
+                #     nodes.append(OsaEthernetCable(f"eth{k + 1}",
+                #                                   URL=f"{self.filename}_{url.pop()}.{self.output_format}"))
 
             # make the connections between ports transparent
             for k in range(out + busy, ports):
                 nodes.append(OsaEthernetFree(f"eth{k + 1}"))
-            for b in range(0, raw):
-                if b + raw <= ports:
-                    nodes[b] - Edge(color="transparent") - nodes[b + raw]
+            for k in range(0, raw):
+                if k + raw <= ports:
+                    _ = nodes[k] - Edge(color="transparent") - nodes[k + raw]
 
     def get_connections(self, member_name: str) -> list:
         """
