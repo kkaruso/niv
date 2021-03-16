@@ -22,7 +22,10 @@ class ArgParser:
     config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/config.yaml')
 
     # Reads in version from setup.py
-    version = pkg_resources.require("niv")[0].version
+    try:
+        version = f"niv {pkg_resources.require('niv')[0].version}"
+    except pkg_resources.DistributionNotFound:
+        version = 'Please install this project with setup.py'
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
     logger = NivLogger
@@ -47,7 +50,7 @@ class ArgParser:
 
         parser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
 
-        parser.add_argument('-v', '--version', action='version', version=f'%(prog)s {self.version}',
+        parser.add_argument('-v', '--version', action='version', version=f'{self.version}',
                             help="Show program's version number and exit")
 
         parser.add_argument('-s', '--save', type=self.save_to_path,
