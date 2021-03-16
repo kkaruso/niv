@@ -78,8 +78,8 @@ class BuildDiagram:
         self.nodes_icon = self.fill_dictionary("nodes", "icon", "")
 
         # Get text of each node
-        self.nodes_text = self.fill_dictionary("nodes", "text", self.yaml_defaults.get('nodes').get(
-            'text') or "node")
+        self.nodes_name = self.fill_dictionary("nodes", "name", self.yaml_defaults.get('nodes').get(
+            'name') or "Node")
 
         # Get Ports-number of each switch default = 24
         self.switch_ports = self.fill_dictionary("nodes", "ports", self.yaml_defaults.get('nodes').get(
@@ -226,7 +226,7 @@ class BuildDiagram:
                 members.append(member)
 
         # If a node is not a member of a group, create it outside of a cluster
-        for node in self.nodes_text:
+        for node in self.nodes_name:
             if node not in members:
                 self.create_single_node(node, self.graph_layout, True)
 
@@ -256,7 +256,7 @@ class BuildDiagram:
         # Check if any endpoints are not given in 'nodes', if not print an error
         for connection in self.connections_endpoints:
             for endpoint in connection:
-                if endpoint not in self.nodes_text and error:
+                if endpoint not in self.nodes_name and error:
                     # Avoid printing the same error message multiple times, just because we call the same function
                     # various times while creating more than 1 diagram
                     log_message = f"KeyError in {self.load_path}: '{endpoint}' is not given in 'nodes', that's why it" \
@@ -453,7 +453,7 @@ class BuildDiagram:
                                 #                     groupsDiagrams.append(o)
 
                             # create the ports with the colored icons for every single switch
-                            self.create_switch(self.switch_ports[member], self.nodes_text[member], switch_nodes,
+                            self.create_switch(self.switch_ports[member], self.nodes_name[member], switch_nodes,
                                                inEtherPort[member] + intent_con_ports[member], outEtherPort[member],
                                                groupsDiagrams)
                             switches_nodes[member] = switch_nodes
@@ -618,16 +618,16 @@ class BuildDiagram:
         # Counter checks how many diagrams have been created thus far
         if self.detail_level == 0:
             if self.counter == 1:
-                node_text = f"\n{self.nodes_text[node]}\n"
+                node_text = f"\n{self.nodes_name[node]}\n"
             else:
-                node_text = f"\n{self.nodes_text[node]}\n" \
+                node_text = f"\n{self.nodes_name[node]}\n" \
                             f" {self.nodes_ip[node]}\n"
         # Detail level 1 shows text and IP's
         elif self.detail_level == 1:
-            node_text = f"\n{self.nodes_text[node]}\n"
+            node_text = f"\n{self.nodes_name[node]}\n"
         # Detail level 2 shows text, IP's and Ports
         else:
-            node_text = f"\n{self.nodes_text[node]}\n" \
+            node_text = f"\n{self.nodes_name[node]}\n" \
                         f" {self.nodes_ip[node]}\n"
 
         # Remove double newlines for the case when port is given but no url
@@ -725,7 +725,7 @@ class BuildDiagram:
         if element == "node":
             # tooltip = self.nodes_tooltip[node]
             # if self.nodes_tooltip[node] == "":
-            tooltip = f"Name: {self.nodes_text[node]}\n" \
+            tooltip = f"Name: {self.nodes_name[node]}\n" \
                       f"MAC-Address: {self.nodes_mac[node]}\n" \
                       f"Modelnr: {self.nodes_modelnr[node]}\n" \
                       f"Manufacturer: {self.nodes_manufactuer[node]}\n" \
@@ -754,13 +754,13 @@ class BuildDiagram:
             first_port = self.connections_ports[connection][0]
             second_port = self.connections_ports[connection][1]
 
-            tooltip_without_port = f"{self.nodes_text[second_endpoint]} " \
+            tooltip_without_port = f"{self.nodes_name[second_endpoint]} " \
                                    f"<---> " \
-                                   f"{self.nodes_text[first_endpoint]}"
+                                   f"{self.nodes_name[first_endpoint]}"
 
-            tooltip_with_port = f"{self.nodes_text[second_endpoint]} (Port: {second_port}) " \
+            tooltip_with_port = f"{self.nodes_name[second_endpoint]} (Port: {second_port}) " \
                                 f"<---> " \
-                                f"{self.nodes_text[first_endpoint]} (Port: {first_port})"
+                                f"{self.nodes_name[first_endpoint]} (Port: {first_port})"
 
             # If a tooltip is given within the connections, set it as the tooltip
             tooltip = self.connections_tooltip[connection]
@@ -822,7 +822,7 @@ class BuildDiagram:
                     switch = url.pop()
                     group = url.pop()
                     nodes.append(OsaEthernetCable(
-                        f"\n\neth {k + 1}\nto\n{self.nodes_text[switch]}\nin\n{self.group_name[group]}",
+                        f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
                         URL=f"{self.filename}_{group}.{self.output_format}"))
                 # if not url:
                 #     nodes.append(OsaEthernetCable(f"eth{k + 1}"))

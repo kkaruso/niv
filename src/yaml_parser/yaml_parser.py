@@ -56,7 +56,7 @@ def get_yaml_default_preset():
             date: # Date (default: current date; type: string)
             version: # Version of the diagram (default: 1.0; type: double)
         nodes:
-            text: # Icon description (default: "Node"; type: string)
+            name: # Icon name (default: "Node"; type: string)
             x: # X-Coordinate of icon (default: 0; type: int)
             y: # Y-Coordinate of icon (default: 0; type: int)
             ip: # IP-Address of device/icon (default: ""; type: string)
