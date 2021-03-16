@@ -324,6 +324,7 @@ class BuildDiagram:
         """
         Creates the diagram with the right amount of nodes, clusters and connections
         """
+        path, file_name = os.path.split(self.save_path)
         members = []
         graph_attr = {
             "bgcolor": f"{self.graph_bg_color}",
@@ -369,7 +370,7 @@ class BuildDiagram:
                 "rankdir": direction
             }
             with Diagram(self.set_diagram_title(),
-                         filename=f"group_diagrams/{self.filename}_{i}",
+                         filename=f"{path}/group_diagrams/{file_name}_{i}",
                          outformat=self.output_format,
                          show=False, graph_attr=subgraph_attr):
                 # Create tooltip for each group
@@ -771,19 +772,18 @@ class BuildDiagram:
                 r = ports / 2
                 raw = int(r)
 
-            for k in range(0, busy ):
-                nodes.append(OsaEthernetBusy(f"eth{k+1}"))
+            for k in range(0, busy):
+                nodes.append(OsaEthernetBusy(f"eth{k + 1}"))
 
             for k in range(busy, out + busy):
                 if not url:
-                    nodes.append(OsaEthernetCable(f"eth{k+1}"))
+                    nodes.append(OsaEthernetCable(f"eth{k + 1}"))
                 else:
-                    nodes.append(OsaEthernetCable(f"eth{k+1}",
-                                                      URL=f"{self.filename}_{url.pop()}.{self.output_format}"))
+                    nodes.append(OsaEthernetCable(f"eth{k + 1}",
+                                                  URL=f"{self.filename}_{url.pop()}.{self.output_format}"))
 
-
-            for k in range(out + busy , ports ):
-                nodes.append(OsaEthernetFree(f"eth{k+1}"))
+            for k in range(out + busy, ports):
+                nodes.append(OsaEthernetFree(f"eth{k + 1}"))
             for b in range(0, raw):
                 if b + raw <= ports:
                     nodes[b] - Edge(color="transparent") - nodes[b + raw]
