@@ -22,19 +22,19 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
   cloud1: {icon: Cloud, text: Internet, x: 24, y: 26}
   router1: { icon: RouterFirewall, text: Router Firewall, x: 24, y: 22 }
-  core-Switch1:  {icon: SafeharborIcon, text: core-Switch 1, x: 22, y: 18, switch-view: False, ports: 24}
+  core-Switch1:  {icon: SafeharborIcon, text: core-Switch 1, x: 22, y: 18, switch-view: True, ports: 24}
   core-Switch2:  {icon: SafeharborIcon, text: core-Switch 2, x: 26, y: 18, switch-view: True, ports: 24}
   spine-Switch1: {icon: SafeharborIcon, text: spine-Switch 1, x: 18, y: 12, switch-view: True, ports: 24}
   spine-Switch2: {icon: SafeharborIcon, text: spine-Switch 2, x: 22, y: 12, switch-view: True, ports: 24}
   spine-Switch3: {icon: SafeharborIcon, text: spine-Switch 3, x: 26, y: 12, switch-view: True, ports: 24}
   spine-Switch4: {icon: SafeharborIcon, text: spine-Switch 4, x: 30, y: 12, switch-view: True, ports: 24}
-  switch1: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 1, y: 6, switch-view: False, ports: 120}
-  switch2: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 4, y: 6, switch-view: True, ports: 12}
+  switch1: { icon: WorkgroupSwitch, text: Work group Switch c1, x: 1, y: 6, switch-view: True, ports: 22}
+  switch2: { icon: WorkgroupSwitch, text: Work group Switch c2, x: 4, y: 6, switch-view: True, ports: 20}
   switch3: { icon: WorkgroupSwitch, text: Work group Switch c3, x: 11, y: 6, switch-view: True, ports: 12}
   switch4: { icon: WorkgroupSwitch, text: Work group Switch c4, x: 14, y: 6, switch-view: True, ports: 12}
   switch5: { icon: WorkgroupSwitch, text: Work group Switch c5, x: 21, y: 6, switch-view: True, ports: 12}
   switch6: { icon: WorkgroupSwitch, text: Work group Switch c6, x: 24, y: 6, switch-view: True, ports: 12}
-  switch7: { icon: WorkgroupSwitch, text: Work group Switch c7, x: 31, y: 6, switch-view: True,ports: 12}
+  switch7: { icon: WorkgroupSwitch, text: Work group Switch c7, x: 31, y: 6, switch-view: True, ports: 12}
   switch8: { icon: WorkgroupSwitch, text: Work group Switch c8, x: 34, y: 6, switch-view: True, ports: 12}
   switch9: { icon: WorkgroupSwitch, text: Work group Switch c9, x: 41, y: 6, switch-view: True, ports: 12}
   switch10: { icon: WorkgroupSwitch, text: Work group Switch c10, x: 44, y: 6, switch-view: True, ports: 12}
@@ -149,9 +149,16 @@ connections: #enter your connections here
 - {endpoints: [switch12, spine-Switch4], color: red}
 
 - {endpoints: [server1, switch1], color: black}
+
+- {endpoints: [switch2, switch1], color: black}
+- {endpoints: [switch1, switch2], color: black}
+- {endpoints: [server1, server2], color: black}
+
+
 - {endpoints: [server1, switch2], color: black }
 - {endpoints: [server2, switch1], color: black}
 - {endpoints: [server2, switch2], color: black }
+
 - {endpoints: [server3, switch1], color: black }
 - {endpoints: [server3, switch2], color: black }
 - {endpoints: [server4, switch1], color: black }

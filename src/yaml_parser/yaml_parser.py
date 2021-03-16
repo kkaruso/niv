@@ -69,5 +69,6 @@ def get_yaml_default_preset():
             text: # Connection description (default: ""; type: string)
             color: # Color of connection-stroke (default: #7B8894; type: string)
             width: # Width of connection-stroke (default: 1; type: int)
+            showports: # Visibility of ports (default: false; type: bool)
         """
     return data
