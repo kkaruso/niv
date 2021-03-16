@@ -683,7 +683,14 @@ class BuildDiagram:
         return tooltip
 
     @staticmethod
-    def create_switch(ports, name, nodes, busy):
+    def create_switch(ports: int, name: str, nodes: [], busy: int):
+        """
+        function create switches as busy or free
+        :param ports: how many ports to create
+        :param name: the name of the switch
+        :param nodes: empty list to fill with the created switches
+        :param busy: how many busy nodes to create
+        """
         with Cluster(name):
             if ports % 2:
                 r = (ports - 1) / 2
@@ -692,14 +699,66 @@ class BuildDiagram:
                 r = ports / 2
                 raw = int(r)
 
+            # create busy ports
             for k in range(1, busy + 1):
                 # nodes.append(globals()["OsaEthernetFree"](f"eth{k}"))
                 nodes.append(OsaEthernetBusy(f"eth{k}"))
 
+            # create Free ports
             for k in range(busy + 1, ports + 1):
                 # nodes.append(globals()["OsaEthernetFree"](f"eth{k}"))
                 nodes.append(OsaEthernetFree(f"eth{k}"))
 
-            for b in range(0, raw):
-                if b + raw <= ports:
-                    nodes[b] - Edge(color="transparent") - nodes[b + raw]
+            # make the connections between ports transparent
+            for i in range(0, raw):
+                if i + raw <= ports:
+                    nodes[i] - Edge(color="transparent") - nodes[i + raw]
+
+    def get_connections(self, member_name: str) -> list:
+        """
+        Function to get the Partner connections from a given node
+
+        :param member_name: name of the node you want the partner from
+        :return partners: a list of all connections that are connected with given node
+        """
+        partners = []
+
+        # iterate through connections
+        for connection in self.connections_endpoints:
+            # try to get 2 elements from connections, len(connection) should always be 2, otherwise give log message
+            try:
+                # get connection values
+                node1 = connection[0]
+                node2 = connection[1]
+
+                # append partners with the other node if the member_name node is in the connection
+                if node1 == member_name:
+                    partners.append(node2)
+                if node2 == member_name:
+                    partners.append(node1)
+
+            except IndexError:
+                self.logger.log("A connection in your yaml doesnt contain only 2 objects")
+
+        return partners
+
+    def are_connected(self, node1: str, node2: str) -> int:
+        """
+        Function to look if 2 given nodes are connected
+
+        :param node1: one node name to look for
+        :param node2: second node name to look for
+        :return: index in connections_endpoints where they are connected
+        """
+        if node1 == node2:
+            return -1
+        # iterate through connections
+        for connection in self.connections_endpoints:
+            # look if nodes are in connection
+            node1_given = node1 in connection
+            node2_given = node2 in connection
+
+            if node1_given and node2_given:
+                # print(f"node1: {node1}, node2: {node2}, index: {self.connections_endpoints.index(connection)}")
+                return self.connections_endpoints.index(connection)
+        return -1
