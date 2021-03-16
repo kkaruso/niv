@@ -73,6 +73,9 @@ class BuildDiagram:
         self.title_font_size = self.set_variables("title", "fontSize", self.yaml_defaults.get('title').get(
             'fontSize') or 15)
 
+        self.title_font_color = self.set_variables("title", "fontColor", self.yaml_defaults.get('title'). get(
+            'fontColor') or "black")
+
         # TODO: Add placeholder icon to set as default for nodes_icon
         # Get icon of each node
         self.nodes_icon = self.fill_dictionary("nodes", "icon", "")
@@ -218,7 +221,7 @@ class BuildDiagram:
         """
         Create nodes outside and inside of clusters
         """
-        path, file_name = os.path.split(self.save_path)
+        file_name = os.path.split(self.save_path)[-1]
         file_name = file_name.split('.')[0]
         # Fill "members" list with all the group members
         for group_name in self.group_members:
@@ -242,7 +245,8 @@ class BuildDiagram:
                 # "URL": f"{self.group_url[name]}"
                 # Connect the main diagram with the created under-diagrams with a URL-link
                 "URL": f"{file_name}-subdiagrams/{self.filename}_{name}.{self.output_format}",
-                "tooltip": f"{tooltip}"
+                "tooltip": f"{tooltip}",
+                "fontcolor": "black"
             }
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
@@ -336,7 +340,8 @@ class BuildDiagram:
             "nodesep": "1.0",
             "ranksep": "2.0",
             "splines": f"{self.graph_splines}",
-            "rankdir": f"{self.graph_direction}"
+            "rankdir": f"{self.graph_direction}",
+            "fontcolor": f"{self.title_font_color}"
         }
         with Diagram(self.set_diagram_title(),
                      filename=self.filename + suffix,
@@ -397,7 +402,6 @@ class BuildDiagram:
                         in_ethernet = 0
                         eth_between_switches = 0
                         for membr in self.group_members.get(i):
-                            print(f"member: {member}, membr: {membr}")
                             for endpoint in range(0, len(self.connections_endpoints)):
                                 if membr == self.connections_endpoints[endpoint][0]:
                                     if self.connections_endpoints[endpoint][1] == member:
@@ -439,6 +443,7 @@ class BuildDiagram:
                                             if group_member in self.connections_endpoints[__]:
                                                 if member not in self.group_members.get(group):
                                                     groups_diagrams.append(group)
+                                                    groups_diagrams.append(group_member)
 
                                 # if member == self.connections_endpoints[__][0]:
                                 #     for o in self.yaml.get("groups"):
@@ -446,12 +451,14 @@ class BuildDiagram:
                                 #             if self.connections_endpoints[__][1] == one:
                                 #                 if member not in self.group_members.get(o):
                                 #                     groupsDiagrams.append(o)
+                                #                     groupsDiagrams.append(one)
                                 # if member == self.connections_endpoints[__][1]:
                                 #     for o in self.yaml.get("groups"):
                                 #         for one in list(self.group_members.get(o)):
                                 #             if self.connections_endpoints[__][0] == one:
                                 #                 if member not in self.group_members.get(o):
                                 #                     groupsDiagrams.append(o)
+                                #                     groupsDiagrams.append(one)
 
                             # create the ports with the colored icons for every single switch
                             self.create_switch(self.switch_ports[member], self.nodes_name[member], switch_nodes,
@@ -764,7 +771,9 @@ class BuildDiagram:
                                 f"{self.nodes_name[first_endpoint]} (Port: {first_port})"
 
             # If a tooltip is given within the connections, set it as the tooltip
-            tooltip = self.connections_tooltip[connection]
+            if self.connections_tooltip[connection] != "":
+                tooltip_with_port = f"{tooltip_with_port}\n{self.connections_tooltip[connection]}"
+                tooltip_without_port = f"{tooltip_without_port}\n{self.connections_tooltip[connection]}"
             # If no tooltip is given within the connection, set both endpoints as the tooltip
             if self.connections_tooltip[connection] == "":
                 # If no ports are given for a connection only print endpoints

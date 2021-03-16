@@ -55,6 +55,7 @@ def get_yaml_default_preset():
             company: # Name of company (default: ""; type: string)
             date: # Date (default: current date; type: string)
             version: # Version of the diagram (default: 1.0; type: double)
+            fontColor: # Color of the title text (default: black, type: string) 
         nodes:
             name: # Icon name (default: "Node"; type: string)
             x: # X-Coordinate of icon (default: 0; type: int)
