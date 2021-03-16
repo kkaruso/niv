@@ -18,17 +18,17 @@ groupDefaults: &groupDefaults #Use current values as defaults
 
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
-  cloud1: {icon: OsaCloud, text: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
-  db1: {icon: OsaDatabase, text: MySQL Database, port: 25565, x: 0, y: 0, url: }
-  deviceScanner1: {icon: OsaDeviceScanner, text: Local Device Scanner, x: 0, y: 6 }
-  serverWeb1: {icon: OsaServerWeb, text: My WebServer, x: 5, y: 2 }
-  serverTerminal1: {icon: OsaServerTerminal, text: Central Terminal, x: 5, y: 5 }
-  desktop1: {icon: OsaDesktopImac, text: My Desktop, x: 3, y: 0 }
-  Osa: {icon: server, text: Test, x: 1 }
-  phone1: { icon: OsaIphone, text: Iphone, x: 1, y: 1 }
-  cameraWeb1: { icon: OsaCameraWeb, text: CameraWeb, x: 0, y: -1 }
-  laptop1: { icon: OsaLaptop, text: Laptop, x: 0, y: 1 }
-  hub1: {icon: CiscoHub, text: Hub, x: 1, y: 4}
+  cloud1: {icon: OsaCloud, name: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
+  db1: {icon: OsaDatabase, name: MySQL Database, port: 25565, x: 0, y: 0, url: }
+  deviceScanner1: {icon: OsaDeviceScanner, name: Local Device Scanner, x: 0, y: 6 }
+  serverWeb1: {icon: OsaServerWeb, name: My WebServer, x: 5, y: 2 }
+  serverTerminal1: {icon: OsaServerTerminal, name: Central Terminal, x: 5, y: 5 }
+  desktop1: {icon: OsaDesktopImac, name: My Desktop, x: 3, y: 0 }
+  Osa: {icon: server, name: Test, x: 1 }
+  phone1: { icon: OsaIphone, name: Iphone, x: 1, y: 1 }
+  cameraWeb1: { icon: OsaCameraWeb, name: CameraWeb, x: 0, y: -1 }
+  laptop1: { icon: OsaLaptop, name: Laptop, x: 0, y: 1 }
+  hub1: {icon: CiscoHub, name: Hub, x: 1, y: 4}
 
 
 
