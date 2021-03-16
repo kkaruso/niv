@@ -826,8 +826,8 @@ class BuildDiagram:
             # create Free ports
             for k in range(busy, out + busy):
                 if not url:
-                    nodes.append(OsaEthernetCable(f"\n\neth {k + 1}\nto\n{switch}\nin\n{self.group_name[group]}",
-                                                  URL=f"{self.filename}_{group}.{self.output_format}"))
+                    nodes.append(OsaEthernetCable(f"\n\neth {k + 1}\nto\n{self.filename}",
+                                                  URL=f"../{self.filename}.{self.output_format}"))
                     # nodes.append(OsaEthernetCable(f"eth{k + 1}"))
                 else:
                     switch = url.pop()
