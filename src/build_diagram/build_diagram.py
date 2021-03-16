@@ -141,9 +141,6 @@ class BuildDiagram:
         # Get the tooltip of each group
         self.group_tooltip = self.fill_dictionary("groups", "tooltip", "")
 
-        self.logger.log_debug(f"\nXs: {self.nodes_x}")
-        self.logger.log_debug(f"Ys: {self.nodes_y}\n")
-
         # Save each endpoint of a connection as a list
         self.connections_endpoints = []
         for i in range(0, len(self.yaml.get("connections"))):
@@ -263,46 +260,46 @@ class BuildDiagram:
                     self.logger.verbose_warning(log_message, self.verbose)
                     print(log_message)
 
+
         # Create connections
-        for i, _ in enumerate(self.instances_keys):
-            # print(f"i:{i}, _:{_}")
-            for j, _ in enumerate(self.connections_endpoints):
-                # print(f"j:{j}, _:{_}")
-                if self.instances_keys[i] == self.connections_endpoints[j][0]:
-                    for k, _ in enumerate(self.instances_keys):
-                        # print(f"k:{k}, _:{_}")
-                        if self.connections_endpoints[j][1] == self.instances_keys[k]:
-                            # print("Yeeeehaaawwww")
+        for i, endpoints in enumerate(self.connections_endpoints):
+            first = endpoints[0]
+            second = endpoints[1]
 
-                            # Create tooltip for each connection
-                            tooltip = self.create_tooltip(element="connection", connection=j)
+            # Only create the connection if both endpoints are instanced as nodes
+            if first in self.instances_keys and second in self.instances_keys:
+                try:
+                    # Create tooltip for each connection
+                    tooltip = self.create_tooltip(element="connection", connection=i)
 
-                            if self.connections_visibility[j]:
-                                _ = self.instances[k] - \
-                                    Edge(color=f"{self.connections_color[j]}",
-                                         label=f"{self.connections_text[j]}",
-                                         labeltooltip=f"{self.connections_text[j]}",
-                                         penwidth=f"{self.connections_width[j]}",
-                                         edgetooltip=tooltip,
-                                         headlabel=f"{self.connections_ports[j][0]}",
-                                         labeldistance="3.5",
-                                         labelangle="30",
-                                         taillabel=f"{self.connections_ports[j][1]}"
-                                         ) - \
-                                    self.instances[i]
-                            else:
-                                _ = self.instances[k] - \
-                                    Edge(color=f"{self.connections_color[j]}",
-                                         label=f"{self.connections_text[j]}",
-                                         labeltooltip=f"{self.connections_text[j]}",
-                                         penwidth=f"{self.connections_width[j]}",
-                                         edgetooltip=tooltip,
-                                         # headlabel=f"{self.connections_ports[j][0]}",
-                                         # labeldistance="3.5",
-                                         # labelangle="30",
-                                         # taillabel=f"{self.connections_ports[j][1]}"
-                                         ) - \
-                                    self.instances[i]
+                    # Get index of first and second value to get the corresponding instances
+                    first_index = self.instances_keys.index(first)
+                    second_index = self.instances_keys.index(second)
+
+                    # If the "showports" parameter is set to true show ports next to connection
+                    if self.connections_visibility[i]:
+                        _ = self.instances[first_index] - \
+                            Edge(color=f"{self.connections_color[i]}",
+                                 label=f"{self.connections_text[i]}",
+                                 labeltooltip=f"{self.connections_text[i]}",
+                                 penwidth=f"{self.connections_width[i]}",
+                                 edgetooltip=tooltip) - \
+                            self.instances[second_index]
+                    else:
+                        _ = self.instances[first_index] - \
+                            Edge(color=f"{self.connections_color[i]}",
+                                 label=f"{self.connections_text[i]}",
+                                 labeltooltip=f"{self.connections_text[i]}",
+                                 penwidth=f"{self.connections_width[i]}",
+                                 edgetooltip=tooltip,
+                                 headlabel=f"{self.connections_ports[i][0]}",
+                                 labeldistance="3.5",
+                                 labelangle="30",
+                                 taillabel=f"{self.connections_ports[i][1]}"
+                                 ) - \
+                            self.instances[second_index]
+                except (ValueError, KeyError):
+                    pass
 
         # Clear both lists to have empty lists for every diagram creation to fix not seeing connections
         # when multiple diagrams are created
@@ -346,7 +343,7 @@ class BuildDiagram:
             # Create connections
             self.create_connections(True)
         # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
-        for _, i in enumerate(self.yaml.get("groups")):
+        for i in self.yaml.get("groups"):
             # if rack in yaml is on True then the direction of the sub-group icons will be Left to Right
             if str(self.yaml.get("groups").get(f"{i}").get("rack")) == "True":
                 direction = "LR"
@@ -380,7 +377,7 @@ class BuildDiagram:
                     "margin": "20",
                     "tooltip": f"{tooltip}"
                 }
-                with Cluster(self.yaml.get("groups").get(f"{i}").get("name"), graph_attr=clustr_attr):
+                with Cluster(self.yaml.get("groups").get(i).get("name"), graph_attr=clustr_attr):
                     switches_nodes = {}
                     intent_con_ports = {}
                     inEtherPort = {}
@@ -395,10 +392,10 @@ class BuildDiagram:
                     for member in list(self.group_members.get(i)):
                         inEthernet = 0
                         ethBetweenSwitches = 0
-                        for __, membr in enumerate(self.group_members.get(i)):
-                            for end in range(0, len(self.connections_endpoints)):
-                                if membr == self.connections_endpoints[end][0]:
-                                    if self.connections_endpoints[end][1] == member:
+                        for membr in self.group_members.get(i):
+                            for endpoint in range(0, len(self.connections_endpoints)):
+                                if membr == self.connections_endpoints[endpoint][0]:
+                                    if self.connections_endpoints[endpoint][1] == member:
                                         if not self.switch_type[membr]:
                                             inEthernet = inEthernet + 1
                                         else:
@@ -416,28 +413,53 @@ class BuildDiagram:
                             for _, switch in enumerate(switches_in_group):
                                 outEther = 0
                                 for __ in range(len(self.connections_endpoints)):
-                                    if switch == self.connections_endpoints[__][0]:
-                                        if self.connections_endpoints[__][1] not in self.group_members.get(i):
-                                            outEther = outEther + 1
-                                    if switch == self.connections_endpoints[__][1]:
-                                        if self.connections_endpoints[__][0] not in self.group_members.get(i):
-                                            outEther = outEther + 1
+                                    if switch in self.connections_endpoints[__]:
+                                        if self.group_members.get(i) not in self.connections_endpoints[__]:
+                                            outEther += 1
+
+
+                                    # if switch == self.connections_endpoints[__][0]:
+                                    #     if self.connections_endpoints[__][1] not in self.group_members.get(i):
+                                    #         outEther = outEther + 1
+                                    # if switch == self.connections_endpoints[__][1]:
+                                    #     if self.connections_endpoints[__][0] not in self.group_members.get(i):
+                                    #         outEther = outEther + 1
                             outEtherPort[member] = outEther
 
                             # read url for each port and save it in a list
                             for __ in range(len(self.connections_endpoints)):
-                                if member == self.connections_endpoints[__][0]:
-                                    for _, o in enumerate(self.yaml.get("groups")):
-                                        for one in list(self.group_members.get(o)):
-                                            if self.connections_endpoints[__][1] == one:
-                                                if member not in self.group_members.get(o):
-                                                    groupsDiagrams.append(o)
-                                if member == self.connections_endpoints[__][1]:
-                                    for _, o in enumerate(self.yaml.get("groups")):
-                                        for one in list(self.group_members.get(o)):
-                                            if self.connections_endpoints[__][0] == one:
-                                                if member not in self.group_members.get(o):
-                                                    groupsDiagrams.append(o)
+                                # check if member in endpoints
+                                if member in self.connections_endpoints[__]:
+                                    # iterate through yaml groups
+                                    for group in self.yaml.get("groups"):
+                                        # iterate through group members from group
+                                        for group_member in list(self.group_members.get(group)):
+                                            # check if group member is in endpoints and if member is in group members
+                                            # and add it to the list
+                                            if group_member in self.connections_endpoints[__]:
+                                                if member not in self.group_members.get(group):
+                                                    groupsDiagrams.append(group)
+
+
+                                # # check if member in endpoints at 0
+                                # if member == self.connections_endpoints[__][0]:
+                                #     print(self.yaml.get("groups"))
+                                #     # iterate through groups in yaml
+                                #     for o in self.yaml.get("groups"):
+                                #         # iterate through groups.members at o
+                                #         for one in list(self.group_members.get(o)):
+                                #             print(f"group_members: {self.group_members.get(o)}")
+                                #             print(f"member: {one}")
+                                #             # check if group_member is in endpoint at 1
+                                #             if self.connections_endpoints[__][1] == one:
+                                #                 if member not in self.group_members.get(o):
+                                #                     groupsDiagrams.append(o)
+                                # if member == self.connections_endpoints[__][1]:
+                                #     for o in self.yaml.get("groups"):
+                                #         for one in list(self.group_members.get(o)):
+                                #             if self.connections_endpoints[__][0] == one:
+                                #                 if member not in self.group_members.get(o):
+                                #                     groupsDiagrams.append(o)
 
                             # create the ports with the colored icons for every single switch
                             self.create_switch(self.switch_ports[member], self.nodes_text[member], switch_nodes,
@@ -451,12 +473,18 @@ class BuildDiagram:
                     counter_for_eth_in_switch = {}
                     for _ in switches_in_group:
                         counter_for_eth_in_switch[_] = 0
+                    # check if instaces != null
                     if self.instances:
+                        # iterate through group_members
                         for membr in self.group_members.get(i):
-                            for end in range(len(self.connections_endpoints)):
-                                if membr == self.connections_endpoints[end][0]:
+                            # iterate through endpoints
+                            for endpoint in range(len(self.connections_endpoints)):
+                                # check if group_member is in endpoints at [0]
+                                if membr == self.connections_endpoints[endpoint][0]:
+                                    # iterate through switches
                                     for endEth in switches_in_group:
-                                        if self.connections_endpoints[end][1] == endEth:
+                                        # check if the other endpoint is a switch
+                                        if self.connections_endpoints[endpoint][1] == endEth:
                                             eths = switches_nodes.get(endEth)
                                             if membr in switches_in_group:
                                                 ets = switches_nodes.get(membr)
@@ -470,6 +498,9 @@ class BuildDiagram:
                                                 counter_for_eth_in_switch[endEth] += 1
                     self.create_connections(True)
                     self.instances.clear()
+
+        print("Diagram successfully created")
+        self.logger.log("Diagram successfully created")
 
     def set_diagram_title(self):
         """
@@ -761,9 +792,13 @@ class BuildDiagram:
         return tooltip
 
     def create_switch(self, ports, name, nodes, busy, out, url):
-        if busy + out > ports:
-            ports = busy + out
-
+        """
+        function create switches as busy or free
+        :param ports: how many ports to create
+        :param name: the name of the switch
+        :param nodes: empty list to fill with the created switches
+        :param busy: how many busy nodes to create
+        """
         with Cluster(name):
             if ports % 2:
                 r = (ports - 1) / 2
@@ -771,10 +806,11 @@ class BuildDiagram:
             else:
                 r = ports / 2
                 raw = int(r)
-
+            # create busy ports
             for k in range(0, busy):
                 nodes.append(OsaEthernetBusy(f"eth{k + 1}"))
 
+            # create Free ports
             for k in range(busy, out + busy):
                 if not url:
                     nodes.append(OsaEthernetCable(f"eth{k + 1}"))
@@ -782,8 +818,58 @@ class BuildDiagram:
                     nodes.append(OsaEthernetCable(f"eth{k + 1}",
                                                   URL=f"{self.filename}_{url.pop()}.{self.output_format}"))
 
+            # make the connections between ports transparent
             for k in range(out + busy, ports):
                 nodes.append(OsaEthernetFree(f"eth{k + 1}"))
             for b in range(0, raw):
                 if b + raw <= ports:
                     nodes[b] - Edge(color="transparent") - nodes[b + raw]
+
+    def get_connections(self, member_name: str) -> list:
+        """
+        Function to get the Partner connections from a given node
+
+        :param member_name: name of the node you want the partner from
+        :return partners: a list of all connections that are connected with given node
+        """
+        partners = []
+
+        # iterate through connections
+        for connection in self.connections_endpoints:
+            # try to get 2 elements from connections, len(connection) should always be 2, otherwise give log message
+            try:
+                # get connection values
+                node1 = connection[0]
+                node2 = connection[1]
+
+                # append partners with the other node if the member_name node is in the connection
+                if node1 == member_name:
+                    partners.append(node2)
+                if node2 == member_name:
+                    partners.append(node1)
+
+            except IndexError:
+                self.logger.log("A connection in your yaml doesnt contain only 2 objects")
+
+        return partners
+
+    def are_connected(self, node1: str, node2: str) -> int:
+        """
+        Function to look if 2 given nodes are connected
+
+        :param node1: one node name to look for
+        :param node2: second node name to look for
+        :return: index in connections_endpoints where they are connected
+        """
+        if node1 == node2:
+            return -1
+        # iterate through connections
+        for connection in self.connections_endpoints:
+            # look if nodes are in connection
+            node1_given = node1 in connection
+            node2_given = node2 in connection
+
+            if node1_given and node2_given:
+                # print(f"node1: {node1}, node2: {node2}, index: {self.connections_endpoints.index(connection)}")
+                return self.connections_endpoints.index(connection)
+        return -1

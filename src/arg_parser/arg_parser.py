@@ -7,6 +7,7 @@ import os
 from src import pathname_validitor as pv
 from src.niv_logger.niv_logger import NivLogger
 from src.yaml_parser.yaml_parser import get_yaml
+import pkg_resources
 
 
 class ArgParser:
@@ -19,6 +20,12 @@ class ArgParser:
         Adds the needed arguments to the ArgumentParser class
     """
     config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/config.yaml')
+
+    # Reads in version from setup.py
+    try:
+        version = f"niv {pkg_resources.require('niv')[0].version}"
+    except pkg_resources.DistributionNotFound:
+        version = 'Please install this project with setup.py'
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
     logger = NivLogger
@@ -43,7 +50,7 @@ class ArgParser:
 
         parser.add_argument('-h', '--help', action='help', help='Show this help message and exit')
 
-        parser.add_argument('-v', '--version', action='version', version='0.3',
+        parser.add_argument('-v', '--version', action='version', version=f'{self.version}',
                             help="Show program's version number and exit")
 
         parser.add_argument('-s', '--save', type=self.save_to_path,
