@@ -9,253 +9,495 @@ class _Vrt_Light_LightPng(_ICONS):
 
 class DLaserScanner1LightPng(_Vrt_Light_LightPng):
     _icon = "2dlaserscanner1.png"
+
+
 class DLaserScanner2LightPng(_Vrt_Light_LightPng):
-    _icon = "2d laser scanner 2.png"
+    _icon = "2dlaserscanner2.png"
+
+
 class DLaserScanner1LightPng(_Vrt_Light_LightPng):
-    _icon = "3d laser scanner 1.png"
-# class 3D Laser Scanner2LightPng(_Vrt_Light_LightPng):
-#     _icon = "3d laser scanner 2.png"
-# class AegisDatacellCellularDatalogger1LightPng(_Vrt_Light_LightPng):
-#     _icon = "aegis datacell cellular datalogger 1.png"
-# class AllenBradley Controllogix PlcLightPng(_Vrt_Light_LightPng):
-#     _icon = "allen-bradley controllogix plc.png"
-# class AllenBradley Flexio 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "allen-bradley flexio 1.png"
-# class AllenBradley Flexio 2LightPng(_Vrt_Light_LightPng):
-#     _icon = "allen-bradley flexio 2.png"
-# class Appliance 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "appliance 1.png"
-# class Atm Switch 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "atm switch 1.png"
-# class Atm Switch 2LightPng(_Vrt_Light_LightPng):
-#     _icon = "atm switch 2.png"
-# class Authentication Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "authentication server 1.png"
-# class Branch Feeder MonitorLightPng(_Vrt_Light_LightPng):
-#     _icon = "branch feeder monitor.png"
-# class Cctv Camera 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "cctv camera 1.png"
-# class Cctv Camera 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "cctv camera 3.png"
-# class Cet MultiCircuit Power Monitor LightPng(Mcpm)LightPng(_Vrt_Light_LightPng):
-#     _icon = "cet multi-circuit power monitor LightPng(mcpm).png"
-# class Communications ServerLightPng(_Vrt_Light_LightPng):
-#     _icon = "communications server.png"
-# class Compact Plc 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "compact plc 1.png"
-# class Coronis Wavenis LightPng(Waveflow Wavelog Wavetalk Mesh Mote)LightPng(_Vrt_Light_LightPng):
-#     _icon = "coronis wavenis LightPng(waveflow wavelog wavetalk mesh mote).png"
-# class Coronis Wavenis LightPng(Waveport Mesh Base Station)LightPng(_Vrt_Light_LightPng):
-#     _icon = "coronis wavenis LightPng(waveport mesh base station).png"
-# class Current Transformer StripLightPng(_Vrt_Light_LightPng):
-#     _icon = "current transformer strip.png"
-# class Data Acquisition LightPng(Scada) Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "data acquisition LightPng(scada) server 1.png"
-# class Data Logger Rtu 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "data logger rtu 1.png"
-# class Database Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "database server 1.png"
-# class Desktop 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "desktop 1.png"
-# class Desktop 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "desktop 3.png"
-# class DialUp Modem 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "dial-up modem 1.png"
-# class Directory Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "directory server 1.png"
-# class Directory ServerLightPng(_Vrt_Light_LightPng):
-#     _icon = "directory server.png"
-# class Document Scanner 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "document scanner 1.png"
-# class Document Scanner 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "document scanner 3.png"
-# class Document Scanner 5LightPng(_Vrt_Light_LightPng):
-#     _icon = "document scanner 5.png"
-# class Document Scanner 7LightPng(_Vrt_Light_LightPng):
-#     _icon = "document scanner 7.png"
-# class End Users 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "end users 1.png"
-# class Energy Utility MeterLightPng(_Vrt_Light_LightPng):
-#     _icon = "energy utility meter.png"
-# class Facsimile 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "facsimile 1.png"
-# class Facsimile 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "facsimile 3.png"
-# class Fibre Optic BreakOut Tray 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "fibre optic break-out tray 1.png"
-# class File Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "file server 1.png"
-# class Firewall 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "firewall 1.png"
-# class Firewall 2LightPng(_Vrt_Light_LightPng):
-#     _icon = "firewall 2.png"
-# class Flat Panel Display 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "flat panel display 1.png"
-# class Gas MeterLightPng(_Vrt_Light_LightPng):
-#     _icon = "gas meter.png"
-# class Generic Black Box 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "generic black box 1.png"
-# class Generic Plc Dcs Controller 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "generic plc dcs controller 1.png"
-# class Hub 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "hub 1.png"
-# class Hub 2LightPng(_Vrt_Light_LightPng):
-#     _icon = "hub 2.png"
-# class Industrial Barcode Scanner 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "industrial barcode scanner 1.png"
-# class Industrial Barcode Scanner 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "industrial barcode scanner 3.png"
-# class Industrial Cellular Modem 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "industrial cellular modem 1.png"
-# class Industrial Cellular Modem 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "industrial cellular modem 3.png"
-# class Industrial Ethernet To Serial Converter 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "industrial ethernet to serial converter 1.png"
-# class Industrial Fibre To Ethernet Converter 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "industrial fibre to ethernet converter 1.png"
-# class Industrial Pc 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "industrial pc 1.png"
-# class Industrial Pc 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "industrial pc 3.png"
-# class Industrial Switch 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "industrial switch 1.png"
-# class Inkjet Printer 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "inkjet printer 1.png"
-# class Inkjet Printer 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "inkjet printer 3.png"
-# class Laptop 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "laptop 1.png"
-# class Laptop 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "laptop 3.png"
-# class Large Hmi Panel 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "large hmi panel 1.png"
-# class Laser Printer 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "laser printer 1.png"
-# class Laser Printer 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "laser printer 3.png"
-# class LeadAcid Battery 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "lead-acid battery 1.png"
-# class Mail Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "mail server 1.png"
-# class Microwave Satellite Base 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "microwave satellite base 1.png"
-# class MultiRole Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "multi-role server 1.png"
-# class Network Attached Storage 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "network attached storage 1.png"
-# class Projector 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "projector 1.png"
-# class Rack Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "rack server 1.png"
-# class Rackmount Switch 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "rackmount switch 1.png"
-# class Role Emblem  AuthenticationLightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - authentication.png"
-# class Role Emblem  Data Acquisition LightPng(Scada)LightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - data acquisition LightPng(scada).png"
-# class Role Emblem  DatabaseLightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - database.png"
-# class Role Emblem  DirectoryLightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - directory.png"
-# class Role Emblem  FileLightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - file.png"
-# class Role Emblem  MailLightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - mail.png"
-# class Role Emblem  VideoLightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - video.png"
-# class Role Emblem  Virtualisation ObjectLightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - virtualisation object.png"
-# class Role Emblem  VirtualisationLightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - virtualisation.png"
-# class Role Emblem  WebLightPng(_Vrt_Light_LightPng):
-#     _icon = "role emblem - web.png"
-# class Router 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "router 1.png"
-# class Router FirewallLightPng(_Vrt_Light_LightPng):
-#     _icon = "router firewall.png"
-# class RouterLightPng(_Vrt_Light_LightPng):
-#     _icon = "router.png"
-# class SinglePhase Energy Meter LightPng(Din)LightPng(_Vrt_Light_LightPng):
-#     _icon = "single-phase energy meter LightPng(din).png"
-# class SinglePhase Energy Meter 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "single-phase energy meter 1.png"
-# class Small Hmi Panel 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "small hmi panel 1.png"
-# class Small Touch Panel 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "small touch panel 1.png"
-# class Smartphone 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "smartphone 1.png"
-# class Smartphone 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "smartphone 3.png"
-# class Solar Pv Panel 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "solar pv panel 1.png"
-# class Solar Pv Panel 2LightPng(_Vrt_Light_LightPng):
-#     _icon = "solar pv panel 2.png"
-# class Switch 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "switch 1.png"
-# class Switch 2LightPng(_Vrt_Light_LightPng):
-#     _icon = "switch 2.png"
-# class Tablet 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "tablet 1.png"
-# class Tablet 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "tablet 3.png"
-# class Telephone 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "telephone 1.png"
-# class Telephone 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "telephone 3.png"
-# class Thin Client 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "thin client 1.png"
-# class Thin Client 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "thin client 3.png"
-# class ThreePhase Energy Meter LightPng(Din)LightPng(_Vrt_Light_LightPng):
-#     _icon = "three-phase energy meter LightPng(din).png"
-# class ThreePhase Energy Meter 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "three-phase energy meter 1.png"
-# class ThreePhase MultiFunction Meter 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "three-phase multi-function meter 1.png"
-# class ThreePhase Power Quality Analyser 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "three-phase power quality analyser 1.png"
-# class Tower Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "tower server 1.png"
-# class Unified Communications Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "unified communications server 1.png"
-# class Uninterruptible Power Supply LightPng(Ups) 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "uninterruptible power supply LightPng(ups) 1.png"
-# class Video Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "video server 1.png"
-# class Virtualisation Object Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "virtualisation object server 1.png"
-# class Virtualisation Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "virtualisation server 1.png"
-# class Vpn Concentrator 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "vpn concentrator 1.png"
-# class Vpn Concentrator 2LightPng(_Vrt_Light_LightPng):
-#     _icon = "vpn concentrator 2.png"
-# class Wages Hub A Series 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "wages hub a series 1.png"
-# class Water Thermal MeterLightPng(_Vrt_Light_LightPng):
-#     _icon = "water thermal meter.png"
-# class Web Server 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "web server 1.png"
-# class Wired Segment LightPng(Internet)LightPng(_Vrt_Light_LightPng):
-#     _icon = "wired segment LightPng(internet).png"
-# class Wired Segment LightPng(Subnet)LightPng(_Vrt_Light_LightPng):
-#     _icon = "wired segment LightPng(subnet).png"
-# class Wireless Access Point 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "wireless access point 1.png"
-# class Wireless Access Point 2LightPng(_Vrt_Light_LightPng):
-#     _icon = "wireless access point 2.png"
-# class Wireless Base 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "wireless base 1.png"
-# class Wireless Router Access Point 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "wireless router access point 1.png"
-# class Wireless Router Access Point 3LightPng(_Vrt_Light_LightPng):
-#     _icon = "wireless router access point 3.png"
-# class Wireless Router FirewallLightPng(_Vrt_Light_LightPng):
-#     _icon = "wireless router firewall.png"
-# class Wireless RouterLightPng(_Vrt_Light_LightPng):
-#     _icon = "wireless router.png"
-# class Workgroup Switch 1LightPng(_Vrt_Light_LightPng):
-#     _icon = "workgroup switch 1.png"
-#
-# Aliases
+    _icon = "3dlaserscanner1.png"
+
+
+class DreiDLaserScanner2LightPng(_Vrt_Light_LightPng):
+    _icon = "3dlaserscanner2.png"
+
+
+class AegisDatacellCellularDatalogger1LightPng(_Vrt_Light_LightPng):
+    _icon = "AegisDatacellCellularDatalogger1.png"
+
+
+class AllenBradleyControllogixPlcLightPng(_Vrt_Light_LightPng):
+    _icon = "Allen-bradleyControllogixPlc.png"
+
+
+class AllenBradleyFlexio1LightPng(_Vrt_Light_LightPng):
+    _icon = "Allen-bradleyFlexio1.png"
+
+
+class AllenBradleyFlexio2LightPng(_Vrt_Light_LightPng):
+    _icon = "Allen-bradleyFlexio2.png"
+
+
+class Appliance1LightPng(_Vrt_Light_LightPng):
+    -icon = "Appliance1.png"
+
+
+class AtmSwitch1LightPng(_Vrt_Light_LightPng):
+    _icon = "AtmSwitch1.png"
+
+
+class AtmSwitch2LightPng(_Vrt_Light_LightPng):
+    _icon = "AtmSwitch2.png"
+
+
+class AuthenticationServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "AuthenticationServer1.png"
+
+
+class BranchFeederMonitorLightPng(_Vrt_Light_LightPng):
+    _icon = "BranchFeederMonitor.png"
+
+
+class CctvCamera1LightPng(_Vrt_Light_LightPng):
+    _icon = "CctvCamera1.png"
+
+
+class CctvCamera3LightPng(_Vrt_Light_LightPng):
+    _icon = "CctvCamera3.png"
+
+
+class CetMultiCircuitPowerMonitorLightPngLightPng(_Vrt_Light_LightPng):
+    _icon = "CetMulti-circuitPowerMonitorLightPng(mcpm).png"
+
+
+class CommunicationsServerLightPng(_Vrt_Light_LightPng):
+    _icon = "CommunicationsServer.png"
+
+
+class CompactPlc1LightPng(_Vrt_Light_LightPng):
+    _icon = "CompactPlc1.png"
+
+
+class CoronisWavenisLightPngLightPng(_Vrt_Light_LightPng):
+    _icon = "CoronisWavenisLightPng.png"
+
+
+class CurrentTransformerStripLightPng(_Vrt_Light_LightPng):
+    _icon = "CurrentTransformerStrip.png"
+
+
+class DataAcquisitionLightPngServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "DataAcquisitionLightPng(scada)server1.png"
+
+
+class DataLoggerRtu1LightPng(_Vrt_Light_LightPng):
+    _icon = "DataLoggerRtu1.png"
+
+
+class DatabaseServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "DatabaseServer1.png"
+
+
+class Desktop1LightPng(_Vrt_Light_LightPng):
+    _icon = "Desktop1.png"
+
+
+class Desktop3LightPng(_Vrt_Light_LightPng):
+    _icon = "Desktop3.png"
+
+
+class DialUpModem1LightPng(_Vrt_Light_LightPng):
+    _icon = "Dial-upModem1.png"
+
+
+class DirectoryServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "DirectoryServer1.png"
+
+
+class DirectoryServerLightPng(_Vrt_Light_LightPng):
+    _icon = "DirectoryServer.png"
+
+
+class DocumentScanner1LightPng(_Vrt_Light_LightPng):
+    _icon = "DocumentScanner1.png"
+
+
+class DocumentScanner3LightPng(_Vrt_Light_LightPng):
+    _icon = "DocumentDcanner3.png"
+
+
+class DocumentScanner5LightPng(_Vrt_Light_LightPng):
+    _icon = "DocumentDcanner5.png"
+
+
+class DocumentScanner7LightPng(_Vrt_Light_LightPng):
+    _icon = "DocumentScanner7.png"
+
+
+class EndUsers1LightPng(_Vrt_Light_LightPng):
+    _icon = "EndUsers1.png"
+
+
+class EnergyUtilityMeterLightPng(_Vrt_Light_LightPng):
+    _icon = "EnergyUtilityMeter.png"
+
+
+class Facsimile1LightPng(_Vrt_Light_LightPng):
+    _icon = "Facsimile1.png"
+
+
+class Facsimile3LightPng(_Vrt_Light_LightPng):
+    _icon = "Facsimile3.png"
+
+
+class FibreOpticBreakOutTray1LightPng(_Vrt_Light_LightPng):
+    _icon = "fibre optic break-out tray 1.png"
+
+
+class FileServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "FileServer1.png"
+
+
+class Firewall1LightPng(_Vrt_Light_LightPng):
+    _icon = "Firewall1.png"
+
+
+class Firewall2LightPng(_Vrt_Light_LightPng):
+    _icon = "Firewall2.png"
+
+
+class FlatPanelDisplay1LightPng(_Vrt_Light_LightPng):
+    _icon = "FlatPanelDisplay1.png"
+
+
+class GasMeterLightPng(_Vrt_Light_LightPng):
+    _icon = "GasMeter.png"
+
+
+class GenericBlackBox1LightPng(_Vrt_Light_LightPng):
+    _icon = "GenericBlackBox1.png"
+
+
+class GenericPlcDcsController1LightPng(_Vrt_Light_LightPng):
+    _icon = "GenericPLCDCSController1.png"
+
+
+class Hub1LightPng(_Vrt_Light_LightPng):
+    _icon = "Hub1.png"
+
+
+class Hub2LightPng(_Vrt_Light_LightPng):
+    _icon = "Hub2.png"
+
+
+class IndustrialBarcodeScanner1LightPng(_Vrt_Light_LightPng):
+    _icon = "IndustrialBarcodeScanner1.png"
+
+
+class IndustrialBarcodeScanner3LightPng(_Vrt_Light_LightPng):
+    _icon = "IndustrialBarcodeScanner3.png"
+
+
+class IndustrialCellularModem1LightPng(_Vrt_Light_LightPng):
+    _icon = "IndustrialCellularModem1.png"
+
+
+class IndustrialCellularModem3LightPng(_Vrt_Light_LightPng):
+    _icon = "IndustrialCellularModem3.png"
+
+
+class IndustrialEthernetToSerialConverter1LightPng(_Vrt_Light_LightPng):
+    _icon = "IndustrialEthernettoSerialConverter1.png"
+
+
+class IndustrialFibreToEthernetConverter1LightPng(_Vrt_Light_LightPng):
+    _icon = "IndustrialFibretoEthernetConverter 1.png"
+
+
+class IndustrialPc1LightPng(_Vrt_Light_LightPng):
+    _icon = "IndustrialPc1.png"
+
+
+class IndustrialPc3LightPng(_Vrt_Light_LightPng):
+    _icon = "IndustrialPc3.png"
+
+
+class IndustrialSwitch1LightPng(_Vrt_Light_LightPng):
+    _icon = "IndustrialSwitch1.png"
+
+
+class InkjetPrinter1LightPng(_Vrt_Light_LightPng):
+    _icon = "InkjetPrinter1.png"
+
+
+class InkjetPrinter3LightPng(_Vrt_Light_LightPng):
+    _icon = "InkjetPrinter3.png"
+
+
+class Laptop1LightPng(_Vrt_Light_LightPng):
+    _icon = "Laptop1.png"
+
+
+class Laptop3LightPng(_Vrt_Light_LightPng):
+    _icon = "Laptop3.png"
+
+
+class LargeHmiPanel1LightPng(_Vrt_Light_LightPng):
+    _icon = "LargeHmiPanel1.png"
+
+
+class LaserPrinter1LightPng(_Vrt_Light_LightPng):
+    _icon = "LaserPrinter1.png"
+
+
+class LaserPrinter3LightPng(_Vrt_Light_LightPng):
+    _icon = "LaserPrinter3.png"
+
+
+class LeadAcidBattery1LightPng(_Vrt_Light_LightPng):
+    _icon = "Lead-acidBattery 1.png"
+
+
+class MailServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "MailServer1.png"
+
+
+class MicrowaveSatelliteBase1LightPng(_Vrt_Light_LightPng):
+    _icon = "MicrowaveSatelliteBase1.png"
+
+
+class MultiRoleServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "Multi-roleServer1.png"
+
+
+class NetworkAttachedStorage1LightPng(_Vrt_Light_LightPng):
+    _icon = "NetworkSttachedStorage1.png"
+
+
+class Projector1LightPng(_Vrt_Light_LightPng):
+    _icon = "Projector1.png"
+
+
+class RackServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "RackServer1.png"
+
+
+class RackmountSwitch1LightPng(_Vrt_Light_LightPng):
+    _icon = "RackmountSwitch1.png"
+
+
+class RoleEmblemAuthenticationLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-Authentication.png"
+
+
+class RoleEmblemDataAcquisitionLightPngLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-DataAcquisitionLightPng(SCADA).png"
+
+
+class RoleEmblemDatabaseLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-Database.png"
+
+
+class RoleEmblemDirectoryLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-Directory.png"
+
+
+class RoleEmblemFileLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-File.png"
+
+
+class RoleEmblemMailLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-Mail.png"
+
+
+class RoleEmblemVideoLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-Video.png"
+
+
+class RoleEmblemVirtualisationObjectLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-VirtualisationObject.png"
+
+
+class RoleEmblemVirtualisationLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-Virtualisation.png"
+
+
+class RoleEmblemWebLightPng(_Vrt_Light_LightPng):
+    _icon = "RoleEmblem-Web.png"
+
+
+class Router1LightPng(_Vrt_Light_LightPng):
+    _icon = "Router1.png"
+
+
+class RouterFirewallLightPng(_Vrt_Light_LightPng):
+    _icon = "RouterFirewall.png"
+
+
+class RouterLightPng(_Vrt_Light_LightPng):
+    _icon = "Router.png"
+
+
+class SinglePhaseEnergyMeterLightPngLightPng(_Vrt_Light_LightPng):
+    _icon = "Single-phaseEnergyMeter(DIN).png"
+
+
+class SinglePhaseEnergyMeter1LightPng(_Vrt_Light_LightPng):
+    _icon = "Single-phaseEnergyMeter1.png"
+
+
+class SmallHmiPanel1LightPng(_Vrt_Light_LightPng):
+    _icon = "SmallHMIPanel1.png"
+
+
+class SmallTouchPanel1LightPng(_Vrt_Light_LightPng):
+    _icon = "SmallTouchPanel1.png"
+
+
+class Smartphone1LightPng(_Vrt_Light_LightPng):
+    _icon = "Smartphone1.png"
+
+
+class Smartphone3LightPng(_Vrt_Light_LightPng):
+    _icon = "Smartphone3.png"
+
+
+class SolarPvPanel1LightPng(_Vrt_Light_LightPng):
+    _icon = "SolarPVPanel1.png"
+
+
+class SolarPvPanel2LightPng(_Vrt_Light_LightPng):
+    _icon = "SolarPVPanel2.png"
+
+
+class Switch1LightPng(_Vrt_Light_LightPng):
+    _icon = "Switch1.png"
+
+
+class Switch2LightPng(_Vrt_Light_LightPng):
+    _icon = "Switch2.png"
+
+
+class Tablet1LightPng(_Vrt_Light_LightPng):
+    _icon = "Tablet1.png"
+
+
+class Tablet3LightPng(_Vrt_Light_LightPng):
+    _icon = "Tablet3.png"
+
+
+class Telephone1LightPng(_Vrt_Light_LightPng):
+    _icon = "Telephone1.png"
+
+
+class Telephone3LightPng(_Vrt_Light_LightPng):
+    _icon = "Telephone3.png"
+
+
+class ThinClient1LightPng(_Vrt_Light_LightPng):
+    _icon = "ThinClient1.png"
+
+
+class ThinClient3LightPng(_Vrt_Light_LightPng):
+    _icon = "ThinClient3.png"
+
+
+class ThreePhaseEnergyMeterLightPngLightPng(_Vrt_Light_LightPng):
+    _icon = "Three-phaseEnergyMeterLightPng(DIN).png"
+
+
+class ThreePhaseEnergyMeter1LightPng(_Vrt_Light_LightPng):
+    _icon = "Three-phaseEnergyMeter1.png"
+
+
+class ThreePhaseMultiFunctionMeter1LightPng(_Vrt_Light_LightPng):
+    _icon = "Three-phaseMulti-functionMeter1.png"
+
+
+class ThreePhasePowerQualityAnalyser1LightPng(_Vrt_Light_LightPng):
+    _icon = "Three-phasePowerQualityAnalyser1.png"
+
+
+class TowerServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "TowerServer1.png"
+
+
+class UnifiedCommunicationsServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "UnifiedCommunicationsServer1.png"
+
+
+class UninterruptiblePowerSupplyLightPng1LightPng(_Vrt_Light_LightPng):
+    _icon = "uninterruptiblePowerSupplyLightPng(UPS)1.png"
+
+
+class VideoServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "VideoServer1.png"
+
+
+class VirtualisationObjectServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "VirtualisationObjectServer1.png"
+
+
+class VirtualisationServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "VirtualisationServer1.png"
+
+
+class VpnConcentrator1LightPng(_Vrt_Light_LightPng):
+    _icon = "VPNConcentrator1.png"
+
+
+class VpnConcentrator2LightPng(_Vrt_Light_LightPng):
+    _icon = "VPNConcentrator2.png"
+
+
+class WagesHubASeries1LightPng(_Vrt_Light_LightPng):
+    _icon = "WagesHubASeries1.png"
+
+
+class WaterThermalMeterLightPng(_Vrt_Light_LightPng):
+    _icon = "WaterThermalMeter.png"
+
+
+class WebServer1LightPng(_Vrt_Light_LightPng):
+    _icon = "WebServer1.png"
+
+
+class WiredSegmentLightPngLightPng(_Vrt_Light_LightPng):
+    _icon = "WiredSegmentLightPng(Internet).png"
+
+
+class WiredSegmentLightPngLightPng(_Vrt_Light_LightPng):
+    _icon = "WiredSegmentLightPng(subnet).png"
+
+
+class WirelessAccessPoint1LightPng(_Vrt_Light_LightPng):
+    _icon = "WirelessAccessPoint1.png"
+
+
+class WirelessAccessPoint2LightPng(_Vrt_Light_LightPng):
+    _icon = "WirelessAccessPoint2.png"
+
+
+class WirelessBase1LightPng(_Vrt_Light_LightPng):
+    _icon = "WirelessBase1.png"
+
+
+class WirelessRouterAccessPoint1LightPng(_Vrt_Light_LightPng):
+    _icon = "WirelessRouterAccessPoint1.png"
+
+
+class WirelessRouterAccessPoint3LightPng(_Vrt_Light_LightPng):
+    _icon = "WirelessRouterAccessPoint3.png"
+
+
+class WirelessRouterFirewallLightPng(_Vrt_Light_LightPng):
+    _icon = "WirelessRouterFirewall.png"
+
+
+class WirelessRouterLightPng(_Vrt_Light_LightPng):
+    _icon = "WirelessRouter.png"
+
+
+class WorkgroupSwitch1LightPng(_Vrt_Light_LightPng):
+    _icon = "WorkgroupSwitch1.png"
