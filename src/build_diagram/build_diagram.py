@@ -330,6 +330,9 @@ class BuildDiagram:
         """
         path, file_name = os.path.split(self.save_path)
         file_name = file_name.split('.')[0]
+        path_for_sub_diagrams = f"{path}/{file_name}-subdiagrams/{file_name}" if path != "" \
+            else f"{file_name}-subdiagrams/{file_name}"
+
         members = []
         graph_attr = {
             "bgcolor": f"{self.graph_bg_color}",
@@ -357,7 +360,7 @@ class BuildDiagram:
             if str(self.yaml.get("groups").get(f"{i}").get("rack")) == "True":
                 direction = "LR"
             else:
-                direction = self.graph_direction
+                direction = "TB"
             # if the sub-group has no layout then the main layout of the diagram will be used instead
             if self.yaml.get("groups").get(f"{i}").get("layout") is None:
                 layout = str(self.graph_layout)
@@ -373,10 +376,10 @@ class BuildDiagram:
                 "nodesep": "1.0",
                 "ranksep": "2.0",
                 "splines": f"{self.yaml.get}",
-                "rankdir": direction
+                "rankdir": direction,
             }
             with Diagram(self.set_diagram_title(),
-                         filename=f"{path}/{file_name}-subdiagrams/{file_name}_{i}",
+                         filename=f"{path_for_sub_diagrams}_{i}",
                          outformat=self.output_format,
                          show=False, graph_attr=subgraph_attr):
                 # Create tooltip for each group
