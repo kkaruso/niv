@@ -8,7 +8,7 @@ test:pylint:
     - pip install ruamel.yaml
     - pylint --ignored-classes=_socketobject --max-line-length=150 --max-statements=50 *.py
 
-test:pytest:
+'test:pytest:
   image: python:3.9
   before_script:
     - python -V # Print out python version for debugging
@@ -18,7 +18,7 @@ test:pytest:
     - pip install ruamel.yaml
     - pip install graphviz
     - apt-get update && apt-get upgrade -y graphviz
-    - python -m pytest
+    - python -m pytest'
 
 build-package:
   stage: deploy
