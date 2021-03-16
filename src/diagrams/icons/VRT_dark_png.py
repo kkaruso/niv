@@ -5,7 +5,7 @@ from . import _ICONS
 
 class _Vrt_Dark_DarkPng(_ICONS):
     _type = "VRT_dark_DarkPng"
-    _icon_dir = "../resources/icons/VRT_Icons/VRT_DarkPng/VRT_dark_DarkPng"
+    _icon_dir = "../resources/icons/VRT_Icons/VRT_png/VRT_dark_png"
 
 
 class LaserScanner1DarkPng(_Vrt_Dark_DarkPng):

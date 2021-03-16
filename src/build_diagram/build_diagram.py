@@ -11,6 +11,11 @@ Dynamically creates the diagram
 """
 import ipaddress
 from datetime import datetime
+
+from src.diagrams.icons.VRT_dark_png import *
+from src.diagrams.icons.VRT_light_png import *
+from src.diagrams.icons.VRT_dark_svg import *
+from src.diagrams.icons.VRT_light_svg import *
 from src.niv_logger import niv_logger
 from src.diagrams import *
 from src.diagrams.icons.ciscoPng import *
