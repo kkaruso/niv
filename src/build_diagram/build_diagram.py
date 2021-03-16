@@ -326,6 +326,9 @@ class BuildDiagram:
         """
         path, file_name = os.path.split(self.save_path)
         file_name = file_name.split('.')[0]
+        path_for_sub_diagrams = f"{path}/{file_name}-subdiagrams/{file_name}" if path != "" \
+            else f"{file_name}-subdiagrams/{file_name}"
+
         members = []
         graph_attr = {
             "bgcolor": f"{self.graph_bg_color}",
@@ -371,7 +374,7 @@ class BuildDiagram:
                 "rankdir": direction
             }
             with Diagram(self.set_diagram_title(),
-                         filename=f"{path}/{file_name}-subdiagrams/{file_name}_{i}",
+                         filename=f"{path_for_sub_diagrams}_{i}",
                          outformat=self.output_format,
                          show=False, graph_attr=subgraph_attr):
                 # Create tooltip for each group
