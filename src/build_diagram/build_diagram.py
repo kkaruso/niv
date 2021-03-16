@@ -320,6 +320,7 @@ class BuildDiagram:
         """
         Creates the diagram with the right amount of nodes, clusters and connections
         """
+        path, file_name = os.path.split(self.save_path)
         members = []
         graph_attr = {
             "bgcolor": f"{self.graph_bg_color}",
@@ -365,7 +366,7 @@ class BuildDiagram:
                 "rankdir": direction
             }
             with Diagram(self.set_diagram_title(),
-                         filename=f"group_diagrams/{self.filename}_{i}",
+                         filename=f"{path}/group_diagrams/{file_name}_{i}",
                          outformat=self.output_format,
                          show=False, graph_attr=subgraph_attr):
                 # Create tooltip for each group
