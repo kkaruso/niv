@@ -384,46 +384,47 @@ class BuildDiagram:
                 with Cluster(self.yaml.get("groups").get(i).get("name"), graph_attr=clustr_attr):
                     switches_nodes = {}
                     intent_con_ports = {}
-                    inEtherPort = {}
-                    outEtherPort = {}
+                    in_ether_port = {}
+                    out_ether_port = {}
                     switches_in_group = []
 
                     for member in list(self.group_members.get(i)):
                         intent_con_ports[member] = 0
-                        inEtherPort[member] = 0
-                        outEtherPort[member] = 0
+                        in_ether_port[member] = 0
+                        out_ether_port[member] = 0
                     # find out how many connections are inside each group
                     for member in list(self.group_members.get(i)):
-                        inEthernet = 0
-                        ethBetweenSwitches = 0
+                        in_ethernet = 0
+                        eth_between_switches = 0
                         for membr in self.group_members.get(i):
+                            print(f"member: {member}, membr: {membr}")
                             for endpoint in range(0, len(self.connections_endpoints)):
                                 if membr == self.connections_endpoints[endpoint][0]:
                                     if self.connections_endpoints[endpoint][1] == member:
                                         if not self.switch_type[membr]:
-                                            inEthernet = inEthernet + 1
+                                            in_ethernet = in_ethernet + 1
                                         else:
-                                            ethBetweenSwitches = ethBetweenSwitches + 1
+                                            eth_between_switches = eth_between_switches + 1
                                             intent_con_ports[membr] = intent_con_ports[membr] + 1
-                                            inEthernet = inEthernet + 1
-                        inEtherPort[member] = inEthernet
+                                            in_ethernet = in_ethernet + 1
+                        in_ether_port[member] = in_ethernet
                     for member in list(self.group_members.get(i)):
-                        groupsDiagrams = []
+                        groups_diagrams = []
                         # create a list of switches with switch-view for each group
                         if self.switch_type[member]:
                             switches_in_group.append(member)
                             switch_nodes = []
                             # How many ethernet ports are going outside the group ?
                             for _, switch in enumerate(switches_in_group):
-                                outEther = 0
+                                out_ether = 0
                                 for __ in range(len(self.connections_endpoints)):
                                     if switch in self.connections_endpoints[__]:
                                         if self.connections_endpoints[__][0] not in self.group_members.get(i):
-                                            outEther += 1
+                                            out_ether += 1
                                         if self.connections_endpoints[__][1] not in self.group_members.get(i):
-                                            outEther += 1
+                                            out_ether += 1
 
-                            outEtherPort[member] = outEther
+                            out_ether_port[member] = out_ether
 
                             # read url for each port and save it in a list
                             for __ in range(len(self.connections_endpoints)):
@@ -437,7 +438,7 @@ class BuildDiagram:
                                             # and add it to the list
                                             if group_member in self.connections_endpoints[__]:
                                                 if member not in self.group_members.get(group):
-                                                    groupsDiagrams.append(group)
+                                                    groups_diagrams.append(group)
 
                                 # if member == self.connections_endpoints[__][0]:
                                 #     for o in self.yaml.get("groups"):
@@ -454,8 +455,8 @@ class BuildDiagram:
 
                             # create the ports with the colored icons for every single switch
                             self.create_switch(self.switch_ports[member], self.nodes_name[member], switch_nodes,
-                                               inEtherPort[member] + intent_con_ports[member], outEtherPort[member],
-                                               groupsDiagrams)
+                                               in_ether_port[member] + intent_con_ports[member], out_ether_port[member],
+                                               groups_diagrams)
                             switches_nodes[member] = switch_nodes
                         else:
                             # Create other devices except switches
@@ -473,20 +474,20 @@ class BuildDiagram:
                                 # check if group_member is in endpoints at [0]
                                 if membr == self.connections_endpoints[endpoint][0]:
                                     # iterate through switches
-                                    for endEth in switches_in_group:
+                                    for end_eth in switches_in_group:
                                         # check if the other endpoint is a switch
-                                        if self.connections_endpoints[endpoint][1] == endEth:
-                                            eths = switches_nodes.get(endEth)
+                                        if self.connections_endpoints[endpoint][1] == end_eth:
+                                            eths = switches_nodes.get(end_eth)
                                             if membr in switches_in_group:
                                                 ets = switches_nodes.get(membr)
                                                 _ = ets[counter_for_eth_in_switch[membr]] - eths[
-                                                    counter_for_eth_in_switch[endEth]]
-                                                counter_for_eth_in_switch[endEth] += 1
+                                                    counter_for_eth_in_switch[end_eth]]
+                                                counter_for_eth_in_switch[end_eth] += 1
                                                 counter_for_eth_in_switch[membr] += 1
                                             else:
-                                                _ = eths[counter_for_eth_in_switch[endEth]] - self.instances[
-                                                    counter_for_eth_in_switch[endEth]]
-                                                counter_for_eth_in_switch[endEth] += 1
+                                                _ = eths[counter_for_eth_in_switch[end_eth]] - self.instances[
+                                                    counter_for_eth_in_switch[end_eth]]
+                                                counter_for_eth_in_switch[end_eth] += 1
                     self.create_connections(True)
                     self.instances.clear()
 
@@ -803,11 +804,11 @@ class BuildDiagram:
 
         with Cluster(name):
             if ports % 2:
-                r = (ports - 1) / 2
-                raw = int(r)
+                raw = (ports - 1) / 2
+                raw = int(raw)
             else:
-                r = ports / 2
-                raw = int(r)
+                raw = ports / 2
+                raw = int(raw)
             # create busy ports
             for k in range(0, busy):
                 nodes.append(OsaEthernetBusy(f"eth{k + 1}"))
@@ -833,9 +834,9 @@ class BuildDiagram:
             # make the connections between ports transparent
             for k in range(out + busy, ports):
                 nodes.append(OsaEthernetFree(f"eth{k + 1}"))
-            for b in range(0, raw):
-                if b + raw <= ports:
-                    nodes[b] - Edge(color="transparent") - nodes[b + raw]
+            for k in range(0, raw):
+                if k + raw <= ports:
+                    _ = nodes[k] - Edge(color="transparent") - nodes[k + raw]
 
     def get_connections(self, member_name: str) -> list:
         """
