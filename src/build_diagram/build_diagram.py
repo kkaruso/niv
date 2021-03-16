@@ -360,7 +360,7 @@ class BuildDiagram:
             if str(self.yaml.get("groups").get(f"{i}").get("rack")) == "True":
                 direction = "LR"
             else:
-                direction = self.graph_direction
+                direction = "TB"
             # if the sub-group has no layout then the main layout of the diagram will be used instead
             if self.yaml.get("groups").get(f"{i}").get("layout") is None:
                 layout = str(self.graph_layout)
@@ -376,7 +376,7 @@ class BuildDiagram:
                 "nodesep": "1.0",
                 "ranksep": "2.0",
                 "splines": f"{self.yaml.get}",
-                "rankdir": direction
+                "rankdir": direction,
             }
             with Diagram(self.set_diagram_title(),
                          filename=f"{path_for_sub_diagrams}_{i}",
