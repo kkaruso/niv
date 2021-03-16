@@ -78,53 +78,55 @@ class BuildDiagram:
         self.nodes_icon = self.fill_dictionary("nodes", "icon", "")
 
         # Get text of each node
-        self.nodes_text = self.fill_dictionary("nodes", "text", self.yaml_defaults.get('icons').get(
+        self.nodes_text = self.fill_dictionary("nodes", "text", self.yaml_defaults.get('nodes').get(
             'text') or "node")
 
         # Get Ports-number of each switch default = 24
-        self.switch_ports = self.fill_dictionary("nodes", "ports", "24")
+        self.switch_ports = self.fill_dictionary("nodes", "ports", self.yaml_defaults.get('nodes').get(
+            'ports') or 24)
 
         # Get if type switch of each nodes
-        self.switch_type = self.fill_dictionary("nodes", "switch-view", False)
+        self.switch_type = self.fill_dictionary("nodes", "switch-view", self.yaml_defaults.get('nodes').get(
+            'switch-view') or False)
 
         # Get ip of each node
-        self.nodes_ip = self.fill_dictionary("nodes", "ip", self.yaml_defaults.get('icons').get(
+        self.nodes_ip = self.fill_dictionary("nodes", "ip", self.yaml_defaults.get('nodes').get(
             'ip') or "")
 
         # Get port of each node
-        self.nodes_port = self.fill_dictionary("nodes", "port", self.yaml_defaults.get('icons').get(
+        self.nodes_port = self.fill_dictionary("nodes", "port", self.yaml_defaults.get('nodes').get(
             'port') or "")
 
         # Get the URL of each node, clear empty URLs
-        self.nodes_url = self.fill_dictionary("nodes", "url", self.yaml_defaults.get('icons').get(
+        self.nodes_url = self.fill_dictionary("nodes", "url", self.yaml_defaults.get('nodes').get(
             'url') or "")
 
         # Get the tooltip of each node
-        self.nodes_tooltip = self.fill_dictionary("nodes", "tooltip", self.yaml_defaults.get('icons').get(
+        self.nodes_tooltip = self.fill_dictionary("nodes", "tooltip", self.yaml_defaults.get('nodes').get(
             'tooltip') or "")
 
         # Get mac addresses of each node
-        self.nodes_mac = self.fill_dictionary("nodes", "mac", self.yaml_defaults.get('icons').get(
+        self.nodes_mac = self.fill_dictionary("nodes", "mac", self.yaml_defaults.get('nodes').get(
             'mac') or "")
 
         # Get model number of each node
-        self.nodes_modelnr = self.fill_dictionary("nodes", "modelnr", self.yaml_defaults.get('icons').get(
+        self.nodes_modelnr = self.fill_dictionary("nodes", "modelnr", self.yaml_defaults.get('nodes').get(
             'modelnr') or "")
 
         # Get manufacturer of each node
-        self.nodes_manufactuer = self.fill_dictionary("nodes", "manufacturer", self.yaml_defaults.get('icons').get(
+        self.nodes_manufactuer = self.fill_dictionary("nodes", "manufacturer", self.yaml_defaults.get('nodes').get(
             'manufacturer') or "")
 
         # Get storage information of each node
-        self.nodes_storage = self.fill_dictionary("nodes", "storage", self.yaml_defaults.get('icons').get(
+        self.nodes_storage = self.fill_dictionary("nodes", "storage", self.yaml_defaults.get('nodes').get(
             'storage') or "")
 
         # Get X coordinate of each node
-        self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('icons').get(
+        self.nodes_x = self.fill_dictionary("nodes", "x", self.yaml_defaults.get('nodes').get(
             'x') or 0)
 
         # Get Y coordinate of each node
-        self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('icons').get(
+        self.nodes_y = self.fill_dictionary("nodes", "y", self.yaml_defaults.get('nodes').get(
             'y') or 0)
 
         # Get name of each group
@@ -497,12 +499,17 @@ class BuildDiagram:
 
         :return: Title of diagram
         """
-        _dict = {"Title": self.set_variables("title", "text", "Diagram"),
-                 "Description": self.set_variables("title", "subText", ""),
-                 "Author": self.set_variables("title", "author", ""),
+        _dict = {"Title": self.set_variables("title", "text", self.yaml_defaults.get('title').get(
+                     'text') or "Diagram"),
+                 "Description": self.set_variables("title", "subText", self.yaml_defaults.get('title').get(
+                     'subText') or ""),
+                 "Author": self.set_variables("title", "author", self.yaml_defaults.get('title').get(
+                     'author') or ""),
                  "Date": self.set_variables("title", "date", datetime.today().strftime('%d.%m.%Y')),
-                 "Company": self.set_variables("title", "company", ""),
-                 "Version": self.set_variables("title", "version", 1.0)}
+                 "Company": self.set_variables("title", "company", self.yaml_defaults.get('title').get(
+                     'company') or ""),
+                 "Version": self.set_variables("title", "version", self.yaml_defaults.get('title').get(
+                     'version') or 1.0)}
         title = ""
         for item in _dict:
             if _dict[item] != "":
@@ -783,11 +790,17 @@ class BuildDiagram:
     def create_switch(self, ports, name, nodes, busy, out, url):
         """
         function create switches as busy or free
+
+        :param url:
+        :param out:
         :param ports: how many ports to create
         :param name: the name of the switch
         :param nodes: empty list to fill with the created switches
         :param busy: how many busy nodes to create
         """
+        if busy + out > ports:
+            ports = busy + out
+
         with Cluster(name):
             if ports % 2:
                 r = (ports - 1) / 2
@@ -802,10 +815,20 @@ class BuildDiagram:
             # create Free ports
             for k in range(busy, out + busy):
                 if not url:
-                    nodes.append(OsaEthernetCable(f"eth{k + 1}"))
+                    nodes.append(OsaEthernetCable(f"\n\neth {k + 1}\nto\n{switch}\nin\n{self.group_name[group]}",
+                                                  URL=f"{self.filename}_{group}.{self.output_format}"))
+                    # nodes.append(OsaEthernetCable(f"eth{k + 1}"))
                 else:
-                    nodes.append(OsaEthernetCable(f"eth{k + 1}",
-                                                  URL=f"{self.filename}_{url.pop()}.{self.output_format}"))
+                    switch = url.pop()
+                    group = url.pop()
+                    nodes.append(OsaEthernetCable(
+                        f"\n\neth {k + 1}\nto\n{self.nodes_text[switch]}\nin\n{self.group_name[group]}",
+                        URL=f"{self.filename}_{group}.{self.output_format}"))
+                # if not url:
+                #     nodes.append(OsaEthernetCable(f"eth{k + 1}"))
+                # else:
+                #     nodes.append(OsaEthernetCable(f"eth{k + 1}",
+                #                                   URL=f"{self.filename}_{url.pop()}.{self.output_format}"))
 
             # make the connections between ports transparent
             for k in range(out + busy, ports):
