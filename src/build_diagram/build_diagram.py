@@ -73,7 +73,7 @@ class BuildDiagram:
         self.title_font_size = self.set_variables("title", "fontSize", self.yaml_defaults.get('title').get(
             'fontSize') or 15)
 
-        self.title_font_color = self.set_variables("title", "fontColor", self.yaml_defaults.get('title'). get(
+        self.title_font_color = self.set_variables("title", "fontColor", self.yaml_defaults.get('title').get(
             'fontColor') or "black")
 
         # TODO: Add placeholder icon to set as default for nodes_icon
@@ -360,7 +360,7 @@ class BuildDiagram:
             if str(self.yaml.get("groups").get(f"{i}").get("rack")) == "True":
                 direction = "LR"
             else:
-                direction = self.graph_direction
+                direction = "TB"
             # if the sub-group has no layout then the main layout of the diagram will be used instead
             if self.yaml.get("groups").get(f"{i}").get("layout") is None:
                 layout = str(self.graph_layout)
@@ -376,7 +376,7 @@ class BuildDiagram:
                 "nodesep": "1.0",
                 "ranksep": "2.0",
                 "splines": f"{self.yaml.get}",
-                "rankdir": direction
+                "rankdir": direction,
             }
             with Diagram(self.set_diagram_title(),
                          filename=f"{path_for_sub_diagrams}_{i}",
@@ -448,21 +448,6 @@ class BuildDiagram:
                                                     groups_diagrams.append(group)
                                                     groups_diagrams.append(group_member)
 
-                                # if member == self.connections_endpoints[__][0]:
-                                #     for o in self.yaml.get("groups"):
-                                #         for one in list(self.group_members.get(o)):
-                                #             if self.connections_endpoints[__][1] == one:
-                                #                 if member not in self.group_members.get(o):
-                                #                     groupsDiagrams.append(o)
-                                #                     groupsDiagrams.append(one)
-                                # if member == self.connections_endpoints[__][1]:
-                                #     for o in self.yaml.get("groups"):
-                                #         for one in list(self.group_members.get(o)):
-                                #             if self.connections_endpoints[__][0] == one:
-                                #                 if member not in self.group_members.get(o):
-                                #                     groupsDiagrams.append(o)
-                                #                     groupsDiagrams.append(one)
-
                             # create the ports with the colored icons for every single switch
                             self.create_switch(self.switch_ports[member], self.nodes_name[member], switch_nodes,
                                                in_ether_port[member] + intent_con_ports[member], out_ether_port[member],
@@ -498,7 +483,7 @@ class BuildDiagram:
                                                 _ = eths[counter_for_eth_in_switch[end_eth]] - self.instances[
                                                     counter_for_eth_in_switch[end_eth]]
                                                 counter_for_eth_in_switch[end_eth] += 1
-                    self.create_connections(True)
+                    self.create_connections(False)
                     self.instances.clear()
 
         print("Diagram successfully created")
@@ -511,7 +496,7 @@ class BuildDiagram:
         :return: Title of diagram
         """
         _dict = {"Title": self.set_variables("title", "text", self.yaml_defaults.get('title').get(
-                     'text') or "Diagram"),
+            'text') or "Diagram"),
                  "Description": self.set_variables("title", "subText", self.yaml_defaults.get('title').get(
                      'subText') or ""),
                  "Author": self.set_variables("title", "author", self.yaml_defaults.get('title').get(
@@ -734,8 +719,6 @@ class BuildDiagram:
         tooltip = ""
 
         if element == "node":
-            # tooltip = self.nodes_tooltip[node]
-            # if self.nodes_tooltip[node] == "":
             tooltip = f"Name: {self.nodes_name[node]}\n" \
                       f"MAC-Address: {self.nodes_mac[node]}\n" \
                       f"Modelnr: {self.nodes_modelnr[node]}\n" \
@@ -762,28 +745,29 @@ class BuildDiagram:
         elif element == "connection":
             first_endpoint = self.connections_endpoints[connection][0]
             second_endpoint = self.connections_endpoints[connection][1]
-            first_port = self.connections_ports[connection][0]
-            second_port = self.connections_ports[connection][1]
 
-            tooltip_without_port = f"{self.nodes_name[second_endpoint]} " \
-                                   f"<---> " \
-                                   f"{self.nodes_name[first_endpoint]}"
+            try:
+                first_port = self.connections_ports[connection][0]
+                second_port = self.connections_ports[connection][1]
+                tooltip_without_port = f"{self.nodes_name[second_endpoint]} " \
+                                       f"<---> " \
+                                       f"{self.nodes_name[first_endpoint]}"
 
-            tooltip_with_port = f"{self.nodes_name[second_endpoint]} (Port: {second_port}) " \
-                                f"<---> " \
-                                f"{self.nodes_name[first_endpoint]} (Port: {first_port})"
+                tooltip_with_port = f"{self.nodes_name[second_endpoint]} (Port: {second_port}) " \
+                                    f"<---> " \
+                                    f"{self.nodes_name[first_endpoint]} (Port: {first_port})"
 
-            # If a tooltip is given within the connections, set it as the tooltip
-            if self.connections_tooltip[connection] != "":
-                tooltip_with_port = f"{tooltip_with_port}\n{self.connections_tooltip[connection]}"
-                tooltip_without_port = f"{tooltip_without_port}\n{self.connections_tooltip[connection]}"
-            # If no tooltip is given within the connection, set both endpoints as the tooltip
-            if self.connections_tooltip[connection] == "":
+                # If a tooltip is given within the connections, set it as the tooltip
+                if self.connections_tooltip[connection] != "":
+                    tooltip_with_port = f"{tooltip_with_port}\n{self.connections_tooltip[connection]}"
+                    tooltip_without_port = f"{tooltip_without_port}\n{self.connections_tooltip[connection]}"
+                # If no tooltip is given within the connection, set both endpoints as the tooltip
+                # if self.connections_tooltip[connection] == "":
                 # If no ports are given for a connection only print endpoints
                 if self.connections_ports[connection][1] == "" or self.connections_ports[connection][0] == "":
                     tooltip = tooltip_without_port
                 else:
-                    # Detail level 0 creates both diagrams for deatail level 1 and 2
+                    # Detail level 0 creates both diagrams for detail level 1 and 2
                     if self.detail_level == 0:
                         if self.counter == 1:
                             tooltip = tooltip_without_port
@@ -797,6 +781,15 @@ class BuildDiagram:
                     # Detail level 2 shows ports aswell
                     else:
                         tooltip = tooltip_with_port
+            except IndexError:
+                log_message = f"For endpoints {self.connections_endpoints[connection]} only 1 port " \
+                              f"{self.connections_ports[connection]} is given. " \
+                              f"Add another one or remove them completely."
+                self.logger.verbose_warning(log_message, self.verbose)
+                print(log_message)
+                tooltip = f"{self.nodes_name[second_endpoint]} " \
+                          f"<---> " \
+                          f"{self.nodes_name[first_endpoint]}"
 
         return tooltip
 
