@@ -260,7 +260,6 @@ class BuildDiagram:
                     self.logger.verbose_warning(log_message, self.verbose)
                     print(log_message)
 
-
         # Create connections
         for i, endpoints in enumerate(self.connections_endpoints):
             first = endpoints[0]
@@ -413,16 +412,11 @@ class BuildDiagram:
                                 outEther = 0
                                 for __ in range(len(self.connections_endpoints)):
                                     if switch in self.connections_endpoints[__]:
-                                        if self.group_members.get(i) not in self.connections_endpoints[__]:
+                                        if self.connections_endpoints[__][0] not in self.group_members.get(i):
+                                            outEther += 1
+                                        if self.connections_endpoints[__][1] not in self.group_members.get(i):
                                             outEther += 1
 
-
-                                    # if switch == self.connections_endpoints[__][0]:
-                                    #     if self.connections_endpoints[__][1] not in self.group_members.get(i):
-                                    #         outEther = outEther + 1
-                                    # if switch == self.connections_endpoints[__][1]:
-                                    #     if self.connections_endpoints[__][0] not in self.group_members.get(i):
-                                    #         outEther = outEther + 1
                             outEtherPort[member] = outEther
 
                             # read url for each port and save it in a list
@@ -439,17 +433,9 @@ class BuildDiagram:
                                                 if member not in self.group_members.get(group):
                                                     groupsDiagrams.append(group)
 
-
-                                # # check if member in endpoints at 0
                                 # if member == self.connections_endpoints[__][0]:
-                                #     print(self.yaml.get("groups"))
-                                #     # iterate through groups in yaml
                                 #     for o in self.yaml.get("groups"):
-                                #         # iterate through groups.members at o
                                 #         for one in list(self.group_members.get(o)):
-                                #             print(f"group_members: {self.group_members.get(o)}")
-                                #             print(f"member: {one}")
-                                #             # check if group_member is in endpoint at 1
                                 #             if self.connections_endpoints[__][1] == one:
                                 #                 if member not in self.group_members.get(o):
                                 #                     groupsDiagrams.append(o)
