@@ -336,7 +336,6 @@ class BuildDiagram:
             "splines": f"{self.graph_splines}",
             "rankdir": f"{self.graph_direction}"
         }
-
         with Diagram(self.set_diagram_title(),
                      filename=self.filename + suffix,
                      outformat=self.output_format,
@@ -345,22 +344,18 @@ class BuildDiagram:
             self.create_nodes(members)
             # Create connections
             self.create_connections(True)
-
         # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
         for _, i in enumerate(self.yaml.get("groups")):
-
             # if rack in yaml is on True then the direction of the sub-group icons will be Left to Right
             if str(self.yaml.get("groups").get(f"{i}").get("rack")) == "True":
                 direction = "LR"
             else:
                 direction = self.graph_direction
-
             # if the sub-group has no layout then the main layout of the diagram will be used instead
             if self.yaml.get("groups").get(f"{i}").get("layout") is None:
                 layout = str(self.graph_layout)
             else:
                 layout = str(self.yaml.get("groups").get(f"{i}").get("layout"))
-
             # modify the subgroup with attributes
             subgraph_attr = {
                 "bgcolor": f"{self.graph_bg_color}",
@@ -373,52 +368,86 @@ class BuildDiagram:
                 "splines": f"{self.yaml.get}",
                 "rankdir": direction
             }
-
             with Diagram(self.set_diagram_title(),
                          filename=f"group_diagrams/{self.filename}_{i}",
                          outformat=self.output_format,
                          show=False, graph_attr=subgraph_attr):
-
                 # Create tooltip for each group
                 tooltip = self.create_tooltip(element="group", group=i)
-
                 clustr_attr = {
                     "fontname": "helvetica-bold",
                     "margin": "20",
                     "tooltip": f"{tooltip}"
                 }
                 with Cluster(self.yaml.get("groups").get(f"{i}").get("name"), graph_attr=clustr_attr):
-
+                    switches_nodes = {}
+                    intent_con_ports = {}
+                    inEtherPort = {}
+                    outEtherPort = {}
+                    switches_in_group = []
                     for member in list(self.group_members.get(i)):
-                        switches_in_group = []
-                        connectEth = 0
-                        # create Switch-View for the Switches inside the subgroups
+                        intent_con_ports[member] = 0
+                        inEtherPort[member] = 0
+                        outEtherPort[member] = 0
+                    # find out how many connections are inside each group
+                    for member in list(self.group_members.get(i)):
+                        inEthernet = 0
+                        ethBetweenSwitches = 0
+                        for __, membr in enumerate(self.group_members.get(i)):
+                            for end in range(0, len(self.connections_endpoints)):
+                                if membr == self.connections_endpoints[end][0]:
+                                    if self.connections_endpoints[end][1] == member:
+                                        if not self.switch_type[membr]:
+                                            inEthernet = inEthernet + 1
+                                        else:
+                                            ethBetweenSwitches = ethBetweenSwitches + 1
+                                            intent_con_ports[membr] = intent_con_ports[membr] + 1
+                                            inEthernet = inEthernet + 1
+                        inEtherPort[member] = inEthernet
+                    for member in list(self.group_members.get(i)):
+                        # create a list of switches with switch-view for each group
                         if self.switch_type[member]:
                             switches_in_group.append(member)
                             switch_nodes = []
-                            for memb, __ in enumerate(self.group_members.get(i)):
-                                for end in range(0, len(self.connections_endpoints)):
-                                    if __ == self.connections_endpoints[end][0]:
-                                        for eth, ___ in enumerate(switches_in_group):
-                                            if self.connections_endpoints[end][1] == ___:
-                                                connectEth = connectEth + 1
+                            # How many ethernet ports are going outside the group ?
+                            for _, switch in enumerate(switches_in_group):
+                                outEther = 0
+                                for __ in range(len(self.connections_endpoints)):
+                                    if switch == self.connections_endpoints[__][0]:
+                                        if self.connections_endpoints[__][1] not in self.group_members.get(i):
+                                            outEther = outEther + 1
+                                    if switch == self.connections_endpoints[__][1]:
+                                        if self.connections_endpoints[__][0] not in self.group_members.get(i):
+                                            outEther = outEther + 1
+                            outEtherPort[member] = outEther
+                            # create the ports with the colored icons for every single switch
                             self.create_switch(self.switch_ports[member], self.nodes_text[member], switch_nodes,
-                                               connectEth)
-                            connectEth = 0
-
-                        # Create the nodes of the group inside a cluster
+                                               inEtherPort[member] + intent_con_ports[member], outEtherPort[member])
+                            switches_nodes[member] = switch_nodes
                         else:
+                            # Create other devices except switches
                             self.create_single_node(member, layout, False)
-
-                        if self.instances:
-                            for memb, __ in enumerate(self.group_members.get(i)):
-                                for end in range(0, len(self.connections_endpoints)):
-                                    if __ == self.connections_endpoints[end][0]:
-                                        for eth, ___ in enumerate(switches_in_group):
-                                            if self.connections_endpoints[end][1] == ___:
-                                                switch_nodes[connectEth] - self.instances[memb]
-                                                connectEth = connectEth + 1
-
+                    # create the connection inside the group and between switches
+                    counter_for_eth_in_switch = {}
+                    for _ in switches_in_group:
+                        counter_for_eth_in_switch[_] = 0
+                    if self.instances:
+                        for membr in self.group_members.get(i):
+                            for end in range(len(self.connections_endpoints)):
+                                if membr == self.connections_endpoints[end][0]:
+                                    for endEth in switches_in_group:
+                                        if self.connections_endpoints[end][1] == endEth:
+                                            eths = switches_nodes.get(endEth)
+                                            if membr in switches_in_group:
+                                                ets = switches_nodes.get(membr)
+                                                _ = ets[counter_for_eth_in_switch[membr]] - eths[
+                                                    counter_for_eth_in_switch[endEth]]
+                                                counter_for_eth_in_switch[endEth] += 1
+                                                counter_for_eth_in_switch[membr] += 1
+                                            else:
+                                                _ = eths[counter_for_eth_in_switch[endEth]] - self.instances[
+                                                    counter_for_eth_in_switch[endEth]]
+                                                counter_for_eth_in_switch[endEth] += 1
                     self.create_connections(True)
                     self.instances.clear()
 
@@ -712,7 +741,10 @@ class BuildDiagram:
         return tooltip
 
     @staticmethod
-    def create_switch(ports, name, nodes, busy):
+    def create_switch(ports, name, nodes, busy, out):
+        if busy + out > ports:
+            ports = busy + out
+
         with Cluster(name):
             if ports % 2:
                 r = (ports - 1) / 2
@@ -722,13 +754,13 @@ class BuildDiagram:
                 raw = int(r)
 
             for k in range(1, busy + 1):
-                # nodes.append(globals()["OsaEthernetFree"](f"eth{k}"))
                 nodes.append(OsaEthernetBusy(f"eth{k}"))
 
-            for k in range(busy + 1, ports + 1):
-                # nodes.append(globals()["OsaEthernetFree"](f"eth{k}"))
-                nodes.append(OsaEthernetFree(f"eth{k}"))
+            for k in range(busy + 1, out + busy + 1):
+                nodes.append(OsaEthernetCable(f"eth{k}"))
 
+            for k in range(out + busy + 1, ports + 1):
+                nodes.append(OsaEthernetFree(f"eth{k}"))
             for b in range(0, raw):
                 if b + raw <= ports:
                     nodes[b] - Edge(color="transparent") - nodes[b + raw]
