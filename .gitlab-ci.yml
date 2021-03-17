@@ -21,7 +21,7 @@ test:pytest:
     - python -m pytest
 
 pages:
-  stage: host pages
+  stage: deploy
   script:
   - mkdir .public
   - cp -r * .public
