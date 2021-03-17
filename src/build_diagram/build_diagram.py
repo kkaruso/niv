@@ -189,6 +189,7 @@ class BuildDiagram:
         self.instances = []
         self.members = []
         self.nodes_not_in_groups = []
+        self.n_url = []
 
         # Just for "debugging"
         # TODO: delete when finished with the file
@@ -521,6 +522,9 @@ class BuildDiagram:
         for k in range(len(self.connections_endpoints)):
             # check if member in endpoints
             if member in self.connections_endpoints[k]:
+                for node in self.nodes_not_in_groups:
+                    if node in self.connections_endpoints[k]:
+                        self.n_url.append(node)
                 # iterate through yaml groups
                 for group in self.group_members:
                     # iterate through group members from group
@@ -858,6 +862,7 @@ class BuildDiagram:
         return tooltip
 
     def create_switch(self, ports, name, nodes, busy, out, url):
+
         """
         function create switches as busy or free
 
@@ -888,11 +893,12 @@ class BuildDiagram:
             # create Free ports
             for k in range(busy, out + busy):
                 if not url:
+                    name = self.n_url.pop()
                     if self.output_format == "svg":
-                        nodes.append(OsaEthernetCable(f"\n\neth {k + 1}\nto\n{self.filename}",
+                        nodes.append(OsaEthernetCable(f"\n\neth{k + 1} \nto\n {name}\nin\n{self.filename}.svg",
                                                       URL=f"../{self.filename}.{self.output_format}"))
                     else:
-                        nodes.append(OsaEthernetCablePng(f"\n\neth {k + 1}\nto\n{self.filename}",
+                        nodes.append(OsaEthernetCablePng(f"\n\neth{k + 1} \nto\n {name}\nin\n{self.filename}.svg",
                                                          URL=f"../{self.filename}.{self.output_format}"))
 
                 else:
