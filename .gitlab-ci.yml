@@ -29,7 +29,7 @@ build-package:
     - python -m build
     - python -m twine upload -r testpypi dist/* --config-file /tmp/.pypirc
 
-build-index.html:
+build-html:
   image: node:latest
 
   # This folder is cached between builds
