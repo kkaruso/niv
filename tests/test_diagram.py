@@ -22,9 +22,7 @@ class TestBuildDiagram(TestCase):
             pass
 
     def test_create_diagram(self):
-        print("ICH BIN HIER BEI : ")
         print(os.getcwd())
-        print("HIER SIND DIESE FILES")
         print(os.listdir("."))
 
         path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
