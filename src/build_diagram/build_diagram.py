@@ -405,94 +405,143 @@ class BuildDiagram:
                         intent_con_ports[member] = 0
                         in_ether_port[member] = 0
                         out_ether_port[member] = 0
-                    # find out how many connections are inside each group
-                    for member in list(self.group_members.get(i)):
-                        in_ethernet = 0
-                        eth_between_switches = 0
-                        for membr in self.group_members.get(i):
-                            for endpoint in range(0, len(self.connections_endpoints)):
-                                if membr == self.connections_endpoints[endpoint][0]:
-                                    if self.connections_endpoints[endpoint][1] == member:
-                                        if not self.switch_type[membr]:
-                                            in_ethernet = in_ethernet + 1
-                                        else:
-                                            eth_between_switches = eth_between_switches + 1
-                                            intent_con_ports[membr] = intent_con_ports[membr] + 1
-                                            in_ethernet = in_ethernet + 1
-                        in_ether_port[member] = in_ethernet
-                    for member in list(self.group_members.get(i)):
-                        groups_diagrams = []
-                        # create a list of switches with switch-view for each group
-                        if self.switch_type[member]:
-                            switches_in_group.append(member)
-                            switch_nodes = []
-                            # How many ethernet ports are going outside the group ?
-                            for _, switch in enumerate(switches_in_group):
-                                out_ether = 0
-                                for __ in range(len(self.connections_endpoints)):
-                                    if switch in self.connections_endpoints[__]:
-                                        if self.connections_endpoints[__][0] not in self.group_members.get(i):
-                                            out_ether += 1
-                                        if self.connections_endpoints[__][1] not in self.group_members.get(i):
-                                            out_ether += 1
 
-                            out_ether_port[member] = out_ether
+                    self.calculate_connections_in_groups(intent_con_ports, in_ether_port, i)
 
-                            # read url for each port and save it in a list
-                            for __ in range(len(self.connections_endpoints)):
-                                # check if member in endpoints
-                                if member in self.connections_endpoints[__]:
-                                    # iterate through yaml groups
-                                    for group in self.yaml.get("groups"):
-                                        # iterate through group members from group
-                                        for group_member in list(self.group_members.get(group)):
-                                            # check if group member is in endpoints and if member is in group members
-                                            # and add it to the list
-                                            if group_member in self.connections_endpoints[__]:
-                                                if member not in self.group_members.get(group):
-                                                    groups_diagrams.append(group)
-                                                    groups_diagrams.append(group_member)
+                    self.create_list_with_switchviews(switches_in_group, out_ether_port, in_ether_port,
+                                                      intent_con_ports, layout, switches_nodes, i)
 
-                            # create the ports with the colored icons for every single switch
-                            self.create_switch(self.switch_ports[member], self.nodes_name[member], switch_nodes,
-                                               in_ether_port[member] + intent_con_ports[member], out_ether_port[member],
-                                               groups_diagrams)
-                            switches_nodes[member] = switch_nodes
-                        else:
-                            # Create other devices except switches
-                            self.create_single_node(member, layout, False)
-                    # create the connection inside the group and between switches
-                    counter_for_eth_in_switch = {}
-                    for _ in switches_in_group:
-                        counter_for_eth_in_switch[_] = 0
-                    # check if instaces != null
-                    if self.instances:
-                        # iterate through group_members
-                        for membr in self.group_members.get(i):
-                            # iterate through endpoints
-                            for endpoint in range(len(self.connections_endpoints)):
-                                # check if group_member is in endpoints at [0]
-                                if membr == self.connections_endpoints[endpoint][0]:
-                                    # iterate through switches
-                                    for end_eth in switches_in_group:
-                                        # check if the other endpoint is a switch
-                                        if self.connections_endpoints[endpoint][1] == end_eth:
-                                            eths = switches_nodes.get(end_eth)
-                                            if membr in switches_in_group:
-                                                ets = switches_nodes.get(membr)
-                                                _ = ets[counter_for_eth_in_switch[membr]] - eths[
-                                                    counter_for_eth_in_switch[end_eth]]
-                                                counter_for_eth_in_switch[end_eth] += 1
-                                                counter_for_eth_in_switch[membr] += 1
-                                            else:
-                                                _ = eths[counter_for_eth_in_switch[end_eth]] - self.instances[
-                                                    counter_for_eth_in_switch[end_eth]]
-                                                counter_for_eth_in_switch[end_eth] += 1
+                    self.create_connections_for_switches(switches_nodes, switches_in_group, i)
+
                     self.create_connections(False)
                     self.instances.clear()
 
         print("Diagram successfully created")
         self.logger.log("Diagram successfully created")
+
+    def create_connections_for_switches(self, switches_nodes: dict, switches_in_group: list, i: int):
+        """
+        Create the connection inside the group and between switches
+
+        # TODO: add parameter descriptions
+        :param switches_nodes:
+        :param switches_in_group:
+        :param i:
+        """
+        counter_for_eth_in_switch = {}
+        for switch in switches_in_group:
+            counter_for_eth_in_switch[switch] = 0
+        # check if instaces != null
+        if self.instances:
+            # iterate through group_members
+            for membr in self.group_members.get(i):
+                # iterate through endpoints
+                for endpoint in range(len(self.connections_endpoints)):
+                    # check if group_member is in endpoints at [0]
+                    if membr == self.connections_endpoints[endpoint][0]:
+                        # iterate through switches
+                        for end_eth in switches_in_group:
+                            # check if the other endpoint is a switch
+                            if self.connections_endpoints[endpoint][1] == end_eth:
+                                eths = switches_nodes.get(end_eth)
+                                if membr in switches_in_group:
+                                    ets = switches_nodes.get(membr)
+                                    _ = ets[counter_for_eth_in_switch[membr]] - eths[
+                                        counter_for_eth_in_switch[end_eth]]
+                                    counter_for_eth_in_switch[end_eth] += 1
+                                    counter_for_eth_in_switch[membr] += 1
+                                else:
+                                    _ = eths[counter_for_eth_in_switch[end_eth]] - self.instances[
+                                        counter_for_eth_in_switch[end_eth]]
+                                    counter_for_eth_in_switch[end_eth] += 1
+
+    def create_list_with_switchviews(self, switches_in_group: list, out_ether_port: dict, in_ether_port: dict,
+                                     intent_con_ports: dict, layout: str, switches_nodes: dict, i: int):
+        """
+        Create a list of switches with switch-view for each group
+
+        # TODO: add parameter description
+        :param switches_in_group:
+        :param out_ether_port:
+        :param in_ether_port:
+        :param intent_con_ports:
+        :param layout:
+        :param switches_nodes:
+        :param i:
+        """
+        for member in list(self.group_members.get(i)):
+            groups_diagrams = []
+            if self.switch_type[member]:
+                switches_in_group.append(member)
+                switch_nodes = []
+                # How many ethernet ports are going outside the group ?
+                for switch in switches_in_group:
+                    out_ether = 0
+                    for j in range(len(self.connections_endpoints)):
+                        if switch in self.connections_endpoints[j]:
+                            if self.connections_endpoints[j][0] not in self.group_members.get(i):
+                                out_ether += 1
+                            if self.connections_endpoints[j][1] not in self.group_members.get(i):
+                                out_ether += 1
+
+                out_ether_port[member] = out_ether
+
+                # read url for each port and save it in a list
+                self.calculate_connections_between_groups(member, groups_diagrams)
+
+                # create the ports with the colored icons for every single switch
+                self.create_switch(self.switch_ports[member], self.nodes_name[member], switch_nodes,
+                                   in_ether_port[member] + intent_con_ports[member], out_ether_port[member],
+                                   groups_diagrams)
+                switches_nodes[member] = switch_nodes
+            else:
+                # Create other devices except switches
+                self.create_single_node(member, layout, False)
+
+    def calculate_connections_between_groups(self, member: str, groups_diagrams: list):
+        """
+        Read url for each port and save it in a list
+
+        # TODO: add parameter description
+        :param member:
+        :param groups_diagrams:
+        """
+        for k in range(len(self.connections_endpoints)):
+            # check if member in endpoints
+            if member in self.connections_endpoints[k]:
+                # iterate through yaml groups
+                for group in self.group_members:
+                    # iterate through group members from group
+                    for group_member in self.group_members.get(group):
+                        # check if group member is in endpoints and if member is in group members
+                        # and add it to the list
+                        if group_member in self.connections_endpoints[k]:
+                            if member not in self.group_members.get(group):
+                                groups_diagrams.append(group)
+                                groups_diagrams.append(group_member)
+
+    def calculate_connections_in_groups(self, intent_con_ports: dict, in_ether_port: dict, i: int):
+        """
+        Calculate how many connections are between the switches from the same group and between switches and nodes, with
+        switch-view set to False
+
+        # TODO: add description to parameters
+        :param intent_con_ports:
+        :param in_ether_port:
+        :param i:
+        """
+        for member in list(self.group_members.get(i)):
+            in_ethernet = 0
+            eth_between_switches = 0
+            for membr in self.group_members.get(i):
+                for endpoint in range(0, len(self.connections_endpoints)):
+                    if (membr == self.connections_endpoints[endpoint][0] and member ==
+                            self.connections_endpoints[endpoint][1]):
+                        if self.switch_type[membr]:
+                            eth_between_switches = eth_between_switches + 1
+                            intent_con_ports[membr] = intent_con_ports[membr] + 1
+                        in_ethernet = in_ethernet + 1
+            in_ether_port[member] = in_ethernet
 
     def set_diagram_title(self):
         """
