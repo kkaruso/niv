@@ -187,6 +187,8 @@ class BuildDiagram:
 
         self.instances_keys = []
         self.instances = []
+        self.members = []
+        self.nodes_not_in_groups = []
 
         # Just for "debugging"
         # TODO: delete when finished with the file
@@ -222,7 +224,7 @@ class BuildDiagram:
         # print(f"connections_tooltip: {self.connections_tooltip}\n")
         # print(f"connections_visibility: {self.connections_visibility}\n")
 
-    def create_nodes(self, members):
+    def create_nodes(self):
         """
         Create nodes outside and inside of clusters
         """
@@ -231,12 +233,13 @@ class BuildDiagram:
         # Fill "members" list with all the group members
         for group_name in self.group_members:
             for member in list(self.group_members.get(group_name)):
-                members.append(member)
+                self.members.append(member)
 
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_name:
-            if node not in members:
+            if node not in self.members:
                 self.create_single_node(node, self.graph_layout, True)
+                self.nodes_not_in_groups.append(node)
 
         # Dynamically create the amount of groups with the corresponding group name
         # If no tooltip is given within the group, set the current name of the group as the tooltip
@@ -338,7 +341,6 @@ class BuildDiagram:
         path_for_sub_diagrams = f"{path}/{file_name}-subdiagrams/{file_name}" if path != "" \
             else f"{file_name}-subdiagrams/{file_name}"
 
-        members = []
         graph_attr = {
             "bgcolor": f"{self.graph_bg_color}",
             "pad": f"{self.graph_padding}",
@@ -356,7 +358,7 @@ class BuildDiagram:
                      outformat=self.output_format,
                      show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
             # Create nodes and clusters
-            self.create_nodes(members)
+            self.create_nodes()
             # Create connections
             self.create_connections(True)
         # Create a separated diagram for each group in the main diagram and save it in group_diagrams/
