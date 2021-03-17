@@ -39,10 +39,6 @@ class AllenBradleyFlexio2Png(vrt_Light_Png):
     _icon = "Allen-bradleyFlexio2.png"
 
 
-class Appliance1Png(vrt_Light_Png):
-    -icon = "Appliance1.png"
-
-
 class AtmSwitch2Png(vrt_Light_Png):
     _icon = "AtmSwitch2.png"
 
