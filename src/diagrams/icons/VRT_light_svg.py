@@ -60,7 +60,6 @@ class BranchFeederMonitorLight(_Vrt_Light_SVG):
     _icon = "branchfeedermonitor.svg"
 
 
-
 class CctvCamera2Light(_Vrt_Light_SVG):
     _icon = "cctvcamera2.svg"
 
@@ -87,7 +86,6 @@ class CoronisWavenisMeshMoteLight(_Vrt_Light_SVG):
 
 class CoronisWavenisMeshBaseStationLight(_Vrt_Light_SVG):
     _icon = "coroniswavenismeshbasestation.svg"
-
 
 
 class CurrentTransformerStripLight(_Vrt_Light_SVG):
