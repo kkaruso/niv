@@ -29,14 +29,13 @@ build-package:
     - python -m build
     - python -m twine upload -r testpypi dist/* --config-file /tmp/.pypirc
 
-build-html:
-  image: alpine:latest
+image: alpine:latest
 
-  pages:
-    stage: deploy
-    script:
-    - echo 'Nothing to do...'
-    artifacts:
-      paths:
-      - public
-      expire_in: 1 day
+pages:
+  stage: deploy
+  script:
+  - echo 'Nothing to do...'
+  artifacts:
+    paths:
+    - public
+    expire_in: 1 day
