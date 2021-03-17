@@ -423,10 +423,9 @@ class BuildDiagram:
         """
         Create the connection inside the group and between switches
 
-        # TODO: add parameter descriptions
-        :param switches_nodes:
-        :param switches_in_group:
-        :param i:
+        :param switches_nodes: a dic for all ports for each switch
+        :param switches_in_group: a list of all switches in the group with switch-view = True
+        :param i: a single group
         """
         counter_for_eth_in_switch = {}
         for switch in switches_in_group:
@@ -460,14 +459,13 @@ class BuildDiagram:
         """
         Create a list of switches with switch-view for each group
 
-        # TODO: add parameter description
-        :param switches_in_group:
-        :param out_ether_port:
-        :param in_ether_port:
-        :param intent_con_ports:
-        :param layout:
-        :param switches_nodes:
-        :param i:
+        :param switches_in_group: a list of all switches with switch-view = True in the group
+        :param out_ether_port: a list of port, those are connected with a port outside the group
+        :param in_ether_port: a list pf ports from the switch those are connected with devices in the same group
+        :param intent_con_ports: a list of ports for the switch, those are connected with switch with switch-view = True
+        :param layout: a layout for the subgroup
+        :param switches_nodes: a dic pf all switches and their ports
+        :param i: a single group
         """
         for member in list(self.group_members.get(i)):
             groups_diagrams = []
@@ -502,9 +500,8 @@ class BuildDiagram:
         """
         Read url for each port and save it in a list
 
-        # TODO: add parameter description
-        :param member:
-        :param groups_diagrams:
+        :param member: a member of group
+        :param groups_diagrams: a list of all subgroup
         """
         for k in range(len(self.connections_endpoints)):
             # check if member in endpoints
@@ -525,10 +522,8 @@ class BuildDiagram:
         Calculate how many connections are between the switches from the same group and between switches and nodes, with
         switch-view set to False
 
-        # TODO: add description to parameters
-        :param intent_con_ports:
-        :param in_ether_port:
-        :param i:
+        switches with switch-view= False for each group :param in_ether_port:a dic of ports, those are connected with
+        non switches with switch-view= True for each group :param i:
         """
         for member in list(self.group_members.get(i)):
             in_ethernet = 0
@@ -851,9 +846,8 @@ class BuildDiagram:
         """
         function create switches as busy or free
 
-        # TODO: add parameter descriptions
-        :param url:
-        :param out:
+        :param url: a list of all subdiagrams
+        :param out: how many ports are connected to ports outside the group
         :param ports: how many ports to create
         :param name: the name of the switch
         :param nodes: empty list to fill with the created switches
