@@ -2,6 +2,8 @@
 
 NIV is a console application to visualize network infrastructure using YAML files.
 
+[Our presantation page](https://top.pages.gitlab.rlp.net/21s/niv/niv/pages/)
+
 Network diagrams are commonly drawn manually, using tools like Visio or Draw.io. This makes maintaining an up-to-date representation of dynamic network environments challenging.
 Currently, no modern tools appear to exist which can generate network drawings from code such as YAML. Such a machine readable format would allow administrators to  automate the visualization of a topology and to track document changes using version control.
 

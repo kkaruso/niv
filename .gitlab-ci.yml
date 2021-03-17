@@ -20,6 +20,16 @@ test:pytest:
     - apt-get update && apt-get upgrade -y graphviz
     - python -m pytest
 
+pages:
+  stage: deploy
+  script:
+  - mkdir .public
+  - cp -r * .public
+  - mv .public public
+  artifacts:
+    paths:
+    - public
+
 build-package:
   stage: deploy
   image: python:3.9
@@ -28,3 +38,5 @@ build-package:
     - pip install -U twine setuptools build
     - python -m build
     - python -m twine upload -r testpypi dist/* --config-file /tmp/.pypirc
+
+
