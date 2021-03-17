@@ -31,6 +31,7 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
   switch1: { icon: WorkgroupSwitch, name: Work group Switch c1, x: 1, y: 6, switch-view: True, ports: 22}
   switch2: { icon: WorkgroupSwitch, name: Work group Switch c2, x: 4, y: 6, switch-view: True, ports: 20}
   switch3: { icon: WorkgroupSwitch, name: Work group Switch c3, x: 11, y: 6, switch-view: True, ports: 12}
+  switch13: { icon: WorkgroupSwitch, name: Work group Switch c13, x: 11, y: 6, switch-view: True, ports: 12}
   switch4: { icon: WorkgroupSwitch, name: Work group Switch c4, x: 14, y: 6, switch-view: True, ports: 12}
   switch5: { icon: WorkgroupSwitch, name: Work group Switch c5, x: 21, y: 6, switch-view: True, ports: 12}
   switch6: { icon: WorkgroupSwitch, name: Work group Switch c6, x: 24, y: 6, switch-view: True, ports: 12}
@@ -152,6 +153,8 @@ connections: #enter your connections here
 
 - {endpoints: [switch2, switch1], color: black}
 - {endpoints: [switch1, switch2], color: black}
+- {endpoints: [switch13, switch2], color: black}
+- {endpoints: [switch2, switch13], color: black}
 - {endpoints: [server1, server2], color: black}
 
 
