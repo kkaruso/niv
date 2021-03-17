@@ -249,7 +249,7 @@ class BuildDiagram:
                 "margin": "20",
                 # "URL": f"{self.group_url[name]}"
                 # Connect the main diagram with the created under-diagrams with a URL-link
-                "URL": f"{file_name}-subdiagrams/{self.filename}_{name}.{self.output_format}",
+                "URL": f"{file_name}-subdiagrams/{file_name}_{name}.{self.output_format}",
                 "tooltip": f"{tooltip}",
                 "fontcolor": "black"
             }
@@ -456,7 +456,7 @@ class BuildDiagram:
                             # create the ports with the colored icons for every single switch
                             self.create_switch(self.switch_ports[member], self.nodes_name[member], switch_nodes,
                                                in_ether_port[member] + intent_con_ports[member], out_ether_port[member],
-                                               groups_diagrams)
+                                               groups_diagrams,self.output_format)
                             switches_nodes[member] = switch_nodes
                         else:
                             # Create other devices except switches
@@ -798,7 +798,7 @@ class BuildDiagram:
 
         return tooltip
 
-    def create_switch(self, ports, name, nodes, busy, out, url):
+    def create_switch(self, ports, name, nodes, busy, out, url, out_format):
         """
         function create switches as busy or free
 
@@ -808,6 +808,7 @@ class BuildDiagram:
         :param name: the name of the switch
         :param nodes: empty list to fill with the created switches
         :param busy: how many busy nodes to create
+        :param out_format: the out put format for the subdiagrams
         """
         if busy + out > ports:
             ports = busy + out
@@ -821,29 +822,40 @@ class BuildDiagram:
                 raw = int(raw)
             # create busy ports
             for k in range(0, busy):
-                nodes.append(OsaEthernetBusy(f"eth{k + 1}"))
+                if out_format == "svg":
+                    nodes.append(OsaEthernetBusy(f"eth{k + 1}"))
+                else:
+                    nodes.append(OsaEthernetBusyPng(f"eth{k + 1}"))
 
             # create Free ports
             for k in range(busy, out + busy):
                 if not url:
-                    nodes.append(OsaEthernetCable(f"\n\neth {k + 1}\nto\n{self.filename}",
-                                                  URL=f"../{self.filename}.{self.output_format}"))
-                    # nodes.append(OsaEthernetCable(f"eth{k + 1}"))
+                    if out_format == "svg":
+                        nodes.append(OsaEthernetCable(f"\n\neth {k + 1}\nto\n{self.filename}",
+                                                      URL=f"../{self.filename}.{self.output_format}"))
+                    else:
+                        nodes.append(OsaEthernetCablePng(f"\n\neth {k + 1}\nto\n{self.filename}",
+                                                         URL=f"../{self.filename}.{self.output_format}"))
+
                 else:
                     switch = url.pop()
                     group = url.pop()
-                    nodes.append(OsaEthernetCable(
-                        f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
-                        URL=f"{self.filename}_{group}.{self.output_format}"))
-                # if not url:
-                #     nodes.append(OsaEthernetCable(f"eth{k + 1}"))
-                # else:
-                #     nodes.append(OsaEthernetCable(f"eth{k + 1}",
-                #                                   URL=f"{self.filename}_{url.pop()}.{self.output_format}"))
+                    if out_format == "svg":
+                        nodes.append(OsaEthernetCable(
+                            f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
+                            URL=f"{self.filename}_{group}.{self.output_format}"))
+                    else:
+                        nodes.append(OsaEthernetCablePng(
+                            f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
+                            URL=f"{self.filename}_{group}.{self.output_format}"))
 
             # make the connections between ports transparent
             for k in range(out + busy, ports):
-                nodes.append(OsaEthernetFree(f"eth{k + 1}"))
+                if out_format == "svg":
+                    nodes.append(OsaEthernetFree(f"eth{k + 1}"))
+                else:
+                    nodes.append(OsaEthernetFreePng(f"eth{k + 1}"))
+
             for k in range(0, raw):
                 if k + raw <= ports:
                     _ = nodes[k] - Edge(color="transparent") - nodes[k + raw]
