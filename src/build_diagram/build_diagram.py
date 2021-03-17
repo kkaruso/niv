@@ -895,11 +895,13 @@ class BuildDiagram:
                 if not url:
                     name = self.n_url.pop()
                     if self.output_format == "svg":
-                        nodes.append(OsaEthernetCable(f"\n\neth{k + 1} \nto\n {name}\nin\n{self.filename}.svg",
-                                                      URL=f"../{self.filename}.{self.output_format}"))
+                        nodes.append(
+                            OsaEthernetCable(f"\n\neth{k + 1} \nto\n {name}\nin\n{self.filename}.{self.output_format}",
+                                             URL=f"../{self.filename}.{self.output_format}"))
                     else:
-                        nodes.append(OsaEthernetCablePng(f"\n\neth{k + 1} \nto\n {name}\nin\n{self.filename}.svg",
-                                                         URL=f"../{self.filename}.{self.output_format}"))
+                        nodes.append(OsaEthernetCablePng(
+                            f"\n\neth{k + 1} \nto\n {name}\nin\n{self.filename}.{self.output_format}",
+                            URL=f"../{self.filename}.{self.output_format}"))
 
                 else:
                     switch = url.pop()
