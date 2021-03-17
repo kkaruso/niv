@@ -879,17 +879,16 @@ class BuildDiagram:
                     nodes.append(OsaEthernetBusyPng(f"eth{k + 1}"))
 
             # create Free ports
-            print(f"{file_name}")
             for k in range(busy, out + busy):
                 if not url:
                     name = self.n_url.pop()
                     file = self.save_path.split('/')[-1]
                     if self.output_format == "svg":
                         nodes.append(OsaEthernetCable(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
-                                                      URL=f"{file_name}.{self.output_format}"))
+                                                      URL=f"../{file_name}.{self.output_format}"))
                     else:
                         nodes.append(OsaEthernetCablePng(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
-                                                         URL=f"{file_name}.{self.output_format}"))
+                                                         URL=f"../{file_name}.{self.output_format}"))
 
                 else:
                     switch = url.pop()
