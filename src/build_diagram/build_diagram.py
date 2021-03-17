@@ -249,7 +249,7 @@ class BuildDiagram:
                 "margin": "20",
                 # "URL": f"{self.group_url[name]}"
                 # Connect the main diagram with the created under-diagrams with a URL-link
-                "URL": f"{file_name}-subdiagrams/{self.filename}_{name}.{self.output_format}",
+                "URL": f"{file_name}-subdiagrams/{file_name}_{name}.{self.output_format}",
                 "tooltip": f"{tooltip}",
                 "fontcolor": "black"
             }
