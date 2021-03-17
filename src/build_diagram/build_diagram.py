@@ -487,20 +487,6 @@ class BuildDiagram:
 
                 out_ether_port[member] = out_ether
 
-                # # How many ethernet ports are going outside the group ?
-                # for _, switch in enumerate(switches_in_group):
-                #     outEther = 0
-                #     for __ in range(len(self.connections_endpoints)):
-                #         if switch == self.connections_endpoints[__][0]:
-                #             if self.connections_endpoints[__][1] not in self.group_members.get(i):
-                #                 outEther = outEther + 1
-                #         if switch == self.connections_endpoints[__][1]:
-                #             if self.connections_endpoints[__][0] not in self.group_members.get(i):
-                #                 outEther = outEther + 1
-                # outEtherPort[member] = outEther
-
-                # read url for each port and save it in a list
-
                 self.calculate_connections_between_groups(member, groups_diagrams)
 
                 # create the ports with the colored icons for every single switch
@@ -894,14 +880,13 @@ class BuildDiagram:
             for k in range(busy, out + busy):
                 if not url:
                     name = self.n_url.pop()
+                    file = self.save_path.split('/')[-1]
                     if self.output_format == "svg":
-                        nodes.append(
-                            OsaEthernetCable(f"\n\neth{k + 1} \nto\n {name}\nin\n{self.filename}.{self.output_format}",
-                                             URL=f"../{self.filename}.{self.output_format}"))
+                        nodes.append(OsaEthernetCable(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
+                                                      URL=f"../{self.filename}.{self.output_format}"))
                     else:
-                        nodes.append(OsaEthernetCablePng(
-                            f"\n\neth{k + 1} \nto\n {name}\nin\n{self.filename}.{self.output_format}",
-                            URL=f"../{self.filename}.{self.output_format}"))
+                        nodes.append(OsaEthernetCablePng(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
+                                                         URL=f"../{self.filename}.{self.output_format}"))
 
                 else:
                     switch = url.pop()

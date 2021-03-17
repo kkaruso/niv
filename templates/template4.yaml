@@ -152,9 +152,7 @@ connections: #enter your connections here
 - {endpoints: [server1, switch1], color: black}
 
 - {endpoints: [switch2, switch1], color: black}
-- {endpoints: [switch1, switch2], color: black}
 - {endpoints: [switch13, switch2], color: black}
-- {endpoints: [switch2, switch13], color: black}
 - {endpoints: [server1, server2], color: black}
 
 
