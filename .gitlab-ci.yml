@@ -30,21 +30,13 @@ build-package:
     - python -m twine upload -r testpypi dist/* --config-file /tmp/.pypirc
 
 build-html:
-  image: node:latest
+  image: alpine:latest
 
-  # This folder is cached between builds
-  # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
-  cache:
-    paths:
-      - node_modules/
-      # Enables git-lab CI caching. Both .cache and public must be cached, otherwise builds will fail.
-      - .cache/
-      - public/
   pages:
+    stage: deploy
     script:
-      - yarn install
-      - ./node_modules/.bin/gatsby build --prefix-paths
+    - echo 'Nothing to do...'
     artifacts:
       paths:
-        - public
-
+      - public
+      expire_in: 1 day
