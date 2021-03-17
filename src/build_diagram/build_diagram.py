@@ -484,7 +484,20 @@ class BuildDiagram:
 
                 out_ether_port[member] = out_ether
 
+                # # How many ethernet ports are going outside the group ?
+                # for _, switch in enumerate(switches_in_group):
+                #     outEther = 0
+                #     for __ in range(len(self.connections_endpoints)):
+                #         if switch == self.connections_endpoints[__][0]:
+                #             if self.connections_endpoints[__][1] not in self.group_members.get(i):
+                #                 outEther = outEther + 1
+                #         if switch == self.connections_endpoints[__][1]:
+                #             if self.connections_endpoints[__][0] not in self.group_members.get(i):
+                #                 outEther = outEther + 1
+                # outEtherPort[member] = outEther
+
                 # read url for each port and save it in a list
+
                 self.calculate_connections_between_groups(member, groups_diagrams)
 
                 # create the ports with the colored icons for every single switch
