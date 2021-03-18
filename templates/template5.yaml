@@ -21,7 +21,11 @@ groupDefaults: &groupDefaults #Use current values as defaults
   backgroundColor: lightblue  # Fill the background of the group box
 
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
+  # Syntax:
+  # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, x: x-coordinate, y: y-coordinate, url: link to a website or another file, tooltip: text shown in the tooltip }
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
+  # switch-view : show detailed port view of the switch in the subgroups (default: switch-view: False)
+  # ports: how many ports has the device with the switch-view = True (default ports: 24)
   cloud1: {icon: Cloud, name: Internet, x: 24, y: 26}
   router1: { icon: RouterFirewall, name: Router Firewall, x: 24, y: 22 }
   core-Switch1:  {icon: SafeharborIcon, name: core-Switch 1, x: 22, y: 18 }
