@@ -672,20 +672,28 @@ class BuildDiagram:
         :return: filled dictionary
         """
         _dict = {}
-        for i in self.yaml.get(_object):
-            _dict[i] = self.yaml.get(_object).get(i).get(_subobject)
-            if self.yaml.get(_object)[i].get(_subobject) is None:
-                if _object == "groups" and _subobject == "members":
-                    log_message = f"{i}: No members given, group won\'t be shown. Add members to group or remove " \
-                                  f"group! :) "
-                    self.logger.verbose_warning(log_message, self.verbose)
-                    print(log_message)
-                _dict[i] = _default
-            elif _subobject == "ip":
-                if not self.validate_ip(_dict[i]):
-                    log_message = f"'{_dict[i]}' does not seem to be a valid IPv4 or IPv6 address"
-                    self.logger.verbose_warning(log_message, self.verbose)
-                    print(log_message)
+        try:
+
+            for i in self.yaml.get(_object):
+                _dict[i] = self.yaml.get(_object).get(i).get(_subobject)
+                if self.yaml.get(_object)[i].get(_subobject) is None:
+                    if _object == "groups" and _subobject == "members":
+                        log_message = f"{i}: No members given, group won\'t be shown. Add members to group or remove " \
+                                      f"group! :) "
+                        self.logger.verbose_warning(log_message, self.verbose)
+                        print(log_message)
+                    _dict[i] = _default
+                elif _subobject == "ip":
+                    if not self.validate_ip(_dict[i]):
+                        log_message = f"'{_dict[i]}' does not seem to be a valid IPv4 or IPv6 address"
+                        self.logger.verbose_warning(log_message, self.verbose)
+                        print(log_message)
+            return _dict
+        except TypeError as e:
+            log_message = f"Didn't use Groups or Nodes in Yaml"
+            self.logger.log_error(e)
+            print(log_message)
+
 
         return _dict
 
