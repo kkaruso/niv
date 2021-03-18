@@ -1,7 +1,6 @@
 diagram: # Diagram properties
   backgroundColor:   # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding: 0.5  # Padding around the graph (default: 0.5; type: double)
-  # TODO: Fix when using neato that no groups are showing
   layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
   connectionStyle: spline # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
   direction: LR #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
@@ -30,7 +29,6 @@ nodes: # List every single node that should be in the diagram here
   desktop2: { icon: OsaDesktopImac, name: My Desktop 2, x: 3, y: 0 }
   Osa: { icon: invalid_icon, name: Invalid Node, x: 1 }
 
-# TODO: Implement that you can group other groups
 groups: # List every group of nodes here
   # Syntax:
   # group name: { name: Text shown in the corner of the group, members: [ list of nodes in this group ], tooltip: text shown in the tooltip }

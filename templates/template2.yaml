@@ -1,7 +1,6 @@
 diagram: # Diagram properties
   backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding:   # Padding around the graph (default: 0.5; type: double)
-  # TODO: Fix when using neato that no groups are showing
   layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
 
 title: # Text underneath the diagram.
@@ -36,7 +35,6 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
 
 
 
-# TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
   # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"

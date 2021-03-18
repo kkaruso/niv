@@ -1,7 +1,6 @@
 # pylint: disable=unused-wildcard-import, method-hidden
 # pylint: disable=unused-import
 # pylint: disable=wildcard-import
-# pylint: disable=fixme
 # pylint: disable=too-many-instance-attributes
 # pylint: disable=too-many-statements
 # pylint: disable=too-many-nested-blocks
@@ -31,7 +30,6 @@ class BuildDiagram:
     """
     path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     config = yaml_parser.get_yaml(path_to_project + '/config.yaml')
-    # TODO: Create config.yaml if it has been deleted
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
     logger = niv_logger.NivLogger
@@ -43,14 +41,12 @@ class BuildDiagram:
 
     counter = 1
 
-    # TODO: Find a way to add margins between node and its text, and margin between the diagram and the title
     def __init__(self, load_path, save_path, detail_level, verbose):
         # Initialize variables for dynamically getting the values from the .yaml file
 
         # get verbosity level (True/False)
         self.verbose = verbose
 
-        # TODO: cleanup (delete not needed comments like old prints)
         # Load the .yaml from the given path
         self.yaml = yaml_parser.get_yaml(load_path)
         self.save_path = save_path[0] if save_path is not None \
@@ -60,7 +56,6 @@ class BuildDiagram:
         self.output_format = self.save_path.split('.')[-1]
         self.filename = os.path.splitext(self.save_path)[0]
 
-        # TODO: Add checks if value not given
         # Load diagram properties
         self.graph_bg_color = self.set_variables("diagram", "backgroundColor",
                                                  self.yaml_defaults.get('diagram').get(
@@ -81,7 +76,6 @@ class BuildDiagram:
         self.title_font_color = self.set_variables("title", "fontColor", self.yaml_defaults.get('title').get(
             'fontColor') or "black")
 
-        # TODO: Add placeholder icon to set as default for nodes_icon
         # Get icon of each node
         self.nodes_icon = self.fill_dictionary("nodes", "icon", "")
 
@@ -190,40 +184,6 @@ class BuildDiagram:
         self.members = []
         self.nodes_not_in_groups = []
         self.n_url = []
-
-        # Just for "debugging"
-        # TODO: delete when finished with the file
-        # print(f"output_format: {self.output_format}")
-        # print(f"save_path: {self.save_path}")
-        # print(f"filename: {self.filename}")
-        # print(f"detail_level: {self.detail_level}\n")
-        #
-        # print("Created variables from .yaml:")
-        # print(f"graph_bg_color: {self.graph_bg_color}")
-        # print(f"graph_padding: {self.graph_padding}")
-        # print(f"graph_layout: {self.graph_layout}")
-        # print(f"graph_splines: {self.graph_splines}")
-        # print(f"graph_direction: {self.graph_direction}\n")
-        # print(f"title_fontsize: {self.title_font_size}\n")
-        # print(f"nodes_icon: {self.nodes_icon}")
-        # print(f"nodes_text: {self.nodes_text}")
-        # print(f"nodes_url: {self.nodes_url}")
-        # print(f"nodes_ip: {self.nodes_ip}")
-        # print(f"nodes_tooltip: {self.nodes_tooltip}")
-        # print(f"nodes_mac: {self.nodes_mac}")
-        # print(f"nodes_modelnr: {self.nodes_modelnr}")
-        # print(f"nodes_manufactuer: {self.nodes_manufactuer}\n")
-        # print(f"nodes_storage: {self.nodes_storage}\n")
-        # print(f"group_name: {self.group_name}")
-        # print(f"group_members: {self.group_members}")
-        # print(f"group_url: {self.group_url}")
-        # print(f"group_tooltip: {self.group_tooltip}\n")
-        # print(f"connections_endpoints: {self.connections_endpoints}")
-        # print(f"connections_ports: {self.connections_ports}")
-        # print(f"connections_color: {self.connections_color}")
-        # print(f"connections_text: {self.connections_text}")
-        # print(f"connections_tooltip: {self.connections_tooltip}\n")
-        # print(f"connections_visibility: {self.connections_visibility}\n")
 
     def create_nodes(self):
         """
@@ -637,7 +597,8 @@ class BuildDiagram:
                                                              fixedsize="box",
                                                              width="1",
                                                              height="2.5",
-                                                             imagescale="true"
+                                                             imagescale="true",
+                                                             # labelloc="t"
                                                              ))
                 self.instances_keys.append(node)
             except KeyError:
@@ -711,20 +672,28 @@ class BuildDiagram:
         :return: filled dictionary
         """
         _dict = {}
-        for i in self.yaml.get(_object):
-            _dict[i] = self.yaml.get(_object).get(i).get(_subobject)
-            if self.yaml.get(_object)[i].get(_subobject) is None:
-                if _object == "groups" and _subobject == "members":
-                    log_message = f"{i}: No members given, group won\'t be shown. Add members to group or remove " \
-                                  f"group! :) "
-                    self.logger.verbose_warning(log_message, self.verbose)
-                    print(log_message)
-                _dict[i] = _default
-            elif _subobject == "ip":
-                if not self.validate_ip(_dict[i]):
-                    log_message = f"'{_dict[i]}' does not seem to be a valid IPv4 or IPv6 address"
-                    self.logger.verbose_warning(log_message, self.verbose)
-                    print(log_message)
+        try:
+
+            for i in self.yaml.get(_object):
+                _dict[i] = self.yaml.get(_object).get(i).get(_subobject)
+                if self.yaml.get(_object)[i].get(_subobject) is None:
+                    if _object == "groups" and _subobject == "members":
+                        log_message = f"{i}: No members given, group won\'t be shown. Add members to group or remove " \
+                                      f"group! :) "
+                        self.logger.verbose_warning(log_message, self.verbose)
+                        print(log_message)
+                    _dict[i] = _default
+                elif _subobject == "ip":
+                    if not self.validate_ip(_dict[i]):
+                        log_message = f"'{_dict[i]}' does not seem to be a valid IPv4 or IPv6 address"
+                        self.logger.verbose_warning(log_message, self.verbose)
+                        print(log_message)
+            return _dict
+        except TypeError as e:
+            log_message = f"Didn't use Groups or Nodes in Yaml"
+            self.logger.log_error(e)
+            print(log_message)
+
 
         return _dict
 
