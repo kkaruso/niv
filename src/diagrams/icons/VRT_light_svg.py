@@ -9,490 +9,502 @@ class _Vrt_Light_SVG(_ICONS):
 
 
 class LaserScanner1LLight(_Vrt_Light_SVG):
-    _icon = "2dlaserscanner1.svg"
+    _icon = "zweidlaserscanner1.svg"
 
 
 class LaserScannerLight(_Vrt_Light_SVG):
-    _icon = "2d laser scanner 2.svg"
+    _icon = "zweidlaserscanner2.svg"
 
 
 class LaserScanner5Light(_Vrt_Light_SVG):
-    _icon = "3d laser scanner 1.svg"
+    _icon = "dreidlaserscanner1.svg"
 
 
 class LaserScanner4Light(_Vrt_Light_SVG):
-    _icon = "3d laser scanner 2.svg"
+    _icon = "dreidlaserscanner2.svg"
 
 
 class AegisDatacellCellularDataloggerLight(_Vrt_Light_SVG):
-    _icon = "aegis datacell cellular datalogger 2.svg"
+    _icon = "aegisdatacellcellulardatalogger2.svg"
+
+
+class AllenBradleyControlLogixPlcLight(_Vrt_Light_SVG):
+    _icon = "allenbradleycontrollogixplc.svg"
+
+
+class AllenBradleyFlexIo1Light(_Vrt_Light_SVG):
+    _icon = "allenbradleyflexio1.svg"
+
+
+class AllenBradleyFlexIo2Light(_Vrt_Light_SVG):
+    _icon = "allenbradleyflexio2.svg"
 
 
 class ApplianceLight(_Vrt_Light_SVG):
-    _icon = "appliance 2.svg"
+    _icon = "appliance2.svg"
 
 
 class AtmSwitchLight(_Vrt_Light_SVG):
-    _icon = "atm switch 1.svg"
+    _icon = "atmswitch1.svg"
 
 
 class AtmSwitch2Light(_Vrt_Light_SVG):
-    _icon = "atm switch 2.svg"
+    _icon = "atmswitch2.svg"
 
 
 class AuthenticationServer2Light(_Vrt_Light_SVG):
-    _icon = "authentication server 2.svg"
+    _icon = "authenticationserver2.svg"
+
+
+class BranchFeederMonitorLight(_Vrt_Light_SVG):
+    _icon = "branchfeedermonitor.svg"
 
 
 class CctvCamera2Light(_Vrt_Light_SVG):
-    _icon = "cctv camera 2.svg"
+    _icon = "cctvcamera2.svg"
 
 
 class CctvCamera4Light(_Vrt_Light_SVG):
-    _icon = "cctv camera 4.svg"
+    _icon = "cctvcamera4.svg"
+
+
+class CetMultiCircuitPowerMonitorMcpmLight(_Vrt_Light_SVG):
+    _icon = "cetmulticircuitpowermonitormcpm.svg"
 
 
 class CommunicationsServerLight(_Vrt_Light_SVG):
-    _icon = "communications server.svg"
+    _icon = "communicationsserver.svg"
 
 
 class CompactPlc2Light(_Vrt_Light_SVG):
-    _icon = "compact plc 2.svg"
+    _icon = "compactplc2.svg"
+
+
+class CoronisWavenisMeshMoteLight(_Vrt_Light_SVG):
+    _icon = "coroniswavenismeshmote.svg"
+
+
+class CoronisWavenisMeshBaseStationLight(_Vrt_Light_SVG):
+    _icon = "coroniswavenismeshbasestation.svg"
+
+
+class CurrentTransformerStripLight(_Vrt_Light_SVG):
+    _icon = "currenttransformerstrip.svg"
 
 
 class DataAcquisitionScadaServer2Light(_Vrt_Light_SVG):
-    _icon = "data acquisition Light(scada) server 2.svg"
+    _icon = "dataacquisitionLightscadaserver2.svg"
 
 
 class DataLoggerRtu2Light(_Vrt_Light_SVG):
-    _icon = "data logger rtu 2.svg"
+    _icon = "dataloggerrtu2.svg"
 
 
 class DatabaseServerLight(_Vrt_Light_SVG):
-    _icon = "database server 2.svg"
+    _icon = "databaseserver2.svg"
 
 
 class DesktopLight(_Vrt_Light_SVG):
-    _icon = "desktop 2.svg"
+    _icon = "desktop2.svg"
 
 
 class Desktop2Light(_Vrt_Light_SVG):
-    _icon = "desktop 4.svg"
+    _icon = "desktop4.svg"
 
 
 class DialUpModemLight(_Vrt_Light_SVG):
-    _icon = "dial-up modem 2.svg"
+    _icon = "dialupmodem2.svg"
 
 
 class DirectoryServerLight(_Vrt_Light_SVG):
-    _icon = "directory server 2.svg"
+    _icon = "directoryserver2.svg"
 
 
 class DirectoryServer3Light(_Vrt_Light_SVG):
-    _icon = "directory server.svg"
+    _icon = "directoryserver.svg"
 
 
 class DocumentScanner2Light(_Vrt_Light_SVG):
-    _icon = "document scanner 2.svg"
+    _icon = "documentscanner2.svg"
 
 
 class DocumentScanner4Light(_Vrt_Light_SVG):
-    _icon = "document scanner 4.svg"
+    _icon = "documentscanner4.svg"
 
 
 class DocumentScanner6Light(_Vrt_Light_SVG):
-    _icon = "document scanner 6.svg"
+    _icon = "documentscanner6.svg"
 
 
 class DocumentScanner8Light(_Vrt_Light_SVG):
-    _icon = "document scanner 8.svg"
+    _icon = "documentscanner8.svg"
 
 
 class EndUsers2Light(_Vrt_Light_SVG):
-    _icon = "end users 2.svg"
+    _icon = "endusers2.svg"
+
+
+class EnergyUtilityMeterLight(_Vrt_Light_SVG):
+    _icon = "energyutilitymeter.svg"
 
 
 class Facsimile2Light(_Vrt_Light_SVG):
-    _icon = "facsimile 2.svg"
+    _icon = "facsimile2.svg"
 
 
 class Facsimile4Light(_Vrt_Light_SVG):
-    _icon = "facsimile 4.svg"
+    _icon = "facsimile4.svg"
 
 
 class FibreOpticBreakOutTray2Light(_Vrt_Light_SVG):
-    _icon = "FibreOpticBreak-outTray2.svg"
+    _icon = "FibreOpticBreakoutTray2.svg"
 
 
 class FileServer2Light(_Vrt_Light_SVG):
-    _icon = "file server 2.svg"
+    _icon = "fileserver2.svg"
 
 
 class Firewall1Light(_Vrt_Light_SVG):
-    _icon = "firewall 1.svg"
+    _icon = "firewall1.svg"
 
 
 class Firewall2Light(_Vrt_Light_SVG):
-    _icon = "firewall 2.svg"
+    _icon = "firewall2.svg"
 
 
 class FlatPanelDisplay2Light(_Vrt_Light_SVG):
-    _icon = "flat panel display 2.svg"
+    _icon = "flatpaneldisplay2.svg"
+
+
+class GasMeterLight(_Vrt_Light_SVG):
+    _icon = "gasmeter.svg"
 
 
 class GenericBlackBox2Light(_Vrt_Light_SVG):
-    _icon = "generic black box 2.svg"
+    _icon = "genericblackbox2.svg"
 
 
 class GenericPlcDcsController2Light(_Vrt_Light_SVG):
-    _icon = "generic plc dcs controller 2.svg"
+    _icon = "genericplcdcscontroller2.svg"
 
 
 class Hub1Light(_Vrt_Light_SVG):
-    _icon = "hub 1.svg"
+    _icon = "hub1.svg"
 
 
 class Hub2Light(_Vrt_Light_SVG):
-    _icon = "hub 2.svg"
+    _icon = "hub2.svg"
 
 
 class IndustrialBarcodeScanner2Light(_Vrt_Light_SVG):
-    _icon = "industrial barcode scanner 2.svg"
+    _icon = "industrialbarcodescanner2.svg"
 
 
 class IndustrialBarcodeScanner4Light(_Vrt_Light_SVG):
-    _icon = "industrial barcode scanner 4.svg"
+    _icon = "industrialbarcodescanner4.svg"
 
 
 class IndustrialCellularModem2Light(_Vrt_Light_SVG):
-    _icon = "industrial cellular modem 2.svg"
+    _icon = "industrialcellularmodem2.svg"
 
 
 class IndustrialCellularModem4Light(_Vrt_Light_SVG):
-    _icon = "industrial cellular modem 4.svg"
+    _icon = "industrialcellularmodem4.svg"
 
 
 class IndustrialEthernetToSerialConverter2Light(_Vrt_Light_SVG):
-    _icon = "industrial ethernet to serial converter 2.svg"
+    _icon = "industrialethernettoserialconverter2.svg"
 
 
 class IndustrialFibreToEthernetConverter2Light(_Vrt_Light_SVG):
-    _icon = "industrial fibre to ethernet converter 2.svg"
+    _icon = "industrialfibretoethernetconverter2.svg"
 
 
 class IndustrialPc2Light(_Vrt_Light_SVG):
-    _icon = "industrial pc 2.svg"
+    _icon = "industrialpc2.svg"
 
 
 class IndustrialPc4Light(_Vrt_Light_SVG):
-    _icon = "industrial pc 4.svg"
+    _icon = "industrialpc4.svg"
 
 
 class IndustrialSwitch2Light(_Vrt_Light_SVG):
-    _icon = "industrial switch 2.svg"
+    _icon = "industrialswitch2.svg"
 
 
 class InkjetPrinter2Light(_Vrt_Light_SVG):
-    _icon = "inkjet printer 2.svg"
+    _icon = "inkjetprinter2.svg"
 
 
 class InkjetPrinter4Light(_Vrt_Light_SVG):
-    _icon = "inkjet printer 4.svg"
+    _icon = "inkjetprinter4.svg"
 
 
 class Laptop2Light(_Vrt_Light_SVG):
-    _icon = "laptop 2.svg"
+    _icon = "laptop2.svg"
 
 
 class Laptop4Light(_Vrt_Light_SVG):
-    _icon = "laptop 4.svg"
+    _icon = "laptop4.svg"
 
 
 class LargeHmiPanel2Light(_Vrt_Light_SVG):
-    _icon = "large hmi panel 2.svg"
+    _icon = "largehmipanel2.svg"
 
 
 class LaserPrinter2Light(_Vrt_Light_SVG):
-    _icon = "laser printer 2.svg"
+    _icon = "laserprinter2.svg"
 
 
 class LaserPrinter4Light(_Vrt_Light_SVG):
-    _icon = "laser printer 4.svg"
+    _icon = "laserprinter4.svg"
 
 
 class LeadAcidBattery2Light(_Vrt_Light_SVG):
-    _icon = "lead-acid battery 2.svg"
+    _icon = "leadacidbattery2.svg"
 
 
 class MailServer2Light(_Vrt_Light_SVG):
-    _icon = "mail server 2.svg"
+    _icon = "mailserver2.svg"
 
 
 class MicrowaveSatelliteBase2Light(_Vrt_Light_SVG):
-    _icon = "microwave satellite base 2.svg"
+    _icon = "microwavesatellitebase2.svg"
 
 
 class MultiRoleServer2Light(_Vrt_Light_SVG):
-    _icon = "multi-role server 2.svg"
+    _icon = "multiroleserver2.svg"
 
 
 class NetworkAttachedStorage2Light(_Vrt_Light_SVG):
-    _icon = "network attached storage 2.svg"
+    _icon = "networkattachedstorage2.svg"
 
 
 class Projector2Light(_Vrt_Light_SVG):
-    _icon = "projector 2.svg"
+    _icon = "projector2.svg"
 
 
 class RackServer2Light(_Vrt_Light_SVG):
-    _icon = "rack server 2.svg"
+    _icon = "rackserver2.svg"
 
 
 class RackmountSwitch2Light(_Vrt_Light_SVG):
-    _icon = "rackmount switch 2.svg"
+    _icon = "rackmountswitch2.svg"
 
 
 class RoleEmblemAuthenticationLight(_Vrt_Light_SVG):
-    _icon = "role emblem - authentication.svg"
+    _icon = "roleemblemauthentication.svg"
 
 
 class RoleEmblemDataAcquisitionScadaLight(_Vrt_Light_SVG):
-    _icon = "role emblem - data acquisition Light(scada).svg"
+    _icon = "roleemblemdataacquisitionLightscada.svg"
 
 
 class RoleEmblemDatabaseLight(_Vrt_Light_SVG):
-    _icon = "role emblem - database.svg"
+    _icon = "roleemblemdatabase.svg"
 
 
 class RoleEmblemDirectoryLight(_Vrt_Light_SVG):
-    _icon = "role emblem - directory.svg"
+    _icon = "roleemblemdirectory.svg"
 
 
 class RoleEmblemFileLight(_Vrt_Light_SVG):
-    _icon = "role emblem - file.svg"
+    _icon = "roleemblemfile.svg"
 
 
 class RoleEmblemMailLight(_Vrt_Light_SVG):
-    _icon = "role emblem - mail.svg"
+    _icon = "roleemblemmail.svg"
 
 
 class RoleEmblemVideoLight(_Vrt_Light_SVG):
-    _icon = "role emblem - video.svg"
+    _icon = "roleemblemvideo.svg"
 
 
 class RoleEmblemVirtualisationObjectLight(_Vrt_Light_SVG):
-    _icon = "role emblem - virtualisation object.svg"
+    _icon = "roleemblemvirtualisationobject.svg"
 
 
 class RoleEmblemVirtualisationLight(_Vrt_Light_SVG):
-    _icon = "role emblem - virtualisation.svg"
+    _icon = "roleemblemvirtualisation.svg"
 
 
 class RoleEmblemWebLight(_Vrt_Light_SVG):
-    _icon = "role emblem - web.svg"
+    _icon = "roleemblemweb.svg"
 
 
 class Router2Light(_Vrt_Light_SVG):
-    _icon = "router 2.svg"
+    _icon = "router2.svg"
 
 
 class RouterFirewallLight(_Vrt_Light_SVG):
-    _icon = "router firewall.svg"
+    _icon = "routerfirewall.svg"
 
 
 class RouterLight(_Vrt_Light_SVG):
     _icon = "router.svg"
 
 
-class ServerRackOpenLight(_Vrt_Light_SVG):
-    _icon = "server rack - open.svg"
-
-
-class ServerRackLight(_Vrt_Light_SVG):
-    _icon = "server rack.svg"
-
-
 class SinglePhaseEnergyMeter2Light(_Vrt_Light_SVG):
-    _icon = "single-phase energy meter 2.svg"
+    _icon = "singlephaseenergymeter2.svg"
+
+
+class SinglePhaseEnergyMeterDinLight(_Vrt_Light_SVG):
+    _icon = "singlephaseenergymeterdin.svg"
 
 
 class SmallHmiPanel2Light(_Vrt_Light_SVG):
-    _icon = "small hmi panel 2.svg"
+    _icon = "smallhmipanel2.svg"
 
 
 class SmallTouchPanel2Light(_Vrt_Light_SVG):
-    _icon = "small touch panel 2.svg"
+    _icon = "smalltouchpanel2.svg"
 
 
 class Smartphone2Light(_Vrt_Light_SVG):
-    _icon = "smartphone 2.svg"
+    _icon = "smartphone2.svg"
 
 
 class Smartphone4Light(_Vrt_Light_SVG):
-    _icon = "smartphone 4.svg"
+    _icon = "smartphone4.svg"
+
+
+class SolarPvPanel1Light(_Vrt_Light_SVG):
+    _icon = "solarpvpanel1.svg"
+
+
+class SolarPvPanel2Light(_Vrt_Light_SVG):
+    _icon = "solarpvpanel2.svg"
 
 
 class Switch1Light(_Vrt_Light_SVG):
-    _icon = "switch 1.svg"
+    _icon = "switch1.svg"
 
 
 class Switch2Light(_Vrt_Light_SVG):
-    _icon = "switch 2.svg"
+    _icon = "switch2.svg"
 
 
 class Tablet2Light(_Vrt_Light_SVG):
-    _icon = "tablet 2.svg"
+    _icon = "tablet2.svg"
 
 
 class Tablet4Light(_Vrt_Light_SVG):
-    _icon = "tablet 4.svg"
+    _icon = "tablet4.svg"
 
 
 class Telephone2Light(_Vrt_Light_SVG):
-    _icon = "telephone 2.svg"
+    _icon = "telephone2.svg"
 
 
 class Telephone4Light(_Vrt_Light_SVG):
-    _icon = "telephone 4.svg"
+    _icon = "telephone4.svg"
 
 
 class ThinClient2Light(_Vrt_Light_SVG):
-    _icon = "thin client 2.svg"
+    _icon = "thinclient2.svg"
 
 
 class ThinClient4Light(_Vrt_Light_SVG):
-    _icon = "thin client 4.svg"
+    _icon = "thinclient4.svg"
 
 
 class ThreePhaseEnergyMeter2Light(_Vrt_Light_SVG):
-    _icon = "three-phase energy meter 2.svg"
+    _icon = "threephaseenergymeter2.svg"
+
+
+class ThreePhaseEnergyMeterDinLight(_Vrt_Light_SVG):
+    _icon = "threephaseenergymeterdin.svg"
 
 
 class ThreePhaseMultiFunctionMeter2Light(_Vrt_Light_SVG):
-    _icon = "three-phase multi-function meter 2.svg"
+    _icon = "threephasemultifunctionmeter2.svg"
 
 
 class ThreePhasePowerQualityAnalyser2Light(_Vrt_Light_SVG):
-    _icon = "three-phase power quality analyser 2.svg"
+    _icon = "threephasepowerqualityanalyser2.svg"
 
 
 class TowerServer2Light(_Vrt_Light_SVG):
-    _icon = "tower server 2.svg"
+    _icon = "towerserver2.svg"
 
 
 class UnifiedCommunicationsServer2Light(_Vrt_Light_SVG):
-    _icon = "unified communications server 2.svg"
+    _icon = "unifiedcommunicationsserver2.svg"
 
 
 class UninterruptiblePowerSupplyUps2Light(_Vrt_Light_SVG):
-    _icon = "uninterruptible power supply Light(ups) 2.svg"
-
-
-class UsbKeyDongle1Light(_Vrt_Light_SVG):
-    _icon = "usb key dongle 1.svg"
-
-
-class UsbKeyDongle2Light(_Vrt_Light_SVG):
-    _icon = "usb key dongle 2.svg"
-
-
-class UsbKeyDongle3Light(_Vrt_Light_SVG):
-    _icon = "usb key dongle 3.svg"
-
-
-class UsbKeyDongle4Light(_Vrt_Light_SVG):
-    _icon = "usb key dongle 4.svg"
-
-
-class UsbKeyDongle5Light(_Vrt_Light_SVG):
-    _icon = "usb key dongle 5.svg"
-
-
-class UsbKeyDongle6Light(_Vrt_Light_SVG):
-    _icon = "usb key dongle 6.svg"
-
-
-class UsbKeyDongle7Light(_Vrt_Light_SVG):
-    _icon = "usb key dongle 7.svg"
-
-
-class UsbKeyDongle8Light(_Vrt_Light_SVG):
-    _icon = "usb key dongle 8.svg"
+    _icon = "uninterruptiblepowersupplyLightups2.svg"
 
 
 class VideoServer2Light(_Vrt_Light_SVG):
-    _icon = "video server 2.svg"
-
-
-class VideoWallCubeLight(_Vrt_Light_SVG):
-    _icon = "video wall cube.svg"
-
-
-class VideoWallLight(_Vrt_Light_SVG):
-    _icon = "video wall.svg"
+    _icon = "videoserver2.svg"
 
 
 class VirtualisationObjectServer2Light(_Vrt_Light_SVG):
-    _icon = "virtualisation object server 2.svg"
+    _icon = "virtualisationobjectserver2.svg"
 
 
 class VirtualisationServer2Light(_Vrt_Light_SVG):
-    _icon = "virtualisation server 2.svg"
+    _icon = "virtualisationserver2.svg"
 
 
 class VpnConcentrator1Light(_Vrt_Light_SVG):
-    _icon = "vpn concentrator 1.svg"
+    _icon = "vpnconcentrator1.svg"
 
 
 class VpnConcentrator2Light(_Vrt_Light_SVG):
-    _icon = "vpn concentrator 2.svg"
+    _icon = "vpnconcentrator2.svg"
 
 
 class WagesHubASeries2Light(_Vrt_Light_SVG):
-    _icon = "wages hub a series 2.svg"
+    _icon = "wageshubaseries2.svg"
+
+
+class WaterThermalMeterLight(_Vrt_Light_SVG):
+    _icon = "waterthermalmeter.svg"
 
 
 class WebServer2Light(_Vrt_Light_SVG):
-    _icon = "web server 2.svg"
+    _icon = "webserver2.svg"
 
 
 class WiredSegmentInternetLight(_Vrt_Light_SVG):
-    _icon = "wired segment Light(internet).svg"
+    _icon = "wiredsegmentLightinternet.svg"
 
 
 class WiredSegmentSubnetLight(_Vrt_Light_SVG):
-    _icon = "wired segment Light(subnet).svg"
+    _icon = "wiredsegmentLightsubnet.svg"
 
 
 class WirelessAccessPoint1Light(_Vrt_Light_SVG):
-    _icon = "wireless access point 1.svg"
+    _icon = "wirelessaccesspoint1.svg"
 
 
 class WirelessAccessPoint2Light(_Vrt_Light_SVG):
-    _icon = "wireless access point 2.svg"
+    _icon = "wirelessaccesspoint2.svg"
 
 
 class WirelessBase2Light(_Vrt_Light_SVG):
-    _icon = "wireless base 2.svg"
+    _icon = "wirelessbase2.svg"
 
 
 class WirelessRouterAccessPoint2Light(_Vrt_Light_SVG):
-    _icon = "wireless router access point 2.svg"
+    _icon = "wirelessrouteraccesspoint2.svg"
 
 
 class WirelessRouterAccessPoint4Light(_Vrt_Light_SVG):
-    _icon = "wireless router access point 4.svg"
+    _icon = "wirelessrouteraccesspoint4.svg"
 
 
 class WirelessRouterFirewallLight(_Vrt_Light_SVG):
-    _icon = "wireless router firewall.svg"
+    _icon = "wirelessrouterfirewall.svg"
 
 
 class WirelessRouterLight(_Vrt_Light_SVG):
-    _icon = "wireless router.svg"
+    _icon = "wirelessrouter.svg"
 
 
 class WorkgroupSwitch3Light(_Vrt_Light_SVG):
-    _icon = "workgroup switch 2.svg"
+    _icon = "workgroupswitch2.svg"
 
 # Aliases

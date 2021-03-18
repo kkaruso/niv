@@ -1,7 +1,6 @@
 diagram: # Diagram properties
   backgroundColor:   # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding: 0.5  # Padding around the graph (default: 0.5; type: double)
-  # TODO: Fix when using neato that no groups are showing
   layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
   connectionStyle: spline # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
   direction: LR #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
@@ -19,6 +18,8 @@ nodes: # List every single node that should be in the diagram here
   # Syntax:
   # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, x: x-coordinate, y: y-coordinate, url: link to a website or another file, tooltip: text shown in the tooltip }
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
+  # switch-view : show detailed port view of the switch in the subgroups (default: switch-view: False)
+  # ports: how many ports has the device with the switch-view = True (default ports: 24)
   cloud1: { icon: OsaCloud, name: Random text, ip: 192.168.0.1, x: 0, y: 3, url: https://theuselessweb.com/, tooltip: Test tooltip }
   db1: { icon: OsaDatabase, name: MySQL Database, ip: 192.164.41.33, x: 0, y: 0, mac: 00:0a:95:9d:68:16, modelnr: 133742069, manufacturer: HP, storage: "Seagate, 50 TB, no raid", tooltip: I am an additional tooltip }
   deviceScanner1: { icon: OsaDeviceScanner, name: Local Device Scanner, x: 0, y: 6, modelnr: 2321331 }
@@ -28,7 +29,6 @@ nodes: # List every single node that should be in the diagram here
   desktop2: { icon: OsaDesktopImac, name: My Desktop 2, x: 3, y: 0 }
   Osa: { icon: invalid_icon, name: Invalid Node, x: 1 }
 
-# TODO: Implement that you can group other groups
 groups: # List every group of nodes here
   # Syntax:
   # group name: { name: Text shown in the corner of the group, members: [ list of nodes in this group ], tooltip: text shown in the tooltip }
