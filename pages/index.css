@@ -12,11 +12,69 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0px;
+    background-color: rgb(236, 236, 236);
 }
 
 [hidden] {
     display: none
+}
+
+.segment {
+    position: relative;
+    margin: 20px;
+    background-color: rgb(236, 99, 99);
+    display: flex;
+    max-height: 500px;
+    height: auto;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.segment-image-left {
+    width: 30%
+}
+
+.segment-text-left {
+    width: 70%;
+}
+
+.segment-image-right {
+    width: 30%;
+}
+
+.segment-text-right {
+    width: 70%;
+}
+
+/* 
+.segment-image {
+    width: 30%;
+}
+
+.segment-text {
+    position: absolute;
+    left: 30%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70%;
+}
+
+.segment-text-right {
+    position: absolute;
+    left: 70%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 70%;
+}
+
+.segment-image-right {
+    width: 30%;
+} */
+
+.intro {
+    text-align: center;
+    margin: 50px 0px;
 }
 
 img {
@@ -95,7 +153,7 @@ h6 {
 h1, h2, h3, h4, h5, h6 {
     font-family: "Segoe UI", Arial, sans-serif;
     font-weight: 400;
-    margin: 10px 0
+    margin: 12px 0
 }
 
 img {
@@ -104,12 +162,6 @@ img {
 
 :disabled * {
     pointer-events: none
-}
-
-.container:after, .container:before, .row-padding:after, .row-padding:before, .row:after, .row:before {
-    content: "";
-    display: table;
-    clear: both
 }
 
 .quarter {
@@ -132,23 +184,58 @@ img {
     max-width: 980px
 }
 
-.circle {
-    border-radius: 50%
+.rounded {
+    border-radius: 5px;
 }
 
-#logo img{
+#logo img {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-  }
+}
 
 .row-padding, .row-padding>.quarter {
     padding: 0 8px
 }
 
-.container {
-    padding: .01em 16px
+footer {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    text-align: center;
+}
+
+footer a {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+a:active {
+    color: white;
+    text-decoration: underline;
+}
+
+.conclusion {
+    text-align: center;
+    margin: 50px 0px;
 }
 
 @keyframes spin {
@@ -273,4 +360,78 @@ img {
 .padding-64 {
     padding-top: 64px!important;
     padding-bottom: 64px!important
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.card img {
+    width: 50%;
+    height: 50%;
+}
+
+/* img border */
+img {
+    border: 3px solid #000;
+}
+
+
+/* Three columns side by side */
+.column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+    text-align: center;
+}
+
+/* Display the columns below each other instead of side by side on small screens */
+
+@media screen and (max-width: 650px) {
+    .column {
+        width: 100%;
+        display: block;
+    }
+}
+
+/* Add some shadows to create a card effect */
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Some left and right padding inside the container */
+
+.container {
+    padding: 0 16px;
+}
+
+/* Clear floats */
+
+.container::after, .row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.title {
+    color: grey;
+}
+
+.button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: #555;
 }
