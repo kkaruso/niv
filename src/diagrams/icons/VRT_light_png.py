@@ -40,7 +40,7 @@ class AllenBradleyFlexio2LightPng(_Vrt_Light_LightPng):
 
 
 class Appliance1LightPng(_Vrt_Light_LightPng):
-    -icon = "Appliance1.png"
+    _icon = "Appliance1.png"
 
 
 class AtmSwitch1LightPng(_Vrt_Light_LightPng):
