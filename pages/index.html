@@ -4,115 +4,160 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="index.css">
-<link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body id="myPage">
 
     <div id="logo">
-        <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
+        <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="rounded hover-opacity">
         <p1></p1>
     </div>
 
-    <div>
-        <p1>Einführungssatz zum Projekt, Informationen über das Problem, ....</p1>
-    </div>
+    <div class="intro">
+      <h1>Einleitung</h1>
+      <p>Einführungssatz zum Projekt, Informationen über das Problem, ....</p>
 
-    <div>
-        <p1>Noch mehr Text, diesmal über unseren Lösungsansatz, Vorgehen und das Ergebnis</p1>
+      <h2>Problem</h2>
+      <p>Noch mehr Text, diesmal über unseren Lösungsansatz, Vorgehen und das Ergebnis</p>
+      <h2>Lösung</h2>
+      <p>Text über Lösungsansatz</p>
+      <h2>Vorgehen</h2>
+      <p>Text über Vorgehen</p>
     </div>
 
     <!-- Example Container -->
-    <div>
-        <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
+    <div class="segment">
+      <div class="segment-image-left">
+        <img src="images/NIV_logo.jpg" alt="NIV_Logo" style="width:30%" class="rounded">
+      </div>
+      <div class="segment-text-left">
         <p1>Screenshot vom Projekt, Beschreibung</p1>
+      </div>
     </div>
 
-    <div>
+    <div class="segment">
+      <div class=segment-text-right>
         <p1>Screenshot vom Projekt, Beschreibung</p1>
-        <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
+      </div>
+      <div class="segment-image-right">
+        <img src="images/NIV_logo.jpg" alt="NIV_Logo" style="width:30%" class="rounded">
+      </div>
     </div>
 
-    <div>
-        <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
+    <div class="segment">
+      <div class="segment-image-left">
+        <img src="images/NIV_logo.jpg" alt="NIV_Logo" style="width:30%" class="rounded">
+      </div>
+      <div class="segment-text-left">
         <p1>Screenshot vom Projekt, Beschreibung</p1>
+      </div>
+    </div>
+
+    <div class="conclusion">
+      <h1>Fazit</h1>  
+      <p1>Abschlussatz</p1>
     </div>
 
     <div>
-        <p1>Abschlussatz</p1></br></br></br></br></br>
-    </div>
-
-    <div>
-        <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
+        <img src="images/poster.png" alt="NIV_Poster" style="width:17%">
         <p1>Platzhalter für das Poster</p1>
-        <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
+        <img src="images/NIV_logo.jpg" alt="NIV_Logo" style="width:25%" class="rounded hover-opacity">
         <p1>Bilderslides, Screenshots aus dem Projekt/Diagrammen?</p1>
     </div>
 
-    <!-- Team Container -->
-    <div class="container padding-64 center" id="team">
-        <h2>Meet the team and our customer:</h2>
 
-        <div class="row"><br>
-                
-            <div class="quarter">
-                <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
-                <h3>Marcel Metzler</h3>
-                <p>Product Owner</p>
+    
+<!---team-->
+    <div class="row">
+      
+        <div class="column">
+          <div class="card">
+            <img src="images/marcel_metzler.png" alt="Marcel_Metzler" style="width:auto">
+            <div class="container">
+              <h2>Marcel Metzler</h2>
+              <p class="title">Product Owner</p>
             </div>
-
-            <div class="quarter">
-                <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
-                <h3>Enis Kecevic</h3>
-                <p>Scrum Master</p>
-            </div>
-
-            <div class="quarter">
-                <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
-                <h3>Tim Thomas</h3>
-                <p>Developer</p>
-            </div>
-
-            <div class="quarter">
-                <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
-                <h3>Darwin Schulz</h3>
-                <p>Developer</p>
-            </div>
-
-            <div class="quarter">
-                <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
-                <h3>Daniel Grosmayer</h3>
-                <p>Developer</p>
-            </div>
-
-            <div class="quarter">
-                <img src="images/musa_tek.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
-                <h3>Musa Tek</h3>
-                <p>Developer</p>
-            </div>
-
-            <div class="quarter">
-                <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
-                <h3>Mohamed-Salim Guezguez</h3>
-                <p>Developer</p>
-            </div>
-
-            <div class="quarter">
-                <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
-                <h3>Gulbarchyn Akbekova</h3>
-                <p>Developer</p>
-            </div>
-
-            <div class="quarter">
-                <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="circle hover-opacity">
-                <h3>Mohamad-Said Himmat</h3>
-                <p>Developer</p>
-            </div>
-
+          </div>
         </div>
-    </div>
+      
+        <div class="column">
+          <div class="card">
+            <img src="images/enis_kecevic.png" alt="Enis_Kecevic" style="width:auto">
+            <div class="container">
+              <h2>Enis Kecevic</h2>
+              <p class="title">Scrum Master</p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+            <div class="card">
+              <img src="images/tim_thomas.png" alt="Tim_Thomas" style="width:auto">
+              <div class="container">
+                <h2>Tim Thomas</h2>
+                <p class="title">Developer</p>
+              </div>
+            </div>
+          </div>
+        <div class="column">
+            <div class="card">
+              <img src="images/daniel_grosmayer.png" alt="Daniel_Grosmayer" style="width:auto">
+              <div class="container">
+                <h2>Daniel Grosmayer</h2>
+                <p class="title">Developer</p>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="card">
+              <img src="images/darwin_schulz.png" alt="Darwin_Schulz" style="width:auto">
+              <div class="container">
+                <h2>Darwin Schulz</h2>
+                <p class="title">Developer</p>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="card">
+              <img src="images/musa_tek.jpg" alt="Musa_Tek" style="width:auto">
+              <div class="container">
+                <h2>Musa Tek</h2>
+                <p class="title">Developer</p>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="card">
+              <img src="images/gulbarchyn_akbekova.png" alt="Gulbarchyn_Akbekova" style="width:auto">
+              <div class="container">
+                <h2>Gulbarchyn Akbekova</h2>
+                <p class="title">Developer</p>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="card">
+              <img src="images/mohamad_said_himmat.png" alt="Mohamad_Said_Himmat" style="width:auto">
+              <div class="container">
+                <h2>Mohamad Said Himmat</h2>
+                <p class="title">Developer</p>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="card">
+              <img src="images/mohamed_salim_guezguez.png" alt="Mohamed_Salim_Guezguez" style="width:auto">
+              <div class="container">
+                <h2>Mohamed Salim Guezguez</h2>
+                <p class="title">Developer</p>
+              </div>
+            </div>
+          </div>
+      </div>
 
 
 </body>
+<footer>
+    <a href="https://gitlab.rlp.net/top/impressum-und-datenschutzerklaerung">Impressum / Datenschutzerklärung</a>
+</footer>
 
 </html>
