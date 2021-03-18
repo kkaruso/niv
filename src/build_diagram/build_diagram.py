@@ -694,7 +694,6 @@ class BuildDiagram:
             self.logger.log_error(e)
             print(log_message)
 
-
         return _dict
 
     def set_variables(self, _object: str, _subobject: str, _default: any):
