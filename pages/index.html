@@ -5,159 +5,228 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="images/NIV_logo.jpg">
 
 <body id="myPage">
 
     <div id="logo">
-        <img src="images/NIV_logo.jpg" alt="Boss" style="width:25%" class="rounded hover-opacity">
+        <img src="images/NIV_logo.jpg" alt="NIV_Logo" style="width:25%" class="rounded">
         <p1></p1>
     </div>
 
     <div class="intro">
-      <h1>Einleitung</h1>
-      <p>Einführungssatz zum Projekt, Informationen über das Problem, ....</p>
+        <h1>Einleitung</h1>
+        <p>Einführungssatz zum Projekt, Informationen über das Problem, ....</p>
 
-      <h2>Problem</h2>
-      <p>Noch mehr Text, diesmal über unseren Lösungsansatz, Vorgehen und das Ergebnis</p>
-      <h2>Lösung</h2>
-      <p>Text über Lösungsansatz</p>
-      <h2>Vorgehen</h2>
-      <p>Text über Vorgehen</p>
+        <h2>Problem</h2>
+        <p>Noch mehr Text, diesmal über unseren Lösungsansatz, Vorgehen und das Ergebnis</p>
+        <h2>Lösung</h2>
+        <p>Text über Lösungsansatz</p>
+        <h2>Vorgehen</h2>
+        <p>Text über Vorgehen</p>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal_image">
+        <div id="caption"></div>
     </div>
 
     <!-- Example Container -->
-    <div class="segment">
-      <div class="segment-image-left">
-        <img src="images/NIV_logo.jpg" alt="NIV_Logo" style="width:30%" class="rounded">
-      </div>
-      <div class="segment-text-left">
-        <p1>Screenshot vom Projekt, Beschreibung</p1>
-      </div>
+    <div class="segment segment-left-to-right">
+        <div class="segment-image">
+            <img src="images/example1_code.png" alt="Beispiel Yaml" width="100%" class="rounded" id="image1">
+        </div>
+        <div class="segment-text-left">
+            <p>Eine einfach Strukturierte YAML-Datei die der User erstellt ergibt eine visualisierte
+                Ansicht des
+                Netzwerks</p>
+        </div>
     </div>
 
-    <div class="segment">
-      <div class=segment-text-right>
-        <p1>Screenshot vom Projekt, Beschreibung</p1>
-      </div>
-      <div class="segment-image-right">
-        <img src="images/NIV_logo.jpg" alt="NIV_Logo" style="width:30%" class="rounded">
-      </div>
+    <div class="segment segment-right-to-left">
+        <div class=segment-text-right>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet
+                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+                amet,
+                consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                erat, sed
+                diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+                sea
+                takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        </div>
+        <div class="segment-image">
+            <img src="images/example2_command.png" alt="NIV_Logo" width="100%" class="rounded" id="image2">
+        </div>
     </div>
 
-    <div class="segment">
-      <div class="segment-image-left">
-        <img src="images/NIV_logo.jpg" alt="NIV_Logo" style="width:30%" class="rounded">
-      </div>
-      <div class="segment-text-left">
-        <p1>Screenshot vom Projekt, Beschreibung</p1>
-      </div>
+    <div class="segment segment-left-to-right">
+        <div class="segment-image">
+            <img src="images/example3_diagramm.png" alt="NIV_Logo" width="100%" class="rounded" id="image3">
+        </div>
+        <div class="segment-text-left">
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
+                labore et
+                dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                Stet
+                clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+                amet,
+                consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+                erat, sed
+                diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
+                sea
+                takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        </div>
     </div>
 
     <div class="conclusion">
-      <h1>Fazit</h1>  
-      <p1>Abschlussatz</p1>
+        <h1>Fazit</h1>
+        <p1>Abschlussatz</p1>
     </div>
 
-    <div>
-        <img src="images/poster.png" alt="NIV_Poster" style="width:17%">
-        <p1>Platzhalter für das Poster</p1>
-        <img src="images/NIV_logo.jpg" alt="NIV_Logo" style="width:25%" class="rounded hover-opacity">
-        <p1>Bilderslides, Screenshots aus dem Projekt/Diagrammen?</p1>
+    <div id="poster-and-slide">
+        <div class="poster-container">
+          <div class="poster">
+            <img src="images/poster.png" alt="NIV_Poster" style="width:100%" id="poster">
+          </div>
+        </div>
+
+        <!-- Slideshow container -->
+        <div class="slideshow-container">
+            <div class="slideshow-all">
+                <!-- Full-width images with number and caption text -->
+                <div class="mySlides fade">
+                    <div class="numbertext">1 / 4</div>
+                    <img src="images/daniel_grosmayer.png" style="width:100%" id="image1_slide">
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">2 / 4</div>
+                    <img src="images/marcel_metzler.png" style="width:100%" id="image2_slide">
+                </div>
+
+                <div class="mySlides fade">
+                    <div class="numbertext">3 / 4</div>
+                    <img src="images/tim_thomas.png" style="width:100%" id="image3_slide">
+                </div>
+                <div class="mySlides fade">
+                    <div class="numbertext">4 / 4</div>
+                    <img src="images/NIV_logo.jpg" style="width:100%" id="image4_slide">
+                </div>
+
+
+                <!-- Next and previous buttons -->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <br>
+            </div>
+            <!-- The dots/circles -->
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
     </div>
 
-
-    
-<!---team-->
+    <!---team-->
     <div class="row">
-      
+        <h1>Das Team</h1>
         <div class="column">
-          <div class="card">
-            <img src="images/marcel_metzler.png" alt="Marcel_Metzler" style="width:auto">
-            <div class="container">
-              <h2>Marcel Metzler</h2>
-              <p class="title">Product Owner</p>
+            <div class="card">
+                <img src="images/marcel_metzler.png" alt="Marcel_Metzler" style="width:auto">
+                <div class="container">
+                    <h2>Marcel Metzler</h2>
+                    <p class="title">Product Owner</p>
+                </div>
             </div>
-          </div>
         </div>
-      
+
         <div class="column">
-          <div class="card">
-            <img src="images/enis_kecevic.png" alt="Enis_Kecevic" style="width:auto">
-            <div class="container">
-              <h2>Enis Kecevic</h2>
-              <p class="title">Scrum Master</p>
+            <div class="card">
+                <img src="images/enis_kecevic.png" alt="Enis_Kecevic" style="width:auto">
+                <div class="container">
+                    <h2>Enis Kecevic</h2>
+                    <p class="title">Scrum Master</p>
+                </div>
             </div>
-          </div>
         </div>
         <div class="column">
             <div class="card">
-              <img src="images/tim_thomas.png" alt="Tim_Thomas" style="width:auto">
-              <div class="container">
-                <h2>Tim Thomas</h2>
-                <p class="title">Developer</p>
-              </div>
+                <img src="images/tim_thomas.png" alt="Tim_Thomas" style="width:auto">
+                <div class="container">
+                    <h2>Tim Thomas</h2>
+                    <p class="title">Developer</p>
+                </div>
             </div>
-          </div>
+        </div>
         <div class="column">
             <div class="card">
-              <img src="images/daniel_grosmayer.png" alt="Daniel_Grosmayer" style="width:auto">
-              <div class="container">
-                <h2>Daniel Grosmayer</h2>
-                <p class="title">Developer</p>
-              </div>
+                <img src="images/daniel_grosmayer.png" alt="Daniel_Grosmayer" style="width:auto">
+                <div class="container">
+                    <h2>Daniel Grosmayer</h2>
+                    <p class="title">Developer</p>
+                </div>
             </div>
-          </div>
-          <div class="column">
+        </div>
+        <div class="column">
             <div class="card">
-              <img src="images/darwin_schulz.png" alt="Darwin_Schulz" style="width:auto">
-              <div class="container">
-                <h2>Darwin Schulz</h2>
-                <p class="title">Developer</p>
-              </div>
+                <img src="images/darwin_schulz.png" alt="Darwin_Schulz" style="width:auto">
+                <div class="container">
+                    <h2>Darwin Schulz</h2>
+                    <p class="title">Developer</p>
+                </div>
             </div>
-          </div>
-          <div class="column">
+        </div>
+        <div class="column">
             <div class="card">
-              <img src="images/musa_tek.jpg" alt="Musa_Tek" style="width:auto">
-              <div class="container">
-                <h2>Musa Tek</h2>
-                <p class="title">Developer</p>
-              </div>
+                <img src="images/musa_tek.jpg" alt="Musa_Tek" style="width:auto">
+                <div class="container">
+                    <h2>Musa Tek</h2>
+                    <p class="title">Developer</p>
+                </div>
             </div>
-          </div>
-          <div class="column">
+        </div>
+        <div class="column">
             <div class="card">
-              <img src="images/gulbarchyn_akbekova.png" alt="Gulbarchyn_Akbekova" style="width:auto">
-              <div class="container">
-                <h2>Gulbarchyn Akbekova</h2>
-                <p class="title">Developer</p>
-              </div>
+                <img src="images/gulbarchyn_akbekova.png" alt="Gulbarchyn_Akbekova" style="width:auto">
+                <div class="container">
+                    <h2>Gulbarchyn Akbekova</h2>
+                    <p class="title">Developer</p>
+                </div>
             </div>
-          </div>
-          <div class="column">
+        </div>
+        <div class="column">
             <div class="card">
-              <img src="images/mohamad_said_himmat.png" alt="Mohamad_Said_Himmat" style="width:auto">
-              <div class="container">
-                <h2>Mohamad Said Himmat</h2>
-                <p class="title">Developer</p>
-              </div>
+                <img src="images/mohamad_said_himmat.png" alt="Mohamad_Said_Himmat" style="width:auto">
+                <div class="container">
+                    <h2>Mohamad-Said Himmat</h2>
+                    <p class="title">Developer</p>
+                </div>
             </div>
-          </div>
-          <div class="column">
+        </div>
+        <div class="column">
             <div class="card">
-              <img src="images/mohamed_salim_guezguez.png" alt="Mohamed_Salim_Guezguez" style="width:auto">
-              <div class="container">
-                <h2>Mohamed Salim Guezguez</h2>
-                <p class="title">Developer</p>
-              </div>
+                <img src="images/mohamed_salim_guezguez.png" alt="Mohamed_Salim_Guezguez" style="width:auto">
+                <div class="container">
+                    <h2>Mohamed-Salim Guezguez</h2>
+                    <p class="title">Developer</p>
+                </div>
             </div>
-          </div>
-      </div>
+        </div>
+    </div>
 
 
 </body>
 <footer>
     <a href="https://gitlab.rlp.net/top/impressum-und-datenschutzerklaerung">Impressum / Datenschutzerklärung</a>
 </footer>
+
+<script src="slideshow.js"></script>
 
 </html>
