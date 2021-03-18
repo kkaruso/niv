@@ -28,7 +28,7 @@ pages:
   - mv .public public
   artifacts:
     paths:
-    - public
+    - public/pages
 
 build-package:
   stage: deploy
