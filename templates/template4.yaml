@@ -16,55 +16,55 @@ title: # Text underneath the diagram.
   version: "1.0"  # Version of the diagram as string
 
 groupDefaults: &groupDefaults #Use current values as defaults
-  backgroundColor: lightblue  # Fill the background of the group box
+  backgroundColor: Darkblue  # Fill the background of the group box
 
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
   cloud1: {icon: Cloud, name: Internet, x: 24, y: 26}
-  router1: { icon: RouterFirewall, name: Router Firewall, x: 24, y: 22 }
-  core-Switch1:  {icon: SafeharborIcon, name: core-Switch 1, x: 22, y: 18, switch-view: True, ports: 24}
-  core-Switch2:  {icon: SafeharborIcon, name: core-Switch 2, x: 26, y: 18, switch-view: True, ports: 24}
-  spine-Switch1: {icon: SafeharborIcon, name: spine-Switch 1, x: 18, y: 12, switch-view: True, ports: 24}
-  spine-Switch2: {icon: SafeharborIcon, name: spine-Switch 2, x: 22, y: 12, switch-view: True, ports: 24}
-  spine-Switch3: {icon: SafeharborIcon, name: spine-Switch 3, x: 26, y: 12, switch-view: True, ports: 24}
-  spine-Switch4: {icon: SafeharborIcon, name: spine-Switch 4, x: 30, y: 12, switch-view: True, ports: 24}
-  switch1: { icon: WorkgroupSwitch, name: Work group Switch c1, x: 1, y: 6, switch-view: True, ports: 22}
-  switch2: { icon: WorkgroupSwitch, name: Work group Switch c2, x: 4, y: 6, switch-view: True, ports: 20}
-  switch3: { icon: WorkgroupSwitch, name: Work group Switch c3, x: 11, y: 6, switch-view: True, ports: 12}
-  switch13: { icon: WorkgroupSwitch, name: Work group Switch c13, x: 11, y: 6, switch-view: True, ports: 12}
-  switch4: { icon: WorkgroupSwitch, name: Work group Switch c4, x: 14, y: 6, switch-view: True, ports: 12}
-  switch5: { icon: WorkgroupSwitch, name: Work group Switch c5, x: 21, y: 6, switch-view: True, ports: 12}
-  switch6: { icon: WorkgroupSwitch, name: Work group Switch c6, x: 24, y: 6, switch-view: True, ports: 12}
-  switch7: { icon: WorkgroupSwitch, name: Work group Switch c7, x: 31, y: 6, switch-view: True, ports: 12}
-  switch8: { icon: WorkgroupSwitch, name: Work group Switch c8, x: 34, y: 6, switch-view: True, ports: 12}
-  switch9: { icon: WorkgroupSwitch, name: Work group Switch c9, x: 41, y: 6, switch-view: True, ports: 12}
-  switch10: { icon: WorkgroupSwitch, name: Work group Switch c10, x: 44, y: 6, switch-view: True, ports: 12}
-  switch11: { icon: WorkgroupSwitch, name: Work group Switch c11, x: 51, y: 6, switch-view: True, ports: 12}
-  switch12: { icon: WorkgroupSwitch, name: Work group Switch c12, x: 54, y: 6, switch-view: True, ports: 12}
-  server1: { icon: FileServer, name: Server 1, x: 0, y: 2 }
-  server2: { icon: FileServer, name: Server 2, x: 2, y: 2 }
-  server3: { icon: FileServer, name: Server 3, x: 4, y: 2 }
-  server4: { icon: FileServer, name: Server 4, x: 6, y: 2 }
-  server5: { icon: FileServer, name: Server 5, x: 10, y: 2 }
-  server6: { icon: FileServer, name: Server 6, x: 12, y: 2 }
-  server7: { icon: FileServer, name: Server 7, x: 14, y: 2 }
-  server8: { icon: FileServer, name: Server 8, x: 16, y: 2 }
-  server9: { icon: FileServer, name: Server 9, x: 20, y: 2 }
-  server10: { icon: FileServer, name: Server 10, x: 22, y: 2 }
-  server11: { icon: FileServer, name: Server 11, x: 24, y: 2 }
-  server12: { icon: FileServer, name: Server 12, x: 26, y: 2 }
-  server13: { icon: FileServer, name: Server 1, x: 30, y: 2 }
-  server14: { icon: FileServer, name: Server 2, x: 32, y: 2 }
-  server15: { icon: FileServer, name: Server 3, x: 34, y: 2 }
-  server16: { icon: FileServer, name: Server 4, x: 36, y: 2 }
-  server17: { icon: FileServer, name: Server 5, x: 40, y: 2 }
-  server18: { icon: FileServer, name: Server 6, x: 42, y: 2 }
-  server19: { icon: FileServer, name: Server 7, x: 44, y: 2 }
-  server20: { icon: FileServer, name: Server 8, x: 46, y: 2 }
-  server21: { icon: FileServer, name: Server 9, x: 50, y: 2 }
-  server22: { icon: FileServer, name: Server 10, x: 52, y: 2 }
-  server23: { icon: FileServer, name: Server 11, x: 54, y: 2 }
-  server24: { icon: FileServer, name: Server 12, x: 56, y: 2 }
+  router1: { icon: RouterFirewallDark, name: Router Firewall, x: 24, y: 22 }
+  core-Switch1:  {icon: CompactPlc2Light, name: core-Switch 1, x: 22, y: 18, switch-view: True, ports: 24}
+  core-Switch2:  {icon: CompactPlc2Light, name: core-Switch 2, x: 26, y: 18, switch-view: True, ports: 24}
+  spine-Switch1: {icon: CompactPlc2Light, name: spine-Switch 1, x: 18, y: 12, switch-view: True, ports: 24}
+  spine-Switch2: {icon: CompactPlc2Light, name: spine-Switch 2, x: 22, y: 12, switch-view: True, ports: 24}
+  spine-Switch3: {icon: CompactPlc2Light, name: spine-Switch 3, x: 26, y: 12, switch-view: True, ports: 24}
+  spine-Switch4: {icon: CompactPlc2Light, name: spine-Switch 4, x: 30, y: 12, switch-view: True, ports: 24}
+  switch1: { icon: WorkgroupSwitch3Dark, name: Work group Switch c1, x: 1, y: 6, switch-view: True, ports: 22}
+  switch2: { icon: WorkgroupSwitch3Dark, name: Work group Switch c2, x: 4, y: 6, switch-view: True, ports: 20}
+  switch3: { icon: WorkgroupSwitch3Dark, name: Work group Switch c3, x: 11, y: 6, switch-view: True, ports: 12}
+  switch13: { icon: WorkgroupSwitch3Dark, name: Work group Switch c13, x: 11, y: 6, switch-view: True, ports: 12}
+  switch4: { icon: WorkgroupSwitch3Dark, name: Work group Switch c4, x: 14, y: 6, switch-view: True, ports: 12}
+  switch5: { icon: WorkgroupSwitch3Dark, name: Work group Switch c5, x: 21, y: 6, switch-view: True, ports: 12}
+  switch6: { icon: WorkgroupSwitch3Dark, name: Work group Switch c6, x: 24, y: 6, switch-view: True, ports: 12}
+  switch7: { icon: WorkgroupSwitch3Dark, name: Work group Switch c7, x: 31, y: 6, switch-view: True, ports: 12}
+  switch8: { icon: WorkgroupSwitch3Dark, name: Work group Switch c8, x: 34, y: 6, switch-view: True, ports: 12}
+  switch9: { icon: WorkgroupSwitch3Dark, name: Work group Switch c9, x: 41, y: 6, switch-view: True, ports: 12}
+  switch10: { icon: WorkgroupSwitch3Dark, name: Work group Switch c10, x: 44, y: 6, switch-view: True, ports: 12}
+  switch11: { icon: WorkgroupSwitch3Dark, name: Work group Switch c11, x: 51, y: 6, switch-view: True, ports: 12}
+  switch12: { icon: WorkgroupSwitch3Dark, name: Work group Switch c12, x: 54, y: 6, switch-view: True, ports: 12}
+  server1: { icon: NetworkAttachedStorage2Light, name: Server 1, x: 0, y: 2 }
+  server2: { icon: NetworkAttachedStorage2Light, name: Server 2, x: 2, y: 2 }
+  server3: { icon: NetworkAttachedStorage2Light, name: Server 3, x: 4, y: 2 }
+  server4: { icon: NetworkAttachedStorage2Light, name: Server 4, x: 6, y: 2 }
+  server5: { icon: NetworkAttachedStorage2Light, name: Server 5, x: 10, y: 2 }
+  server6: { icon: NetworkAttachedStorage2Light, name: Server 6, x: 12, y: 2 }
+  server7: { icon: NetworkAttachedStorage2Light, name: Server 7, x: 14, y: 2 }
+  server8: { icon: NetworkAttachedStorage2Light, name: Server 8, x: 16, y: 2 }
+  server9: { icon: NetworkAttachedStorage2Light, name: Server 9, x: 20, y: 2 }
+  server10: { icon: NetworkAttachedStorage2Light, name: Server 10, x: 22, y: 2 }
+  server11: { icon: NetworkAttachedStorage2Light, name: Server 11, x: 24, y: 2 }
+  server12: { icon: NetworkAttachedStorage2Light, name: Server 12, x: 26, y: 2 }
+  server13: { icon: NetworkAttachedStorage2Light, name: Server 1, x: 30, y: 2 }
+  server14: { icon: NetworkAttachedStorage2Light, name: Server 2, x: 32, y: 2 }
+  server15: { icon: NetworkAttachedStorage2Light, name: Server 3, x: 34, y: 2 }
+  server16: { icon: NetworkAttachedStorage2Light, name: Server 4, x: 36, y: 2 }
+  server17: { icon: NetworkAttachedStorage2Light, name: Server 5, x: 40, y: 2 }
+  server18: { icon: NetworkAttachedStorage2Light, name: Server 6, x: 42, y: 2 }
+  server19: { icon: NetworkAttachedStorage2Light, name: Server 7, x: 44, y: 2 }
+  server20: { icon: NetworkAttachedStorage2Light, name: Server 8, x: 46, y: 2 }
+  server21: { icon: NetworkAttachedStorage2Light, name: Server 9, x: 50, y: 2 }
+  server22: { icon: NetworkAttachedStorage2Light, name: Server 10, x: 52, y: 2 }
+  server23: { icon: NetworkAttachedStorage2Light, name: Server 11, x: 54, y: 2 }
+  server24: { icon: NetworkAttachedStorage2Light, name: Server 12, x: 56, y: 2 }
 
 # TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
@@ -153,7 +153,8 @@ connections: #enter your connections here
 
 - {endpoints: [switch2, switch1], color: black}
 - {endpoints: [switch13, switch2], color: black}
-- {endpoints: [server1, server2], color: black}
+- {endpoints: [switch13, server8], color: black}
+- {endpoints: [switch13, server12], color: black}
 
 
 - {endpoints: [server1, switch2], color: black }
