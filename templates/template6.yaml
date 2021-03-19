@@ -30,9 +30,9 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
   core-Switch2:  {icon: CompactPlc2Light, name: core-Switch 2, x: 25, y: 13, switch-view: True, ports: 12 }
   core-Switch3:  {icon: CompactPlc2Light, name: core-Switch 3, x: 29, y: 16, switch-view: True, ports: 12 }
 
-  switch1: { icon: CompactPlc2Light, name: Work group Switch c1, x: 14, y: 16, switch-view: True, ports: 6 }
-  switch2: { icon: CompactPlc2Light, name: Work group Switch c2, x: 25, y: 7, switch-view: True, ports: 6 }
-  switch3: { icon: CompactPlc2Light, name: Work group Switch c3, x: 36, y: 16, switch-view: True, ports: 6 }
+  switch1: { icon: CompactPlc2Light, name: Work group Switch c1, x: 14, y: 16, switch-view: True, ports: 12 }
+  switch2: { icon: CompactPlc2Light, name: Work group Switch c2, x: 25, y: 7, switch-view: True, ports: 12 }
+  switch3: { icon: CompactPlc2Light, name: Work group Switch c3, x: 36, y: 16, switch-view: True, ports: 12 }
 
   server1: { icon: WorkgroupSwitch3Dark, name: Server 1, x: 14, y: 21 }
   server2: { icon: WorkgroupSwitch3Dark, name: Server 2, x: 11, y: 21 }
@@ -66,11 +66,12 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
 
  # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+ # ps: when a device in the group has a switch-view = True then dot will be automatically used
  # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
-  group0: { name: Core-Swiches , members: [core-Switch1, core-Switch2, core-Switch3], layout:, rack: }
-  group1: { name: Network1 , members: [switch1, server1, server2, server3, server4, server5, server6, server7, server8], layout:, rack:}
-  group2: { name: Network2 , members: [switch2, server9, server10, server11, server12, server13, server14, server15, server16], layout:, rack:}
-  group3: { name: Network3 , members: [switch3, server17, server18, server19, server20, server21, server22, server23, server24], layout:, rack:}
+  group0: { name: Core-Swiches , members: [core-Switch1, core-Switch2, core-Switch3], layout: dot, rack: }
+  group1: { name: Network1 , members: [switch1, server1, server2, server3, server4, server5, server6, server7, server8], layout: dot, rack:}
+  group2: { name: Network2 , members: [switch2, server9, server10, server11, server12, server13, server14, server15, server16], layout: dot, rack:}
+  group3: { name: Network3 , members: [switch3, server17, server18, server19, server20, server21, server22, server23, server24], layout: dot, rack:}
 
 
 connections: #enter your connections here
