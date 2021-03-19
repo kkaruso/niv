@@ -1,8 +1,8 @@
 diagram: # Diagram properties
-  backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
-  padding: 0.5  # Padding around the graph (default: 0.5; type: double)
+  backgroundColor: white  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
+  padding: 1.0  # Padding around the graph (default: 0.5; type: double)
   layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
-  connectionStyle: curved # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
+  connectionStyle: ortho # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
   direction: BT #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
 
 title: # Text underneath the diagram.
@@ -10,12 +10,12 @@ title: # Text underneath the diagram.
   subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
   fontSize: 15  # Font size (default: 15; type: int)
   author: "Tom Themas"  # Author's name: enter string
-  company: Empty  # Enter company name or leave empty
+  company:  # Enter company name or leave empty
   date: "01.01.2021"  # Default date is current date or enter specific date as string
-  version: "1.0"  # Version of the diagram as string
+  version: "1.1"  # Version of the diagram as string
 
 groupDefaults: &groupDefaults #Use current values as defaults
-  backgroundColor: Darkblue  # Fill the background of the group box
+  backgroundColor: papayawhip  # Fill the background of the group box
 
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # Syntax:
@@ -45,36 +45,36 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
   switch10: { icon: WorkgroupSwitch3Dark, name: Work group Switch c10, x: 44, y: 6, switch-view: True, ports: 12}
   switch11: { icon: WorkgroupSwitch3Dark, name: Work group Switch c11, x: 51, y: 6, switch-view: True, ports: 12}
   switch12: { icon: WorkgroupSwitch3Dark, name: Work group Switch c12, x: 54, y: 6, switch-view: True, ports: 12}
-  server1: { icon: NetworkAttachedStorage2Light, name: Server 1, x: 0, y: 2 }
-  server2: { icon: NetworkAttachedStorage2Light, name: Server 2, x: 2, y: 2 }
-  server3: { icon: NetworkAttachedStorage2Light, name: Server 3, x: 4, y: 2 }
-  server4: { icon: NetworkAttachedStorage2Light, name: Server 4, x: 6, y: 2 }
-  server5: { icon: NetworkAttachedStorage2Light, name: Server 5, x: 10, y: 2 }
-  server6: { icon: NetworkAttachedStorage2Light, name: Server 6, x: 12, y: 2 }
-  server7: { icon: NetworkAttachedStorage2Light, name: Server 7, x: 14, y: 2 }
-  server8: { icon: NetworkAttachedStorage2Light, name: Server 8, x: 16, y: 2 }
-  server9: { icon: NetworkAttachedStorage2Light, name: Server 9, x: 20, y: 2 }
-  server10: { icon: NetworkAttachedStorage2Light, name: Server 10, x: 22, y: 2 }
-  server11: { icon: NetworkAttachedStorage2Light, name: Server 11, x: 24, y: 2 }
-  server12: { icon: NetworkAttachedStorage2Light, name: Server 12, x: 26, y: 2 }
-  server13: { icon: NetworkAttachedStorage2Light, name: Server 1, x: 30, y: 2 }
-  server14: { icon: NetworkAttachedStorage2Light, name: Server 2, x: 32, y: 2 }
-  server15: { icon: NetworkAttachedStorage2Light, name: Server 3, x: 34, y: 2 }
-  server16: { icon: NetworkAttachedStorage2Light, name: Server 4, x: 36, y: 2 }
-  server17: { icon: NetworkAttachedStorage2Light, name: Server 5, x: 40, y: 2 }
-  server18: { icon: NetworkAttachedStorage2Light, name: Server 6, x: 42, y: 2 }
-  server19: { icon: NetworkAttachedStorage2Light, name: Server 7, x: 44, y: 2 }
-  server20: { icon: NetworkAttachedStorage2Light, name: Server 8, x: 46, y: 2 }
-  server21: { icon: NetworkAttachedStorage2Light, name: Server 9, x: 50, y: 2 }
-  server22: { icon: NetworkAttachedStorage2Light, name: Server 10, x: 52, y: 2 }
-  server23: { icon: NetworkAttachedStorage2Light, name: Server 11, x: 54, y: 2 }
-  server24: { icon: NetworkAttachedStorage2Light, name: Server 12, x: 56, y: 2 }
+  server1: { icon: RackServer2Light, name: Server 1, x: 0, y: 2 }
+  server2: { icon: RackServer2Light, name: Server 2, x: 1, y: 2 }
+  server3: { icon: RackServer2Light, name: Server 3, x: 2, y: 2 }
+  server4: { icon: RackServer2Light, name: Server 4, x: 3, y: 2 }
+  server5: { icon: RackServer2Light, name: Server 5, x: 10, y: 2 }
+  server6: { icon: RackServer2Light, name: Server 6, x: 12, y: 2 }
+  server7: { icon: RackServer2Light, name: Server 7, x: 14, y: 2 }
+  server8: { icon: RackServer2Light, name: Server 8, x: 16, y: 2 }
+  server9: { icon: RackServer2Light, name: Server 9, x: 20, y: 2 }
+  server10: { icon: RackServer2Light, name: Server 10, x: 22, y: 2 }
+  server11: { icon: RackServer2Light, name: Server 11, x: 24, y: 2 }
+  server12: { icon: RackServer2Light, name: Server 12, x: 26, y: 2 }
+  server13: { icon: RackServer2Light, name: Server 1, x: 30, y: 2 }
+  server14: { icon: RackServer2Light, name: Server 2, x: 32, y: 2 }
+  server15: { icon: RackServer2Light, name: Server 3, x: 34, y: 2 }
+  server16: { icon: RackServer2Light, name: Server 4, x: 36, y: 2 }
+  server17: { icon: RackServer2Light, name: Server 5, x: 40, y: 2 }
+  server18: { icon: RackServer2Light, name: Server 6, x: 42, y: 2 }
+  server19: { icon: RackServer2Light, name: Server 7, x: 44, y: 2 }
+  server20: { icon: RackServer2Light, name: Server 8, x: 46, y: 2 }
+  server21: { icon: RackServer2Light, name: Server 9, x: 50, y: 2 }
+  server22: { icon: RackServer2Light, name: Server 10, x: 52, y: 2 }
+  server23: { icon: RackServer2Light, name: Server 11, x: 54, y: 2 }
+  server24: { icon: RackServer2Light, name: Server 12, x: 56, y: 2 }
 
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
-
  # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+  # ps: when a device in the group has a switch-view = True then dot will be automatically used
  # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
-  group1: { name: Core-Swiches , members: [core-Switch1, core-Switch2], layout: , rack: False}
+  group1: { name: Core-Swiches , members: [core-Switch1, core-Switch2], layout: neato , rack: False}
   group2: { name: Spine-Switches, members: [spine-Switch1, spine-Switch2, spine-Switch3, spine-Switch4] }
   group4: { name: Rack 1, members: [ server1, server2, server3, server4, switch1, switch2], layout:,  rack: False}
   group5: { name: Rack 2, members: [ server5, server6, server7, server8, switch3, switch4] }
@@ -86,18 +86,18 @@ groups: #add a group to target multiple objects at once, if you don't, delete th
 connections: #enter your connections here
 - {endpoints: [router1, cloud1], color: red}
 
-- {endpoints: [core-Switch1, router1], color: red}
-- {endpoints: [core-Switch2, router1], color: red}
+- {endpoints: [core-Switch1, router1], color: blue, width: 4}
+- {endpoints: [core-Switch2, router1], color: blue, width: 4}
 
-- {endpoints: [spine-Switch1, core-Switch1], color: red}
-- {endpoints: [spine-Switch2, core-Switch1], color: red}
-- {endpoints: [spine-Switch3, core-Switch1], color: red}
-- {endpoints: [spine-Switch4, core-Switch1], color: red}
+- {endpoints: [spine-Switch1, core-Switch1], color: green, width: 4}
+- {endpoints: [spine-Switch2, core-Switch1], color: green, width: 4}
+- {endpoints: [spine-Switch3, core-Switch1], color: green, width: 4}
+- {endpoints: [spine-Switch4, core-Switch1], color: green, width: 4}
 
-- {endpoints: [spine-Switch1, core-Switch2], color: red}
-- {endpoints: [spine-Switch2, core-Switch2], color: red}
-- {endpoints: [spine-Switch3, core-Switch2], color: red}
-- {endpoints: [spine-Switch4, core-Switch2], color: red}
+- {endpoints: [spine-Switch1, core-Switch2], color: green, width: 4}
+- {endpoints: [spine-Switch2, core-Switch2], color: green, width: 4}
+- {endpoints: [spine-Switch3, core-Switch2], color: green, width: 4}
+- {endpoints: [spine-Switch4, core-Switch2], color: green, width: 4}
 
 
 - {endpoints: [switch1, spine-Switch1], color: red}
