@@ -343,6 +343,12 @@ class BuildDiagram:
                 layout = str(self.graph_layout)
             else:
                 layout = str(self.yaml.get("groups").get(f"{i}").get("layout"))
+
+            for membr in self.group_members.get(i):
+                if self.switch_type[membr]:
+                    layout = "dot"
+                    break
+
             # modify the subgroup with attributes
             subgraph_attr = {
                 "bgcolor": f"{self.graph_bg_color}",
@@ -596,6 +602,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                     margin="1",
                                                                      URL=url,
                                                                      tooltip=tooltip,
                                                                      style="rounded",
@@ -863,9 +870,9 @@ class BuildDiagram:
             # create busy ports
             for k in range(0, busy):
                 if self.output_format == "svg":
-                    nodes.append(OsaEthernetBusy(f"eth{k + 1}",margin="1"))
+                    nodes.append(OsaEthernetBusy(f"eth{k + 1}", margin="1"))
                 else:
-                    nodes.append(OsaEthernetBusyPng(f"eth{k + 1}",margin="1"))
+                    nodes.append(OsaEthernetBusyPng(f"eth{k + 1}", margin="1"))
 
             # create Free ports
             for k in range(busy, out + busy):
@@ -874,10 +881,10 @@ class BuildDiagram:
                     file = self.save_path.split('/')[-1]
                     if self.output_format == "svg":
                         nodes.append(OsaEthernetCable(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
-                                                      URL=f"../{file_name}.{self.output_format}",margin="1"))
+                                                      URL=f"../{file_name}.{self.output_format}", margin="1"))
                     else:
                         nodes.append(OsaEthernetCablePng(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
-                                                         URL=f"../{file_name}.{self.output_format}",margin="1"))
+                                                         URL=f"../{file_name}.{self.output_format}", margin="1"))
 
                 else:
                     switch = url.pop()
@@ -885,11 +892,11 @@ class BuildDiagram:
                     if self.output_format == "svg":
                         nodes.append(OsaEthernetCable(
                             f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
-                            URL=f"{file_name}_{group}.{self.output_format}",margin="1"))
+                            URL=f"{file_name}_{group}.{self.output_format}", margin="1"))
                     else:
                         nodes.append(OsaEthernetCablePng(
                             f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
-                            URL=f"{file_name}_{group}.{self.output_format}",margin="1"))
+                            URL=f"{file_name}_{group}.{self.output_format}", margin="1"))
 
             # make the connections between ports transparent
             for k in range(out + busy, ports):
