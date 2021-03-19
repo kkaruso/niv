@@ -11,10 +11,12 @@ html {
 body, html {
     margin: 0 !important;
     padding: 0 !important;
+    /* background-color: #5a5a5a; */
     background-color: #ececec;
     font-family: Verdana, sans-serif;
     font-size: 15px;
-    line-height: 1.4
+    line-height: 1.4;
+    /* color: white; */
 }
 
 [hidden] {
@@ -52,6 +54,10 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
+p {
+    text-align: center;
+}
+
 .segment {
     position: relative;
     margin: 20px;
@@ -86,41 +92,44 @@ h1, h2, h3, h4, h5, h6 {
 .segment-text-left {
     width: 70%;
     margin: 10px 50px;
+    color: black;
 }
 
 .segment-text-right {
     text-align: right;
     width: 70%;
     margin: 10px 50px;
-}
-
-.intro {
-    text-align: center;
-    margin: 50px 0px;
+    color: black;
 }
 
 .rounded {
     border-radius: 5px;
 }
 
+#logo-and-intro {
+    display: block;
+}
+
 #logo {
-    padding-top: 40px;
+    position: relative;
+    padding-top: 10px;
+    padding-left: 10px;
+    margin: auto;
+    width: 40%;
 }
 
 #logo img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+    border: none;
 }
 
-#poster-and-slide {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 100px;
-    width: 90%;
-    display: flex;
+#intro {
+    text-align: center;
+    margin: -20px auto 100px;
+}
+
+#intro h1 {
+    font-size: 70px;
+    line-height: 1.2;
 }
 
 footer {
@@ -155,8 +164,10 @@ a:active {
 }
 
 .conclusion {
+    display: block;
     text-align: center;
-    margin: 50px 0px;
+    margin: 75px auto;
+    width: 60%;
 }
 
 .row {
@@ -241,24 +252,42 @@ img {
     box-sizing: border-box
 }
 
+#poster-and-slide {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+    width: 90%;
+    display: flex;
+}
+
 .poster-container {
     width: 50%;
 }
 
-.slideshow-container {
+.slideshow-all {
     width: 50%;
     position: relative;
+}
+
+.slideshow-and-dots {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.slideshow-container {
+    max-width: 500px;
+    position: relative;
+    margin: auto;
 }
 
 .poster {
     position: relative;
     max-width: 500px;
-    margin: auto;
-}
-
-.slideshow-all {
-    max-width: 500px;
-    position: relative;
     margin: auto;
 }
 
@@ -392,8 +421,8 @@ img {
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
-    max-width: 700px;
+    width: 100%;
+    max-width: 1200px;
 }
 
 /* Caption of Modal Image */
