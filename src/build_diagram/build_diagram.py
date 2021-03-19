@@ -257,16 +257,8 @@ class BuildDiagram:
 
                     if f"{first} + {second}" not in list_connections or f"{second} + {first}" not in list_connections:
 
-                        # If the "showports" parameter is set to true show ports next to connection
+                        # If the "showports" parameter is set to true, show ports next to connection
                         if self.connections_visibility[i]:
-                            _ = self.instances[first_index] - \
-                                Edge(color=f"{self.connections_color[i]}",
-                                     label=f"{self.connections_text[i]}",
-                                     labeltooltip=f"{self.connections_text[i]}",
-                                     penwidth=f"{self.connections_width[i]}",
-                                     edgetooltip=tooltip) - \
-                                self.instances[second_index]
-                        else:
                             _ = self.instances[first_index] - \
                                 Edge(color=f"{self.connections_color[i]}",
                                      label=f"{self.connections_text[i]}",
@@ -277,6 +269,15 @@ class BuildDiagram:
                                      labeldistance="3.5",
                                      labelangle="30",
                                      taillabel=f"{self.connections_ports[i][1]}"
+                                     ) - \
+                                self.instances[second_index]
+                        else:
+                            _ = self.instances[first_index] - \
+                                Edge(color=f"{self.connections_color[i]}",
+                                     label=f"{self.connections_text[i]}",
+                                     labeltooltip=f"{self.connections_text[i]}",
+                                     penwidth=f"{self.connections_width[i]}",
+                                     edgetooltip=tooltip
                                      ) - \
                                 self.instances[second_index]
                         list_connections.append(f"{first} + {second}")
