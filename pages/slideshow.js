@@ -37,6 +37,7 @@ var img3 = document.getElementById("image3");
 var img1_slide = document.getElementById("image1_slide");
 var img2_slide = document.getElementById("image2_slide");
 var img3_slide = document.getElementById("image3_slide");
+var img4_slide = document.getElementById("image4_slide");
 var img_poster = document.getElementById("poster");
 var modalImg = document.getElementById("modal_image");
 var captionText = document.getElementById("caption");
@@ -47,6 +48,7 @@ setOnClickListener(img3)
 setOnClickListener(img1_slide)
 setOnClickListener(img2_slide)
 setOnClickListener(img3_slide)
+setOnClickListener(img4_slide)
 setOnClickListener(img_poster)
 
 function setOnClickListener(imageVariable) {
