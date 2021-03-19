@@ -56,6 +56,33 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     text-align: center;
+    font-size: 18px;
+}
+
+a {
+    text-decoration: underline;
+    color: black;
+}
+
+a:visited {
+    text-decoration: underline;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+code {
+    color: crimson;
+    background-color: rgba(222,222,222,0.3);
+}
+
+.example {
+    margin-top: 50px;
 }
 
 .segment {
@@ -64,6 +91,7 @@ p {
     background-color: #c4c4c4;
     display: flex;
     height: auto;
+    min-height: 300px;
     border-radius: 5px;
     align-items: center;
 }
@@ -147,23 +175,7 @@ footer ul {
 
 footer a {
     margin: auto 20px;
-}
-
-a {
     color: white;
-    text-decoration: none;
-}
-
-a:visited {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-a:active {
-    text-decoration: underline;
 }
 
 .conclusion {
