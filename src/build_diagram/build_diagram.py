@@ -420,7 +420,8 @@ class BuildDiagram:
                             if sec_con == end_eth:
                                 eths = switches_nodes.get(end_eth)
                                 if membr in switches_in_group:
-                                    if f"{end_eth}+{membr}" not in dic_of_connection or f"{membr}+{end_eth}" not in dic_of_connection:
+                                    if f"{end_eth}+{membr}" not in dic_of_connection or f"{membr}+{end_eth}" \
+                                            not in dic_of_connection:
                                         ets = switches_nodes.get(membr)
                                         _ = ets[counter_for_eth_in_switch[membr]] - eths[
                                             counter_for_eth_in_switch[end_eth]]
@@ -430,7 +431,7 @@ class BuildDiagram:
                                         dic_of_connection.append(f"{end_eth}+{membr}")
                                 else:
                                     _ = eths[counter_for_eth_in_switch[end_eth]] - self.instances[
-                                        counter_for_eth_in_switch[end_eth]]
+                                        self.instances_keys.index(membr)]
                                     counter_for_eth_in_switch[end_eth] += 1
 
     def create_list_with_switchviews(self, switches_in_group: list, out_ether_port: dict, in_ether_port: dict,
@@ -565,6 +566,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                     margin="1",
                                                                      URL=url,
                                                                      pos=pos,
                                                                      tooltip=tooltip,
@@ -578,6 +580,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
+                                                             margin="1",
                                                              URL=url,
                                                              pos=pos,
                                                              tooltip=tooltip,
@@ -605,6 +608,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
+                                                             margin="1",
                                                              URL=url,
                                                              tooltip=tooltip,
                                                              style="rounded",
@@ -858,9 +862,9 @@ class BuildDiagram:
             # create busy ports
             for k in range(0, busy):
                 if self.output_format == "svg":
-                    nodes.append(OsaEthernetBusy(f"eth{k + 1}"))
+                    nodes.append(OsaEthernetBusy(f"eth{k + 1}",margin="1"))
                 else:
-                    nodes.append(OsaEthernetBusyPng(f"eth{k + 1}"))
+                    nodes.append(OsaEthernetBusyPng(f"eth{k + 1}",margin="1"))
 
             # create Free ports
             for k in range(busy, out + busy):
@@ -869,10 +873,10 @@ class BuildDiagram:
                     file = self.save_path.split('/')[-1]
                     if self.output_format == "svg":
                         nodes.append(OsaEthernetCable(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
-                                                      URL=f"../{file_name}.{self.output_format}"))
+                                                      URL=f"../{file_name}.{self.output_format}",margin="1"))
                     else:
                         nodes.append(OsaEthernetCablePng(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
-                                                         URL=f"../{file_name}.{self.output_format}"))
+                                                         URL=f"../{file_name}.{self.output_format}",margin="1"))
 
                 else:
                     switch = url.pop()
@@ -880,11 +884,11 @@ class BuildDiagram:
                     if self.output_format == "svg":
                         nodes.append(OsaEthernetCable(
                             f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
-                            URL=f"{file_name}_{group}.{self.output_format}"))
+                            URL=f"{file_name}_{group}.{self.output_format}",margin="1"))
                     else:
                         nodes.append(OsaEthernetCablePng(
                             f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
-                            URL=f"{file_name}_{group}.{self.output_format}"))
+                            URL=f"{file_name}_{group}.{self.output_format}",margin="1"))
 
             # make the connections between ports transparent
             for k in range(out + busy, ports):
