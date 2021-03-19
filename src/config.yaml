@@ -4,4 +4,4 @@ default:
   # Default level of Detail // 0 = all detail levels, 1 = least detail, 2 = most detail
   std_details: 2
   # Open in browser after the diagram is built, True or False
-  open_in_browser: True
+  open_in_browser: False
