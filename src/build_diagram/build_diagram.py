@@ -344,7 +344,7 @@ class BuildDiagram:
             else:
                 layout = str(self.yaml.get("groups").get(f"{i}").get("layout"))
 
-            # if there is a device with switch-view = True in the group then layout = "dot " will be automatically used
+            # if there is a device with switch-view = True in the group then layout = "dot " will be automaticlly used
             for membr in self.group_members.get(i):
                 if self.switch_type[membr]:
                     layout = "dot"
@@ -574,7 +574,6 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                     margin="1",
                                                                      URL=url,
                                                                      pos=pos,
                                                                      tooltip=tooltip,
@@ -588,7 +587,6 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
-                                                             margin="1",
                                                              URL=url,
                                                              pos=pos,
                                                              tooltip=tooltip,
@@ -603,7 +601,6 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                     margin="1",
                                                                      URL=url,
                                                                      tooltip=tooltip,
                                                                      style="rounded",
@@ -617,7 +614,6 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
-                                                             margin="1",
                                                              URL=url,
                                                              tooltip=tooltip,
                                                              style="rounded",
