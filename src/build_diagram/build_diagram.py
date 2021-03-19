@@ -801,11 +801,11 @@ class BuildDiagram:
                 first_port = self.connections_ports[connection][0]
                 second_port = self.connections_ports[connection][1]
                 tooltip_without_port = f"{self.nodes_name[second_endpoint]} " \
-                                       f"<---> " \
+                                       f"<———> " \
                                        f"{self.nodes_name[first_endpoint]}"
 
                 tooltip_with_port = f"{self.nodes_name[second_endpoint]} (Port: {second_port}) " \
-                                    f"<---> " \
+                                    f"<———> " \
                                     f"{self.nodes_name[first_endpoint]} (Port: {first_port})"
 
                 # If a tooltip is given within the connections, set it as the tooltip
@@ -839,7 +839,7 @@ class BuildDiagram:
                 self.logger.verbose_warning(log_message, self.verbose)
                 print(log_message)
                 tooltip = f"{self.nodes_name[second_endpoint]} " \
-                          f"<---> " \
+                          f"<———> " \
                           f"{self.nodes_name[first_endpoint]}"
 
         return tooltip
