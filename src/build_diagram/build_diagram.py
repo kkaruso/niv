@@ -199,7 +199,7 @@ class BuildDiagram:
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_name:
             if node not in self.members:
-                self.create_single_node(node, self.graph_layout, True)
+                self.create_single_node(node, self.graph_layout, True, False)
                 self.nodes_not_in_groups.append(node)
 
         # Dynamically create the amount of groups with the corresponding group name
@@ -220,7 +220,7 @@ class BuildDiagram:
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(name)):
-                    self.create_single_node(member, self.graph_layout, True)
+                    self.create_single_node(member, self.graph_layout, True, False)
 
     def create_connections(self, error: bool):
         """
@@ -481,7 +481,7 @@ class BuildDiagram:
                 switches_nodes[member] = switch_nodes
             else:
                 # Create other devices except switches
-                self.create_single_node(member, layout, False)
+                self.create_single_node(member, layout, False, True)
 
     def calculate_connections_between_groups(self, member: str, groups_diagrams: list):
         """
@@ -551,7 +551,7 @@ class BuildDiagram:
                 title += item + ": " + str(_dict[item]) + "\n"
         return title
 
-    def create_single_node(self, node, layout, error):
+    def create_single_node(self, node, layout, error, subdiagram: bool):
         """
         Create an instance of a given node class, if not valid print name of not valid node
         """
@@ -565,6 +565,10 @@ class BuildDiagram:
 
             # Create tooltip for each node
             tooltip = self.create_tooltip(element="node", node=node)
+            if subdiagram:
+                margin = "1"
+            else:
+                margin = "0"
 
             try:
                 # Only pass coordinates to node creation if layout == neato
@@ -574,6 +578,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                     margin=margin,
                                                                      URL=url,
                                                                      pos=pos,
                                                                      tooltip=tooltip,
@@ -587,6 +592,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
+                                                             margin=margin,
                                                              URL=url,
                                                              pos=pos,
                                                              tooltip=tooltip,
@@ -601,6 +607,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                     margin=margin,
                                                                      URL=url,
                                                                      tooltip=tooltip,
                                                                      style="rounded",
@@ -614,6 +621,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
+                                                             margin=margin,
                                                              URL=url,
                                                              tooltip=tooltip,
                                                              style="rounded",
@@ -867,9 +875,9 @@ class BuildDiagram:
             # create busy ports
             for k in range(0, busy):
                 if self.output_format == "svg":
-                    nodes.append(OsaEthernetBusy(f"eth{k + 1}", margin="1"))
+                    nodes.append(OsaEthernetBusy(f"eth{k + 1}"))
                 else:
-                    nodes.append(OsaEthernetBusyPng(f"eth{k + 1}", margin="1"))
+                    nodes.append(OsaEthernetBusyPng(f"eth{k + 1}"))
 
             # create Free ports
             for k in range(busy, out + busy):
@@ -878,10 +886,10 @@ class BuildDiagram:
                     file = self.save_path.split('/')[-1]
                     if self.output_format == "svg":
                         nodes.append(OsaEthernetCable(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
-                                                      URL=f"../{file_name}.{self.output_format}", margin="1"))
+                                                      URL=f"../{file_name}.{self.output_format}"))
                     else:
                         nodes.append(OsaEthernetCablePng(f"\n\neth{k + 1} \nto\n{self.nodes_name[name]}\nin\n{file}",
-                                                         URL=f"../{file_name}.{self.output_format}", margin="1"))
+                                                         URL=f"../{file_name}.{self.output_format}"))
 
                 else:
                     switch = url.pop()
@@ -889,11 +897,11 @@ class BuildDiagram:
                     if self.output_format == "svg":
                         nodes.append(OsaEthernetCable(
                             f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
-                            URL=f"{file_name}_{group}.{self.output_format}", margin="1"))
+                            URL=f"{file_name}_{group}.{self.output_format}"))
                     else:
                         nodes.append(OsaEthernetCablePng(
                             f"\n\neth {k + 1}\nto\n{self.nodes_name[switch]}\nin\n{self.group_name[group]}",
-                            URL=f"{file_name}_{group}.{self.output_format}", margin="1"))
+                            URL=f"{file_name}_{group}.{self.output_format}"))
 
             # make the connections between ports transparent
             for k in range(out + busy, ports):
