@@ -90,12 +90,12 @@ You can choose between three different detail levels
 ```
 niv -l load_path/example.yaml 
 ```	
-<img src="./img/Detail0.png" alt="drawing" width="200"/>
+<img src="./img/Default.png" alt="drawing" width="300"/>
 ### Detail level 1:
 ```
 niv -l load_path/example.yaml -d 1
 ```
-<img src="./img/Detail1.png" alt="drawing" width="200"/>
+<img src="./img/Detail1.png" alt="drawing" width="300"/>
 
 # Verbosity
 ```
