@@ -46,11 +46,13 @@ pip install niv
 ```
 niv -h
 ```
+![alt text](img/niv-h.png)
 # Version
 ***Example:***
  ```
 niv -v
 ```
+![alt text](img/niv-v.png)
 # Create Diagram 
 
 NIV can create network diagrams dynamically from a yaml file describing the placement, layout, groups and icons. Given a Yaml describing the hierarchy of the network and it's connections, a resulting svg diagram will be created.
