@@ -430,7 +430,7 @@ class BuildDiagram:
                                         dic_of_connection.append(f"{end_eth}+{membr}")
                                 else:
                                     _ = eths[counter_for_eth_in_switch[end_eth]] - self.instances[
-                                        counter_for_eth_in_switch[end_eth]]
+                                        self.instances_keys.index(membr)]
                                     counter_for_eth_in_switch[end_eth] += 1
 
     def create_list_with_switchviews(self, switches_in_group: list, out_ether_port: dict, in_ether_port: dict,
