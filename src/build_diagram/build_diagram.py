@@ -340,7 +340,7 @@ class BuildDiagram:
             if str(self.yaml.get("groups").get(f"{i}").get("rack")) == "True":
                 direction = "LR"
             else:
-                direction = "TB"
+                direction = "BT"
             # if the sub-group has no layout then the main layout of the diagram will be used instead
             if self.yaml.get("groups").get(f"{i}").get("layout") is None:
                 layout = str(self.graph_layout)
