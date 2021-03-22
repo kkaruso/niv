@@ -140,10 +140,9 @@ code {
 
 #logo {
     position: relative;
-    padding-top: 10px;
-    padding-left: 10px;
     margin: auto;
-    width: 40%;
+    margin-top: -50px;
+    width: 60%;
 }
 
 #logo img {
@@ -188,6 +187,9 @@ footer a {
     text-align: center;
     margin: 75px auto;
     width: 60%;
+    border: 9px groove rgba(117,149,164,0.2);
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .row {
@@ -288,6 +290,7 @@ img {
 .slideshow-all {
     width: 50%;
     position: relative;
+    display: block;
 }
 
 .slideshow-and-dots {
