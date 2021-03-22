@@ -296,7 +296,7 @@ class BuildDiagram:
 
     def run(self):
         """
-        Checks detail level and call create_diagram()
+        Checks detail level and call  iagram()
         """
         if self.detail_level == 0:
             for i in range(2):
@@ -567,7 +567,7 @@ class BuildDiagram:
             # Create tooltip for each node
             tooltip = self.create_tooltip(element="node", node=node)
             if subdiagram:
-                margin = "1"
+                margin = "0"
             else:
                 margin = "0"
 
