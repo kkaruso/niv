@@ -28,16 +28,19 @@ class BuildDiagram:
     """
     Handles creation of diagram
     """
+
     path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    config = yaml_parser.get_yaml(path_to_project + '/config.yaml')
+    path_to_configs = yaml_parser.get_path_to_config()
+
+    config = yaml_parser.get_yaml(path_to_configs + '/config.yaml')
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
     logger = niv_logger.NivLogger
 
     # Read yaml_defaults.yaml if it exists, otherwise create the file and assign empty default to yaml_defaults
-    yaml_defaults = yaml_parser.get_yaml(path_to_project + '/yaml_defaults.yaml') if os.path.isfile(
-        path_to_project + '/yaml_defaults.yaml') else yaml_parser.create_yaml_defaults(
-        path_to_project + '/yaml_defaults.yaml')
+    yaml_defaults = yaml_parser.get_yaml(yaml_parser.get_path_to_config() + '/yaml_defaults.yaml') if os.path.isfile(
+        yaml_parser.get_path_to_config() + '/yaml_defaults.yaml') else yaml_parser.create_config_file(
+        yaml_parser.get_path_to_config() + '/yaml_defaults.yaml')
 
     counter = 1
 
@@ -326,7 +329,7 @@ class BuildDiagram:
         with Diagram(self.set_diagram_title(),
                      filename=self.filename + suffix,
                      outformat=self.output_format,
-                     show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
+                     show=self.config.get('default').get('open_on_creation'), graph_attr=graph_attr):
             # Create nodes and clusters
             self.create_nodes()
             # Create connections
@@ -720,9 +723,9 @@ class BuildDiagram:
                         self.logger.verbose_warning(log_message, self.verbose)
                         print(log_message)
             return _dict
-        except TypeError as e:
-            log_message = f"Didn't use Groups or Nodes in Yaml"
-            self.logger.log_error(e)
+        except TypeError as error:
+            log_message = "Didn't use Groups or Nodes in Yaml"
+            self.logger.log_error(error)
             print(log_message)
 
         return _dict
@@ -858,7 +861,7 @@ class BuildDiagram:
         :param nodes: empty list to fill with the created switches
         :param busy: how many busy nodes to create
         """
-        path, file_name = os.path.split(self.save_path)
+        _, file_name = os.path.split(self.save_path)
         file_name = file_name.split('.')[0]
         if busy + out > ports:
             ports = busy + out
