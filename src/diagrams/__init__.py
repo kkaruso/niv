@@ -51,6 +51,7 @@ class Diagram:
         "fontname": "Sans-Serif",
         "fontsize": "15",
         "fontcolor": "#2D3436",
+        "overlap": "scalexy",
     }
     _default_node_attrs = {
         "shape": "box",

@@ -39,8 +39,7 @@ class TestArgParser(TestCase):
         """
         set_args function tests
         """
-        path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        config = yaml_parser.get_yaml(path_to_project + '/src/config.yaml')
+        config = yaml_parser.get_yaml(yaml_parser.get_path_to_config() + '/config.yaml')
         detail = config.get('default').get('std_details')
         parser = ArgParser("")
 

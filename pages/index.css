@@ -113,6 +113,10 @@ code {
     margin: 40px 20px;
 }
 
+.segment-image:hover {
+    cursor: pointer;
+}
+
 .segment-image img {
     border: none;
 }
@@ -140,25 +144,31 @@ code {
 
 #logo {
     position: relative;
-    padding-top: 10px;
-    padding-left: 10px;
     margin: auto;
-    width: 40%;
+    margin-top: -50px;
+    width: 60%;
 }
 
 #logo img {
     border: none;
 }
 
+#introtitle {
+    text-align: center;
+    margin: -20px auto 125px;
+    margin-top: -80px;
+    font-size: 150%;
+}
+
 #intro {
     text-align: center;
     margin: -20px auto 100px;
+    width: 60%;
+    border: 9px groove rgba(117,149,164,0.2);
+    border-radius: 20px;
+    padding: 20px;
 }
 
-#intro h1 {
-    font-size: 70px;
-    line-height: 1.2;
-}
 
 footer {
     position: relative;
@@ -183,6 +193,9 @@ footer a {
     text-align: center;
     margin: 75px auto;
     width: 60%;
+    border: 9px groove rgba(117,149,164,0.2);
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .row {
@@ -283,6 +296,7 @@ img {
 .slideshow-all {
     width: 50%;
     position: relative;
+    display: block;
 }
 
 .slideshow-and-dots {
@@ -299,12 +313,19 @@ img {
     position: relative;
     margin: auto;
 }
+.slideshow-container:hover {
+    cursor: pointer;
+}
 
 .poster {
     position: relative;
     max-width: 500px;
     margin: auto;
 }
+.poster:hover {
+    cursor: pointer;
+}
+
 
 /* Hide the images by default */
 

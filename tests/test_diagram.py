@@ -4,8 +4,8 @@ Includes all tests for build_diagram
 from unittest import TestCase
 import os
 
-from src.build_diagram.build_diagram import BuildDiagram
 from src.diagrams import Diagram
+from src.yaml_parser import yaml_parser
 
 
 class TestBuildDiagram(TestCase):
@@ -13,15 +13,19 @@ class TestBuildDiagram(TestCase):
     A Class for testing functions of build_diagram
     """
     test_directory_path = "testdirectory/"
+    if not (os.path.isfile(yaml_parser.get_path_to_config() + '/config.yaml')):
+        yaml_parser.create_config_file(yaml_parser.get_path_to_config() + '/config.yaml')
 
     def setUp(self) -> None:
         """
         Setup test file
         """
+
         with open("test.svg", "w"):
             pass
 
     def test_create_diagram(self):
+        from src.build_diagram.build_diagram import BuildDiagram
         print(os.getcwd())
         print(os.listdir("."))
 
