@@ -38,7 +38,7 @@ pip install niv
 |[**-v, --version**](#version)|Show program's version number and exit|
 |[**-l / --load load_path**](#create-diagram)|Create visualization with a given .yaml file  |
 |[**-s / --save save_path**](#create-and-save-a-diagram)|Save .svg, .png, .jpg or .pdf file to a given path (DEFAULT: .svg)  |
-|[**-d / --detail [INT]**](#detailed-view)| The level of detail you want to use for the visualization; 0: most detail (default), : less details |
+|[**-d / --detail [INT]**](#detailed-view)| The level of detail you want to use for the visualization; 0: most detail (default),1 : less details |
 |[**-vv, --verbose**](#verbosity)  | Increase verbosity of console messages |
 
 # Help
@@ -90,12 +90,12 @@ You can choose between three different detail levels
 ```
 niv -l load_path/example.yaml 
 ```	
-![](./img/Detail0.PNG)
+![](./img/Detail0.png)
 ### Detail level 1:
 ```
 niv -l load_path/example.yaml -d 1
 ```
-![](./img/Detail1.PNG)
+![](./img/Detail1.png)
 
 # Verbosity
 ```
