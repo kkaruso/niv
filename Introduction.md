@@ -46,7 +46,7 @@ pip install niv
 ```
 niv -h
 ```
-![](d/img/help.PNG)
+![](./img/help.PNG)
 # Version
 ***Example:***
  ```
