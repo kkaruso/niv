@@ -113,6 +113,10 @@ code {
     margin: 40px 20px;
 }
 
+.segment-image:hover {
+    cursor: pointer;
+}
+
 .segment-image img {
     border: none;
 }
@@ -151,7 +155,9 @@ code {
 
 #introtitle {
     text-align: center;
-    margin: -20px auto 100px;
+    margin: -20px auto 125px;
+    margin-top: -80px;
+    font-size: 150%;
 }
 
 #intro {
@@ -307,12 +313,19 @@ img {
     position: relative;
     margin: auto;
 }
+.slideshow-container:hover {
+    cursor: pointer;
+}
 
 .poster {
     position: relative;
     max-width: 500px;
     margin: auto;
 }
+.poster:hover {
+    cursor: pointer;
+}
+
 
 /* Hide the images by default */
 
