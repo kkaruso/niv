@@ -402,36 +402,35 @@ class BuildDiagram:
         counter_for_eth_in_switch = {}
         for switch in switches_in_group:
             counter_for_eth_in_switch[switch] = 0
-        # check if instances != null
-        if self.instances:
-            # iterate through group_members
-            for membr in self.group_members.get(i):
-                # iterate through endpoints
-                for endpoint in range(len(self.connections_endpoints)):
-                    if membr in self.connections_endpoints[endpoint]:
-                        # check if group_member is in endpoints at [0]
-                        if membr == self.connections_endpoints[endpoint][0]:
-                            sec_con = self.connections_endpoints[endpoint][1]
-                        else:
-                            sec_con = self.connections_endpoints[endpoint][0]
-                            # iterate through switches
-                        for end_eth in switches_in_group:
-                            # check if the other endpoint is a switch
-                            if sec_con == end_eth:
-                                eths = switches_nodes.get(end_eth)
-                                if membr in switches_in_group:
-                                    if f"{end_eth}+{membr}" not in dic_of_connection or f"{membr}+{end_eth}" not in dic_of_connection:
-                                        ets = switches_nodes.get(membr)
-                                        _ = ets[counter_for_eth_in_switch[membr]] - eths[
-                                            counter_for_eth_in_switch[end_eth]]
-                                        counter_for_eth_in_switch[end_eth] += 1
-                                        counter_for_eth_in_switch[membr] += 1
-                                        dic_of_connection.append(f"{membr}+{end_eth}")
-                                        dic_of_connection.append(f"{end_eth}+{membr}")
-                                else:
-                                    _ = eths[counter_for_eth_in_switch[end_eth]] - self.instances[
-                                        self.instances_keys.index(membr)]
+        # iterate through group_members
+        for membr in self.group_members.get(i):
+            # iterate through endpoints
+            for endpoint in range(len(self.connections_endpoints)):
+                if membr in self.connections_endpoints[endpoint]:
+                    # check if group_member is in endpoints at [0]
+                    if membr == self.connections_endpoints[endpoint][0]:
+                        sec_con = self.connections_endpoints[endpoint][1]
+                    else:
+                        sec_con = self.connections_endpoints[endpoint][0]
+                        # iterate through switches
+                    for end_eth in switches_in_group:
+                        # check if the other endpoint is a switch
+                        if sec_con == end_eth:
+                            eths = switches_nodes.get(end_eth)
+                            if membr in switches_in_group:
+                                if f"{end_eth}+{membr}" not in dic_of_connection or f"{membr}+{end_eth}" \
+                                        not in dic_of_connection:
+                                    ets = switches_nodes.get(membr)
+                                    _ = ets[counter_for_eth_in_switch[membr]] - eths[
+                                        counter_for_eth_in_switch[end_eth]]
                                     counter_for_eth_in_switch[end_eth] += 1
+                                    counter_for_eth_in_switch[membr] += 1
+                                    dic_of_connection.append(f"{membr}+{end_eth}")
+                                    dic_of_connection.append(f"{end_eth}+{membr}")
+                            else:
+                                _ = eths[counter_for_eth_in_switch[end_eth]] - self.instances[
+                                    self.instances_keys.index(membr)]
+                                counter_for_eth_in_switch[end_eth] += 1
 
     def create_list_with_switchviews(self, switches_in_group: list, out_ether_port: dict, in_ether_port: dict,
                                      intent_con_ports: dict, layout: str, switches_nodes: dict, i: int):

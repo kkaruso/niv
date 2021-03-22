@@ -37,6 +37,7 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
 
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+  # ps: when a device in the group has a switch-view = True then dot will be automatically used
   # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
   group1: { <<: *groupDefaults, name: My Servers, members: [hub1, cloud1, db1, deviceScanner1], layout:, rack: True}
   moinmusa: { <<: *groupDefaults, name: My Servers2, members: [server1, serverWeb1, serverTerminal1, laptop1], url: https://google.com }
