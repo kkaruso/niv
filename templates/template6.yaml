@@ -1,0 +1,123 @@
+diagram: # Diagram properties
+  backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
+  padding: 0.5  # Padding around the graph (default: 0.5; type: double)
+  layout: neato  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
+  connectionStyle: curved # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
+  direction: TB #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
+
+title: # Text underneath the diagram.
+  text: NIV  # Title under the Diagram (default: Diagram; type: string)
+  subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
+  fontSize: 15  # Font size (default: 15; type: int)
+
+  author: "Tom Themas"  # Author's name: enter string
+  company: Empty  # Enter company name or leave empty
+  date: "01.01.2021"  # Default date is current date or enter specific date as string
+  version: "1.0"  # Version of the diagram as string
+
+groupDefaults: &groupDefaults #Use current values as defaults
+  backgroundColor: lightblue  # Fill the background of the group box
+
+nodes: #enter devices here. Maybe change "icons" to "devices" later.
+  # Syntax:
+  # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, x: x-coordinate, y: y-coordinate, url: link to a website or another file, tooltip: text shown in the tooltip }
+  # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
+  # switch-view : show detailed port view of the switch in the subgroups (default: switch-view: False)
+  # ports: how many ports has the device with the switch-view = True (default ports: 24)
+  cloud1: {icon: Cloud, name: Internet, x: 25, y: 28}
+  router1: { icon: RouterFirewall, name: Router Firewall, x: 25, y: 22, switch-view: True, ports: 6}
+  core-Switch1:  {icon: CompactPlc2Light, name: core-Switch 1, x: 21, y: 16, switch-view: True, ports: 12 }
+  core-Switch2:  {icon: CompactPlc2Light, name: core-Switch 2, x: 25, y: 13, switch-view: True, ports: 12 }
+  core-Switch3:  {icon: CompactPlc2Light, name: core-Switch 3, x: 29, y: 16, switch-view: True, ports: 12 }
+
+  switch1: { icon: CompactPlc2Light, name: Work group Switch c1, x: 14, y: 16, switch-view: True, ports: 12 }
+  switch2: { icon: CompactPlc2Light, name: Work group Switch c2, x: 25, y: 7, switch-view: True, ports: 12 }
+  switch3: { icon: CompactPlc2Light, name: Work group Switch c3, x: 36, y: 16, switch-view: True, ports: 12 }
+
+  server1: { icon: WorkgroupSwitch3Dark, name: Server 1, x: 14, y: 21 }
+  server2: { icon: WorkgroupSwitch3Dark, name: Server 2, x: 11, y: 21 }
+  server3: { icon: WorkgroupSwitch3Dark, name: Server 3, x: 8, y: 21 }
+  server4: { icon: WorkgroupSwitch3Dark, name: Server 4, x: 8, y: 18 }
+  server5: { icon: WorkgroupSwitch3Dark, name: Server 5, x: 8, y: 15 }
+  server6: { icon: WorkgroupSwitch3Dark, name: Server 6, x: 8, y: 12 }
+  server7: { icon: WorkgroupSwitch3Dark, name: Server 7, x: 11, y: 12 }
+  server8: { icon: WorkgroupSwitch3Dark, name: Server 8, x: 14, y: 12 }
+
+
+  server9: { icon: WorkgroupSwitch3Dark, name: Server 1, x: 20, y: 7 }
+  server10: { icon: WorkgroupSwitch3Dark, name: Server 2, x: 20, y: 4 }
+  server11: { icon: WorkgroupSwitch3Dark, name: Server 3, x: 20, y: 1 }
+  server12: { icon: WorkgroupSwitch3Dark, name: Server 4, x: 23, y: 1 }
+  server13: { icon: WorkgroupSwitch3Dark, name: Server 5, x: 26, y: 1 }
+  server14: { icon: WorkgroupSwitch3Dark, name: Server 6, x: 29, y: 1 }
+  server15: { icon: WorkgroupSwitch3Dark, name: Server 7, x: 29, y: 7 }
+  server16: { icon: WorkgroupSwitch3Dark, name: Server 8, x: 29, y: 4 }
+
+  server17: { icon: WorkgroupSwitch3Dark, name: Server 17, x: 36, y: 21 }
+  server18: { icon: WorkgroupSwitch3Dark, name: Server 18, x: 39, y: 21 }
+  server19: { icon: WorkgroupSwitch3Dark, name: Server 19, x: 42, y: 21 }
+  server20: { icon: WorkgroupSwitch3Dark, name: Server 20, x: 42, y: 18 }
+  server21: { icon: WorkgroupSwitch3Dark, name: Server 21, x: 42, y: 15 }
+  server22: { icon: WorkgroupSwitch3Dark, name: Server 22, x: 42, y: 12 }
+  server23: { icon: WorkgroupSwitch3Dark, name: Server 23, x: 39, y: 12 }
+  server24: { icon: WorkgroupSwitch3Dark, name: Server 24, x: 36, y: 12 }
+
+
+groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
+
+ # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+ # ps: when a device in the group has a switch-view = True then dot will be automatically used
+ # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
+  group0: { name: Core-Swiches , members: [core-Switch1, core-Switch2, core-Switch3], layout: dot, rack: }
+  group1: { name: Network1 , members: [switch1, server1, server2, server3, server4, server5, server6, server7, server8], layout: dot, rack:}
+  group2: { name: Network2 , members: [switch2, server9, server10, server11, server12, server13, server14, server15, server16], layout: dot, rack:}
+  group3: { name: Network3 , members: [switch3, server17, server18, server19, server20, server21, server22, server23, server24], layout: dot, rack:}
+
+
+connections: #enter your connections here
+- {endpoints: [core-Switch1, core-Switch2], color: red}
+- {endpoints: [core-Switch2, core-Switch3], color: red}
+- {endpoints: [core-Switch3, core-Switch1], color: red}
+
+- {endpoints: [switch1, server1], color: black}
+- {endpoints: [switch1, server2], color: black}
+- {endpoints: [switch1, server3], color: black}
+- {endpoints: [switch1, server4], color: black}
+- {endpoints: [switch1, server5], color: black}
+- {endpoints: [switch1, server6], color: black}
+- {endpoints: [switch1, server7], color: black}
+- {endpoints: [switch1, server8], color: black}
+
+- {endpoints: [switch2, server9], color: black}
+- {endpoints: [switch2, server10], color: black}
+- {endpoints: [switch2, server11], color: black}
+- {endpoints: [switch2, server12], color: black}
+- {endpoints: [switch2, server13], color: black}
+- {endpoints: [switch2, server14], color: black}
+- {endpoints: [switch2, server15], color: black}
+- {endpoints: [switch2, server16], color: black}
+
+- {endpoints: [switch3, server17], color: black}
+- {endpoints: [switch3, server18], color: black}
+- {endpoints: [switch3, server19], color: black}
+- {endpoints: [switch3, server20], color: black}
+- {endpoints: [switch3, server21], color: black}
+- {endpoints: [switch3, server22], color: black}
+- {endpoints: [switch3, server23], color: black}
+- {endpoints: [switch3, server24], color: black}
+
+- { endpoints: [ core-Switch1, router1 ], color: purple }
+- { endpoints: [ core-Switch2, router1 ], color: purple }
+- { endpoints: [ core-Switch3, router1 ], color: purple }
+
+- {endpoints: [switch1, core-Switch1], color: Blue}
+- {endpoints: [switch2, core-Switch2], color: Blue}
+- {endpoints: [switch3, core-Switch3], color: Blue}
+
+- {endpoints: [switch1, switch2], color: green}
+- {endpoints: [switch2, switch3], color: green}
+- {endpoints: [switch1, router1], color: green}
+- {endpoints: [switch3, router1], color: green}
+
+
+- {endpoints: [router1, cloud1], color: yellow}

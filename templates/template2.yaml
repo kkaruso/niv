@@ -1,15 +1,12 @@
 diagram: # Diagram properties
   backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding:   # Padding around the graph (default: 0.5; type: double)
-  # TODO: Fix when using neato that no groups are showing
   layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
 
 title: # Text underneath the diagram.
   text: NIV  # Title under the Diagram (default: Diagram; type: string)
   subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
   fontSize: 15  # Font size (default: 15; type: int)
-
-  # TODO: Find a way to add this information to the diagram or delete it
   author: "Tom Themas"  # Author's name: enter string
   company: Empty  # Enter company name or leave empty
   date: "01.01.2021"  # Default date is current date or enter specific date as string
@@ -18,26 +15,29 @@ title: # Text underneath the diagram.
 groupDefaults: &groupDefaults #Use current values as defaults
   backgroundColor: lightblue  # Fill the background of the group box
 
-# TODO: change icon names to variables and put current name into "icon"
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
+  # Syntax:
+  # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, x: x-coordinate, y: y-coordinate, url: link to a website or another file, tooltip: text shown in the tooltip }
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
-  cloud1: {icon: OsaCloud, text: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
-  db1: {icon: OsaDatabase, text: MySQL Database, port: 25565, x: 0, y: 0, url: }
-  deviceScanner1: {icon: OsaDeviceScanner, text: Local Device Scanner, x: 0, y: 6 }
-  serverWeb1: {icon: OsaServerWeb, text: My WebServer, x: 5, y: 2 }
-  serverTerminal1: {icon: OsaServerTerminal, text: Central Terminal, x: 5, y: 5 }
-  desktop1: {icon: OsaDesktopImac, text: My Desktop, x: 3, y: 0 }
-  Osa: {icon: server, text: Test, x: 1 }
-  phone1: { icon: OsaIphone, text: Iphone, x: 1, y: 1 }
-  cameraWeb1: { icon: OsaCameraWeb, text: CameraWeb, x: 0, y: -1 }
-  laptop1: { icon: OsaLaptop, text: Laptop, x: 0, y: 1 }
-  hub1: {icon: CiscoHub, text: Hub, x: 1, y: 4}
+  # switch-view : show detailed port view of the switch in the subgroups (default: switch-view: False)
+  # ports: how many ports has the device with the switch-view = True (default ports: 24)
+  cloud1: {icon: OsaCloud, name: Text der hier steht, ip: 192.168.0.1, port: 443, x: 0, y: 3, url: https://theuselessweb.com/}
+  db1: {icon: OsaDatabase, name: MySQL Database, port: 25565, x: 0, y: 0, url: }
+  deviceScanner1: {icon: OsaDeviceScanner, name: Local Device Scanner, x: 0, y: 6 }
+  serverWeb1: {icon: OsaServerWeb, name: My WebServer, x: 5, y: 2 }
+  serverTerminal1: {icon: OsaServerTerminal, name: Central Terminal, x: 5, y: 5 }
+  desktop1: {icon: OsaDesktopImac, name: My Desktop, x: 3, y: 0 }
+  Osa: {icon: server, name: Test, x: 1 }
+  phone1: { icon: OsaIphone, name: Iphone, x: 1, y: 1 }
+  cameraWeb1: { icon: OsaCameraWeb, name: CameraWeb, x: 0, y: -1 }
+  laptop1: { icon: OsaLaptop, name: Laptop, x: 0, y: 1 }
+  hub1: {icon: CiscoHub, name: Hub, x: 1, y: 4}
 
 
 
-# TODO: Implement that you can group other groups
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+  # ps: when a device in the group has a switch-view = True then dot will be automatically used
   # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
   group1: { <<: *groupDefaults, name: My Servers, members: [hub1, cloud1, db1, deviceScanner1], layout:, rack: True}
   moinmusa: { <<: *groupDefaults, name: My Servers2, members: [server1, serverWeb1, serverTerminal1, laptop1], url: https://google.com }

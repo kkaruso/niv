@@ -243,3 +243,4 @@ dmypy.json
 
 # logs
 logs/niv.log
+logs/**

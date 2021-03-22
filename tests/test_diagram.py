@@ -4,8 +4,8 @@ Includes all tests for build_diagram
 from unittest import TestCase
 import os
 
-from build_diagram import BuildDiagram
-from diagrams import Diagram
+from src.build_diagram.build_diagram import BuildDiagram
+from src.diagrams import Diagram
 
 
 class TestBuildDiagram(TestCase):
@@ -21,34 +21,19 @@ class TestBuildDiagram(TestCase):
         with open("test.svg", "w"):
             pass
 
-    def test_create_nodes(self):
-        """
-        create_nodes tests
-        """
-        with Diagram("test", filename="test", outformat="svg", show=False):
-            members = []
-            diagram = BuildDiagram(
-                os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/tests/test_template.yaml', "", 1)
-            diagram.create_nodes(members)
+    def test_create_diagram(self):
+        print(os.getcwd())
+        print(os.listdir("."))
 
-            test_members = ["cloud1", "db1", "deviceScanner1"]
-            self.assertEqual(test_members, members)
+        path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        yaml = path_to_project + '/templates/template.yaml'
 
-    # def test_create_connections(self):
-    #     """
-    #     create_connections tests
-    #     """
-    #     with Diagram("test", filename="test", outformat="svg", show=False):
-    #         instances = []
-    #         members = []
-    #         diagram = BuildDiagram(
-    #             os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/tests/test_template.yaml', "", 1)
-    #         diagram.create_nodes(members)
-    #         diagram.create_connections()
-    #
-    #         test_instance_names = ["cloud1", "db1", "deviceScanner1"]
-    #
-    #         self.assertEqual(test_instance_names, instances)
+        self.assertIsNotNone(BuildDiagram(yaml, "Test_Diagram.svg", 1, False))
+
+        self.assertIsNotNone(BuildDiagram(yaml, None, 1, False))
+
+        with self.assertRaises(FileNotFoundError):
+            self.assertIsNone(BuildDiagram("../../templates/template.yaml", "Test_Diagram.svg", 1, False))
 
     def tearDown(self) -> None:
         """

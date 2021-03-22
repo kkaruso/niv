@@ -5,7 +5,9 @@ import argparse
 import os
 import shutil
 from unittest import TestCase
-from arg_parser import ArgParser
+
+from src.yaml_parser import yaml_parser
+from src.arg_parser.arg_parser import ArgParser
 
 
 class TestArgParser(TestCase):
@@ -37,25 +39,34 @@ class TestArgParser(TestCase):
         """
         set_args function tests
         """
+        path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        config = yaml_parser.get_yaml(path_to_project + '/src/config.yaml')
+        detail = config.get('default').get('std_details')
         parser = ArgParser("")
-        self.assertEqual(argparse.Namespace(save=None, load=None, detail=1),
+
+        self.assertEqual(argparse.Namespace(save=None, load=None, detail=detail, verbose=False),
                          parser.get_parser())
 
-        parser = ArgParser(["-s", f"{self.test_directory_path}test2.svg", "-l", "./tests.yaml"])
+        parser = ArgParser(["-s", f"./{self.test_directory_path}test2.svg", "-l", "./tests.yaml"])
         self.assertEqual(
-            argparse.Namespace(save=[f"./{self.test_directory_path}test2.svg"], load=["./tests.yaml"], detail=1),
+            argparse.Namespace(save=[f"./{self.test_directory_path}test2.svg"], load=["./tests.yaml"],
+                               detail=detail, verbose=False),
             parser.get_parser())
 
         parser = ArgParser(["-l", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=1),
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=detail, verbose=False),
                          parser.get_parser())
 
         parser = ArgParser(["--load", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=1),
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=detail, verbose=False),
                          parser.get_parser())
 
         parser = ArgParser(["-d", "2", "-l", "./tests.yaml"])
-        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=2),
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=2, verbose=False),
+                         parser.get_parser())
+
+        parser = ArgParser(["-l", "./tests.yaml", "-vv"])
+        self.assertEqual(argparse.Namespace(save=None, load=["./tests.yaml"], detail=detail, verbose=True),
                          parser.get_parser())
 
     def test_is_path_to_yaml_file(self):
@@ -98,19 +109,32 @@ class TestArgParser(TestCase):
         save_to_path function tests
         """
         parser = ArgParser(["-l", "./tests.yaml"])
-        with self.assertRaises(Exception):
-            parser.save_to_path("./test_directory/")
 
-        with self.assertRaises(TypeError):
-            parser.save_to_path("./tests.yaml")
+        self.assertEqual("./tests.svg", parser.save_to_path("./"))
 
-        self.assertEqual(f"./{self.test_directory_path}test2.svg",
+        self.assertEqual("./tests.svg", parser.save_to_path("."))
+
+        self.assertEqual("ein_anderer_test.svg", parser.save_to_path("ein_anderer_test.svg"))
+
+        self.assertEqual("testdirectory/tests.svg", parser.save_to_path("testdirectory/tests.svg"))
+
+        self.assertEqual(f"{self.test_directory_path}test2.svg",
                          parser.save_to_path(f"{self.test_directory_path}test2.svg"))
 
-        self.assertEqual(f"./{self.test_directory_path}", parser.save_to_path(f"{self.test_directory_path}"))
+        self.assertEqual(f"{self.test_directory_path}tests.svg", parser.save_to_path(f"{self.test_directory_path}"))
 
-        self.assertEqual("./testdirectory/",
-                         parser.save_to_path(f"./{self.test_directory_path}"))
+        self.assertEqual("testdirectory/tests.svg",
+                         parser.save_to_path(f"{self.test_directory_path}"))
+
+        with self.assertRaises(OSError):
+            parser.save_to_path("./testslmao/")
+
+        with self.assertRaises(OSError):
+            parser.save_to_path("./testslmao/")
+
+        parser = ArgParser(["-l", "tests.yaml", "-s", "."])
+
+        self.assertEqual("./tests.svg", parser.get_save_path()[0])
 
     def test_create_filename(self):
         """
