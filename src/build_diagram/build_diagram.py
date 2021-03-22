@@ -359,7 +359,7 @@ class BuildDiagram:
                 "fontname": "helvetica-bold",
                 "nodesep": "1.0",
                 "ranksep": "2.0",
-                "splines": f"{self.yaml.get}",
+                "splines": f"{self.graph_splines}",
                 "rankdir": direction,
             }
             with Diagram(self.set_diagram_title(),
