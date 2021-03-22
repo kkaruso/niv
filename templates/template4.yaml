@@ -14,9 +14,6 @@ title: # Text underneath the diagram.
   date: "01.01.2021"  # Default date is current date or enter specific date as string
   version: "1.1"  # Version of the diagram as string
 
-groupDefaults: &groupDefaults #Use current values as defaults
-  backgroundColor: papayawhip  # Fill the background of the group box
-
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # Syntax:
   # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, x: x-coordinate, y: y-coordinate, url: link to a website or another file, tooltip: text shown in the tooltip }
