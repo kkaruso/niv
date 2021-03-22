@@ -89,8 +89,10 @@ You can choose between three different detail levels
 ### Detail level 0 (default):
 ```
 niv -l load_path/example.yaml 
-```	
+```
+
 <img src="./img/Default.png" alt="drawing" width="300"/>
+
 ### Detail level 1:
 ```
 niv -l load_path/example.yaml -d 1
