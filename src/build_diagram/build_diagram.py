@@ -639,18 +639,18 @@ class BuildDiagram:
                 # Avoid printing the same error message multiple times
                 if error:
                     log_message = f"KeyError in {self.load_path}: '{self.nodes_icon[node]}' is not a valid icon, " \
-                                  f"that's why it does not show in the diagram " \
                                   f"Please take a look at the icon catalog in resources or remove the node."
                     self.logger.verbose_warning(log_message, self.verbose)
                     print(log_message)
-
+                    exit(0)
         except KeyError:
             # Avoid printing the same error message multiple times
             if error:
-                log_message = f"KeyError in {self.load_path}: '{node}' is not given in 'nodes', that's why it does " \
-                              f"not show in the diagram. Add it to 'nodes' or remove it as a member."
+                log_message = f"KeyError in {self.load_path}: '{node}' is not given in 'nodes'. Add it to 'nodes' or " \
+                              f"remove it as a member. "
                 self.logger.verbose_warning(log_message, self.verbose)
                 print(log_message)
+                exit(0)
 
     def set_node_text(self, node) -> str:
         """
