@@ -150,15 +150,20 @@ code {
     border: none;
 }
 
-#intro {
+#introtitle {
     text-align: center;
     margin: -20px auto 100px;
 }
 
-#intro h1 {
-    font-size: 70px;
-    line-height: 1.2;
+#intro {
+    text-align: center;
+    margin: -20px auto 100px;
+    width: 60%;
+    border: 9px groove rgba(117,149,164,0.2);
+    border-radius: 20px;
+    padding: 20px;
 }
+
 
 footer {
     position: relative;
