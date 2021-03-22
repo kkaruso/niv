@@ -202,7 +202,7 @@ class BuildDiagram:
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_name:
             if node not in self.members:
-                self.create_single_node(node, self.graph_layout, True, False)
+                self.create_single_node(node, self.graph_layout, True)
                 self.nodes_not_in_groups.append(node)
 
         # Dynamically create the amount of groups with the corresponding group name
@@ -223,7 +223,7 @@ class BuildDiagram:
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(name)):
-                    self.create_single_node(member, self.graph_layout, True, False)
+                    self.create_single_node(member, self.graph_layout, True)
 
     def create_connections(self, error: bool):
         """
@@ -296,7 +296,7 @@ class BuildDiagram:
 
     def run(self):
         """
-        Checks detail level and call create_diagram()
+        Checks detail level and call  iagram()
         """
         if self.detail_level == 0:
             for i in range(2):
@@ -340,7 +340,7 @@ class BuildDiagram:
             if str(self.yaml.get("groups").get(f"{i}").get("rack")) == "True":
                 direction = "LR"
             else:
-                direction = "TB"
+                direction = "BT"
             # if the sub-group has no layout then the main layout of the diagram will be used instead
             if self.yaml.get("groups").get(f"{i}").get("layout") is None:
                 layout = str(self.graph_layout)
@@ -482,7 +482,7 @@ class BuildDiagram:
                 switches_nodes[member] = switch_nodes
             else:
                 # Create other devices except switches
-                self.create_single_node(member, layout, False, True)
+                self.create_single_node(member, layout, False)
 
     def calculate_connections_between_groups(self, member: str, groups_diagrams: list):
         """
@@ -552,7 +552,7 @@ class BuildDiagram:
                 title += item + ": " + str(_dict[item]) + "\n"
         return title
 
-    def create_single_node(self, node, layout, error, subdiagram: bool):
+    def create_single_node(self, node, layout, error):
         """
         Create an instance of a given node class, if not valid print name of not valid node
         """
@@ -566,11 +566,6 @@ class BuildDiagram:
 
             # Create tooltip for each node
             tooltip = self.create_tooltip(element="node", node=node)
-            if subdiagram:
-                margin = "1"
-            else:
-                margin = "0"
-
             try:
                 # Only pass coordinates to node creation if layout == neato
                 if layout == "neato":
@@ -579,7 +574,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                     margin=margin,
+                                                                     margin="0",
                                                                      URL=url,
                                                                      pos=pos,
                                                                      tooltip=tooltip,
@@ -593,7 +588,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
-                                                             margin=margin,
+                                                             margin="0",
                                                              URL=url,
                                                              pos=pos,
                                                              tooltip=tooltip,
@@ -608,7 +603,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                     margin=margin,
+                                                                     margin="0",
                                                                      URL=url,
                                                                      tooltip=tooltip,
                                                                      style="rounded",
@@ -622,7 +617,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
-                                                             margin=margin,
+                                                             margin="0",
                                                              URL=url,
                                                              tooltip=tooltip,
                                                              style="rounded",
@@ -632,7 +627,6 @@ class BuildDiagram:
                                                              width="1",
                                                              height="2.5",
                                                              imagescale="true",
-                                                             # labelloc="t"
                                                              ))
                 self.instances_keys.append(node)
             except KeyError:
