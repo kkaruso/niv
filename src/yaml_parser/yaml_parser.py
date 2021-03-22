@@ -123,6 +123,6 @@ def get_path_to_config():
     """
     # Check if platform is linux or mac
     if platform in ('linux', 'darwin'):
-        return '~/.config/niv'
+        return os.getenv('HOME') + '/.config/niv'
     # Windows
     return os.getenv('APPDATA') + '/niv'
