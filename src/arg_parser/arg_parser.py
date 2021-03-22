@@ -19,6 +19,9 @@ class ArgParser:
     set_args():
         Adds the needed arguments to the ArgumentParser class
     """
+    # Create config file if it doesn't exist
+    if not (os.path.isfile(yaml_parser.get_path_to_config() + '/config.yaml')):
+        yaml_parser.create_config_file(yaml_parser.get_path_to_config() + '/config.yaml')
     config = yaml_parser.get_yaml(yaml_parser.get_path_to_config() + '/config.yaml')
 
     # Reads in version from setup.py
