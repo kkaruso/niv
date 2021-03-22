@@ -4,10 +4,10 @@ Parser class for Arguments when you start NIV
 
 import argparse
 import os
+import pkg_resources
 from src import pathname_validitor as pv
 from src.niv_logger.niv_logger import NivLogger
-from src.yaml_parser.yaml_parser import get_yaml
-import pkg_resources
+from src.yaml_parser import yaml_parser
 
 
 class ArgParser:
@@ -19,7 +19,7 @@ class ArgParser:
     set_args():
         Adds the needed arguments to the ArgumentParser class
     """
-    config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/config.yaml')
+    config = yaml_parser.get_yaml(yaml_parser.get_path_to_config() + '/config.yaml')
 
     # Reads in version from setup.py
     try:
