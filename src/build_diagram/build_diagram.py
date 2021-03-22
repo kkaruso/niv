@@ -88,8 +88,8 @@ class BuildDiagram:
             'ports') or 24)
 
         # Get if type switch of each nodes
-        self.switch_type = self.fill_dictionary("nodes", "switch-view", self.yaml_defaults.get('nodes').get(
-            'switch-view') or False)
+        self.switch_type = self.fill_dictionary("nodes", "port-view", self.yaml_defaults.get('nodes').get(
+            'port-view') or False)
 
         # Get ip of each node
         self.nodes_ip = self.fill_dictionary("nodes", "ip", self.yaml_defaults.get('nodes').get(
@@ -344,7 +344,7 @@ class BuildDiagram:
             else:
                 layout = str(self.yaml.get("groups").get(f"{i}").get("layout"))
 
-            # if there is a device with switch-view = True in the group then layout = "dot " will be automaticlly used
+            # if there is a device with port-view = True in the group then layout = "dot " will be automaticlly used
             for membr in self.group_members.get(i):
                 if self.switch_type[membr]:
                     layout = "dot"
@@ -403,7 +403,7 @@ class BuildDiagram:
         Create the connection inside the group and between switches
 
         :param switches_nodes: a dic for all ports for each switch
-        :param switches_in_group: a list of all switches in the group with switch-view = True
+        :param switches_in_group: a list of all switches in the group with port-view = True
         :param i: a single group
         """
         dic_of_connection = []
@@ -443,12 +443,12 @@ class BuildDiagram:
     def create_list_with_switchviews(self, switches_in_group: list, out_ether_port: dict, in_ether_port: dict,
                                      intent_con_ports: dict, layout: str, switches_nodes: dict, i: int):
         """
-        Create a list of switches with switch-view for each group
+        Create a list of switches with port-view for each group
 
-        :param switches_in_group: a list of all switches with switch-view = True in the group
+        :param switches_in_group: a list of all switches with port-view = True in the group
         :param out_ether_port: a list of port, those are connected with a port outside the group
         :param in_ether_port: a list pf ports from the switch those are connected with devices in the same group
-        :param intent_con_ports: a list of ports for the switch, those are connected with switch with switch-view = True
+        :param intent_con_ports: a list of ports for the switch, those are connected with switch with port-view = True
         :param layout: a layout for the subgroup
         :param switches_nodes: a dic pf all switches and their ports
         :param i: a single group
@@ -508,10 +508,10 @@ class BuildDiagram:
     def calculate_connections_in_groups(self, intent_con_ports: dict, in_ether_port: dict, i: int):
         """
         Calculate how many connections are between the switches from the same group and between switches and nodes, with
-        switch-view set to False
+        port-view set to False
 
-        switches with switch-view= False for each group :param in_ether_port:a dic of ports, those are connected with
-        non switches with switch-view= True for each group :param i:
+        switches with port-view= False for each group :param in_ether_port:a dic of ports, those are connected with
+        non switches with port-view= True for each group :param i:
         """
         for member in list(self.group_members.get(i)):
             in_ethernet = 0
