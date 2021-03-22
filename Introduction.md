@@ -26,7 +26,7 @@ NIV Packages are available on [Python Package Index](https://pypi.org/project/ni
 ```
 pip install niv
 ````
-## System Requirments
+### System Requirments
 
  - [Python 3.x–3.9](https://www.python.org/downloads/)
  - [pip 19.0 or higher](https://pip.pypa.io/en/stable/installing/)
