@@ -61,6 +61,7 @@ NIV can create network diagrams dynamically from a yaml file describing the plac
 ```
 niv -l load_path/example.yaml
 ```
+![](./img/Niv_topologie.PNG)
 # Create And Save a Diagram
 To save the generated diagram you can pass the  [ -s ]   Argument with a given save_path and filename
 
