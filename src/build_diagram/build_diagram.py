@@ -347,7 +347,7 @@ class BuildDiagram:
             else:
                 layout = str(self.yaml.get("groups").get(f"{i}").get("layout"))
 
-            # if there is a device with switch-view = True in the group then layout = "dot " will be automaticlly used
+            # if there is a device with port-view = True in the group then layout = "dot " will be automaticlly used
             for membr in self.group_members.get(i):
                 if self.switch_type[membr]:
                     layout = "dot"
