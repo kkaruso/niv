@@ -27,7 +27,6 @@ nodes: # List every single node that should be in the diagram here
   serverTerminal1: { icon: OsaServerTerminal, name: Central Terminal, x: 5, y: 5, mac: 22:0a:95:9d:12:16 }
   desktop1: { icon: OsaDesktopImac, x: 3, y: 0, manufacturer: Asus }
   desktop2: { icon: OsaDesktopImac, name: My Desktop 2, x: 3, y: 0 }
-  Osa: { icon: invalid_icon, name: Invalid Node, x: 1 }
 
 groups: # List every group of nodes here
   # Syntax:
@@ -36,8 +35,8 @@ groups: # List every group of nodes here
   # ps: when a device in the group has a switch-view = True then dot will be automatically used
   # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
   group1: { name: Servers, members: [ cloud1, db1, deviceScanner1 ], layout:, rack: True, tooltip: That's a tooltip }
-  group2: { name: Desktops, members: [ server1, serverWeb1, serverTerminal1 ]}
-  group3: { name: Group, members: [ server1, serverWeb1, desktop1 ]}
+  group2: { name: Desktops, members: [serverWeb1, serverTerminal1 ]}
+  group3: { name: Group, members: [ serverWeb1, desktop1 ]}
 
 connections: # List every connection between 2 points here
   # Syntax:
