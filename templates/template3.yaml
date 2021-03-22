@@ -18,8 +18,8 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # Syntax:
   # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, x: x-coordinate, y: y-coordinate, url: link to a website or another file, tooltip: text shown in the tooltip }
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
-  # switch-view : show detailed port view of the switch in the subgroups (default: switch-view: False)
-  # ports: how many ports has the device with the switch-view = True (default ports: 24)
+  # port-view : show detailed port view of the switch in the subgroups (default: port-view: False)
+  # ports: how many ports has the device with the port-view = True (default ports: 24)
   pc1: {icon: Pc, name: PC1, ip: 172.19.176.131, x: -3, y: 3 }
   pc2: {icon: Pc, name: PC2, ip: 172.19.176.132, x: -3, y: 2 }
   pc3: {icon: Pc, name: PC3, ip: 172.19.176.133, x: -3, y: 1 }
@@ -41,6 +41,7 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
 
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
   # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
+  # ps: when a device in the group has a port-view = True then dot will be automatically used
   # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
   group1: {name: PCs, members: [pc1, pc2, pc3, pc4, pc5, pc6, switch1]}
   group2: {name: ATM Router, members: [switch2, atmrouter1, atmrouter2, atmrouter3, atmrouter4, prozessor1, server1], layout: dot, rack: True}

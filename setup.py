@@ -10,7 +10,7 @@ with open(file="README.md", mode="r") as readme_handle:
 setup(
     name='niv',
     author='HS Worms Top',
-    version='1.4',
+    version='1.5',
     description='console application to visualize network infrastructure using YAML files.',
     long_description=long_description,
     long_description_content_type="text/markdown",

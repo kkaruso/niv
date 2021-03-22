@@ -1,6 +1,9 @@
 """
 Parses given .yaml file
 """
+import errno
+import os
+from sys import platform
 import yaml
 import ruamel.yaml
 
@@ -20,17 +23,31 @@ def get_yaml(path):
             raise Exception from exc
 
 
-def create_yaml_defaults(path):
+def create_config_file(path):
     """
     Creates yaml_defaults.yaml at given path
 
     :param path: path where the .yaml file will be created
     :return: empty yaml defaults
     """
-    print("No yaml_defaults.yaml found. Creating file in " + path + ".\n")
-    yaml_data = ruamel.yaml.load(get_yaml_default_preset(), ruamel.yaml.RoundTripLoader)
-    with open(path, 'w') as file:
-        ruamel.yaml.dump(yaml_data, file, Dumper=ruamel.yaml.RoundTripDumper)
+    file_name = path.rsplit('/', 1)[1]
+    if not os.path.exists(os.path.dirname(path)):
+        try:
+            os.makedirs(os.path.dirname(path))
+        except OSError as exc:  # Guard against race condition
+            if exc.errno != errno.EEXIST:
+                raise
+
+    if file_name == 'config.yaml':
+        yaml_data = ruamel.yaml.load(get_config_preset(), ruamel.yaml.RoundTripLoader)
+        with open(path, 'w') as file:
+            ruamel.yaml.dump(yaml_data, file, Dumper=ruamel.yaml.RoundTripDumper)
+    else:
+        yaml_data = ruamel.yaml.load(get_yaml_default_preset(), ruamel.yaml.RoundTripLoader)
+        with open(path, 'w') as file:
+            ruamel.yaml.dump(yaml_data, file, Dumper=ruamel.yaml.RoundTripDumper)
+
+    print(f"No {file_name} found. Creating file in " + path + ".\n")
     return yaml_data
 
 
@@ -81,3 +98,31 @@ def get_yaml_default_preset():
             tooltip: # Text shown at the bottom of the tooltip (default: ""; type: string)
         """
     return data
+
+
+def get_config_preset():
+    """
+    Contains preset of config.yaml necessary for creating a new config.yaml
+
+    :return: data for config.yaml
+    """
+    data = """\
+        default:            
+            std_type: ".svg" # Default output type            
+            std_details: 2 # Default level of Detail // 0 = all detail levels, 1 = least detail, 2 = most detail            
+            open_on_creation: True # Open in browser after the diagram is built, True or False
+        """
+    return data
+
+
+def get_path_to_config():
+    """
+    Returns path to config directory for current platform
+
+    :return: path to config directory
+    """
+    # Check if platform is linux or mac
+    if platform in ('linux', 'darwin'):
+        return '~/.config/niv'
+    # Windows
+    return os.getenv('APPDATA') + '/niv'
