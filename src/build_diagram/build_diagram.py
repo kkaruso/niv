@@ -185,8 +185,6 @@ class BuildDiagram:
         self.nodes_not_in_groups = []
         self.n_url = []
 
-        self.check_nodes_in_groups()
-
     def create_nodes(self):
         """
         Create nodes outside and inside of clusters
@@ -201,7 +199,7 @@ class BuildDiagram:
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_name:
             if node not in self.members:
-                self.create_single_node(node, self.graph_layout, True)
+                self.create_single_node(node, self.graph_layout, True, False)
                 self.nodes_not_in_groups.append(node)
 
         # Dynamically create the amount of groups with the corresponding group name
@@ -222,7 +220,7 @@ class BuildDiagram:
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(name)):
-                    self.create_single_node(member, self.graph_layout, True)
+                    self.create_single_node(member, self.graph_layout, True, False)
 
     def create_connections(self, error: bool):
         """
@@ -259,16 +257,8 @@ class BuildDiagram:
 
                     if f"{first} + {second}" not in list_connections or f"{second} + {first}" not in list_connections:
 
-                        # If the "showports" parameter is set to true show ports next to connection
+                        # If the "showports" parameter is set to true, show ports next to connection
                         if self.connections_visibility[i]:
-                            _ = self.instances[first_index] - \
-                                Edge(color=f"{self.connections_color[i]}",
-                                     label=f"{self.connections_text[i]}",
-                                     labeltooltip=f"{self.connections_text[i]}",
-                                     penwidth=f"{self.connections_width[i]}",
-                                     edgetooltip=tooltip) - \
-                                self.instances[second_index]
-                        else:
                             _ = self.instances[first_index] - \
                                 Edge(color=f"{self.connections_color[i]}",
                                      label=f"{self.connections_text[i]}",
@@ -279,6 +269,15 @@ class BuildDiagram:
                                      labeldistance="3.5",
                                      labelangle="30",
                                      taillabel=f"{self.connections_ports[i][1]}"
+                                     ) - \
+                                self.instances[second_index]
+                        else:
+                            _ = self.instances[first_index] - \
+                                Edge(color=f"{self.connections_color[i]}",
+                                     label=f"{self.connections_text[i]}",
+                                     labeltooltip=f"{self.connections_text[i]}",
+                                     penwidth=f"{self.connections_width[i]}",
+                                     edgetooltip=tooltip
                                      ) - \
                                 self.instances[second_index]
                         list_connections.append(f"{first} + {second}")
@@ -344,6 +343,13 @@ class BuildDiagram:
                 layout = str(self.graph_layout)
             else:
                 layout = str(self.yaml.get("groups").get(f"{i}").get("layout"))
+
+            # if there is a device with port-view = True in the group then layout = "dot " will be automaticlly used
+            for membr in self.group_members.get(i):
+                if self.switch_type[membr]:
+                    layout = "dot"
+                    break
+
             # modify the subgroup with attributes
             subgraph_attr = {
                 "bgcolor": f"{self.graph_bg_color}",
@@ -353,7 +359,7 @@ class BuildDiagram:
                 "fontname": "helvetica-bold",
                 "nodesep": "1.0",
                 "ranksep": "2.0",
-                "splines": f"{self.yaml.get}",
+                "splines": f"{self.graph_splines}",
                 "rankdir": direction,
             }
             with Diagram(self.set_diagram_title(),
@@ -473,7 +479,7 @@ class BuildDiagram:
                 switches_nodes[member] = switch_nodes
             else:
                 # Create other devices except switches
-                self.create_single_node(member, layout, False)
+                self.create_single_node(member, layout, False, True)
 
     def calculate_connections_between_groups(self, member: str, groups_diagrams: list):
         """
@@ -543,7 +549,7 @@ class BuildDiagram:
                 title += item + ": " + str(_dict[item]) + "\n"
         return title
 
-    def create_single_node(self, node, layout, error):
+    def create_single_node(self, node, layout, error, subdiagram: bool):
         """
         Create an instance of a given node class, if not valid print name of not valid node
         """
@@ -557,6 +563,10 @@ class BuildDiagram:
 
             # Create tooltip for each node
             tooltip = self.create_tooltip(element="node", node=node)
+            if subdiagram:
+                margin = "1"
+            else:
+                margin = "0"
 
             try:
                 # Only pass coordinates to node creation if layout == neato
@@ -566,6 +576,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                     margin=margin,
                                                                      URL=url,
                                                                      pos=pos,
                                                                      tooltip=tooltip,
@@ -579,6 +590,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
+                                                             margin=margin,
                                                              URL=url,
                                                              pos=pos,
                                                              tooltip=tooltip,
@@ -593,6 +605,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
+                                                                     margin=margin,
                                                                      URL=url,
                                                                      tooltip=tooltip,
                                                                      style="rounded",
@@ -606,6 +619,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
+                                                             margin=margin,
                                                              URL=url,
                                                              tooltip=tooltip,
                                                              style="rounded",
@@ -789,11 +803,11 @@ class BuildDiagram:
                 first_port = self.connections_ports[connection][0]
                 second_port = self.connections_ports[connection][1]
                 tooltip_without_port = f"{self.nodes_name[second_endpoint]} " \
-                                       f"<---> " \
+                                       f"<———> " \
                                        f"{self.nodes_name[first_endpoint]}"
 
                 tooltip_with_port = f"{self.nodes_name[second_endpoint]} (Port: {second_port}) " \
-                                    f"<---> " \
+                                    f"<———> " \
                                     f"{self.nodes_name[first_endpoint]} (Port: {first_port})"
 
                 # If a tooltip is given within the connections, set it as the tooltip
@@ -827,7 +841,7 @@ class BuildDiagram:
                 self.logger.verbose_warning(log_message, self.verbose)
                 print(log_message)
                 tooltip = f"{self.nodes_name[second_endpoint]} " \
-                          f"<---> " \
+                          f"<———> " \
                           f"{self.nodes_name[first_endpoint]}"
 
         return tooltip
@@ -946,45 +960,3 @@ class BuildDiagram:
                 # print(f"node1: {node1}, node2: {node2}, index: {self.connections_endpoints.index(connection)}")
                 return self.connections_endpoints.index(connection)
         return -1
-
-    def check_nodes_in_groups(self):
-        """
-        Function to look if nodes are given in 2 or more groups
-        and prints them
-        """
-        list_of_group_members = []
-
-        list_of_occurence_members = []
-        for group in self.group_members.values():
-            for member_from_group in group:
-                list_of_group_members.append(member_from_group)
-
-        for member in list_of_group_members:
-            if list_of_group_members.count(member) > 1 and member not in list_of_occurence_members:
-                list_of_occurence_members.append(member)
-
-        if len(list_of_occurence_members) > 0:
-            members_in_string = ""
-
-            # go through elements from list_of_occurence_members:
-            for member in list_of_occurence_members:
-                # add member to string
-                members_in_string += member + " ("
-                for key, value in self.group_members.items():
-                    if member in value:
-                        members_in_string += ''.join(key) + ", "
-                members_in_string = members_in_string[:-2] + "), "
-            members_in_string = members_in_string[:-2]
-
-            log_message = "These Nodes were used multiple times in different groups and can lead to unexpected " \
-                          "results:\n "
-
-            log_message += members_in_string
-            log_message += "\n"
-
-            self.logger.verbose_warning(log_message, self.verbose)
-            print(log_message)
-
-
-
-
