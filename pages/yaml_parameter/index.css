@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #262626;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.1em;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+a, a:visited {
+    color: #425469;
+    font-weight: bold;
+}
+
+article {
+    display: block;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+#params-table {
+    width: 100%;
+    text-align: center;
+}
+
+#color-table {
+    width: 70%;
+}
+
+.param_heading {
+    text-align: left;
+}

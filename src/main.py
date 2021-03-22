@@ -11,7 +11,7 @@ from src.niv_logger.niv_logger import NivLogger
 
 def main():
     """
-    uses arguments to create diagrams
+    Uses arguments to create diagrams
     """
     # Create an instance of the logger Class
     logger = NivLogger
