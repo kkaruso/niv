@@ -185,6 +185,8 @@ class BuildDiagram:
         self.nodes_not_in_groups = []
         self.n_url = []
 
+        self.check_nodes_in_groups()
+
     def create_nodes(self):
         """
         Create nodes outside and inside of clusters
@@ -944,3 +946,45 @@ class BuildDiagram:
                 # print(f"node1: {node1}, node2: {node2}, index: {self.connections_endpoints.index(connection)}")
                 return self.connections_endpoints.index(connection)
         return -1
+
+    def check_nodes_in_groups(self):
+        """
+        Function to look if nodes are given in 2 or more groups
+        and prints them
+        """
+        list_of_group_members = []
+
+        list_of_occurence_members = []
+        for group in self.group_members.values():
+            for member_from_group in group:
+                list_of_group_members.append(member_from_group)
+
+        for member in list_of_group_members:
+            if list_of_group_members.count(member) > 1 and member not in list_of_occurence_members:
+                list_of_occurence_members.append(member)
+
+        if len(list_of_occurence_members) > 0:
+            members_in_string = ""
+
+            # go through elements from list_of_occurence_members:
+            for member in list_of_occurence_members:
+                # add member to string
+                members_in_string += member + " ("
+                for key, value in self.group_members.items():
+                    if member in value:
+                        members_in_string += ''.join(key) + ", "
+                members_in_string = members_in_string[:-2] + "), "
+            members_in_string = members_in_string[:-2]
+
+            log_message = "These Nodes were used multiple times in different groups and can lead to unexpected " \
+                          "results:\n "
+
+            log_message += members_in_string
+            log_message += "\n"
+
+            self.logger.verbose_warning(log_message, self.verbose)
+            print(log_message)
+
+
+
+
