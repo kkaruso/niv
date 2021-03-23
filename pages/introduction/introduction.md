@@ -14,6 +14,7 @@ Network diagrams are commonly drawn manually, using tools like Visio or Draw.io.
       * [Save As SVG](#save-as-svg)
       * [Save As PDF](#save-as-pdf)
       * [Save As PNG](#save-as-png)
+      * [Save As JPG](#save-as-jpg)
  - [Detailed view](#detailed-view)
  - [Verbosity](#verbosity)
 
@@ -87,6 +88,12 @@ niv -l load_path/example.yaml -s save_path/your_file_name.pdf
 ***Example:***
 ```
 niv -l load_path/example.yaml -s save_path/your_file_name.png
+```
+### Save As JPG
+
+***Example:***
+```
+niv -l load_path/example.yaml -s save_path/your_file_name.jpg
 ```
 # Detailed view
 You can choose between three different detail levels
