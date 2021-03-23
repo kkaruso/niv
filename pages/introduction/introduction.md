@@ -55,7 +55,7 @@ Will show you the arguments you can use and their functionality
  ```
 niv -v
 ```
-Will show you ther version of the package you installed
+Will show you the version of the package you installed
 
 ![](../images/introduction/version.png)
 # Create Diagram 
