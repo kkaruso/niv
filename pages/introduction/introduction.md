@@ -11,9 +11,9 @@ Network diagrams are commonly drawn manually, using tools like Visio or Draw.io.
  - [Version](#version)
  - [Create diagram](#create-diagram)
  - [Create And Save a Diagram](#create-and-save-a-diagram)
-      * [Save As SVG](#save-as-svg)
-      * [Save As PDF](#save-as-pdf)
-      * [Save As PNG](#save-as-png)
+      * [Save As SVG](#save-as-svg-:)
+      * [Save As PDF](#save-as-pdf-:)
+      * [Save As PNG](#save-as-png-:)
  - [Detailed view](#detailed-view)
  - [Verbosity](#verbosity)
 
