@@ -3,20 +3,24 @@ showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
-  showSlides(slideIndex += n);
+  showSlides((slideIndex += n));
 }
 
 // Thumbnail image controls
 function currentSlide(n) {
-  showSlides(slideIndex = n);
+  showSlides((slideIndex = n));
 }
 
 function showSlides(n) {
   var i;
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) { slideIndex = 1 }
-  if (n < 1) { slideIndex = slides.length }
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
@@ -42,21 +46,21 @@ var img_poster = document.getElementById("poster");
 var modalImg = document.getElementById("modal_image");
 var captionText = document.getElementById("caption");
 
-setOnClickListener(img1)
-setOnClickListener(img2)
-setOnClickListener(img3)
-setOnClickListener(img1_slide)
-setOnClickListener(img2_slide)
-setOnClickListener(img3_slide)
-setOnClickListener(img4_slide)
-setOnClickListener(img_poster)
+setOnClickListener(img1);
+setOnClickListener(img2);
+setOnClickListener(img3);
+setOnClickListener(img1_slide);
+setOnClickListener(img2_slide);
+setOnClickListener(img3_slide);
+setOnClickListener(img4_slide);
+setOnClickListener(img_poster);
 
 function setOnClickListener(imageVariable) {
   imageVariable.onclick = function () {
     modal.style.display = "block";
     modalImg.src = this.src;
     captionText.innerHTML = this.alt;
-  }
+  };
 }
 
 // Get the <span> element that closes the modal
@@ -64,5 +68,5 @@ var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
-  modal.style.display = "none";
-}
+    modal.style.display = "none";
+};

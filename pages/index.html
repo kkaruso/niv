@@ -1,264 +1,376 @@
 <!DOCTYPE html>
 <html>
-<title>Network Infrastructure Visualizer</title>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="index.css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<link rel="icon" href="images/NIV_logo.jpg" />
+  <title>Network Infrastructure Visualizer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="index.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <link rel="icon" href="images/NIV_logo.jpg" />
 
-<body>
-  <div id="logo-and-intro">
-    <div id="logo">
-      <img src="images/niv_logo7.png" alt="NIV_Logo" style="width: 100%" class="rounded" />
-    </div>
-
-    <div id="introtitle">
-      <h1 style="font-size: 50px;">The Network Infrastructure Visualizer</h1>
-    </div>
-  </div>
-
-  <div id="intro">
-    <h2>Einleitung</h2>
-    <p>Das Projekt "Network Infrastructure Visualizer" unterstütz die visuelle Darstellung einer Netzwerkstruktur.</p>
-
-    <h2>Problem</h2>
-    <p>
-      Es gibt ähnliche Produkte bereits auf dem Markt, jedoch fehlt an diesen Produkten jeweils der Feinschliff. Unser
-      Produkt ist für den Kunden so optimiert, sodass die Interessen widergespiegelt werden.
-    </p>
-    <h2>Lösung</h2>
-    <p>Wir haben die verschiedenen Produkte im Detail analysiert, um den aktuellen Stand zu erfahren. Anschließend war
-      es uns wichtig, den Kundenkontakt zu pflegen, sodass wir regelmäßig an Feedback kommen und somit das Produkt
-      anpassen.</p>
-  </div>
-
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="modal_image" />
-    <div id="caption"></div>
-  </div>
-
-  <div class="example">
-    <h2>Beispiel</h2>
-    <div class="segment segment-left-to-right">
-      <div class="segment-image">
-        <img src="images/example1_code.png" alt="YAML-Beispiel" width="100%" class="rounded" id="image1" />
+  <body>
+    <div id="logo-and-intro">
+      <div id="logo">
+        <img
+          src="images/niv_logo7.png"
+          alt="NIV_Logo"
+          style="width: 100%"
+          class="rounded"
+        />
       </div>
-      <div class="segment-text-left">
+
+      <div id="introtitle">
+        <h1>The Network Infrastructure Visualizer</h1>
+      </div>
+      <div id="learn-more">
+        <a href="#introdiv" class="btn">Learn more</a>
+      </div>
+    </div>
+
+    <div id="introdiv">
+      <div id="intro">
         <p>
-          Der Benutzer kann eine YAML-Datei erstellen, welche für die Erstellung des Diagramms notwendig ist. Die Datei
-          ist sehr simpel gehalten. Bei <code>diagram</code> sind Parameter enthalten, welche im ganzen Diagramm
-          sichtbar sind. Beim <code>title</code> sind allgemeine Informationen, die unter dem Diagram angezeigt werden,
-          vorhanden. In
-          <code>nodes</code>, sind wie der Name schon sagt, die einzelnen Nodes bzw. Geräte definiert. In
-          <code>groups</code> kann
-          man Nodes gruppieren. Und schließlich sind in <code>connections</code> die Verbindungen der jeweiligen Nodes
-          definiert. Für jede Node kann man ein Icon, aus einem unserer drei <a href="icon_catalog/icon_catalog.pdf"
-            target="_blank">Icon-Sets</a>, auswählen. Außerdem gibt es weitere <a href="yaml_parameter/index.html"
-            target="_blank">Parameter</a>, welche die
-          Erstellung des Diagramms erweitern können.
+          Das Projekt "Network Infrastructure Visualizer" unterstütz die
+          visuelle Darstellung einer Netzwerkstruktur mithilfe YAML-Dateien.
+        </p>
+
+        <h3>Problem</h3>
+        <p>
+          Es gibt ähnliche Produkte bereits auf dem Markt, jedoch fehlt an
+          diesen Produkten jeweils der Feinschliff. Unser Produkt ist für den
+          Kunden so optimiert, sodass die Interessen widergespiegelt werden.
+        </p>
+        <h3>Lösung</h3>
+        <p>
+          Wir haben die verschiedenen Produkte im Detail analysiert, um den
+          aktuellen Stand zu erfahren. Anschließend war es uns wichtig, den
+          Kundenkontakt zu pflegen, sodass wir regelmäßig an Feedback kommen und
+          somit das Produkt anpassen.
         </p>
       </div>
     </div>
 
-    <div class="segment segment-right-to-left">
-      <div class="segment-text-right">
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modal_image" />
+      <div id="caption"></div>
+    </div>
+
+    <div class="example">
+      <h2>Beispiel</h2>
+      <div class="segment segment-left-to-right">
+        <div class="segment-image">
+          <img
+            src="images/example1_code.png"
+            alt="YAML-Beispiel"
+            width="100%"
+            class="rounded"
+            id="image1"
+          />
+        </div>
+        <div class="segment-text-left">
+          <p>
+            Der Benutzer kann eine YAML-Datei erstellen, welche für die
+            Erstellung des Diagramms notwendig ist. Die Datei ist sehr simpel
+            gehalten. Bei <code>diagram</code> sind Parameter enthalten, welche
+            im ganzen Diagramm sichtbar sind. Beim <code>title</code> sind
+            allgemeine Informationen, die unter dem Diagram angezeigt werden,
+            vorhanden. In <code>nodes</code>, sind wie der Name schon sagt, die
+            einzelnen Nodes bzw. Geräte definiert. In <code>groups</code> kann
+            man Nodes gruppieren. Und schließlich sind in
+            <code>connections</code> die Verbindungen der jeweiligen Nodes
+            definiert. Für jede Node kann man ein Icon, aus einem unserer drei
+            <a href="icon_catalog/icon_catalog.pdf" target="_blank">Icon-Sets</a
+            >, auswählen. Außerdem gibt es weitere
+            <a href="yaml_parameter/index.html" target="_blank">Parameter</a>,
+            welche die Erstellung des Diagramms erweitern können.
+          </p>
+        </div>
+      </div>
+
+      <div class="segment segment-right-to-left">
+        <div class="segment-text-right">
+          <p>
+            Der Konsolenbefehl setzt sich aus verschiedenen Elementen zusammen.
+            Mit <code>niv</code> wird das Programm gestartet,
+            <code>--load</code> ist, wie der Name schon verrät, für das Laden
+            der YAML-Datei zuständig. Anschließend erfolgt die Angabe über den
+            Pfad der YAML-Datei. Der Parameter <code>--detail</code> beschreibt
+            den Detailgrad, also wie viel Informationen tatsächlich angezeigt
+            werden. Es gibt noch weitere
+            <a href="yaml_parameter/index.html" target="_blank">Parameter</a>,
+            welche in unserer Anwendung verwendbar sind.
+          </p>
+        </div>
+        <div class="segment-image">
+          <img
+            src="images/example2_command.png"
+            alt="Command-Beispiel"
+            width="100%"
+            class="rounded"
+            id="image2"
+          />
+        </div>
+      </div>
+
+      <div class="segment segment-left-to-right">
+        <div class="segment-image">
+          <img
+            src="images/example3_diagramm.png"
+            alt="Diagramm-Beispiel"
+            width="100%"
+            class="rounded"
+            id="image3"
+          />
+        </div>
+        <div class="segment-text-left">
+          <p>
+            Das Diagramm ist aus der YAML-Datei entstanden. Hierbei sind alle
+            angegebenen Verbindungen realisiert worden. Die Informationen aus
+            dem Titel stehen im unteren Teil des Diagramms. In dem
+            <a href="#slider">Bilderslider</a> sieht man auch komplexere
+            Diagramme, welche ebenso mit unserem Tool entstanden sind. Da diese
+            Diagramme im SVG Format sind, geht die Auflösung nicht verloren,
+            wenn die Größe verändert wird.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="conclusion-and-links">
+      <div class="conclusion">
+        <h2 style="border-bottom: solid; margin-bottom: 24px;">Fazit</h2>
         <p>
-          Der Konsolenbefehl setzt sich aus verschiedenen Elementen zusammen.
-          Mit <code>niv</code> wird das Programm gestartet,
-          <code>--load</code> ist, wie der Name schon verrät, für das Laden
-          der YAML-Datei zuständig. Anschließend erfolgt die Angabe über den
-          Pfad der YAML-Datei. Der Parameter <code>--detail</code> beschreibt
-          den Detailgrad, also wie viel Informationen tatsächlich angezeigt
-          werden. Es gibt noch weitere
-          <a href="yaml_parameter/index.html" target="_blank">Parameter</a>,
-          welche in unserer Anwendung verwendbar sind.
+          In den acht vollen Wochen haben wir als Team viel geleistet. Wir sind
+          dankbar für die gesammelten Erfahrungen, welche für das spätere
+          Arbeitsleben von Bedeutung sein werden. Außerdem bedanken wir uns beim
+          Herrn Bozakov für die Zusammenarbeit in diesem Projekt.
         </p>
       </div>
-      <div class="segment-image">
-        <img src="images/example2_command.png" alt="Command-Beispiel" width="100%" class="rounded" id="image2" />
-      </div>
     </div>
 
-    <div class="segment segment-left-to-right">
-      <div class="segment-image">
-        <img src="images/example3_diagramm.png" alt="Diagramm-Beispiel" width="100%" class="rounded" id="image3" />
+    <div id="poster-and-slide">
+      <div class="poster-container">
+        <div class="poster">
+          <h1>Werbeposter</h1>
+          <img
+            src="images/poster.png"
+            alt="NIV_Poster"
+            style="width: 100%"
+            id="poster"
+          />
+        </div>
       </div>
-      <div class="segment-text-left">
-        <p>
-          Das Diagramm ist aus der YAML-Datei entstanden. Hierbei sind alle angegebenen
-          Verbindungen realisiert worden. Die Informationen aus dem Titel stehen im
-          unteren Teil des Diagramms. In dem <a href="#slider">Bilderslider</a> sieht man auch
-          komplexere Diagramme, welche ebenso mit unserem Tool entstanden sind. Da diese
-          Diagramme im SVG Format sind, geht die Auflösung nicht verloren, wenn die Größe verändert
-          wird.
-        </p>
-      </div>
-    </div>
-  </div>
 
-  <div class="more-links">
-    <h2>Weitere Links</h2>
-    <ul>
-      <li><a href="https://gitlab.rlp.net/top/21s/niv/niv/-/blob/dev/pages/introduction/introduction.md" target="_blank">Installation & Erste Schritte</a></li>
-      <li><a href="yaml_parameter/index.html" target="_blank">YAML Parameter</a></li>
-    </ul>
-  </div>
+      <!-- Slideshow container -->
+      <div class="slideshow-all">
+        <h1 style="margin-top: 100px" id="slider">Bilderslider</h1>
+        <div class="slideshow-and-dots">
+          <div class="slideshow-container">
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+              <div class="numbertext">1 / 4</div>
+              <img
+                src="images/slide1.png"
+                alt="Komplexes Diagramm"
+                style="width: 100%"
+                id="image1_slide"
+              />
+            </div>
+            <div class="mySlides fade">
+              <div class="numbertext">2 / 4</div>
+              <img
+                src="images/slide2.png"
+                alt="Ansicht von den Ports"
+                style="width: 100%"
+                id="image2_slide"
+              />
+            </div>
+            <div class="mySlides fade">
+              <div class="numbertext">3 / 4</div>
+              <img
+                src="images/slide3.png"
+                alt="Ansicht von den Ports 2"
+                style="width: 100%"
+                id="image3_slide"
+              />
+            </div>
+            <div class="mySlides fade">
+              <div class="numbertext">4 / 4</div>
+              <img
+                src="images/slide4.png"
+                alt="Komplexes Diagramm 2"
+                style="width: 100%"
+                id="image4_slide"
+              />
+            </div>
 
-  <div class="conclusion">
-    <h2>Fazit</h2>
-    <p>
-      In den acht vollen Wochen haben wir als Team viel geleistet. Wir sind
-      dankbar für die gesammelten Erfahrungen, welche für das spätere
-      Arbeitsleben von Bedeutung sein werden. Außerdem bedanken wir uns beim
-      Herrn Bozakov für die Zusammenarbeit in diesem Projekt.
-    </p>
-  </div>
-
-  <div id="poster-and-slide">
-    <div class="poster-container">
-      <div class="poster">
-        <h1>Werbeposter</h1>
-        <img src="images/poster.png" alt="NIV_Poster" style="width: 100%" id="poster" />
-      </div>
-    </div>
-
-    <!-- Slideshow container -->
-    <div class="slideshow-all">
-      <h1 style="margin-top: 100px;" id="slider">Bilderslider</h1>
-      <div class="slideshow-and-dots">
-        <div class="slideshow-container">
-
-          <!-- Full-width images with number and caption text -->
-          <div class="mySlides fade">
-            <div class="numbertext">1 / 4</div>
-            <img src="images/slide1.png" alt="Komplexes Diagramm" style="width: 100%" id="image1_slide" />
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <br />
           </div>
-          <div class="mySlides fade">
-            <div class="numbertext">2 / 4</div>
-            <img src="images/slide2.png" alt="Ansicht von den Ports" style="width: 100%" id="image2_slide" />
+          <!-- The dots/circles -->
+          <div style="text-align: center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
           </div>
-          <div class="mySlides fade">
-            <div class="numbertext">3 / 4</div>
-            <img src="images/slide3.png" alt="Ansicht von den Ports 2" style="width: 100%" id="image3_slide" />
+        </div>
+      </div>
+    </div>
+
+    <div class="more-links-container">
+      <div class="more-links">
+        <h2>Weitere Links</h2>
+        <ul>
+          <li>
+            <a
+              href="https://gitlab.rlp.net/top/21s/niv/niv/-/blob/dev/pages/introduction/introduction.md"
+              target="_blank"
+              >Installation & Erste Schritte</a
+            >
+          </li>
+          <li>
+            <a href="yaml_parameter/index.html" target="_blank"
+              >YAML Parameter Dokumentation</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!---team-->
+    <div class="row">
+      <h2>Das Team</h2>
+      <div class="column">
+        <div class="card">
+          <img
+            src="images/marcel_metzler.png"
+            alt="Marcel_Metzler"
+            style="width: auto"
+          />
+          <div class="container">
+            <h2>Marcel Metzler</h2>
+            <p class="title">Product Owner</p>
           </div>
-          <div class="mySlides fade">
-            <div class="numbertext">4 / 4</div>
-            <img src="images/slide4.png" alt="Komplexes Diagramm 2" style="width: 100%" id="image4_slide" />
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="card">
+          <img
+            src="images/enis_kecevic.png"
+            alt="Enis_Kecevic"
+            style="width: auto"
+          />
+          <div class="container">
+            <h2>Enis Kecevic</h2>
+            <p class="title">Scrum Master</p>
           </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <img
+            src="images/tim_thomas.png"
+            alt="Tim_Thomas"
+            style="width: auto"
+          />
+          <div class="container">
+            <h2>Tim Thomas</h2>
+            <p class="title">Developer</p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <img
+            src="images/daniel_grosmayer.png"
+            alt="Daniel_Grosmayer"
+            style="width: auto"
+          />
+          <div class="container">
+            <h2>Daniel Grosmayer</h2>
+            <p class="title">Developer</p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <img
+            src="images/darwin_schulz.png"
+            alt="Darwin_Schulz"
+            style="width: auto"
+          />
+          <div class="container">
+            <h2>Darwin Schulz</h2>
+            <p class="title">Developer</p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <img src="images/musa_tek.jpg" alt="Musa_Tek" style="width: auto" />
+          <div class="container">
+            <h2>Musa Tek</h2>
+            <p class="title">Developer</p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <img
+            src="images/gulbarchyn_akbekova.png"
+            alt="Gulbarchyn_Akbekova"
+            style="width: auto"
+          />
+          <div class="container">
+            <h2>Gulbarchyn Akbekova</h2>
+            <p class="title">Developer</p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <img
+            src="images/mohamad_said_himmat.png"
+            alt="Mohamad_Said_Himmat"
+            style="width: auto"
+          />
+          <div class="container">
+            <h2>Mohamad-Said Himmat</h2>
+            <p class="title">Developer</p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <img
+            src="images/mohamed_salim_guezguez.png"
+            alt="Mohamed_Salim_Guezguez"
+            style="width: auto"
+          />
+          <div class="container">
+            <h2>Mohamed-Salim Guezguez</h2>
+            <p class="title">Developer</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- Next and previous buttons -->
-          <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-          <a class="next" onclick="plusSlides(1)">&#10095;</a>
-          <br />
-        </div>
-        <!-- The dots/circles -->
-        <div style="text-align: center">
-          <span class="dot" onclick="currentSlide(1)"></span>
-          <span class="dot" onclick="currentSlide(2)"></span>
-          <span class="dot" onclick="currentSlide(3)"></span>
-          <span class="dot" onclick="currentSlide(4)"></span>
-        </div>
-      </div>
-    </div>
-  </div>
+    <footer>
+      <ul>
+        <a href="https://gitlab.rlp.net/top/impressum-und-datenschutzerklaerung"
+          >Impressum/Datenschutzerklärung</a
+        >
+      </ul>
+    </footer>
+  </body>
 
-  <!---team-->
-  <div class="row">
-    <h1>Das Team</h1>
-    <div class="column">
-      <div class="card">
-        <img src="images/marcel_metzler.png" alt="Marcel_Metzler" style="width: auto" />
-        <div class="container">
-          <h2>Marcel Metzler</h2>
-          <p class="title">Product Owner</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="column">
-      <div class="card">
-        <img src="images/enis_kecevic.png" alt="Enis_Kecevic" style="width: auto" />
-        <div class="container">
-          <h2>Enis Kecevic</h2>
-          <p class="title">Scrum Master</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <img src="images/tim_thomas.png" alt="Tim_Thomas" style="width: auto" />
-        <div class="container">
-          <h2>Tim Thomas</h2>
-          <p class="title">Developer</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <img src="images/daniel_grosmayer.png" alt="Daniel_Grosmayer" style="width: auto" />
-        <div class="container">
-          <h2>Daniel Grosmayer</h2>
-          <p class="title">Developer</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <img src="images/darwin_schulz.png" alt="Darwin_Schulz" style="width: auto" />
-        <div class="container">
-          <h2>Darwin Schulz</h2>
-          <p class="title">Developer</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <img src="images/musa_tek.jpg" alt="Musa_Tek" style="width: auto" />
-        <div class="container">
-          <h2>Musa Tek</h2>
-          <p class="title">Developer</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <img src="images/gulbarchyn_akbekova.png" alt="Gulbarchyn_Akbekova" style="width: auto" />
-        <div class="container">
-          <h2>Gulbarchyn Akbekova</h2>
-          <p class="title">Developer</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <img src="images/mohamad_said_himmat.png" alt="Mohamad_Said_Himmat" style="width: auto" />
-        <div class="container">
-          <h2>Mohamad-Said Himmat</h2>
-          <p class="title">Developer</p>
-        </div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="card">
-        <img src="images/mohamed_salim_guezguez.png" alt="Mohamed_Salim_Guezguez" style="width: auto" />
-        <div class="container">
-          <h2>Mohamed-Salim Guezguez</h2>
-          <p class="title">Developer</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <ul>
-      <a href="https://gitlab.rlp.net/top/impressum-und-datenschutzerklaerung">Impressum/Datenschutzerklärung</a>
-    </ul>
-  </footer>
-</body>
-
-<script src="slideshow.js"></script>
-
+  <script src="slideshow.js"></script>
 </html>
