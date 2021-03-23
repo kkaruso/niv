@@ -46,12 +46,16 @@ pip install niv
 ```
 niv -h
 ```
+Will show you the arguments you can use and their functionality
+
 ![](../images/introduction/help.png)
 # Version
 ***Example:***
  ```
 niv -v
 ```
+Will show you ther version of the package you installed
+
 ![](../images/introduction/version.png)
 # Create Diagram 
 
