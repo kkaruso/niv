@@ -12,8 +12,8 @@ Network diagrams are commonly drawn manually, using tools like Visio or Draw.io.
  - [Create diagram](#create-diagram)
  - [Create And Save a Diagram](#create-and-save-a-diagram)
       * [Save As SVG](#save-as-svg)
-      * [Save As PDF](#save-as-pdf-:)
-      * [Save As PNG](#save-as-png-:)
+      * [Save As PDF](#save-as-pdf)
+      * [Save As PNG](#save-as-png)
  - [Detailed view](#detailed-view)
  - [Verbosity](#verbosity)
 
@@ -76,13 +76,13 @@ To save the generated diagram you can pass the  [ -s ]   Argument with a given s
 niv -l load_path/example.yaml -s save_path/your_file_name.svg
 ```
 You can also save the diagram in other file formats.
-### Save As PDF :
+### Save As PDF
 
 ***Example:***
 ```
 niv -l load_path/example.yaml -s save_path/your_file_name.pdf
 ```
-### Save As PNG :
+### Save As PNG
 
 ***Example:***
 ```
