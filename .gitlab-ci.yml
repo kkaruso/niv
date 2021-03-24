@@ -1,8 +1,17 @@
+image: node:10.16.3
+cache:
+  paths:
+    - node_modules/
+before_script:
+  - rm -rf build
+  - CI=false npm install
+
 pages:
   stage: deploy
   variables:
     DEST: "public"
   script:
+    - CI=false npm run build
     - mkdir -p public
     - rm -rf "$DEST"
     - mv pages "$DEST"
