@@ -38,7 +38,7 @@ pip install niv
 |[**-v, --version**](#version)|Show program's version number and exit|
 |[**-l / --load load_path**](#create-diagram)|Create visualization with a given .yaml file  |
 |[**-s / --save save_path**](#create-and-save-a-diagram)|Save .svg, .png, .jpg or .pdf file to a given path (DEFAULT: .svg)  |
-|[**-d / --detail [INT]**](#detailed-view)| The level of detail you want to use for the visualization; 0: most detail (default),1 : less details |
+|[**-d / --detail [INT]**](#detailed-view)| The level of detail you want to use for the visualization; 0: , 1 : less details, 2: more details (default) |
 |[**-vv, --verbose**](#verbosity)  | Increase verbosity of console messages |
 
 # Help
@@ -48,15 +48,15 @@ niv -h
 ```
 Will show you the arguments you can use and their functionality
 
-![](../images/introduction/help.png)
+![](../../src/images/introduction/help.png)
 # Version
 ***Example:***
  ```
 niv -v
 ```
-Will show you ther version of the package you installed
+Will show you the version of the package you installed
 
-![](../images/introduction/version.png)
+![](../../src/images/introduction/version.png)
 # Create Diagram 
 
 NIV can create network diagrams dynamically from a yaml file describing the placement, layout, groups and icons. Given a Yaml describing the hierarchy of the network and it's connections, a resulting svg diagram will be created.
@@ -65,7 +65,7 @@ NIV can create network diagrams dynamically from a yaml file describing the plac
 ```
 niv -l load_path/example.yaml
 ```
-![](../images/introduction/niv_topologie.png)
+![](../../src/images/introduction/niv_topologie.png)
 # Create And Save a Diagram
 To save the generated diagram you can pass the  [ -s ]   Argument with a given save_path and filename
 
@@ -95,13 +95,13 @@ You can choose between three different detail levels
 niv -l load_path/example.yaml 
 ```
 
-<img src="../images/introduction/default.png" alt="drawing" width="300"/>
+<img src="../../src/images/introduction/default.png" alt="drawing" width="300"/>
 
 ### Detail level 1:
 ```
 niv -l load_path/example.yaml -d 1
 ```
-<img src="../images/introduction/detail1.png" alt="drawing" width="300"/>
+<img src="../../src/images/introduction/detail1.png" alt="drawing" width="300"/>
 
 # Verbosity
 ```

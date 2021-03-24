@@ -1,0 +1,62 @@
+#example {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    background-color: #3C4665;
+}
+
+#example h2 {
+    border-bottom: none;
+}
+
+.segment {
+    position: relative;
+    margin: 20px;
+    background-color: #c4c4c4;
+    display: flex;
+    height: auto;
+    min-height: 300px;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.segment-left-to-right {
+    background-image: linear-gradient(90deg, #2b2f3c, #3b4052);
+    box-shadow: -9px 0px 8px -4px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: -9px 0px 8px -4px rgba(0, 0, 0, 0.2);
+}
+
+.segment-right-to-left {
+    background-image: linear-gradient(-90deg, #2b2f3c, #3b4052);
+    box-shadow: 9px 0px 8px -4px rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 9px 0px 8px -4px rgba(0, 0, 0, 0.2);
+}
+
+.exampleImage {
+    width: 30%;
+    margin: 40px 20px;
+}
+
+.exampleImage img{
+    width: 100%;
+}
+
+.exampleImage:hover {
+    cursor: pointer;
+}
+
+.exampleImage img {
+    border: none;
+}
+
+.segment-text-left {
+    width: 70%;
+    margin: 10px 50px;
+    color: black;
+}
+
+.segment-text-right {
+    text-align: right;
+    width: 70%;
+    margin: 10px 50px;
+    color: black;
+}

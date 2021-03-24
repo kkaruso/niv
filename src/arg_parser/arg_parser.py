@@ -66,8 +66,8 @@ class ArgParser:
 
         parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
                             default=self.config.get('default').get('std_details'), choices=self.DETAIL,
-                            help='The level of detail you want to use for the visualization; 1: least detail, '
-                                 '2: medium detail, 3: most detail (DEFAULT: 0)')
+                            help='The level of detail you want to use for the visualization; 0: both detail levels, '
+                                 '1: least detail, 2: most detail (DEFAULT: 2)')
 
         parser.add_argument('-vv', '--verbose', action='store_true',
                             help='Increase verbosity of console messages')
