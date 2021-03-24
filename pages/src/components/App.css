@@ -1,0 +1,79 @@
+*, :after, :before {
+  box-sizing: inherit
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body, html {
+  margin: 0 !important;
+  padding: 0 !important;
+  background-color: #914b85;
+  font-family: Verdana, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #fff
+}
+
+h1 {
+  font-size: 36px
+}
+
+h2 {
+  font-size: 30px
+}
+
+h3 {
+  font-size: 24px
+}
+
+h4 {
+  font-size: 20px
+}
+
+h5 {
+  font-size: 18px
+}
+
+h6 {
+  font-size: 16px
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: 500;
+  margin: 12px 0;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 16px;
+  /* color: #292929; */
+  color: #fff;
+}
+
+a {
+  text-decoration: underline;
+  color: #fff;
+}
+
+a:visited {
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+code {
+  color: #3cc4a8;
+}

@@ -1,0 +1,58 @@
+#teamDiv {
+    margin-right: 0px;
+    margin-left: 0px;
+    background-color: #2b2f3c;
+}
+
+#teamDiv h2 {
+    padding-top: 12px;
+    margin-top: 0px;
+    border-bottom: none;
+}
+
+.card img {
+    width: 50%;
+    height: 50%;
+    
+}
+
+img {
+    border: 2px solid #000;
+    vertical-align: middle;
+    width: auto;
+}
+
+.teamColumn {
+    float: left;
+    width: 33.3333%;
+    margin-bottom: 16px;
+    padding: 0px 8px;
+    text-align: center;
+}
+
+@media screen and (max-width: 650px) {
+    .teamColumn {
+        width: 100%;
+        display: block;
+    }
+}
+
+.card {
+    background-color: #21232c;
+    box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.5);
+    padding-top: 20px;
+}
+
+.container {
+    padding: 0 16px;
+}
+
+.container::after, #teamDiv::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.title {
+    color: grey;
+}

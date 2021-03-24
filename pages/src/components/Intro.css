@@ -1,0 +1,13 @@
+#introDiv {
+    background-color: #21232C;
+    padding: 50px;
+}
+
+#intro {
+    display: block;
+    text-align: center;
+    width: 60%;
+    border-radius: 20px;
+    padding: 20px;
+    margin: auto;
+}

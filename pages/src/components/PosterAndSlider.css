@@ -1,0 +1,83 @@
+@import "~react-image-gallery/styles/css/image-gallery.css";
+#posterAndSliderDiv {
+    display: block;
+    background-color: #3C4665;
+    padding: 50px;
+    display: flex;
+}
+
+#posterDiv {
+    width: 50%;
+}
+
+#poster {
+    max-width: 100%;
+    height: auto;
+}
+
+#sliderDiv {
+    width: 50%;
+}
+
+#moreLinksDiv {
+    background-color: #3C4665;
+    padding-bottom: 24px;
+}
+
+#moreLinks h2 {
+    border-bottom: none;
+}
+
+#moreLinks {
+    text-align: center;
+    margin: auto;
+    border: 5px solid #A7AABD;
+    width: 60%;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#moreLinks ul {
+    margin-top: 40px;
+}
+
+#moreLinks li {
+    display: inline;
+    padding: 0 20px;
+}
+
+#moreLinks li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    position: relative;
+    padding: 10px;
+}
+
+#moreLinks li a:before, #moreLinks li a:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    transition: all 0.5s ease;
+}
+
+#moreLinks li a:before {
+    top: -2.5%;
+    left: -1%;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+}
+
+#moreLinks li a:after {
+    bottom: -2.5%;
+    right: -1%;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+}
+
+#moreLinks li a:hover:before, #moreLinks li a:hover:after {
+    width: 102%;
+    height: 102%;
+    transition: all 0.5s ease;
+}
