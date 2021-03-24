@@ -33,13 +33,13 @@ export default class PosterAndSlider extends React.Component {
                 <div id="posterAndSliderDiv">
 
                     <div id="posterDiv">
-                        <div class="poster">
+                        <div id="poster">
                             <h1 ref="image">Werbeposter</h1>
                             <img src={poster} alt="NIV_Poster" id="poster" />
                         </div>
                     </div>
                     <div id="sliderDiv">
-                        <h1>Bildslider</h1>
+                        <h1>Bilderslider</h1>
                         <ImageGallery id="slider" items={images} showPlayButton={false} useBrowserFullscreen={false}>
 
                         </ImageGallery>
@@ -50,11 +50,11 @@ export default class PosterAndSlider extends React.Component {
                         <h2>Weitere Links</h2>
                         <ul>
                             <li>
-                                <a href="https://gitlab.rlp.net/top/21s/niv/niv/-/blob/dev/pages/introduction/introduction.md"
+                                <a href="https://gitlab.rlp.net/top/21s/niv/niv/-/blob/dev/pages/public/introduction/introduction.md"
                                     target="_blank" rel="noreferrer">Installation & Erste Schritte</a>
                             </li>
                             <li>
-                                <a href="../../yaml_parameters/index.html" target="_blank">YAML Parameter Dokumentation</a>
+                                <a href="../../public/yaml_parameter/index.html" target="_blank" rel="noreferrer">YAML Parameter Dokumentation</a>
                             </li>
                         </ul>
                     </div>

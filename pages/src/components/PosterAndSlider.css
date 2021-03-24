@@ -1,4 +1,5 @@
 @import "~react-image-gallery/styles/css/image-gallery.css";
+
 #posterAndSliderDiv {
     display: block;
     background-color: #3C4665;
@@ -13,9 +14,14 @@
 #poster {
     max-width: 100%;
     height: auto;
+    margin: 0 auto;
+    text-align: center;
 }
 
 #sliderDiv {
+    width: 50%;
+}
+.imageGallery {
     width: 50%;
 }
 

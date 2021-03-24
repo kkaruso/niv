@@ -47,12 +47,12 @@ export default class Example extends React.Component {
                             allgemeine Informationen, die unter dem Diagram angezeigt werden,
                             vorhanden. In <code>nodes</code>, sind wie der Name schon sagt, die
                             einzelnen Nodes bzw. Geräte definiert. In <code>groups</code> kann
-                            man Nodes gruppieren. Und schließlich sind in
+                            man Nodes gruppieren. Und schließlich sind in&nbsp; 
                             <code>connections</code> die Verbindungen der jeweiligen Nodes
                             definiert. Für jede Node kann man ein Icon, aus einem unserer drei&nbsp;
-                            <a href={"../../icon_catalog.pdf"} rel="noreferrer" target="_blank">Icon-Sets</a>
+                            <a href={"../../public/icon_catalog.pdf"} rel="noreferrer" target="_blank">Icon-Sets</a>
                             , auswählen. Außerdem gibt es weitere&nbsp;
-                            <a href="../../yaml_parameters/index.html" target="_blank">Parameter</a>,
+                            <a href="../../public/yaml_parameters/index.html" target="_blank">Parameter</a>,
                             welche die Erstellung des Diagramms erweitern können.
                         </p>
                     </div>
@@ -62,12 +62,12 @@ export default class Example extends React.Component {
                     <div class="segment-text-right">
                         <p>
                             Der Konsolenbefehl setzt sich aus verschiedenen Elementen zusammen.
-                            Mit <code>niv</code> wird das Programm gestartet,
+                            Mit <code>niv</code> wird das Programm gestartet,&nbsp; 
                             <code>--load</code> ist, wie der Name schon verrät, für das Laden
                             der YAML-Datei zuständig. Anschließend erfolgt die Angabe über den
                             Pfad der YAML-Datei. Der Parameter <code>--detail</code> beschreibt
                             den Detailgrad, also wie viel Informationen tatsächlich angezeigt
-                            werden. Es gibt noch weitere
+                            werden. Es gibt noch weitere&nbsp; 
                             <a href="yaml_parameter/index.html" target="_blank">Parameter</a>,
                             welche in unserer Anwendung verwendbar sind.
                         </p>
@@ -96,7 +96,7 @@ export default class Example extends React.Component {
                         <p>
                             Das Diagramm ist aus der YAML-Datei entstanden. Hierbei sind alle
                             angegebenen Verbindungen realisiert worden. Die Informationen aus
-                            dem Titel stehen im unteren Teil des Diagramms. In dem
+                            dem Titel stehen im unteren Teil des Diagramms. In dem&nbsp; 
                             <a href="#slider">Bilderslider</a> sieht man auch komplexere
                             Diagramme, welche ebenso mit unserem Tool entstanden sind. Da diese
                             Diagramme im SVG Format sind, geht die Auflösung nicht verloren,
