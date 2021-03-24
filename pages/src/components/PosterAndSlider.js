@@ -54,7 +54,7 @@ export default class PosterAndSlider extends React.Component {
                                     target="_blank" rel="noreferrer">Installation & Erste Schritte</a>
                             </li>
                             <li>
-                                <a href="pages/public/yaml_parameter/index.html" target="_blank" rel="noreferrer">YAML Parameter Dokumentation</a>
+                                <a href="yaml_parameter/index.html" target="_blank" rel="noreferrer">YAML Parameter Dokumentation</a>
                             </li>
                         </ul>
                     </div>
