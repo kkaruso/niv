@@ -67,7 +67,7 @@ export default class Example extends React.Component {
                 Icon-Sets
               </a>
               , auswählen. Außerdem gibt es weitere&nbsp;
-              <a href={"src/yaml_parameter/index.html"} target="_blank" rel="noreferrer">
+              <a href={"../src/yaml_parameter/index.html"} target="_blank" rel="noreferrer">
                 Parameter
               </a>
               , welche die Erstellung des Diagramms erweitern können.
@@ -85,7 +85,7 @@ export default class Example extends React.Component {
               Pfad der YAML-Datei. Der Parameter <code>--detail</code>{" "}
               beschreibt den Detailgrad, also wie viel Informationen tatsächlich
               angezeigt werden. Es gibt noch weitere&nbsp;
-              <a href="src/yaml_parameter/index.html" target="_blank">
+              <a href="../src/yaml_parameter/index.html" target="_blank">
                 Parameter
               </a>
               , welche in unserer Anwendung verwendbar sind.
