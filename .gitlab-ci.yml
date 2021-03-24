@@ -20,10 +20,10 @@ pages:
   script:
     - rm -rf public
     - cp pages/build/index.html pages/build/404.html
-    - mv pages/build pages/public
+    - mv pages/build public
   artifacts:
     paths:
-      - pages/public
+      - public
 
 test:pylint:
   image: python:3.9
