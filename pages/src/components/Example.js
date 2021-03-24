@@ -5,7 +5,7 @@ import exampleTwo from "../images/example2_command.png";
 import exampleThree from "../images/example3_diagramm.png";
 import iconCatalog from "../icon_catalog.pdf";
 import "./Example.css";
-import Modal from "./Modal";
+// import Modal from "./Modal";
 
 function GetImage(props) {
   return (
@@ -14,7 +14,6 @@ function GetImage(props) {
       useBrowserFullscreen={false}
       showThumbnails={false}
       items={[{ original: props.image }]}
-      useBrowserFullscreen={false}
       showFullscreenButton={true}
     />
   );
@@ -64,11 +63,11 @@ export default class Example extends React.Component {
               <code>connections</code> die Verbindungen der jeweiligen Nodes
               definiert. Für jede Node kann man ein Icon, aus einem unserer
               drei&nbsp;
-              <a href={iconCatalog} target="_blank">
+              <a href={iconCatalog} target="_blank" rel="noreferrer">
                 Icon-Sets
               </a>
               , auswählen. Außerdem gibt es weitere&nbsp;
-              <a href={"../yaml_parameter/index"} target="_blank">
+              <a href={"../yaml_parameter/index"} target="_blank" rel="noreferrer">
                 Parameter
               </a>
               , welche die Erstellung des Diagramms erweitern können.
