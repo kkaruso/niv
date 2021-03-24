@@ -11,9 +11,9 @@ Network diagrams are commonly drawn manually, using tools like Visio or Draw.io.
  - [Version](#version)
  - [Create diagram](#create-diagram)
  - [Create And Save a Diagram](#create-and-save-a-diagram)
-      * [Save As SVG](#save-as-svg)
-      * [Save As PDF](#save-as-pdf)
-      * [Save As PNG](#save-as-png)
+      * [Save As SVG](#save-as-svg-:)
+      * [Save As PDF](#save-as-pdf-:)
+      * [Save As PNG](#save-as-png-:)
  - [Detailed view](#detailed-view)
  - [Verbosity](#verbosity)
 
@@ -38,7 +38,7 @@ pip install niv
 |[**-v, --version**](#version)|Show program's version number and exit|
 |[**-l / --load load_path**](#create-diagram)|Create visualization with a given .yaml file  |
 |[**-s / --save save_path**](#create-and-save-a-diagram)|Save .svg, .png, .jpg or .pdf file to a given path (DEFAULT: .svg)  |
-|[**-d / --detail [INT]**](#detailed-view)| The level of detail you want to use for the visualization; 0: , 1 : less details, 2: more details (default) |
+|[**-d / --detail [INT]**](#detailed-view)| The level of detail you want to use for the visualization; 0: both detail levels , 1 : least detail, 2: most detail (default) |
 |[**-vv, --verbose**](#verbosity)  | Increase verbosity of console messages |
 
 # Help
