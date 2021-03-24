@@ -1,5 +1,6 @@
 {
   "name": "niv",
+  "homepage": "https://top.pages.gitlab.rlp.net/21s/niv/niv/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
