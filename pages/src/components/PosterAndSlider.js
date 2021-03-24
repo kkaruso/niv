@@ -62,7 +62,7 @@ export default class PosterAndSlider extends React.Component {
               </li>
               <li>
                 <a
-                  href="../src/yaml_parameter/index.html"
+                  href="yaml_parameters/index.html"
                   target="_blank"
                   rel="noreferrer"
                 >
