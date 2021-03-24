@@ -67,7 +67,7 @@ export default class Example extends React.Component {
                 Icon-Sets
               </a>
               , auswählen. Außerdem gibt es weitere&nbsp;
-              <a href="../../yaml_parameters/index.html" target="_blank" rel="noreferrer">
+              <a href="yaml_parameters/index.html" target="_blank" rel="noreferrer">
                 Parameter
               </a>
               , welche die Erstellung des Diagramms erweitern können.
