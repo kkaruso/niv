@@ -13,7 +13,7 @@ pages:
     - mv build public
   artifacts:
     paths:
-    - pages
+    - pages/public
 
 test:pylint:
   image: python:3.9
