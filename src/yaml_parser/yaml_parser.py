@@ -56,20 +56,20 @@ def get_yaml_default_preset():
     """
     data = """\
 diagram:
-    backgroundColor: # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
+    background-color: # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
     padding: # Padding around the graph (default: 0.5; type: double)
     layout: # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
-    connectionStyle: # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
+    connection-style: # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
     direction: # Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
 title:
     text: # Title under the Diagram (default: Diagram; type: string)
-    subText: # Text underneath the title (default: ""; type: string)
-    fontSize: # Font size (default: 15; type: int)
+    sub-text: # Text underneath the title (default: ""; type: string)
+    font-size: # Font size (default: 15; type: int)
     author: # Name of author (default: ""; type: string)
     company: # Name of company (default: ""; type: string)
     date: # Date (default: current date; type: string)
     version: # Version of the diagram (default: 1.0; type: double)
-    fontColor: # Color of the title text (default: black, type: string) 
+    font-color: # Color of the title text (default: black, type: string) 
 nodes:
     name: # Icon name (default: "Node"; type: string)
     x: # X-Coordinate of icon (default: 0; type: int)
