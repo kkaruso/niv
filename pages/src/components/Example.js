@@ -50,9 +50,9 @@ export default class Example extends React.Component {
                             man Nodes gruppieren. Und schließlich sind in&nbsp; 
                             <code>connections</code> die Verbindungen der jeweiligen Nodes
                             definiert. Für jede Node kann man ein Icon, aus einem unserer drei&nbsp;
-                            <a href={"../../public/icon_catalog.pdf"} rel="noreferrer" target="_blank">Icon-Sets</a>
+                            <a href="icon_catalog.pdf" rel="noreferrer" target="_blank">Icon-Sets</a>
                             , auswählen. Außerdem gibt es weitere&nbsp;
-                            <a href="../../public/yaml_parameters/index.html" target="_blank">Parameter</a>,
+                            <a href="yaml_parameters/index.html" target="_blank">Parameter</a>,
                             welche die Erstellung des Diagramms erweitern können.
                         </p>
                     </div>

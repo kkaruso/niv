@@ -7,7 +7,7 @@ export default class Intro extends React.Component {
             <div id="introDiv">
                 <div id="intro">
                     <p>
-                        Das Projekt "Network Infrastructure Visualizer" unterstütz die
+                        Das Projekt "Network Infrastructure Visualizer" unterstützt die
                         visuelle Darstellung einer Netzwerkstruktur mithilfe YAML-Dateien.
                     </p>
 
