@@ -4,8 +4,9 @@ build:
   stage: build
   cache:
     paths:
-      - page/node_modules/
+      - pages/node_modules/
   script:
+    - cd pages/
     - npm install
     - npm run build
   artifacts:
