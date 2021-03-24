@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import headerLogo from  '../images/niv_logo7.png';
+import headerLogo from '../images/niv_logo7.png';
 
 export default class Header extends React.Component {
     render() {

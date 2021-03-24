@@ -5,7 +5,6 @@ import exampleTwo from "../images/example2_command.png";
 import exampleThree from "../images/example3_diagramm.png";
 import iconCatalog from "../icon_catalog.pdf";
 import "./Example.css";
-// import Modal from "./Modal";
 
 function GetImage(props) {
   return (
@@ -20,28 +19,11 @@ function GetImage(props) {
 }
 
 export default class Example extends React.Component {
-  //   state = {
-  //     modal: false,
-  //     imageNr: 0,
-  //   };
-
-  //   selectModal = (nr) => {
-  //     this.setState({
-  //       modal: !this.state.modal,
-  //       imageNr: nr,
-  //     });
-  //     console.log(nr);
-  //   };
 
   render() {
     return (
       <div id="example">
         <div className="App">
-          {/* <Modal
-            displayModal={this.state.modal}
-            closeModal={this.selectModal}
-            imageNumber={this.imageNr}
-          /> */}
         </div>
         <h2>Beispiel</h2>
         <div class="segment segment-left-to-right">
@@ -105,7 +87,7 @@ export default class Example extends React.Component {
               Das Diagramm ist aus der YAML-Datei entstanden. Hierbei sind alle
               angegebenen Verbindungen realisiert worden. Die Informationen aus
               dem Titel stehen im unteren Teil des Diagramms. In dem&nbsp;
-              <a href="#slider">Bilderslider</a> sieht man auch komplexere
+              <a href="#sliderDiv">Bilderslider</a> sieht man auch komplexere
               Diagramme, welche ebenso mit unserem Tool entstanden sind. Da
               diese Diagramme im SVG Format sind, geht die Auflösung nicht
               verloren, wenn die Größe verändert wird.

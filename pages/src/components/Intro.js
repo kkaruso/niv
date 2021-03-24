@@ -14,7 +14,7 @@ export default class Intro extends React.Component {
             PNG-Diagramme umzuwandeln. Hierbei ist anzumerken, dass die
             YAML-Dateien einem bestimmten Muster befolgen müssen, welches wir
             detailliert in unserer&nbsp;
-            <a href="../src/yaml_parameter/index.html" target="_blank">Dokumentation</a> beschrieben haben.
+            <a href="yaml_parameters/index.html" target="_blank">Dokumentation</a> beschrieben haben.
           </p>
 
           <h3>Problem</h3>
