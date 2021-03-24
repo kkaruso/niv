@@ -1,6 +1,6 @@
 #logo-and-intro {
     display: block;
-    background-color: #515563;
+    background-color: #3c4665;
 }
 
 #logoDiv {
@@ -32,7 +32,7 @@
     font-size: 64px;
 }
 
-#button {
+#learn-more-btn {
     text-transform: uppercase;
     color: #fff;
     background-color: #3cc4a8;
@@ -45,17 +45,17 @@
     line-height: 1.3;
     text-decoration: none;
     display: inline-block;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     box-shadow: 0 4px #298976;
 }
 
-#button:hover {
+#learn-more-btn:hover {
     text-decoration: none;
     background-color: #35b198;
     border-color: #35b198;
 }
 
-#button:active {
+#learn-more-btn:active {
     box-shadow: 0 1px #3cc4a9c4;
     transform: translateY(3px);
 }
@@ -64,5 +64,5 @@
     display: block;
     margin: 0 auto;
     text-align: center;
-    padding-bottom: 30vh;
+    padding-bottom: 25vh;
 }

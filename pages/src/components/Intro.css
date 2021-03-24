@@ -1,9 +1,9 @@
-#introDiv {
+#introduction {
     background-color: #21232C;
     padding: 50px;
 }
 
-#intro {
+#intro-text {
     display: block;
     text-align: center;
     width: 60%;

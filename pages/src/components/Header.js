@@ -18,7 +18,7 @@ export default class Header extends React.Component {
                     <h1>The Network Infrastructure Visualizer</h1>
                 </div>
                 <div id="learnMoreDiv">
-                    <a href="#introdiv" id="button">Learn more</a>
+                    <a href="#introduction" id="learn-more-btn">Learn more</a>
                 </div>
             </div>
         );

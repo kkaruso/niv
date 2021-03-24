@@ -753,6 +753,7 @@
       </dd>
     </dl>
   </div>
+  <hr>
   <div id="yaml_defaults">
     <h2>yaml_defaults.yaml</h2>
     <p>The <i>yaml_defaults.yaml</i> file is located at "~/.config/niv"(Linux) and "AppData/Roaming/niv"(Windows) 
@@ -770,19 +771,65 @@
       it automatically uses the value from <i>yaml_defaults.yaml.</i>
     </p>
   </div>
+  <hr>
   <div id="config">
     <h2>config.yaml</h2>
     <p>
       Available options for our <i>config.yaml</i> file are:
     </p>
-    <ul>
-      <li>std_type</li>
-      <li>std_details</li>
-      <li>open_on_creation</li>
-    </ul>
-    <hr />
+    <table id="config-table">
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+      </tr>
+      <tr>
+        <td><a id="t:std_type" href="#k:std_type">std_type</a></td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td><a id="t:std_details" href="#k:std_details">std_details</a></td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><a id="t:open_on_creation" href="#k:open_on_creation">open_on_creation</a></td>
+        <td>bool</td>
+      </tr>
+    </table>
+    <hr>
     <dl>
-      <dt> <a href="k:std_type">std_type</a></dt>
+      <dt><a id="k:std_type" href="#t:std_type">std_type</a></dt>
+      <dd>
+        <p>
+        Sets the default output format if no explicit file foramt is given in <code>--save</code>. Available formats:
+        <ul>
+          <li>.svg</li>
+          <li>.pdf</li>
+          <li>.png</li>
+          <li>.jpg</li>
+        </ul>
+        </p>
+      </dd>
+      <dt><a id="k:std_details" href="#t:std_details">std_details</a></dt>
+      <dd>
+        <p>
+          Sets the default value if not given when using the command line. Available values:
+          <ul>
+            <li>0 (outputs both detail levels)</li>
+            <li>1 (least detail)</li>
+            <li>2 (most detail)</li>
+          </ul>
+        </p>
+      </dd>
+      <dt><a id="k:open_on_creation" href="#t:open_on_creation">open_on_creation</a></dt>
+      <dd>
+        <p>
+          Sets the default value if the diagram should be automatically opened after executing the command. Available values:
+          <ul>
+            <li>true (automatically opens and saves the diagram)</li>
+            <li>false (only saves the diagram)</li>
+          </ul>
+        </p>
+      </dd>
     </dl>
   </div>
   </article>

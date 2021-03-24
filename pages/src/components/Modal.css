@@ -24,11 +24,11 @@
 /* Modal content */
 
 .modalContent {
-    width: 70%;
+    width: 90%;
     /* Width in proportion to its parent container*/
     max-width: 640px;
     /* Max width where it stops expanding */
-    height: 70%;
+    height: 90%;
     /* Height in proportion to its parent container */
     margin: auto;
     /* Auto margin according to the element width */
@@ -48,6 +48,11 @@
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
     animation-duration: 0.6s;
+}
+
+img {
+    border-radius: 10px;
+    max-width: 100%;
 }
 
 /* Close button */
