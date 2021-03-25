@@ -1,10 +1,10 @@
-#teamDiv {
+#team {
     margin-right: 0px;
     margin-left: 0px;
     background-color: #2b2f3c;
 }
 
-#teamDiv h2 {
+#team h2 {
     padding-top: 12px;
     margin-top: 0px;
     border-bottom: none;
@@ -13,7 +13,6 @@
 .card img {
     width: 50%;
     height: 50%;
-    
 }
 
 img {
@@ -47,7 +46,7 @@ img {
     padding: 0 16px;
 }
 
-.container::after, #teamDiv::after {
+.container::after, #team::after {
     content: "";
     clear: both;
     display: table;

@@ -13,7 +13,7 @@ import './Team.css';
 export default class Team extends React.Component {
     render() {
         return (
-            <div id="teamDiv">
+            <div id="team">
                 <h2>Das Team</h2>
                 <div class="teamColumn">
                     <div class="card">

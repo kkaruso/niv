@@ -5,7 +5,7 @@ export default class Conclusion extends React.Component {
     render() {
         return (
             <div class="conclusionDiv">
-                <div class="conclusion">
+                <div class="conclusion" id="conclusion">
                     <h2>Fazit</h2>
                     <p>
                         In den acht vollen Wochen haben wir als Team viel geleistet. Wir sind
