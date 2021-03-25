@@ -1,18 +1,18 @@
 diagram: # Diagram properties
-  backgroundColor: white  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
+  backgroundColor: lightblue  # Background color of the diagram (default: transparent; type: string; list of all available colors: https://graphviz.org/doc/info/colors.html#svg)
   padding: 1.0  # Padding around the graph (default: 0.5; type: double)
   layout: dot  # Name of the layout algorithm to use (default: fdp; type: string; options: fdp, dot, neato(only way to use coordinates))
-  connectionStyle: ortho # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
+  connectionStyle: curved # Style of connections between nodes (default: spline; type: string; options: spline, curved, ortho)
   direction: BT #  Sets direction of graph layout (default: LR; type: string; options: LR, RL, TB, BT)
 
 title: # Text underneath the diagram.
   text: NIV  # Title under the Diagram (default: Diagram; type: string)
   subText: Network Infrastructure Visualization  # Text underneath the title (default: ""; type: string)
   fontSize: 15  # Font size (default: 15; type: int)
-  author: "Tom Themas"  # Author's name: enter string
+  author: Max Mustermann  # Author's name: enter string
   company:  # Enter company name or leave empty
-  date: "01.01.2021"  # Default date is current date or enter specific date as string
-  version: "1.1"  # Version of the diagram as string
+  date: 26.02.2021  # Default date is current date or enter specific date as string
+  version: 1.0  # Version of the diagram as string
 
 nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # Syntax:
@@ -83,18 +83,18 @@ groups: #add a group to target multiple objects at once, if you don't, delete th
 connections: #enter your connections here
 - {endpoints: [router1, cloud1], color: red}
 
-- {endpoints: [core-Switch1, router1], color: blue, width: 4}
-- {endpoints: [core-Switch2, router1], color: blue, width: 4}
+- {endpoints: [core-Switch1, router1], color: blue, width: 2}
+- {endpoints: [core-Switch2, router1], color: blue, width: 2}
 
-- {endpoints: [spine-Switch1, core-Switch1], color: green, width: 4}
-- {endpoints: [spine-Switch2, core-Switch1], color: green, width: 4}
-- {endpoints: [spine-Switch3, core-Switch1], color: green, width: 4}
-- {endpoints: [spine-Switch4, core-Switch1], color: green, width: 4}
+- {endpoints: [spine-Switch1, core-Switch1], color: green, width: 2}
+- {endpoints: [spine-Switch2, core-Switch1], color: green, width: 2}
+- {endpoints: [spine-Switch3, core-Switch1], color: green, width: 2}
+- {endpoints: [spine-Switch4, core-Switch1], color: green, width: 2}
 
-- {endpoints: [spine-Switch1, core-Switch2], color: green, width: 4}
-- {endpoints: [spine-Switch2, core-Switch2], color: green, width: 4}
-- {endpoints: [spine-Switch3, core-Switch2], color: green, width: 4}
-- {endpoints: [spine-Switch4, core-Switch2], color: green, width: 4}
+- {endpoints: [spine-Switch1, core-Switch2], color: green, width: 2}
+- {endpoints: [spine-Switch2, core-Switch2], color: green, width: 2}
+- {endpoints: [spine-Switch3, core-Switch2], color: green, width: 2}
+- {endpoints: [spine-Switch4, core-Switch2], color: green, width: 2}
 
 
 - {endpoints: [switch1, spine-Switch1], color: red}

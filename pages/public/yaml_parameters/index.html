@@ -18,7 +18,18 @@
   </div>
 
   <article>
-    <h1>YAML Parameters</h1>
+    <div id="intro">
+      <h1>Documentation</h1>
+      <p>This page contains all the useful information needed to create valid YAML files for using
+      <i>NIV (Network Infrastructure Visualizer)</i> and understanding its config files.</p>
+      <p>There are 3 parts to this documentation. The first one is <a href="#yaml_params">YAML Parameters</a> 
+        for all the available YAML parameters to create the diagram. The second part is about the 
+        <a href="#yaml_defaults">yaml_defaults</a> file, which is about the file where you set your own
+        defaults for the YAML file. The last part <a href="#config">config</a> is about the config file where you set up 
+      general settings about the program.</p>
+    </div>
+    <div id="yaml_params">
+    <h2>YAML Parameters</h2>
     <p>
       The table below describes the parameters used to create your diagram
       with a YAML file. The table gives the name of the parameter, the type of
@@ -42,6 +53,7 @@
       connection).
     </p>
     <p>How to use the parameters of each section:</p>
+    <script src="https://gist.github.com/Juzcan/554ed8b4d256ff922263561b3a9da2cd.js"></script>
     <p>
       To instance the header, just write the name of the section with a colon(":"). </br>
       For diagram and title heading you can use the parameters listed under each header with two whitespaces in front.
@@ -347,7 +359,7 @@
       </dd>
       <dt>
         <a id="d:connection-style" href="#t:connection-style">connection-style</a>: <i><b>string</b>, default:
-          "spline"</i>
+          "spline", dot and fdp only</i>
       </dt>
       <dd>
         <p>Controls how edges are represented</p>
@@ -355,11 +367,10 @@
           <li>"spline": edges are drawn as splines routed around nodes</li>
           <li>"line" edges are drawn as line segments</li>
           <li>none or "": no edges are drawn at all</li>
-          <li>
-            "polyline": specifies that edges should be drawn as polylines
-          </li>
           <li>"curved": specifies edges should be drawn as curved arcs</li>
+          <li>"ortho": specifies edges should be routed as polylines of axis-aligned segments</li>
         </ul>
+        <p><b>Note:</b> when using <i>"layout: neato"</i> only ortho is used as a connection style</p>
       </dd>
 
       <dt>
@@ -454,16 +465,16 @@
         </p>
       </dd>
       <dt>
-        <a id="d:x" href="#t:x">x</a>: <i><b>int</b>: default: 0</i>
+        <a id="d:x" href="#t:x">x</a>: <i><b>int</b>: default: 0, neato only</i>
       </dt>
       <dd>
-        <p>X-Coordinate where the node should be, if layout is neato</p>
+        <p>X-Coordinate where the node should be, if layout is set to neato</p>
       </dd>
       <dt>
-        <a id="d:y" href="#t:y">y</a>: <i><b>int</b>: default: 0</i>
+        <a id="d:y" href="#t:y">y</a>: <i><b>int</b>: default: 0, neato only</i>
       </dt>
       <dd>
-        <p>Y-Coordinate where the Node should be, if layout is neato</p>
+        <p>Y-Coordinate where the Node should be, if layout is set to neato</p>
       </dd>
       <dt>
         <a id="d:node_tooltip" href="#t:node_tooltip">tooltip</a>:
@@ -733,6 +744,84 @@
         <p>IPv6: 2001:0db8:85a3:0000:0000:8a2e:0370:7334</p>
       </dd>
     </dl>
+  </div>
+  <div id="yaml_defaults">
+    <h2>yaml_defaults.yaml</h2>
+    <p>The <i>yaml_defaults.yaml</i> file is located at "~/.config/niv"(Linux) and "AppData/Roaming/niv"(Windows) 
+    and is created automatically when starting the program for the first time.
+    </p>
+    <p>
+      The file contains every parameter available in the YAML without a value. 
+      You can set every value so that it overrides the default value, 
+      if the corresponding value is not given in the YAML file.
+    </p>
+    <p>
+      Example: <br>
+      If you set the parameter <a href="#t:background-color">background-color</a> to <i>red</i> 
+      in <i>yaml_defaults.yaml</i> and don't have a value for it in the YAML, 
+      it automatically uses the value from <i>yaml_defaults.yaml.</i>
+    </p>
+  </div>
+  <div id="config">
+    <h2>config.yaml</h2>
+    <p>
+      Available options for our <i>config.yaml</i> file are:
+    </p>
+    <table id="config-table">
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+      </tr>
+      <tr>
+        <td><a id="t:std_type" href="#k:std_type">std_type</a></td>
+        <td>string</td>
+      </tr>
+      <tr>
+        <td><a id="t:std_details" href="#k:std_details">std_details</a></td>
+        <td>int</td>
+      </tr>
+      <tr>
+        <td><a id="t:open_on_creation" href="#k:open_on_creation">open_on_creation</a></td>
+        <td>bool</td>
+      </tr>
+    </table>
+    <hr />
+    <dl>
+      <dt> <a id="k:std_type" href="#t:std_type">std_type</a></dt>
+      <dd>
+        <p>
+          Sets the default output format of the diagram, if no explicit file format is given with <code>--save</code>. Available formats:
+        <ul>
+          <li>".svg"</li>
+          <li>".png"</li>
+          <li>".pdf"</li>
+          <li>".jpg"</li>
+        </ul>
+      </p>
+      </dd>
+      <dt> <a id="k:std_details" href="#t:std_details">std_details</a></dt>
+      <dd>
+        <p>
+          Sets the default detail value, if no explicit value is given with <code>--detail</code>. Available values:
+          <ul>
+            <li>0 (outputs diagrams with both detail levels)</li>
+            <li>1 (least detail)</li>
+            <li>2 (most detail)</li>
+          </ul>
+        </p>
+      </dd>
+      <dt> <a id="k:open_on_creation" href="#t:open_on_creation">open_on_creation</a></dt>
+      <dd>
+        <p>
+          Sets the default value if the diagram should automatically open after executing the console command. Available values:
+          <ul>
+            <li>true (opens the diagram after executing the command)</li>
+            <li>false (does not open the diagram after executing the command)</li>
+          </ul>
+        </p>
+      </dd>
+    </dl>
+  </div>
   </article>
 </body>
 <script src="index.js"></script>
