@@ -1,6 +1,7 @@
 import React from "react";
 import "./Intro.css";
 import video from "../videos/niv_video.mp4";
+import thumbnail from "../images/thumbnail.png";
 
 export default class Intro extends React.Component {
   render() {
@@ -42,7 +43,7 @@ export default class Intro extends React.Component {
             optimiert, sodass die Interessen widergespiegelt werden.
           </p>
         </div>
-        <video controls width="640" height="360">
+        <video controls width="640" height="360" poster={thumbnail}>
           <source src={video} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
