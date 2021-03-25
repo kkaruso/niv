@@ -1,8 +1,6 @@
-li, a, button {
+.navLinks a, .getItNow button {
     font-weight: 700;
     font-size: 16px;
-    color: #edf0f1;
-    text-decoration: none;
 }
 
 header {
@@ -13,7 +11,6 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    /* background-color: #21232C; */
     background-color: rgba(33, 35, 44, 1);
 }
 
@@ -48,8 +45,54 @@ button {
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
+    -webkit-transition: all 0.3s ease 0s;
 }
 
 button:hover {
-    background-color: rgba(0, 136, 169, 0.8);
+    background-color: #35b198;
+}
+
+/* navbar links animation */
+
+.navLinks li {
+    position: relative;
+    display: inline-block;
+    overflow:hidden;
+}
+.navLinks li:hover, .navLinks li:focus {
+    	outline: none;
+}
+.btn {
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+}
+.btn:before{
+    position: absolute;
+    top: 100%;
+    color:#3cc4a8;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+.btn:hover, .btn:focus {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+.btn-intro:before {
+    content: "Über uns";
+}
+
+.btn-example:before {
+    content: "Beispiel";
+}
+
+.btn-conclusion:before {
+    content: "Fazit";
+}
+
+.btn-team:before {
+    content: "Team";
 }
