@@ -56,13 +56,13 @@
 
 .segment-text-left {
   width: 70%;
-  margin: 10px 50px;
+  margin: 10px 100px;
   color: black;
 }
 
 .segment-text-right {
   text-align: right;
   width: 70%;
-  margin: 10px 50px;
+  margin: 10px 100px;
   color: black;
 }

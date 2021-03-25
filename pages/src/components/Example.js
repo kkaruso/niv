@@ -19,12 +19,10 @@ function GetImage(props) {
 }
 
 export default class Example extends React.Component {
-
   render() {
     return (
       <div id="example">
-        <div className="App">
-        </div>
+        <div className="App"></div>
         <h2>Beispiel</h2>
         <div class="segment segment-left-to-right">
           <div class="exampleImage">
@@ -36,20 +34,26 @@ export default class Example extends React.Component {
               Der Benutzer kann eine YAML-Datei erstellen, welche für die
               Erstellung des Diagramms notwendig ist. Die Datei ist sehr simpel
               gehalten. Bei <code>diagram</code> sind Parameter enthalten,
-              welche im ganzen Diagramm sichtbar sind. Beim <code>title</code>{" "}
-              sind allgemeine Informationen, die unter dem Diagram angezeigt
-              werden, vorhanden. In <code>nodes</code>, sind wie der Name schon
-              sagt, die einzelnen Nodes bzw. Geräte definiert. In{" "}
-              <code>groups</code> kann man Nodes gruppieren. Und schließlich
-              sind in&nbsp;
-              <code>connections</code> die Verbindungen der jeweiligen Nodes
-              definiert. Für jede Node kann man ein Icon, aus einem unserer
-              drei&nbsp;
+              welche das gesamte Diagramm beeinflussen. Bei <code>title</code>{" "}
+              sind Parameter, die den Text unter dem Diagram anpassen. In{" "}
+              <code>nodes</code>, sind wie der Name schon sagt, die einzelnen
+              Nodes bzw. Geräte definiert. In <code>groups</code> kann man Nodes
+              gruppieren. Und schließlich sind in&nbsp;
+              <code>connections</code> die Verbindungen zwischen den jeweiligen
+              Nodes definiert.
+            </p>
+            <p>
+              {" "}
+              Für jede Node kann man ein Icon, aus einem unserer drei&nbsp;
               <a href={iconCatalog} target="_blank" rel="noreferrer">
                 Icon-Sets
               </a>
               , auswählen. Außerdem gibt es weitere&nbsp;
-              <a href="yaml_parameters/index.html" target="_blank" rel="noreferrer">
+              <a
+                href="yaml_parameters/index.html"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Parameter
               </a>
               , welche die Erstellung des Diagramms erweitern können.
@@ -64,13 +68,22 @@ export default class Example extends React.Component {
               zusammen. Mit <code>niv</code> wird das Programm gestartet,&nbsp;
               <code>--load</code> ist, wie der Name schon verrät, für das Laden
               der YAML-Datei zuständig. Anschließend erfolgt die Angabe über den
-              Pfad der YAML-Datei. Der Parameter <code>--detail</code>{" "}
-              beschreibt den Detailgrad, also wie viel Informationen tatsächlich
-              angezeigt werden. Es gibt noch weitere&nbsp;
-              <a href="yaml_parameters/index.html" target="_blank">
-                Parameter
-              </a>
-              , welche in unserer Anwendung verwendbar sind.
+              Pfad der YAML-Datei. Der Parameter <br />
+              <code>--save</code> ist für das Speichern des erstellten Diagramms
+              zuständig. Direkt dahinter wird der Pfad inklusive dem gewünschten
+              Dateiname- und format angeben.
+            </p>
+            <p>
+              Für eine Einleitung zum Verwenden des Konsolenbefehls kann man
+              sich die{" "}
+              <a
+                href="https://gitlab.rlp.net/top/21s/niv/niv/-/blob/dev/pages/public/introduction/introduction.md"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ersten Schritte & Installation
+              </a>{" "}
+              anschauen.
             </p>
           </div>
           <div class="exampleImage">
@@ -85,8 +98,13 @@ export default class Example extends React.Component {
           <div class="segment-text-left">
             <p>
               Das Diagramm ist aus der YAML-Datei entstanden. Hierbei sind alle
-              angegebenen Verbindungen realisiert worden. Die Informationen aus
-              dem Titel stehen im unteren Teil des Diagramms. In dem&nbsp;
+              angegebenen Verbindungen realisiert worden, genauso wie die Hintergrundfarbe.
+              Die einzelnen Geräte sind richtig gruppiert und visuell voneinander getrennt.
+              Die Informationen aus dem Titel stehen im unteren Teil des Diagramms. Ebenso ist "svg" das Dateiformat 
+              des Diagramm, wie wir im Schritt davor in der Konsole angegeben haben.
+            </p>
+            <p>
+              In dem&nbsp;
               <a href="#sliderDiv">Bilderslider</a> sieht man auch komplexere
               Diagramme, welche ebenso mit unserem Tool entstanden sind. Da
               diese Diagramme im SVG Format sind, geht die Auflösung nicht

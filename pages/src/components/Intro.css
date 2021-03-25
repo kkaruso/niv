@@ -11,3 +11,8 @@
     padding: 20px;
     margin: auto;
 }
+
+#introVideo {
+    display: block;
+    margin: 0 auto;
+}
