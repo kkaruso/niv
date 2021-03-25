@@ -1,6 +1,7 @@
 #logo-and-intro {
     display: block;
     background-color: #3c4665;
+    padding-top: 70px;
 }
 
 #logoDiv {
@@ -11,6 +12,7 @@
 
 #logoDiv img {
     border: none;
+    z-index: 0;
 }
 
 #logo {
