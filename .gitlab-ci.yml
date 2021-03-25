@@ -1,3 +1,30 @@
+image: node
+
+build:
+  stage: build
+  cache:
+    paths:
+      - pages/node_modules/
+  script:
+    - cd pages/
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - pages/build
+
+pages:
+  stage: deploy
+  dependencies: 
+    - build
+  script:
+    - rm -rf public
+    - cp pages/build/index.html pages/build/404.html
+    - mv pages/build public
+  artifacts:
+    paths:
+      - public
+
 test:pylint:
   image: python:3.9
   before_script:
@@ -17,18 +44,6 @@ test:pytest:
     - pip install graphviz
     - apt-get update && apt-get upgrade -y graphviz
     - python -m pytest
-
-pages:
-  stage: deploy
-  variables:
-    DEST: "public"
-  script:
-    - mkdir -p public
-    - rm -rf "$DEST"
-    - mv pages "$DEST"
-  artifacts:
-    paths:
-    - public
 
 build-package:
   stage: deploy

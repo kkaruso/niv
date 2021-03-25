@@ -22,17 +22,17 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
   # Syntax:
   # node name: { icon: type of icon you want to use, text: text under the icon, ip: valid IPv4 or IPV6 address, x: x-coordinate, y: y-coordinate, url: link to a website or another file, tooltip: text shown in the tooltip }
   # x, y: coordinate for the icon and the diagram (default: x: 0, y: 0)
-  # switch-view : show detailed port view of the switch in the subgroups (default: switch-view: False)
-  # ports: how many ports has the device with the switch-view = True (default ports: 24)
+  # port-view : show detailed port view of the switch in the subgroups (default: port-view: False)
+  # ports: how many ports has the device with the port-view = True (default ports: 24)
   cloud1: {icon: Cloud, name: Internet, x: 25, y: 28}
-  router1: { icon: RouterFirewall, name: Router Firewall, x: 25, y: 22, switch-view: True, ports: 6}
-  core-Switch1:  {icon: CompactPlc2Light, name: core-Switch 1, x: 21, y: 16, switch-view: True, ports: 12 }
-  core-Switch2:  {icon: CompactPlc2Light, name: core-Switch 2, x: 25, y: 13, switch-view: True, ports: 12 }
-  core-Switch3:  {icon: CompactPlc2Light, name: core-Switch 3, x: 29, y: 16, switch-view: True, ports: 12 }
+  router1: { icon: RouterFirewall, name: Router Firewall, x: 25, y: 22, port-view: True, ports: 6}
+  core-Switch1:  {icon: CompactPlc2Light, name: core-Switch 1, x: 21, y: 16, port-view: True, ports: 12 }
+  core-Switch2:  {icon: CompactPlc2Light, name: core-Switch 2, x: 25, y: 13, port-view: True, ports: 12 }
+  core-Switch3:  {icon: CompactPlc2Light, name: core-Switch 3, x: 29, y: 16, port-view: True, ports: 12 }
 
-  switch1: { icon: CompactPlc2Light, name: Work group Switch c1, x: 14, y: 16, switch-view: True, ports: 12 }
-  switch2: { icon: CompactPlc2Light, name: Work group Switch c2, x: 25, y: 7, switch-view: True, ports: 12 }
-  switch3: { icon: CompactPlc2Light, name: Work group Switch c3, x: 36, y: 16, switch-view: True, ports: 12 }
+  switch1: { icon: CompactPlc2Light, name: Work group Switch c1, x: 14, y: 16, port-view: True, ports: 12 }
+  switch2: { icon: CompactPlc2Light, name: Work group Switch c2, x: 25, y: 7, port-view: True, ports: 12 }
+  switch3: { icon: CompactPlc2Light, name: Work group Switch c3, x: 36, y: 16, port-view: True, ports: 12 }
 
   server1: { icon: WorkgroupSwitch3Dark, name: Server 1, x: 14, y: 21 }
   server2: { icon: WorkgroupSwitch3Dark, name: Server 2, x: 11, y: 21 }
@@ -66,7 +66,7 @@ nodes: #enter devices here. Maybe change "icons" to "devices" later.
 groups: #add a group to target multiple objects at once, if you don't, delete then subpoints
 
  # layout: Name of the layout for the sup-group (default: the same layout of the main diagram; type: string; options: fdp, dot, neato(only way to use coordinates))
- # ps: when a device in the group has a switch-view = True then dot will be automatically used
+ # ps: when a device in the group has a port-view = True then dot will be automatically used
  # rack: Sets direction (default: False; type: boolean; options: True, False) "works only with layout: dot"
   group0: { name: Core-Swiches , members: [core-Switch1, core-Switch2, core-Switch3], layout: dot, rack: }
   group1: { name: Network1 , members: [switch1, server1, server2, server3, server4, server5, server6, server7, server8], layout: dot, rack:}

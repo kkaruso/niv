@@ -1,0 +1,69 @@
+#logo-and-intro {
+    display: block;
+    background-color: #3c4665;
+    padding-top: 70px;
+}
+
+#logoDiv {
+    position: relative;
+    margin: auto;
+    width: 15%;
+}
+
+#logoDiv img {
+    border: none;
+    z-index: 0;
+}
+
+#logo {
+    width: 100%;
+}
+
+#titleDiv {
+    text-align: center;
+    padding: 8vh 20px 2vh;
+    color: #ececec;
+}
+
+#titleDiv h1 {
+    line-height: 1.3em;
+    font-weight: 800;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 64px;
+}
+
+#learn-more-btn {
+    text-transform: uppercase;
+    color: #fff;
+    background-color: #3cc4a8;
+    border-color: #3cc4a8;
+    padding: 1.5rem 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border-radius: 0.25rem;
+    text-align: center;
+    line-height: 1.3;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 4px #298976;
+}
+
+#learn-more-btn:hover {
+    text-decoration: none;
+    background-color: #35b198;
+    border-color: #35b198;
+}
+
+#learn-more-btn:active {
+    box-shadow: 0 1px #3cc4a9c4;
+    transform: translateY(3px);
+}
+
+#learnMoreDiv {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 25vh;
+}

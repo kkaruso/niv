@@ -4,10 +4,10 @@ Parser class for Arguments when you start NIV
 
 import argparse
 import os
+import pkg_resources
 from src import pathname_validitor as pv
 from src.niv_logger.niv_logger import NivLogger
-from src.yaml_parser.yaml_parser import get_yaml
-import pkg_resources
+from src.yaml_parser import yaml_parser
 
 
 class ArgParser:
@@ -19,7 +19,10 @@ class ArgParser:
     set_args():
         Adds the needed arguments to the ArgumentParser class
     """
-    config = get_yaml(os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + '/config.yaml')
+    # Create config file if it doesn't exist
+    if not (os.path.isfile(yaml_parser.get_path_to_config() + '/config.yaml')):
+        yaml_parser.create_config_file(yaml_parser.get_path_to_config() + '/config.yaml')
+    config = yaml_parser.get_yaml(yaml_parser.get_path_to_config() + '/config.yaml')
 
     # Reads in version from setup.py
     try:
@@ -63,8 +66,8 @@ class ArgParser:
 
         parser.add_argument('-d', '--detail', type=int, nargs='?', metavar='INT',
                             default=self.config.get('default').get('std_details'), choices=self.DETAIL,
-                            help='The level of detail you want to use for the visualization; 1: least detail, '
-                                 '2: medium detail, 3: most detail (DEFAULT: 0)')
+                            help='The level of detail you want to use for the visualization; 0: both detail levels, '
+                                 '1: least detail, 2: most detail (DEFAULT: 2)')
 
         parser.add_argument('-vv', '--verbose', action='store_true',
                             help='Increase verbosity of console messages')

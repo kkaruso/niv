@@ -1,0 +1,18 @@
+h2 {
+    border-bottom: solid;
+    margin-bottom: 24px;
+}
+
+.conclusionDiv {
+    background-color: #21232C;
+    padding-bottom: 24px;
+    padding-top: 24px;
+}
+
+.conclusion {
+    display: block;
+    text-align: center;
+    margin: auto;
+    width: 60%;
+    padding: 50px;
+}

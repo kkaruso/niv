@@ -28,16 +28,19 @@ class BuildDiagram:
     """
     Handles creation of diagram
     """
+
     path_to_project = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    config = yaml_parser.get_yaml(path_to_project + '/config.yaml')
+    path_to_configs = yaml_parser.get_path_to_config()
+
+    config = yaml_parser.get_yaml(path_to_configs + '/config.yaml')
 
     # logging.basicConfig(filename='logs/arg_parser.log', level=logging.DEBUG)
     logger = niv_logger.NivLogger
 
     # Read yaml_defaults.yaml if it exists, otherwise create the file and assign empty default to yaml_defaults
-    yaml_defaults = yaml_parser.get_yaml(path_to_project + '/yaml_defaults.yaml') if os.path.isfile(
-        path_to_project + '/yaml_defaults.yaml') else yaml_parser.create_yaml_defaults(
-        path_to_project + '/yaml_defaults.yaml')
+    yaml_defaults = yaml_parser.get_yaml(yaml_parser.get_path_to_config() + '/yaml_defaults.yaml') if os.path.isfile(
+        yaml_parser.get_path_to_config() + '/yaml_defaults.yaml') else yaml_parser.create_config_file(
+        yaml_parser.get_path_to_config() + '/yaml_defaults.yaml')
 
     counter = 1
 
@@ -88,8 +91,8 @@ class BuildDiagram:
             'ports') or 24)
 
         # Get if type switch of each nodes
-        self.switch_type = self.fill_dictionary("nodes", "switch-view", self.yaml_defaults.get('nodes').get(
-            'switch-view') or False)
+        self.switch_type = self.fill_dictionary("nodes", "port-view", self.yaml_defaults.get('nodes').get(
+            'port-view') or False)
 
         # Get ip of each node
         self.nodes_ip = self.fill_dictionary("nodes", "ip", self.yaml_defaults.get('nodes').get(
@@ -199,7 +202,7 @@ class BuildDiagram:
         # If a node is not a member of a group, create it outside of a cluster
         for node in self.nodes_name:
             if node not in self.members:
-                self.create_single_node(node, self.graph_layout, True, False)
+                self.create_single_node(node, self.graph_layout, True)
                 self.nodes_not_in_groups.append(node)
 
         # Dynamically create the amount of groups with the corresponding group name
@@ -220,7 +223,7 @@ class BuildDiagram:
             with Cluster(self.group_name[name], graph_attr=clustr_attr):
                 # Create a node for each member in every group
                 for member in list(self.group_members.get(name)):
-                    self.create_single_node(member, self.graph_layout, True, False)
+                    self.create_single_node(member, self.graph_layout, True)
 
     def create_connections(self, error: bool):
         """
@@ -265,10 +268,10 @@ class BuildDiagram:
                                      labeltooltip=f"{self.connections_text[i]}",
                                      penwidth=f"{self.connections_width[i]}",
                                      edgetooltip=tooltip,
-                                     headlabel=f"{self.connections_ports[i][0]}",
+                                     headlabel=f"{self.connections_ports[i][1]}",
                                      labeldistance="3.5",
                                      labelangle="30",
-                                     taillabel=f"{self.connections_ports[i][1]}"
+                                     taillabel=f"{self.connections_ports[i][0]}"
                                      ) - \
                                 self.instances[second_index]
                         else:
@@ -293,7 +296,7 @@ class BuildDiagram:
 
     def run(self):
         """
-        Checks detail level and call create_diagram()
+        Checks detail level and call  iagram()
         """
         if self.detail_level == 0:
             for i in range(2):
@@ -326,7 +329,7 @@ class BuildDiagram:
         with Diagram(self.set_diagram_title(),
                      filename=self.filename + suffix,
                      outformat=self.output_format,
-                     show=self.config.get('default').get('open_in_browser'), graph_attr=graph_attr):
+                     show=self.config.get('default').get('open_on_creation'), graph_attr=graph_attr):
             # Create nodes and clusters
             self.create_nodes()
             # Create connections
@@ -337,14 +340,14 @@ class BuildDiagram:
             if str(self.yaml.get("groups").get(f"{i}").get("rack")) == "True":
                 direction = "LR"
             else:
-                direction = "TB"
+                direction = "BT"
             # if the sub-group has no layout then the main layout of the diagram will be used instead
             if self.yaml.get("groups").get(f"{i}").get("layout") is None:
                 layout = str(self.graph_layout)
             else:
                 layout = str(self.yaml.get("groups").get(f"{i}").get("layout"))
 
-            # if there is a device with switch-view = True in the group then layout = "dot " will be automaticlly used
+            # if there is a device with port-view = True in the group then layout = "dot " will be automaticlly used
             for membr in self.group_members.get(i):
                 if self.switch_type[membr]:
                     layout = "dot"
@@ -403,7 +406,7 @@ class BuildDiagram:
         Create the connection inside the group and between switches
 
         :param switches_nodes: a dic for all ports for each switch
-        :param switches_in_group: a list of all switches in the group with switch-view = True
+        :param switches_in_group: a list of all switches in the group with port-view = True
         :param i: a single group
         """
         dic_of_connection = []
@@ -443,12 +446,12 @@ class BuildDiagram:
     def create_list_with_switchviews(self, switches_in_group: list, out_ether_port: dict, in_ether_port: dict,
                                      intent_con_ports: dict, layout: str, switches_nodes: dict, i: int):
         """
-        Create a list of switches with switch-view for each group
+        Create a list of switches with port-view for each group
 
-        :param switches_in_group: a list of all switches with switch-view = True in the group
+        :param switches_in_group: a list of all switches with port-view = True in the group
         :param out_ether_port: a list of port, those are connected with a port outside the group
         :param in_ether_port: a list pf ports from the switch those are connected with devices in the same group
-        :param intent_con_ports: a list of ports for the switch, those are connected with switch with switch-view = True
+        :param intent_con_ports: a list of ports for the switch, those are connected with switch with port-view = True
         :param layout: a layout for the subgroup
         :param switches_nodes: a dic pf all switches and their ports
         :param i: a single group
@@ -479,7 +482,7 @@ class BuildDiagram:
                 switches_nodes[member] = switch_nodes
             else:
                 # Create other devices except switches
-                self.create_single_node(member, layout, False, True)
+                self.create_single_node(member, layout, False)
 
     def calculate_connections_between_groups(self, member: str, groups_diagrams: list):
         """
@@ -508,10 +511,10 @@ class BuildDiagram:
     def calculate_connections_in_groups(self, intent_con_ports: dict, in_ether_port: dict, i: int):
         """
         Calculate how many connections are between the switches from the same group and between switches and nodes, with
-        switch-view set to False
+        port-view set to False
 
-        switches with switch-view= False for each group :param in_ether_port:a dic of ports, those are connected with
-        non switches with switch-view= True for each group :param i:
+        switches with port-view= False for each group :param in_ether_port:a dic of ports, those are connected with
+        non switches with port-view= True for each group :param i:
         """
         for member in list(self.group_members.get(i)):
             in_ethernet = 0
@@ -549,7 +552,7 @@ class BuildDiagram:
                 title += item + ": " + str(_dict[item]) + "\n"
         return title
 
-    def create_single_node(self, node, layout, error, subdiagram: bool):
+    def create_single_node(self, node, layout, error):
         """
         Create an instance of a given node class, if not valid print name of not valid node
         """
@@ -563,11 +566,6 @@ class BuildDiagram:
 
             # Create tooltip for each node
             tooltip = self.create_tooltip(element="node", node=node)
-            if subdiagram:
-                margin = "1"
-            else:
-                margin = "0"
-
             try:
                 # Only pass coordinates to node creation if layout == neato
                 if layout == "neato":
@@ -576,7 +574,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                     margin=margin,
+                                                                     margin="0",
                                                                      URL=url,
                                                                      pos=pos,
                                                                      tooltip=tooltip,
@@ -590,7 +588,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
-                                                             margin=margin,
+                                                             margin="0",
                                                              URL=url,
                                                              pos=pos,
                                                              tooltip=tooltip,
@@ -605,7 +603,7 @@ class BuildDiagram:
                     if self.output_format != "svg":
                         self.instances.append(
                             globals()[self.nodes_icon[node] + "Png"](node_text,
-                                                                     margin=margin,
+                                                                     margin="0",
                                                                      URL=url,
                                                                      tooltip=tooltip,
                                                                      style="rounded",
@@ -619,7 +617,7 @@ class BuildDiagram:
                     else:
                         self.instances.append(
                             globals()[self.nodes_icon[node]](node_text,
-                                                             margin=margin,
+                                                             margin="0",
                                                              URL=url,
                                                              tooltip=tooltip,
                                                              style="rounded",
@@ -629,25 +627,24 @@ class BuildDiagram:
                                                              width="1",
                                                              height="2.5",
                                                              imagescale="true",
-                                                             # labelloc="t"
                                                              ))
                 self.instances_keys.append(node)
             except KeyError:
                 # Avoid printing the same error message multiple times
                 if error:
                     log_message = f"KeyError in {self.load_path}: '{self.nodes_icon[node]}' is not a valid icon, " \
-                                  f"that's why it does not show in the diagram " \
                                   f"Please take a look at the icon catalog in resources or remove the node."
                     self.logger.verbose_warning(log_message, self.verbose)
                     print(log_message)
-
+                    exit(0)
         except KeyError:
             # Avoid printing the same error message multiple times
             if error:
-                log_message = f"KeyError in {self.load_path}: '{node}' is not given in 'nodes', that's why it does " \
-                              f"not show in the diagram. Add it to 'nodes' or remove it as a member."
+                log_message = f"KeyError in {self.load_path}: '{node}' is not given in 'nodes'. Add it to 'nodes' or " \
+                              f"remove it as a member. "
                 self.logger.verbose_warning(log_message, self.verbose)
                 print(log_message)
+                exit(0)
 
     def set_node_text(self, node) -> str:
         """
@@ -720,9 +717,9 @@ class BuildDiagram:
                         self.logger.verbose_warning(log_message, self.verbose)
                         print(log_message)
             return _dict
-        except TypeError as e:
-            log_message = f"Didn't use Groups or Nodes in Yaml"
-            self.logger.log_error(e)
+        except TypeError as error:
+            log_message = "Didn't use Groups or Nodes in Yaml"
+            self.logger.log_error(error)
             print(log_message)
 
         return _dict
@@ -858,7 +855,7 @@ class BuildDiagram:
         :param nodes: empty list to fill with the created switches
         :param busy: how many busy nodes to create
         """
-        path, file_name = os.path.split(self.save_path)
+        _, file_name = os.path.split(self.save_path)
         file_name = file_name.split('.')[0]
         if busy + out > ports:
             ports = busy + out
