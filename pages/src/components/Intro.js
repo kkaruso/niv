@@ -1,5 +1,6 @@
 import React from "react";
 import "./Intro.css";
+import video from "../videos/niv_video.mp4";
 
 export default class Intro extends React.Component {
   render() {
@@ -42,7 +43,7 @@ export default class Intro extends React.Component {
           </p>
         </div>
         <video controls width="640" height="360">
-          <source src="src/videos/niv_video.mp4" type="video/mp4" />
+          <source src={video} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
