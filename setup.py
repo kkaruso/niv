@@ -18,10 +18,9 @@ setup(
     install_requires=[
         "graphviz==0.16",
         "diagrams==0.19.1",
-        "ruamel.yaml==0.16.13",
         "PyYAML==5.4.1"
     ],
-    keywords='niv, network infrastructure visualisation',
+    keywords='niv, network infrastructure visualizer',
     packages=find_packages(),
 
     entry_points={
