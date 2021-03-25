@@ -268,10 +268,10 @@ class BuildDiagram:
                                      labeltooltip=f"{self.connections_text[i]}",
                                      penwidth=f"{self.connections_width[i]}",
                                      edgetooltip=tooltip,
-                                     headlabel=f"{self.connections_ports[i][0]}",
+                                     headlabel=f"{self.connections_ports[i][1]}",
                                      labeldistance="3.5",
                                      labelangle="30",
-                                     taillabel=f"{self.connections_ports[i][1]}"
+                                     taillabel=f"{self.connections_ports[i][0]}"
                                      ) - \
                                 self.instances[second_index]
                         else:
