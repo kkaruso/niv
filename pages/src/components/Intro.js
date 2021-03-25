@@ -43,7 +43,7 @@ export default class Intro extends React.Component {
             optimiert, sodass die Interessen widergespiegelt werden.
           </p>
         </div>
-        <video controls width="640" height="360" poster={thumbnail}>
+        <video controls width="620" height="360" poster={thumbnail}>
           <source src={video} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
