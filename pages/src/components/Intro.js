@@ -42,7 +42,7 @@ export default class Intro extends React.Component {
           </p>
         </div>
         <video controls width="640" height="360">
-          <source src="../src/videos/niv_video.mp4" type="video/mp4" />
+          <source src="src/videos/niv_video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </div>
