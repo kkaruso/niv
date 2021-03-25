@@ -11,8 +11,8 @@ export default class Intro extends React.Component {
             Das Projekt "Network Infrastructure Visualizer" zielt darauf ab,
             Netzwerkadministratoren bei der Erstellung von Netzwerkdiagrammen zu
             unterstützen, indem es die Möglichkeit bietet, YAML-Dateien per
-            einfacher Eingabe in der Kommandozeile zu detaillierten SVG, PDF sowie
-            PNG-Diagrammen umzuwandeln. Hierbei ist anzumerken, dass die
+            einfacher Eingabe in der Kommandozeile zu detaillierten SVG, PDF
+            sowie PNG-Diagrammen umzuwandeln. Hierbei ist anzumerken, dass die
             YAML-Dateien einem bestimmten Muster befolgen müssen, welches wir
             detailliert in unserer&nbsp;
             <a href="yaml_parameters/index.html" target="_blank">
@@ -41,12 +41,10 @@ export default class Intro extends React.Component {
             optimiert, sodass die Interessen widergespiegelt werden.
           </p>
         </div>
-        <div id="introVideo">
-          <video controls>
-            <source src="" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </div>
+        <video controls width="640" height="360">
+          <source src="../videos/niv_video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
     );
   }
